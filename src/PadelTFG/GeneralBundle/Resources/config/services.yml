@@ -1,0 +1,4 @@
+services:
+#    general.example:
+#        class: PadelTFG\GeneralBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
