@@ -1,0 +1,32 @@
+recordal_all:
+    path:  /recordal
+    defaults: { _controller: GeneralBundle:Recordal:allRecordal, _format: ~ }
+    requirements:
+        _method: GET
+
+recordal_get:
+    path:  /recordal/{id}
+    defaults: { _controller: GeneralBundle:Recordal:getRecordal, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+recordal_post:
+    path:  /recordal
+    defaults: { _controller: GeneralBundle:Recordal:postRecordal, _format: ~ }
+    requirements:
+        _method: POST
+
+recordal_put:
+    path:  /recordal/{id}
+    defaults: { _controller: GeneralBundle:Recordal:putRecordal, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+recordal_delete:
+    path:  /recordal/{id}
+    defaults: { _controller: GeneralBundle:Recordal:deleteRecordal, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"

@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class Notification
+class Notification implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -23,7 +24,7 @@ class Notification
 	protected $creationDate;
 
 	/** @ORM\Column(type="datetime") */
-	protected $recordalDate;
+	protected $notificationDate;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\NotificationStatus") */
 	protected $status;
@@ -31,11 +32,12 @@ class Notification
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament") */
 	protected $tournament;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\User") */
+	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\User", inversedBy="notification") */
 	protected $user;
 
 	public function __construct(){
 		$this->user = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->creationDate = new \DateTime();
 	}
 
 	public function getId(){
@@ -47,8 +49,8 @@ class Notification
 	public function getCreationDate(){
 		return $this->creationDate;
 	}
-	public function getRecordalDate(){
-		return $this->recordalDate;
+	public function getNotificationDate(){
+		return $this->notificationDate;
 	}
 	public function getStatus(){
 		return $this->status;
@@ -66,19 +68,32 @@ class Notification
 	public function setCreationDate($creationDate){
 		$this->creationDate = $creationDate;
 	}
-	public function setRecordalDate($recordalDate){
-		$this->recordalDate = $recordalDate;
+	public function setNotificationDate($notificationDate){
+		$this->notificationDate = $notificationDate;
 	}
 	public function setStatus($status){
 		$this->status = $status;
 	}
 	public function setTournament($tournament){
-		$this->status = $tournament;
+		$this->tournament = $tournament;
 	}
 
 	public function addUser(User $user)
     {
         $user->addNotification($this);
         $this->user[] = $user;
+    }
+
+    public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'text' => $this->text,
+            'creationDate' => $this->creationDate,
+            'notificationDate' => $this->notificationDate,
+            'status' => $this->status,
+            'tournament' => $this->tournament,
+            'user' => $this->user
+        );
     }
 }

@@ -22,7 +22,7 @@ class Game
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Pair", mappedBy="game") */
 	protected $pair;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Schedule") */
+	/** @ORM\OneToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Schedule", inversedBy="game") */
 	protected $date;
 
 	/** @ORM\Column(type="string", length=50) */

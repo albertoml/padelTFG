@@ -19,13 +19,13 @@ class Category
 	/** @ORM\Column(type="string", length=50) */
 	protected $name;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament") */
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="category") */
 	protected $tournament;
 
 	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Game", mappedBy="category") */
 	protected $game;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Pair") */
+	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Pair", mappedBy="category") */
 	protected $pair;
 
 	public function __construct() {

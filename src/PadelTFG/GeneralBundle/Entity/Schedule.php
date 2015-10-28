@@ -22,7 +22,7 @@ class Schedule
 	/** @ORM\Column(type="string", length=50) */
 	protected $track;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Game") */
+	/** @ORM\OneToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Game", mappedBy="schedule") */
 	protected $game;
 
 	public function getId(){

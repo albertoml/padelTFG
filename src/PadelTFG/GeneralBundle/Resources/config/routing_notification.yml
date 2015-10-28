@@ -1,0 +1,32 @@
+notification_all:
+    path:  /notification
+    defaults: { _controller: GeneralBundle:Notification:allNotification, _format: ~ }
+    requirements:
+        _method: GET
+
+notification_get:
+    path:  /notification/{id}
+    defaults: { _controller: GeneralBundle:Notification:getNotification, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+notification_post:
+    path:  /notification
+    defaults: { _controller: GeneralBundle:Notification:postNotification, _format: ~ }
+    requirements:
+        _method: POST
+
+notification_put:
+    path:  /notification/{id}
+    defaults: { _controller: GeneralBundle:Notification:putNotification, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+notification_delete:
+    path:  /notification/{id}
+    defaults: { _controller: GeneralBundle:Notification:deleteNotification, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"

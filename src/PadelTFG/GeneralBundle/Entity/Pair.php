@@ -19,13 +19,13 @@ class Pair
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\User") */
 	protected $user;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", mappedBy="pair") */
+	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="pair") */
 	protected $tournament;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Category", mappedBy="pair") */
+	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Category", inversedBy="pair") */
 	protected $category;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Game", mappedBy="pair") */
+	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Game", inversedBy="pair") */
 	protected $game;
 
 	public function __construct() {

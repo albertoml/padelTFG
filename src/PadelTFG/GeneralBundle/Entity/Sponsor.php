@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class Sponsor
+class Sponsor implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -25,6 +26,13 @@ class Sponsor
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\SponsorStatus") */
 	protected $status;
 
+	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="sponsor") */
+	protected $tournament;
+
+	public function __construct() {
+        $this->tournament = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 	public function getId(){
 		return $this->id;
 	}
@@ -37,6 +45,9 @@ class Sponsor
 	public function getStatus(){
 		return $this->status;
 	}
+	public function getTournament(){
+		return $this->tournament;
+	}
 
 	public function setName($name){
 		$this->name = $name;
@@ -47,4 +58,18 @@ class Sponsor
 	public function setStatus($status){
 		$this->status = $status;
 	}
+	public function setTournament($tournament){
+		$this->tournament = $tournament;
+	}
+
+	public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'name' => $this->name,
+            'cif' => $this->cif,
+            'status' => $this->status,
+            'tournament' => $this->tournament
+        );
+    }
 }

@@ -5,6 +5,13 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+
+    public function init()
+    {
+        date_default_timezone_set( 'Europe/Madrid' );
+        parent::init();
+    }
+
     public function registerBundles()
     {
         $bundles = array(
@@ -18,6 +25,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new PadelTFG\GeneralBundle\GeneralBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class Tournament
+class Tournament implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -16,7 +17,8 @@ class Tournament
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User") */
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User", inversedBy="tournament")
+	@ORM\JoinColumn(name="admin_id", onDelete="cascade") */
 	protected $admin;
 
 	/** @ORM\Column(type="string", length=100) */
@@ -25,22 +27,22 @@ class Tournament
 	/** @ORM\Column(type="datetime") */
 	protected $creationDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $startInscriptionDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $endInscriptionDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $startGroupDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $endGroupDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $startFinalDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $endFinalDate;
 
 	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Category", mappedBy="tournament") */
@@ -55,10 +57,10 @@ class Tournament
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Pair", mappedBy="tournament") */
 	protected $pair;
 
-	/** @ORM\Column(type="integer") */
+	/** @ORM\Column(type="integer", nullable=true) */
 	protected $registeredLimit;
 
-	/** @ORM\Column(type="blob") */
+	/** @ORM\Column(type="blob", nullable=true) */
 	protected $image;
 
 	public function __construct() {
@@ -173,5 +175,25 @@ class Tournament
     {
         $sponsor->addTournament($this);
         $this->sponsor[] = $sponsor;
+    }
+
+    public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'admin' => $this->admin,
+            'name' => $this->name,
+            'creationDate' => $this->creationDate,
+            'startInscriptionDate' => $this->startInscriptionDate,
+            'endInscriptionDate' => $this->endInscriptionDate,
+            'startGroupDate' => $this->startGroupDate,
+            'endGroupDate' => $this->endGroupDate,
+            'startFinalDate' => $this->startFinalDate,
+            'endFinalDate'=> $this->endFinalDate,
+            'category' => $this->category,
+            'status' => $this->status,
+            'sponsor' => $this->sponsor,
+            'registeredLimit' => $this->registeredLimit
+        );
     }
 }

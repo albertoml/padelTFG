@@ -1,0 +1,5 @@
+status_all:
+    path: /status/{entity}
+    defaults: { _controller: GeneralBundle:Status:allStatus, _format: ~ }
+    requirements:
+        _method: GET

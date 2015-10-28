@@ -1,7 +1,4 @@
 general:
-    resource: "@GeneralBundle/Resources/config/routing.yml"
-    prefix:   /
-
-pagina_estatica:
-    path: /web/{pagina}/
-    defaults: { _controller: GeneralBundle:Web:pagina}
+    type: rest
+    resource: "@GeneralBundle/Resources/config/routing_general.yml"
+    prefix: /api

@@ -1,0 +1,32 @@
+tournament_all:
+    path:  /tournament
+    defaults: { _controller: GeneralBundle:Tournament:allTournament, _format: ~ }
+    requirements:
+        _method: GET
+
+tournament_get:
+    path:  /tournament/{id}
+    defaults: { _controller: GeneralBundle:Tournament:getTournament, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+tournament_post:
+    path:  /tournament
+    defaults: { _controller: GeneralBundle:Tournament:postTournament, _format: ~ }
+    requirements:
+        _method: POST
+
+tournament_put:
+    path:  /tournament/{id}
+    defaults: { _controller: GeneralBundle:Tournament:putTournament, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+tournament_delete:
+    path:  /tournament/{id}
+    defaults: { _controller: GeneralBundle:Tournament:deleteTournament, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"

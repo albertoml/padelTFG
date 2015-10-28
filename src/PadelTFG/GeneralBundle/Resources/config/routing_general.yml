@@ -1,0 +1,29 @@
+user:
+    type: rest
+    resource: routing_user.yml
+    name_prefix:  user_
+
+tournament:
+    type: rest
+    resource: routing_tournament.yml
+    name_prefix:  tournament_
+
+status:
+    type: rest
+    resource: routing_status.yml
+    name_prefix:  status_
+
+sponsor:
+    type: rest
+    resource: routing_sponsor.yml
+    name_prefix:  sponsor_
+
+recordal:
+    type: rest
+    resource: routing_recordal.yml
+    name_prefix:  recordal_
+
+notification:
+    type: rest
+    resource: routing_notification.yml
+    name_prefix:  notification_

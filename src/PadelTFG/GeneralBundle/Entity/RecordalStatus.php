@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class RecordalStatus
+class RecordalStatus implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -31,4 +32,12 @@ class RecordalStatus
 	public function setValue($value){
 		$this->value = $value;
 	}
+
+	public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'value' => $this->value
+        );
+    }
 }

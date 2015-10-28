@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class Recordal
+class Recordal implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -27,6 +28,10 @@ class Recordal
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\RecordalStatus") */
 	protected $status;
+
+	public function __construct(){
+		$this->creationDate = new \DateTime();
+	}
 
 	public function getId(){
 		return $this->id;
@@ -56,4 +61,15 @@ class Recordal
 	public function setStatus($status){
 		$this->status = $status;
 	}
+
+	public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'text' => $this->text,
+            'creationDate' => $this->creationDate,
+            'recordalDate' => $this->recordalDate,
+            'status' => $this->status
+        );
+    }
 }

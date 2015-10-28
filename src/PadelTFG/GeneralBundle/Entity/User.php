@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class User
+class User implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -22,34 +23,31 @@ class User
 	/** @ORM\Column(type="string", length=100) */
 	protected $lastName;
 
-	/** @ORM\Column(type="string", length=9) */
+	/** @ORM\Column(type="string", length=9, nullable=true) */
 	protected $firstPhone;
 
-	/** @ORM\Column(type="string", length=9) */
+	/** @ORM\Column(type="string", length=9, nullable=true) */
 	protected $secondPhone;
 
 	/** @ORM\Column(type="string", length=100) */
 	protected $email;
 
-	/** @ORM\Column(type="string", length=200) */
+	/** @ORM\Column(type="string", length=200, nullable=true) */
 	protected $address;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(type="string", length=100, nullable=true) */
 	protected $city;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(type="string", length=100, nullable=true) */
 	protected $country;
 
-	/** @ORM\Column(type="string", length=10) */
+	/** @ORM\Column(type="string", length=10, nullable=true) */
 	protected $cp;
-
-	/** @ORM\Column(type="string", length=50) */
-	protected $user;
 
 	/** @ORM\Column(type="string", length=500) */
 	protected $password;
 
-	/** @ORM\Column(type="string", length=500) */
+	/** @ORM\Column(type="string", length=500, nullable=true) */
 	protected $salt;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\UserStatus") */
@@ -61,21 +59,46 @@ class User
 	/** @ORM\Column(type="datetime") */
 	protected $registrationDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $birthDate;	
 
-	/** @ORM\Column(type="blob") */
+	/** @ORM\Column(type="blob", nullable=true) */
 	protected $profileImage;
 
-	/** @ORM\Column(type="integer") */
+	/** @ORM\Column(type="integer", nullable=true) */
 	protected $gameLevel;
 
-	/** @ORM\Column(type="string", length=50) */
+	/** @ORM\Column(type="string", length=50, nullable=true) */
 	protected $alias;
+
+	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", mappedBy="user") */
+	protected $tournament;
 
 	public function __construct(){
 		$this->notification = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->tournament = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->registrationDate = new \DateTime();
+	}
+
+	/**
+	 * @ORM\PrePersist
+	 */
+	public function setCreatedAtValue()
+	{
+	    $this->registrationDate = new \DateTime();
+	    $this->salt = $this->registrationDate + 'PadelTFG';
+	    $this->password = password_hash($this->password, PASSWORD_DEFAULT, $this->salt);
+	}
+
+	public function isPassEqual($pass){
+
+		$iguales = password_verify($pass, $this->password);
+ 
+		if ($iguales) {
+		    return true;
+		} else {
+		    return false;
+		}
 	}
 
 	public function getId(){
@@ -108,14 +131,11 @@ class User
 	public function getCP(){
 		return $this->cp;
 	}
-	public function getUser(){
-		return $this->user;
-	}
 	public function getPassword(){
-		return $this->$password;
+		return $this->password;
 	}
 	public function getSalt(){
-		return $this->$salt;
+		return $this->salt;
 	}
 	public function getStatus(){
 		return $this->status;
@@ -166,9 +186,6 @@ class User
 	public function setCP($cp){
 		$this->cp = $cp;
 	}
-	public function setUser($user){
-		$this->user = $user;
-	}
 	public function setPassword($password){
 		$this->password = $password;
 	}
@@ -196,4 +213,26 @@ class User
 	public function setAlias($alias){
 		$this->alias = $alias;
 	}
+
+	public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'name' => $this->name,
+            'lastName' => $this->lastName,
+            'firstPhone' => $this->firstPhone,
+            'secondPhone' => $this->secondPhone,
+            'email' => $this->email,
+            'address' => $this->address,
+            'city' => $this->city,
+            'country' => $this->country,
+            'cp'=> $this->cp,
+            'status' => $this->status,
+            'notification' => $this->notification,
+            'registrationDate' => $this->registrationDate,
+            'birthDate' => $this->birthDate,
+            'gameLevel' => $this->gameLevel,
+            'alias' => $this->alias
+        );
+    }
 }
