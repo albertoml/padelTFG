@@ -30,3 +30,10 @@ tournament_delete:
     requirements:
         _method: DELETE
         id: "\d+"
+
+add_category_to_tournament:
+    path: /tournament/addCategory/{id}
+    defaults: { _controller: GeneralBundle:Tournament:addCategory, _format: ~ }
+    requirements:
+        _method: POST
+        id: "\d+"

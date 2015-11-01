@@ -1,31 +1,28 @@
 <?php
 
-namespace PadelTFG\GeneralBundle\DataFixtures\ORM\TournamentTest;
+namespace PadelTFG\GeneralBundle\DataFixtures\ORM\CategoryTest;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use PadelTFG\GeneralBundle\Entity\Category;
 use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\User;
-use PadelTFG\GeneralBundle\Entity\Category;
 
 
-class TournamentTestRemove implements FixtureInterface
+class CategoryTestRemove implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 
-		$Tournaments = array(
-			array('name' => 'Torneo TFG'),
-			array('name' => 'Torneo TFG2'),
-			array('name' => 'Torneo TFG3'),
-			array('name' => 'Torneo TFG4'),
-			array('name' => 'Torneo TFG5'),
-			array('name' => 'Torneo POST'),
-			array('name' => 'Torneo TFGDELETE')
-		);
 		$Categories = array(
-			array('name' => 'CategoryTournamentTest1'),
-			array('name' => 'CategoryTournamentTest2'),
-			array('name' => 'CategoryTournamentTest3')
+			array('name' => 'Category TFG'),
+			array('name' => 'Category TFG2'),
+			array('name' => 'Category TFG3'),
+			array('name' => 'Category TFG4'),
+			array('name' => 'Category TFG5'),
+			array('name' => 'Category Tournament'),
+			array('name' => 'Category Tournament1'),
+			array('name' => 'Category POST'),
+			array('name' => 'Category TFGDELETE')
 		);
 
 		$repository = $manager->getRepository('GeneralBundle:Category');
@@ -39,14 +36,12 @@ class TournamentTestRemove implements FixtureInterface
 		}
 
 		$repository = $manager->getRepository('GeneralBundle:Tournament');
-		foreach ($Tournaments as $key) {
-			
-			$entity = $repository->findOneByName($key['name']);
-			if ($entity instanceof Tournament) {
+		$entity = $repository->findOneByName('CategoryTournamentName');
+		if ($entity instanceof Tournament) {
 
-				$manager->remove($entity);
-			}	
-		}
+			$manager->remove($entity);
+		}	
+		$manager->flush();	
 
 		$repository = $manager->getRepository('GeneralBundle:User');
 		$entity = $repository->findOneByEmail('emailTournamentTest');

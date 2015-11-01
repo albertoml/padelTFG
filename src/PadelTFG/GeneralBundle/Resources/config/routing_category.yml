@@ -1,0 +1,19 @@
+category_all:
+    path:  /category
+    defaults: { _controller: GeneralBundle:Category:allCategory, _format: ~ }
+    requirements:
+        _method: GET
+
+category_get:
+    path:  /category/{id}
+    defaults: { _controller: GeneralBundle:Category:getCategory, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+category_by_tournament:
+    path:  /category/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Category:getCategoryByTournament, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"

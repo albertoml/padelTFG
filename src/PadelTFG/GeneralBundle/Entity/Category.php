@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class Category
+class Category implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -19,7 +20,14 @@ class Category
 	/** @ORM\Column(type="string", length=50) */
 	protected $name;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="category") */
+	/** @ORM\Column(type="integer", nullable=true) */
+	protected $registeredLimitMax;
+
+	/** @ORM\Column(type="integer", nullable=true) */
+	protected $registeredLimitMin;
+
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\tournament")
+	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
 	protected $tournament;
 
 	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Game", mappedBy="category") */
@@ -48,12 +56,24 @@ class Category
 	public function getGame(){
 		return $this->game;
 	}
+	public function getRegisteredLimitMax(){
+		return $this->registeredLimitMax;
+	}
+	public function getRegisteredLimitMin(){
+		return $this->registeredLimitMin;
+	}
 
 	public function setName($name){
 		$this->name = $name;
 	}
 	public function setTournament($tournament){
 		$this->tournament = $tournament;
+	}
+	public function setRegisteredLimitMax($registeredLimitMax){
+		$this->registeredLimitMax = $registeredLimitMax;
+	}
+	public function setRegisteredLimitMin($registeredLimitMin){
+		$this->registeredLimitMin = $registeredLimitMin;
 	}
 
 	public function addPair(Pair $pair)
@@ -65,5 +85,16 @@ class Category
     {
         $game->addCategory($this);
         $this->game[] = $game;
+    }
+
+    public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'name' => $this->name,
+            'tournament' => isset($this->tournament) ? $this->tournament->getId() : null ,
+            'pair' => $this->pair,
+            'game' => $this->game
+        );
     }
 }

@@ -265,4 +265,93 @@ class TournamentControllerAPITest extends WebTestCase
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
         $this->assertContains(Literals::TournamentNotFound, $response);
     }
+
+    public function testAddCategoryTournamentActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName("Torneo TFG");
+
+        $method = 'POST';
+        $uri = '/api/tournament/addCategory/' . $tournament->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = '{"category":[{"name":"CategoryTournamentTest1"}, {"name":"CategoryTournamentTest2"}, {"name":"CategoryTournamentTest3"}]}';
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains("Torneo TFG", $response);
+
+        $method = 'GET';
+        $uri = '/api/category/tournament/' . $tournament->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = "";
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains("CategoryTournamentTest1", $response);
+        $this->assertContains("CategoryTournamentTest2", $response);
+        $this->assertContains("CategoryTournamentTest3", $response);
+        $this->assertContains('"tournament":' . $tournament->getId(), $response);
+    }
+
+    public function testAddCategoryTournamentNotFoundTournamentActionAPI()
+    {
+        $method = 'POST';
+        $uri = '/api/tournament/addCategory/0';
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = '{"category":[{"name":"CategoryTest1"}, {"name":"CategoryTest2"}, {"name":"CategoryTest3"}]}';
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::TournamentNotFound, $response);
+    }
+
+    public function testAddCategoryEmptyContentTournamentActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName("Torneo TFG");
+
+        $method = 'POST';
+        $uri = '/api/tournament/addCategory/' . $tournament->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = "";
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::EmptyContent, $response);
+    }
+
+    public function testAddCategoryCategoryNotFoundTournamentActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName("Torneo TFG");
+
+        $method = 'POST';
+        $uri = '/api/tournament/addCategory/' . $tournament->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = "Not Correct Content";
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::CategoryNotFound, $response);
+    }
 }

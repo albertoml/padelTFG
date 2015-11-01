@@ -20,6 +20,7 @@ abstract class Literals
 
 	//TournamentController
 	const TournamentNotFound = "Tournament not found";
+	const CategoryNotFound = "Category not found";
 	const TournamentDeleted = "Tournament deleted";
 
 	const AdminEmpty = "admin is Empty;";
@@ -50,5 +51,7 @@ abstract class Literals
 	const TournamentEmpty = "tournament Empty;";
 	const TournamentIncorrect = "Incorrect Tournament";
 
-
+	//AnnotationController
+	const AnnotationNotFound = "Annotation not found";
+	const AnnotationDeleted = "Annotation deleted";
 }

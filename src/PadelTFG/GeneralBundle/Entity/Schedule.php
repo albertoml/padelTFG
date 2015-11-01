@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class Schedule
+class Schedule implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -47,5 +48,15 @@ class Schedule
 	public function setGame($game){
 		$this->game = $game;
 	}
+
+	public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'date' => $this->date,
+            'track' => $this->track,
+            'game' => $this->game
+        );
+    }
 	
 }

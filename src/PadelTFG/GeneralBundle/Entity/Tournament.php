@@ -45,9 +45,6 @@ class Tournament implements JsonSerializable
 	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $endFinalDate;
 
-	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Category", mappedBy="tournament") */
-	protected $category;
-
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\TournamentStatus") */
 	protected $status;
 
@@ -99,9 +96,6 @@ class Tournament implements JsonSerializable
 	public function getEndFinalDate(){
 		return $this->endFinalDate;
 	}
-	public function getCategory(){
-		return $this->category;
-	}
 	public function getStatus(){
 		return $this->status;
 	}
@@ -145,9 +139,6 @@ class Tournament implements JsonSerializable
 	public function setEndFinalDate($endFinalDate){
 		$this->endFinalDate = $endFinalDate;
 	}
-	public function setCategory($category){
-		$this->category = $category;
-	}
 	public function setStatus($status){
 		$this->status = $status;
 	}
@@ -168,7 +159,7 @@ class Tournament implements JsonSerializable
     }
     public function addCategory(Category $category)
     {
-        $category->addTournament($this);
+        $category->setTournament($this);
         $this->category[] = $category;
     }
     public function addSponsor(Sponsor $sponsor)
@@ -190,7 +181,6 @@ class Tournament implements JsonSerializable
             'endGroupDate' => $this->endGroupDate,
             'startFinalDate' => $this->startFinalDate,
             'endFinalDate'=> $this->endFinalDate,
-            'category' => $this->category,
             'status' => $this->status,
             'sponsor' => $this->sponsor,
             'registeredLimit' => $this->registeredLimit

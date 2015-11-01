@@ -27,3 +27,13 @@ notification:
     type: rest
     resource: routing_notification.yml
     name_prefix:  notification_
+
+annotation:
+    type: rest
+    resource: routing_annotation.yml
+    name_prefix:  annotation_
+
+category:
+    type: rest
+    resource: routing_category.yml
+    name_prefix:  category_

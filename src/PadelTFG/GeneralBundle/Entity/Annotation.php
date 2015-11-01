@@ -3,12 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
 * @ORM\Entity
 */
 
-class Annotation
+class Annotation implements JsonSerializable
 {
 	/**
 	* @ORM\Id
@@ -24,6 +25,10 @@ class Annotation
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\AnnotationStatus") */
 	protected $status;
+
+	public function __construct(){
+		$this->creationDate = new \DateTime();
+	}
 
 	public function getId(){
 		return $this->id;
@@ -47,4 +52,14 @@ class Annotation
 	public function setStatus($status){
 		$this->status = $status;
 	}
+
+	public function jsonSerialize()
+    {
+        return array(
+        	'id' => $this->id,
+            'text' => $this->text,
+            'creationDate' => $this->creationDate,
+            'status' => $this->status
+        );
+    }
 }

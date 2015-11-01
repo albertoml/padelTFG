@@ -1,0 +1,32 @@
+annotation_all:
+    path:  /annotation
+    defaults: { _controller: GeneralBundle:Annotation:allAnnotation, _format: ~ }
+    requirements:
+        _method: GET
+
+annotation_get:
+    path:  /annotation/{id}
+    defaults: { _controller: GeneralBundle:Annotation:getAnnotation, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+annotation_post:
+    path:  /annotation
+    defaults: { _controller: GeneralBundle:Annotation:postAnnotation, _format: ~ }
+    requirements:
+        _method: POST
+
+annotation_put:
+    path:  /annotation/{id}
+    defaults: { _controller: GeneralBundle:Annotation:putAnnotation, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+annotation_delete:
+    path:  /annotation/{id}
+    defaults: { _controller: GeneralBundle:Annotation:deleteAnnotation, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"
