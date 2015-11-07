@@ -32,6 +32,9 @@ class Game implements JsonSerializable
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament") */
 	protected $tournament;
 
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Group") */
+	protected $group;
+
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Category") */
 	protected $category;
 
@@ -63,6 +66,9 @@ class Game implements JsonSerializable
 	public function getCategory(){
 		return $this->category;
 	}
+	public function getGroup(){
+		return $this->group;
+	}
 	public function getStatus(){
 		return $this->status;
 	}
@@ -81,6 +87,9 @@ class Game implements JsonSerializable
 	}
 	public function setCategory($category){
 		$this->category = $category;
+	}
+	public function setGroup($group){
+		$this->group = $group;
 	}
 	public function setStatus($status){
 		$this->status = $status;
@@ -102,6 +111,7 @@ class Game implements JsonSerializable
             'score' => $this->score,
             'tournament' => $this->tournament,
             'category' => $this->category,
+            'group' => $this->group,
             'status' => $this->status
         );
     }

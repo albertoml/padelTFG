@@ -189,44 +189,4 @@ class TournamentController extends FOSRestController
             return $this->util->setResponse(404, Literals::TournamentNotFound);
         }
 	}
-
-    public function addCategoryAction($id){
-
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('GeneralBundle:Tournament');
-        $tournament = $repository->find($id);
-
-        if ($tournament instanceof Tournament) {
-
-            $params = array();
-            $content = $this->get("request")->getContent();
-
-            if (!empty($content)){
-
-                $params = json_decode($content, true);
-                if(!empty($params['category'])){
-
-                    foreach ($params['category'] as $category) {
-                        $categoryEntity = new Category();
-                        $categoryEntity->setName($category['name']);
-                        $categoryEntity->setRegisteredLimitMax(isset($params['registeredLimitMax']) ? $params['endFinalDate'] : null);
-                        $categoryEntity->setRegisteredLimitMin(isset($params['registeredLimitMin']) ? $params['endFinalDate'] : null);
-                        $tournament->addCategory($categoryEntity);
-                        $em->persist($categoryEntity);
-                    }
-                    $em->persist($tournament);
-                    $em->flush();
-
-                    $dataToSend = json_encode(array('tournament' => $tournament));
-                    return $this->util->setJsonResponse(200, $dataToSend);
-                } else {
-                    return $this->util->setResponse(400, Literals::CategoryNotFound);
-                }
-            } else {
-                return $this->util->setResponse(400, Literals::EmptyContent);
-            }
-        } else {
-            return $this->util->setResponse(404, Literals::TournamentNotFound);
-        }
-    }
 }

@@ -29,7 +29,8 @@ class Notification implements JsonSerializable
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\NotificationStatus") */
 	protected $status;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament") */
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\tournament")
+	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
 	protected $tournament;
 
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\User", inversedBy="notification") */

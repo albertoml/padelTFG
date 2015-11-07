@@ -35,6 +35,9 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
+        //increase memory for execute all test successfully
+        ini_set('memory_limit','512M');
+
         return $bundles;
     }
 

@@ -51,9 +51,6 @@ class Tournament implements JsonSerializable
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Sponsor", mappedBy="tournament") */
 	protected $sponsor;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Pair", mappedBy="tournament") */
-	protected $pair;
-
 	/** @ORM\Column(type="integer", nullable=true) */
 	protected $registeredLimit;
 
@@ -62,7 +59,6 @@ class Tournament implements JsonSerializable
 
 	public function __construct() {
         $this->sponsor = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->pair = new \Doctrine\Common\Collections\ArrayCollection();
         $this->category = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -101,9 +97,6 @@ class Tournament implements JsonSerializable
 	}
 	public function getSponsor(){
 		return $this->sponsor;
-	}
-	public function getPair(){
-		return $this->pair;
 	}
 	public function getRegisteredLimit(){
 		return $this->registeredLimit;
@@ -152,11 +145,6 @@ class Tournament implements JsonSerializable
 		$this->image = $image;
 	}
 
-	public function addPair(Pair $pair)
-    {
-        $pair->addTournament($this);
-        $this->pair[] = $pair;
-    }
     public function addCategory(Category $category)
     {
         $category->setTournament($this);

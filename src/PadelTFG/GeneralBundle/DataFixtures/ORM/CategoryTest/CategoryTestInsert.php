@@ -13,19 +13,35 @@ class CategoryTestInsert implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 
-		$admin = new User();
+		$Users = array(
+			array('name' => 'UserCategoryTest', 'lastName' => 'UserCategoryLastName', 'email' => 'emailCategoryTest',
+				'password' => 'password'),
+			array('name' => 'User1Pair1CategoryTest', 'lastName' => 'User1Pair1CategoryTest', 'email' => 'User1Pair1CategoryTest',
+				'password' => 'password'),
+			array('name' => 'User2Pair1CategoryTest', 'lastName' => 'User2Pair1CategoryTest', 'email' => 'User2Pair1CategoryTest',
+				'password' => 'password'),
+			array('name' => 'User1Pair2CategoryTest', 'lastName' => 'User1Pair2CategoryTest', 'email' => 'User1Pair2CategoryTest',
+				'password' => 'password'),
+			array('name' => 'User2Pair2CategoryTest', 'lastName' => 'User2Pair2CategoryTest', 'email' => 'User2Pair2CategoryTest',
+				'password' => 'password')
+			);
 
-		$admin->setName('UserCategoryTest');
-		$admin->setLastName('UserCategoryLastName');
-		$admin->setEmail('emailCategoryTest');
-		$admin->setPassword('password');
-
-		$manager->persist($admin);	
+		foreach ($Users as $key) {
+			$entity = new User();
+			$entity->setName($key['name']);
+			$entity->setLastName($key['lastName']);
+			$entity->setEmail($key['email']);
+			$entity->setPassword($key['password']);
+			$manager->persist($entity);	
+		}
 		$manager->flush();
 
 		$tournament = new Tournament();
 
-		$tournament->setAdmin($admin);
+		$repository = $manager->getRepository('GeneralBundle:User');
+		$userAdmin = $repository->findOneByName('UserCategoryTest');
+
+		$tournament->setAdmin($userAdmin);
 		$tournament->setName('CategoryTournamentName');
 		$tournament->setCreationDate(new \DateTime());
 

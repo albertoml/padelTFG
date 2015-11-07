@@ -1,0 +1,46 @@
+inscription_all:
+    path:  /inscription
+    defaults: { _controller: GeneralBundle:Inscription:allInscription, _format: ~ }
+    requirements:
+        _method: GET
+
+inscription_get:
+    path:  /inscription/{id}
+    defaults: { _controller: GeneralBundle:Inscription:getInscription, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+inscription_by_tournament:
+    path:  /inscription/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Inscription:getInscriptionByTournament, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+inscription_by_category:
+    path:  /inscription/category/{idCategory}
+    defaults: { _controller: GeneralBundle:Inscription:getInscriptionByCategory, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+inscription_by_pair:
+    path:  /inscription/pair/{idPair}
+    defaults: { _controller: GeneralBundle:Inscription:getInscriptionByPair, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+inscription_by_group:
+    path:  /inscription/pair/{idGroup}
+    defaults: { _controller: GeneralBundle:Inscription:getInscriptionByGroup, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+inscription_post:
+    path:  /inscription
+    defaults: { _controller: GeneralBundle:Inscription:postInscription, _format: ~ }
+    requirements:
+        _method: POST

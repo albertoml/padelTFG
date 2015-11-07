@@ -1,0 +1,19 @@
+category_all:
+    path:  /observation
+    defaults: { _controller: GeneralBundle:Observation:allObservation, _format: ~ }
+    requirements:
+        _method: GET
+
+category_get:
+    path:  /observation/{id}
+    defaults: { _controller: GeneralBundle:Observation:getObservation, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+observation_by_inscription:
+    path:  /observation/inscription/{idInscription}
+    defaults: { _controller: GeneralBundle:Observation:getObservationByInscription, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"

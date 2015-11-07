@@ -17,3 +17,10 @@ category_by_tournament:
     requirements:
         _method: GET
         id: "\d+"
+
+add_category_to_tournament:
+    path: /category/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Category:addCategory, _format: ~ }
+    requirements:
+        _method: POST
+        id: "\d+"

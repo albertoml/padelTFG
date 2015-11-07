@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PadelTFG\GeneralBundle\Entity\Notification;
 use PadelTFG\GeneralBundle\Entity\Tournament;
+use PadelTFG\GeneralBundle\Entity\User;
 
 
 class NotificationTestRemove implements FixtureInterface
@@ -32,8 +33,8 @@ class NotificationTestRemove implements FixtureInterface
 
 				$manager->remove($entity);
 			}
-
 		}
+		
 		$repository = $manager->getRepository('GeneralBundle:Tournament');
 		$entity = $repository->findOneByName('TournamentNotificationTest');
 		if ($entity instanceof Tournament) {

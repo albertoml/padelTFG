@@ -1,0 +1,110 @@
+<?php
+
+namespace PadelTFG\GeneralBundle\DataFixtures\ORM\Status;
+
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use PadelTFG\GeneralBundle\Entity\Category;
+use PadelTFG\GeneralBundle\Entity\Tournament;
+use PadelTFG\GeneralBundle\Entity\User;
+use PadelTFG\GeneralBundle\Entity\Pair;
+use PadelTFG\GeneralBundle\Entity\Inscription;
+
+
+class InitiateBDInsert implements FixtureInterface
+{
+	public function load(ObjectManager $manager){
+
+		$Users = array(
+			array('name' => 'Natalia', 'lastName' => 'Perez', 'email' => 'nape',
+				'password' => 'password'),
+			array('name' => 'Servando', 'lastName' => 'Escobar', 'email' => 'sees',
+				'password' => 'password'),
+			array('name' => 'Victoria', 'lastName' => 'Abril', 'email' => 'viab',
+				'password' => 'password'),
+			array('name' => 'Alberto', 'lastName' => 'Martinez', 'email' => 'alma',
+				'password' => 'password'),
+			array('name' => 'Cecilia', 'lastName' => 'Soriano', 'email' => 'ceso',
+				'password' => 'password'),
+			array('name' => 'Saray', 'lastName' => 'Lozano', 'email' => 'salo',
+				'password' => 'password'),
+			array('name' => 'Ana', 'lastName' => 'Guardiola', 'email' => 'angu',
+				'password' => 'password'),
+			array('name' => 'Andrea', 'lastName' => 'Garcia', 'email' => 'anga',
+				'password' => 'password'),
+			array('name' => 'Rocio', 'lastName' => 'Lopez', 'email' => 'rolo',
+				'password' => 'password')
+			);
+
+		foreach ($Users as $key) {
+			$entity = new User();
+			$entity->setName($key['name']);
+			$entity->setLastName($key['lastName']);
+			$entity->setEmail($key['email']);
+			$entity->setPassword($key['password']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$Categories = array(
+			array('name' => 'Category Femenina'),
+			array('name' => 'Category Masculina'),
+			array('name' => 'Category Mixta')
+			);
+
+		foreach ($Categories as $key) {
+			$entity = new Category();
+			$entity->setName($key['name']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$repository = $manager->getRepository('GeneralBundle:Category');
+		$category1 = $repository->findOneByName('Category Femenina');
+		$category2 = $repository->findOneByName('Category Masculina');
+		$category3 = $repository->findOneByName('Category Mixta');
+
+		$tournament = new Tournament();
+		$tournament2 = new Tournament();
+		$repository = $manager->getRepository('GeneralBundle:User');
+		$userAdmin = $repository->findOneByName('Servando');
+		$tournament->setAdmin($userAdmin);
+		$tournament->setName('Los Rebeldes');
+		$tournament->setCreationDate(new \DateTime());
+		$tournament->addCategory($category1);
+		$tournament->addCategory($category2);
+		$tournament2->setAdmin($userAdmin);
+		$tournament2->setName('Los Vampiros');
+		$tournament2->setCreationDate(new \DateTime());
+		$tournament2->addCategory($category3);
+
+		$manager->persist($tournament);	
+		$manager->persist($tournament2);	
+		$manager->flush();
+
+		$repository = $manager->getRepository('GeneralBundle:User');
+		$user1Pair1 = $repository->findOneByName('Natalia');
+		$user2Pair1 = $repository->findOneByName('Victoria');
+		$user1Pair2 = $repository->findOneByName('Alberto');
+		$user2Pair2 = $repository->findOneByName('Cecilia');
+		$user1Pair3 = $repository->findOneByName('Saray');
+		$user2Pair3 = $repository->findOneByName('Ana');
+		$user1Pair4 = $repository->findOneByName('Andrea');
+		$user2Pair4 = $repository->findOneByName('Rocio');
+
+		$Pairs = array(
+			array('user1' => $user1Pair1, 'user2' => $user2Pair1),
+			array('user1' => $user1Pair2, 'user2' => $user2Pair2),
+			array('user1' => $user1Pair3, 'user2' => $user2Pair3),
+			array('user1' => $user1Pair4, 'user2' => $user2Pair4)
+			);
+
+		foreach ($Pairs as $key) {
+			$entity = new Pair();
+			$entity->setUser1($key['user1']);
+			$entity->setUser2($key['user2']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+	}
+}

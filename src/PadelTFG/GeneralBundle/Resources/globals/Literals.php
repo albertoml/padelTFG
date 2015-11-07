@@ -54,4 +54,22 @@ abstract class Literals
 	//AnnotationController
 	const AnnotationNotFound = "Annotation not found";
 	const AnnotationDeleted = "Annotation deleted";
+
+	//CategoryController
+	const PairNotFound = "Pair not found";
+
+	//InscriptionController
+	const InscriptionNotFound = "Inscription not found";
+	const PairEmpty = "pair empty;";
+	const CategoryEmpty = "category empty;";
+	const CategoryIncorrect = "Error in select category";
+	const PairDuplicate = "Pair duplicate";
+	const Inscriptions = "Pairs registered succesfully";
+	const StartDateEmpty = "startDate empty";
+	const EndDateEmpty = "endDate empty";
+	const AvailableEmpty = "available empty";
+	const ObservationIncorrect = "observation incorrect";
+
+	//ObservationController
+	const ObservationNotFound = "Observation not found";
 }

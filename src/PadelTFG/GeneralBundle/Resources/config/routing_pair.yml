@@ -1,0 +1,40 @@
+pair_all:
+    path:  /pair
+    defaults: { _controller: GeneralBundle:Pair:allPair, _format: ~ }
+    requirements:
+        _method: GET
+
+pair_get:
+    path:  /pair/{id}
+    defaults: { _controller: GeneralBundle:Pair:getPair, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+pair_by_user:
+    path:  /pair/user/{idUser}
+    defaults: { _controller: GeneralBundle:Pair:getPairByUser, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+pair_by_users:
+    path:  /pair/user/{idUser1}/{idUser2}
+    defaults: { _controller: GeneralBundle:Pair:getPairByUsers, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+pair_by_category:
+    path:  /pair/category/{idCategory}
+    defaults: { _controller: GeneralBundle:Pair:getPairByCategory, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+pair_by_tournament:
+    path:  /pair/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Pair:getPairByTournament, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"

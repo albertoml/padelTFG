@@ -17,56 +17,38 @@ class Pair implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\User") */
-	protected $user;
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User")
+	@ORM\JoinColumn(name="user1_id", onDelete="cascade") */
+	protected $user1;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="pair") */
-	protected $tournament;
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User")
+	@ORM\JoinColumn(name="user2_id", onDelete="cascade") */
+	protected $user2;
 
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Category", inversedBy="pair") */
-	protected $category;
-
-	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Game", inversedBy="pair") */
-	protected $game;
-
-	public function __construct() {
-        $this->tournament = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->game = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
-
-    }
 
     public function getId(){
 		return $this->id;
 	}
-	public function getUser(){
-		return $this->user;
+	public function getUser1(){
+		return $this->user1;
 	}
-	public function getTournament(){
-		return $this->tournament;
-	}
-	public function getCategory(){
-		return $this->category;
-	}
-	public function getGame(){
-		return $this->game;
+	public function getUser2(){
+		return $this->user2;
 	}
 
-	public function addUser(User $user)
-    {
-        $user->addPair($this);
-        $this->user[] = $user;
-    }
+	public function setUser1($user1){
+		$this->user1 = $user1;
+	}
+	public function setUser2($user2){
+		$this->user2 = $user2;
+	}
 
     public function jsonSerialize()
     {
         return array(
         	'id' => $this->id,
-            'user' => $this->user,
-            'tournament' => $this->tournament,
-            'category' => $this->category,
-            'game' => $this->game
+            'user1' => $this->user1,
+            'user2' => $this->user2
         );
     }
 }

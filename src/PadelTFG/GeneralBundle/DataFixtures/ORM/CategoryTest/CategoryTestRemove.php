@@ -19,35 +19,34 @@ class CategoryTestRemove implements FixtureInterface
 			array('name' => 'Category TFG3'),
 			array('name' => 'Category TFG4'),
 			array('name' => 'Category TFG5'),
-			array('name' => 'Category Tournament'),
-			array('name' => 'Category Tournament1'),
-			array('name' => 'Category POST'),
 			array('name' => 'Category TFGDELETE')
-		);
-
+			);
 		$repository = $manager->getRepository('GeneralBundle:Category');
+
 		foreach ($Categories as $key) {
-			
 			$entity = $repository->findOneByName($key['name']);
 			if ($entity instanceof Category) {
 
 				$manager->remove($entity);
-			}	
+			}
 		}
 
-		$repository = $manager->getRepository('GeneralBundle:Tournament');
-		$entity = $repository->findOneByName('CategoryTournamentName');
-		if ($entity instanceof Tournament) {
-
-			$manager->remove($entity);
-		}	
-		$manager->flush();	
+		$Users = array(
+			array('email' => 'emailCategoryTest'),
+			array('email' => 'User1Pair1CategoryTest'),
+			array('email' => 'User2Pair1CategoryTest'),
+			array('email' => 'User1Pair2CategoryTest'),
+			array('email' => 'User2Pair2CategoryTest')
+		);
 
 		$repository = $manager->getRepository('GeneralBundle:User');
-		$entity = $repository->findOneByEmail('emailTournamentTest');
-		if ($entity instanceof User) {
+		foreach ($Users as $key) {
+			
+			$entity = $repository->findOneByEmail($key['email']);
+			if ($entity instanceof User) {
 
-			$manager->remove($entity);
+				$manager->remove($entity);
+			}	
 		}	
 
 		$manager->flush();

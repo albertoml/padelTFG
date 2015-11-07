@@ -37,3 +37,18 @@ category:
     type: rest
     resource: routing_category.yml
     name_prefix:  category_
+
+pair:
+    type: rest
+    resource: routing_pair.yml
+    name_prefix:  pair_
+
+inscription:
+    type: rest
+    resource: routing_inscription.yml
+    name_prefix:  inscription_
+
+observation:
+    type: rest
+    resource: routing_observation.yml
+    name_prefix:  observation_
