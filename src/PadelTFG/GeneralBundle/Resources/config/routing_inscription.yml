@@ -33,7 +33,7 @@ inscription_by_pair:
         id: "\d+"
 
 inscription_by_group:
-    path:  /inscription/pair/{idGroup}
+    path:  /inscription/group/{idGroup}
     defaults: { _controller: GeneralBundle:Inscription:getInscriptionByGroup, _format: ~ }
     requirements:
         _method: GET

@@ -8,6 +8,7 @@ use PadelTFG\GeneralBundle\Entity\Category;
 use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Entity\Pair;
+use PadelTFG\GeneralBundle\Entity\GroupCategory;
 use PadelTFG\GeneralBundle\Entity\Inscription;
 
 
@@ -49,14 +50,15 @@ class InscriptionTestInsert implements FixtureInterface
 		$manager->flush();
 
 		$Categories = array(
-			array('name' => 'Category Tournament'),
-			array('name' => 'Category Tournament1'),
-			array('name' => 'Category Tournament2')
+			array('name' => 'Category Tournament', 'registeredLimitMax' => null),
+			array('name' => 'Category Tournament1', 'registeredLimitMax' => 2),
+			array('name' => 'Category Tournament2', 'registeredLimitMax' => null)
 			);
 
 		foreach ($Categories as $key) {
 			$entity = new Category();
 			$entity->setName($key['name']);
+			$entity->setRegisteredLimitMax($key['registeredLimitMax']);
 			$manager->persist($entity);	
 		}
 		$manager->flush();
@@ -79,6 +81,7 @@ class InscriptionTestInsert implements FixtureInterface
 		$tournament2->setAdmin($userAdmin);
 		$tournament2->setName('CategoryTournamentName1');
 		$tournament2->setCreationDate(new \DateTime());
+		$tournament2->setRegisteredLimit(2);
 		$tournament2->addCategory($category3);
 
 		$manager->persist($tournament);	
@@ -110,7 +113,21 @@ class InscriptionTestInsert implements FixtureInterface
 		}
 		$manager->flush();
 
-		//getear 4 parejas y las 3 categorias y 2 torneos
+		$Groups = array(
+			array('name' => 'Group A', 'category' => $category2, 'tournament' => $tournament),
+			array('name' => 'Group B', 'category' => $category2, 'tournament' => $tournament),
+			array('name' => 'Group C', 'category' => $category2, 'tournament' => $tournament2)
+			);
+
+		foreach ($Groups as $key) {
+			$entity = new GroupCategory();
+			$entity->setName($key['name']);
+			$entity->setCategory($key['category']);
+			$entity->setTournament($key['tournament']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
 		$repository = $manager->getRepository('GeneralBundle:Pair');
 		$pair1 = $repository->findOneByUser1($user1Pair1);
 		$pair2 = $repository->findOneByUser1($user1Pair2);
@@ -119,14 +136,18 @@ class InscriptionTestInsert implements FixtureInterface
 		$repository = $manager->getRepository('GeneralBundle:Tournament');
 		$tournament = $repository->findOneByName('CategoryTournamentName');
 		$tournament1 = $repository->findOneByName('CategoryTournamentName1');
+		$repository = $manager->getRepository('GeneralBundle:GroupCategory');
+		$groupA = $repository->findOneByName('Group A');
+		$groupB = $repository->findOneByName('Group B');
+		$groupC = $repository->findOneByName('Group C');
 
 
 		$Inscriptions = array(
-			array('pair' => $pair1, 'tournament' => $tournament, 'category' => $category1),
-			array('pair' => $pair2, 'tournament' => $tournament, 'category' => $category2),
-			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category3),
-			array('pair' => $pair3, 'tournament' => $tournament, 'category' => $category2),
-			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category3)
+			array('pair' => $pair1, 'tournament' => $tournament, 'category' => $category1, 'group' => $groupA),
+			array('pair' => $pair2, 'tournament' => $tournament, 'category' => $category2, 'group' => $groupB),
+			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category3, 'group' => $groupC),
+			array('pair' => $pair3, 'tournament' => $tournament, 'category' => $category2, 'group' => $groupB),
+			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category3, 'group' => $groupC)
 			);
 
 		foreach ($Inscriptions as $key) {
@@ -134,6 +155,7 @@ class InscriptionTestInsert implements FixtureInterface
 			$entity->setPair($key['pair']);
 			$entity->setTournament($key['tournament']);
 			$entity->setCategory($key['category']);
+			$entity->setGroup($key['group']);
 			$manager->persist($entity);	
 		}
 		$manager->flush();

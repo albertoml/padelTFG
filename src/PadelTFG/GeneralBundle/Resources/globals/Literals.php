@@ -69,7 +69,12 @@ abstract class Literals
 	const EndDateEmpty = "endDate empty";
 	const AvailableEmpty = "available empty";
 	const ObservationIncorrect = "observation incorrect";
+	const TournamentInscriptionLimit = "tournament inscription limit";
+	const CategoryInscriptionLimitMax = "category inscription limit";
 
 	//ObservationController
 	const ObservationNotFound = "Observation not found";
+
+	//GroupController
+	const GroupNotFound = "Group not found";
 }

@@ -1,0 +1,40 @@
+group_all:
+    path:  /group
+    defaults: { _controller: GeneralBundle:Group:allGroup, _format: ~ }
+    requirements:
+        _method: GET
+
+group_get:
+    path:  /group/{id}
+    defaults: { _controller: GeneralBundle:Group:getgroup, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+group_by_tournament:
+    path:  /group/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Group:getGroupByTournament, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+group_by_category:
+    path:  /group/category/{idCategory}
+    defaults: { _controller: GeneralBundle:Group:getGroupByCategory, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+add_groups_to_tournament:
+    path: /group/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Group:addGroupForTournament, _format: ~ }
+    requirements:
+        _method: POST
+        id: "\d+"
+
+add_groups_to_category:
+    path: /group/category/{idCategory}
+    defaults: { _controller: GeneralBundle:Group:addGroupForCategory, _format: ~ }
+    requirements:
+        _method: POST
+        id: "\d+"

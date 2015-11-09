@@ -33,6 +33,10 @@ class InitiateBDInsert implements FixtureInterface
 			array('name' => 'Andrea', 'lastName' => 'Garcia', 'email' => 'anga',
 				'password' => 'password'),
 			array('name' => 'Rocio', 'lastName' => 'Lopez', 'email' => 'rolo',
+				'password' => 'password'),
+			array('name' => 'Francisco', 'lastName' => 'Garcia', 'email' => 'frga',
+				'password' => 'password'),
+			array('name' => 'Juan', 'lastName' => 'Martinez', 'email' => 'juma',
 				'password' => 'password')
 			);
 
@@ -77,6 +81,7 @@ class InitiateBDInsert implements FixtureInterface
 		$tournament2->setName('Los Vampiros');
 		$tournament2->setCreationDate(new \DateTime());
 		$tournament2->addCategory($category3);
+		$tournament2->setRegisteredLimit(4);
 
 		$manager->persist($tournament);	
 		$manager->persist($tournament2);	
@@ -91,18 +96,52 @@ class InitiateBDInsert implements FixtureInterface
 		$user2Pair3 = $repository->findOneByName('Ana');
 		$user1Pair4 = $repository->findOneByName('Andrea');
 		$user2Pair4 = $repository->findOneByName('Rocio');
+		$user1Pair5 = $repository->findOneByName('Francisco');
+		$user2Pair5 = $repository->findOneByName('Juan');
 
 		$Pairs = array(
 			array('user1' => $user1Pair1, 'user2' => $user2Pair1),
 			array('user1' => $user1Pair2, 'user2' => $user2Pair2),
 			array('user1' => $user1Pair3, 'user2' => $user2Pair3),
-			array('user1' => $user1Pair4, 'user2' => $user2Pair4)
+			array('user1' => $user1Pair4, 'user2' => $user2Pair4),
+			array('user1' => $user1Pair5, 'user2' => $user2Pair5)
+
 			);
 
 		foreach ($Pairs as $key) {
 			$entity = new Pair();
 			$entity->setUser1($key['user1']);
 			$entity->setUser2($key['user2']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$repository = $manager->getRepository('GeneralBundle:Pair');
+		$pair1 = $repository->findOneByUser1($user1Pair1);
+		$pair2 = $repository->findOneByUser1($user1Pair2);
+		$pair3 = $repository->findOneByUser1($user1Pair3);
+		$pair4 = $repository->findOneByUser1($user1Pair4);
+		$repository = $manager->getRepository('GeneralBundle:Tournament');
+		$tournament = $repository->findOneByName('Los Rebeldes');
+		$tournament1 = $repository->findOneByName('Los Vampiros');
+
+
+		$Inscriptions = array(
+			array('pair' => $pair1, 'tournament' => $tournament, 'category' => $category1),
+			array('pair' => $pair2, 'tournament' => $tournament, 'category' => $category2),
+			array('pair' => $pair3, 'tournament' => $tournament, 'category' => $category2),
+			array('pair' => $pair4, 'tournament' => $tournament, 'category' => $category1),
+			array('pair' => $pair1, 'tournament' => $tournament1, 'category' => $category3),
+			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category3),
+			array('pair' => $pair3, 'tournament' => $tournament1, 'category' => $category3),
+			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category3)
+			);
+
+		foreach ($Inscriptions as $key) {
+			$entity = new Inscription();
+			$entity->setPair($key['pair']);
+			$entity->setTournament($key['tournament']);
+			$entity->setCategory($key['category']);
 			$manager->persist($entity);	
 		}
 		$manager->flush();

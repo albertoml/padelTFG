@@ -30,13 +30,6 @@ class Category implements JsonSerializable
 	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
 	protected $tournament;
 
-	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Group", mappedBy="category") */
-	protected $group;
-
-	public function __construct() {
-        $this->group = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     public function getId(){
 		return $this->id;
 	}
@@ -45,9 +38,6 @@ class Category implements JsonSerializable
 	}
 	public function getTournament(){
 		return $this->tournament;
-	}
-	public function getGroup(){
-		return $this->group;
 	}
 	public function getRegisteredLimitMax(){
 		return $this->registeredLimitMax;
@@ -68,19 +58,13 @@ class Category implements JsonSerializable
 	public function setRegisteredLimitMin($registeredLimitMin){
 		$this->registeredLimitMin = $registeredLimitMin;
 	}
-    public function addGroup(Group $group)
-    {
-        $group->addGroup($this);
-        $this->group[] = $group;
-    }
 
     public function jsonSerialize()
     {
         return array(
         	'id' => $this->id,
             'name' => $this->name,
-            'tournament' => isset($this->tournament) ? $this->tournament->getId() : null ,
-            'group' => $this->group
+            'tournament' => isset($this->tournament) ? $this->tournament->getId() : null
         );
     }
 }

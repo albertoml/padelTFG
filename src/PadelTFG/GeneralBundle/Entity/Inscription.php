@@ -29,7 +29,7 @@ class Inscription implements JsonSerializable
 	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
 	protected $tournament;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Group")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory")
 	@ORM\JoinColumn(name="group_id", onDelete="cascade") */
 	protected $group;
 
@@ -65,7 +65,7 @@ class Inscription implements JsonSerializable
 	public function setTournament(Tournament $tournament){
 		$this->tournament = $tournament;
 	}
-    public function setGroup(Group $group){
+    public function setGroup(GroupCategory $group){
         $this->group = $group;
     }
     public function setSeeded($seeded){

@@ -94,7 +94,19 @@ class InscriptionController extends FOSRestController
 
     public function getInscriptionByGroupAction($idGroup){
 
-        //TODO
+        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:Inscription');
+        $inscriptions = $repository->findByGroup($idGroup);
+
+        $repositoryGroup = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:GroupCategory');
+        $group = $repositoryGroup->find($idGroup);
+
+        if($group==null){
+            return $this->util->setResponse(400, Literals::GroupNotFound);
+        }
+        else{
+            $dataToSend = json_encode(array('inscription' => $inscriptions));
+            return $this->util->setJsonResponse(200, $dataToSend);
+        }
     }
 
     private function checkInscription($params){
@@ -141,6 +153,28 @@ class InscriptionController extends FOSRestController
         else{
             return null;
         }
+    }
+
+    private function getCountInscriptionsInTournament($tournamentId){
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'SELECT i FROM GeneralBundle:Inscription i WHERE i.tournament = :tournament'
+        )->setParameters(array(
+            'tournament' => $tournamentId
+        ));
+        $inscriptionsNumber = $query->getResult();
+        return count($inscriptionsNumber);
+    }
+
+    private function getCountInscriptionsInCategory($categoryId){
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'SELECT i FROM GeneralBundle:Inscription i WHERE i.category = :category'
+        )->setParameters(array(
+            'category' => $categoryId
+        ));
+        $inscriptionsNumber = $query->getResult();
+        return count($inscriptionsNumber);
     }
 
     public function postInscriptionAction(){
@@ -191,6 +225,14 @@ class InscriptionController extends FOSRestController
                         $pair = $repositoryPair->find($pairId);
                         if($pair == null){
                             $message .= $pairId . ' ' . Literals::PairNotFound;
+                        }
+                        else if($tournament->getRegisteredLimit() != null && 
+        $tournament->getRegisteredLimit() == $this->getCountInscriptionsInTournament($tournament->getId())){
+                            $message .= $pairId . ' ' . Literals::TournamentInscriptionLimit;
+                        }
+                        else if($category->getRegisteredLimitMax() != null && 
+        $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($category->getId())){
+                            $message .= $pairId . ' ' . Literals::CategoryInscriptionLimitMax;
                         }
                         else{
                             $newInscription = new Inscription();

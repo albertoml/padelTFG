@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\Category;
+use PadelTFG\GeneralBundle\Entity\GroupCategory;
 use PadelTFG\GeneralBundle\Entity\Pair;
 use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Entity\Tournament;
@@ -168,6 +169,21 @@ class InscriptionControllerAPITest extends WebTestCase
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
         $this->assertContains(Literals::PairNotFound, $response);
+    }
+
+    public function testGetInscriptionByGroupActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:GroupCategory');
+        $group = $repository->findOneByName('Group A');
+
+        $this->client->request('GET', '/api/inscription/group/' . $group->getId());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('User1Pair1PairTest', $response);
+        $this->assertContains('User2Pair1PairTest', $response);
+        $this->assertContains('CategoryTournamentName', $response);
+        $this->assertContains('Category Tournament', $response);
     }
 
     public function testPostInscriptionActionAPI()
@@ -421,5 +437,57 @@ class InscriptionControllerAPITest extends WebTestCase
         $expectedError = Literals::StartDateEmpty . Literals::EndDateEmpty . Literals::AvailableEmpty;
         $this->assertContains($expectedError, $response);
         $this->assertContains('1 ' . Literals::Inscriptions, $response);
+    }
+
+    public function testPostInscriptionRegisteredLimitTournamentExceptionActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Category');
+        $category = $repository->findOneByName("Category Tournament2");
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName("CategoryTournamentName1");
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user1 = $repository->findOneByName('User1Pair1PairTest');
+        $repository = $this->em->getRepository('GeneralBundle:Pair');
+        $pair1 = $repository->findOneByUser1($user1);
+
+        $method = 'POST';
+        $uri = '/api/inscription';
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = '{"category":' . $category->getId() . ', "tournament":' . $tournament->getId() . ', "pair":[{"pairId":' .
+        $pair1->getId() . ', "observations":[]}]}';
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains($pair1->getId . ' ' . Literals::TournamentInscriptionLimit, $response);
+    }
+
+    public function testPostInscriptionRegisteredLimitMaxCategoryExceptionActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Category');
+        $category = $repository->findOneByName("Category Tournament1");
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName("CategoryTournamentName");
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user1 = $repository->findOneByName('User1Pair1PairTest');
+        $repository = $this->em->getRepository('GeneralBundle:Pair');
+        $pair1 = $repository->findOneByUser1($user1);
+
+        $method = 'POST';
+        $uri = '/api/inscription';
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = '{"category":' . $category->getId() . ', "tournament":' . $tournament->getId() . ', "pair":[{"pairId":' .
+        $pair1->getId() . ', "observations":[]}]}';
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains($pair1->getId . ' ' . Literals::CategoryInscriptionLimitMax, $response);
     }
 }

@@ -52,3 +52,8 @@ observation:
     type: rest
     resource: routing_observation.yml
     name_prefix:  observation_
+
+groupCategory:
+    type: rest
+    resource: routing_groupcategory.yml
+    name_prefix:  group_

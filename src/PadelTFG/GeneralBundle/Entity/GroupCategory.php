@@ -9,7 +9,7 @@ use JsonSerializable;
 * @ORM\Entity
 */
 
-class Group implements JsonSerializable
+class GroupCategory implements JsonSerializable
 {
 	/**
 	* @ORM\Id
