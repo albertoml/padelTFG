@@ -122,4 +122,16 @@ class StatusControllerAPITest extends WebTestCase
         $this->assertContains('hidden', $response);
         $this->assertContains('deleted', $response);
     }
+
+    public function testStatusInscriptionActionAPI()
+    {
+        $this->client->request('GET', '/api/status/inscription');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('tournament not started', $response);
+        $this->assertContains('not classified', $response);
+        $this->assertContains('classified', $response);
+        $this->assertContains('finished', $response);
+    }
 }

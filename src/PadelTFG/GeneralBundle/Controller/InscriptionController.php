@@ -239,6 +239,7 @@ class InscriptionController extends FOSRestController
                             $newInscription->setPair($pair);
                             $newInscription->setCategory($category);
                             $newInscription->setTournament($tournament);
+                            $newInscription->setStatus($this->util->getStatus($this->getDoctrine()->getManager(), 'inscription', 'tournament not started'));
                             $em->persist($newInscription);
                             $em->flush();
                             $inscriptions += 1;

@@ -45,6 +45,9 @@ class Utils
             case 'annotation':
                 $repository = $manager->getRepository('GeneralBundle:AnnotationStatus');
                 break;
+            case 'inscription':
+            $repository = $manager->getRepository('GeneralBundle:InscriptionStatus');
+            break;
         }
         return $repository;
     }

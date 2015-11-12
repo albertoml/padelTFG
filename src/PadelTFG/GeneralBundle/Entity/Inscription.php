@@ -36,6 +36,15 @@ class Inscription implements JsonSerializable
 	/** @ORM\Column(type="integer", nullable=true) */
 	protected $seeded;
 
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\InscriptionStatus") */
+	protected $status;
+
+	/** @ORM\Column(type="integer", nullable=true) */
+	protected $classifiedPosition;
+
+	/** @ORM\Column(type="integer", nullable=true) */
+	protected $rankingMark;
+
 
     public function getId(){
 		return $this->id;
@@ -55,6 +64,15 @@ class Inscription implements JsonSerializable
 	public function getSeeded(){
 		return $this->seeded;
 	}
+	public function getStatus(){
+		return $this->status;
+	}
+	public function getClassifiedPosition(){
+		return $this->classifiedPosition;
+	}
+	public function getRankingMark(){
+		return $this->rankingMark;
+	}
 
 	public function setPair(Pair $pair){
 		$this->pair = $pair;
@@ -71,6 +89,15 @@ class Inscription implements JsonSerializable
     public function setSeeded($seeded){
 		$this->seeded = $seeded;
 	}
+	public function setStatus($status){
+		$this->status = $status;
+	}
+	public function setClassifiedPosition($classifiedPosition){
+		$this->classifiedPosition = $classifiedPosition;
+	}
+	public function setRankingMark($rankingMark){
+		$this->rankingMark = $rankingMark;
+	}
 
     public function jsonSerialize()
     {
@@ -80,7 +107,10 @@ class Inscription implements JsonSerializable
             'category' => $this->category,
             'tournament' => $this->tournament,
             'group' => $this->group,
-            'seeded' => $this->seeded
+            'seeded' => $this->seeded,
+            'status' => $this->status,
+            'classifiedPosition' => $this->classifiedPosition,
+            'rankingMark' => $this->rankingMark
         );
     }
 }

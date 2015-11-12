@@ -16,6 +16,7 @@ use PadelTFG\GeneralBundle\Entity\RecordalStatus;
 use PadelTFG\GeneralBundle\Entity\NotificationStatus;
 use PadelTFG\GeneralBundle\Entity\GameStatus;
 use PadelTFG\GeneralBundle\Entity\AnnotationStatus;
+use PadelTFG\GeneralBundle\Entity\InscriptionStatus;
 
 class StatusController extends FOSRestController
 {
