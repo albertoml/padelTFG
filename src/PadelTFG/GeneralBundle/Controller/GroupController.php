@@ -7,11 +7,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use PadelTFG\GeneralBundle\Resources\globals\Utils as Util;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
-use PadelTFG\GeneralBundle\Entity\Category;
-use PadelTFG\GeneralBundle\Entity\Pair;
-use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\GroupCategory;
-use PadelTFG\GeneralBundle\Entity\Inscription;
 
 class GroupController extends FOSRestController
 {

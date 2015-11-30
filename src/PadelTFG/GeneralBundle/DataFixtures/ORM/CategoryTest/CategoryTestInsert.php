@@ -43,7 +43,6 @@ class CategoryTestInsert implements FixtureInterface
 
 		$tournament->setAdmin($userAdmin);
 		$tournament->setName('CategoryTournamentName');
-		$tournament->setCreationDate(new \DateTime());
 
 		$manager->persist($tournament);	
 		$manager->flush();

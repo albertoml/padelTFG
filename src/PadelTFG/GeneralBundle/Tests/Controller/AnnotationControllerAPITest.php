@@ -106,7 +106,8 @@ class AnnotationControllerAPITest extends WebTestCase
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
         $expectedError = Literals::TextEmpty;
-        $this->assertContains($expectedError, $response);
+        $this->assertContains('Annotation).text:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPostEmptyContentAnnotationActionAPI()
@@ -116,13 +117,14 @@ class AnnotationControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertContains('Annotation).text:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPutAnnotationActionAPI()
@@ -174,13 +176,13 @@ class AnnotationControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Annotation TFG', $response);
     }
 
     public function testDeleteTournamentActionAPI()

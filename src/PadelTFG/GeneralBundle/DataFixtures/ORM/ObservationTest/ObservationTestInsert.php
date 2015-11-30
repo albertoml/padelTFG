@@ -49,7 +49,6 @@ class ObservationTestInsert implements FixtureInterface
 		$userAdmin = $repository->findOneByName('UserObservationTest');
 		$tournament->setAdmin($userAdmin);
 		$tournament->setName('ObservationTournamentName');
-		$tournament->setCreationDate(new \DateTime());
 		$tournament->addCategory($category);
 		$manager->persist($tournament);	
 		$manager->flush();

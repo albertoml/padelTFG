@@ -111,7 +111,8 @@ class UserControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmailRegistered, $response);
+        $this->assertContains('User).email:', $response);
+        $this->assertContains('This value is already used.', $response);
     }
 
     public function testPostEmptyRequiredFieldsUserActionAPI()
@@ -129,8 +130,11 @@ class UserControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $expectedError = Literals::NameEmpty . Literals::LastNameEmpty . Literals::EmailEmpty . Literals::PasswordEmpty;
-        $this->assertContains($expectedError, $response);
+        $this->assertContains('User).name:', $response);
+        $this->assertContains('User).email:', $response);
+        $this->assertContains('User).lastName:', $response);
+        $this->assertContains('User).password:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPostEmptyContentUserActionAPI()
@@ -140,13 +144,17 @@ class UserControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertContains('User).name:', $response);
+        $this->assertContains('User).email:', $response);
+        $this->assertContains('User).lastName:', $response);
+        $this->assertContains('User).password:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPutUserActionAPI()
@@ -161,7 +169,8 @@ class UserControllerAPITest extends WebTestCase
         $files = array();
         $server = array();
         $content = json_encode(array(
-            'firstPhone' => '111111111'
+            'firstPhone' => '111111111',
+            'city' => 'Alicante'
         ));
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
@@ -169,6 +178,7 @@ class UserControllerAPITest extends WebTestCase
         
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('111111111', $response);
+        $this->assertContains('Alicante', $response);
     }
 
     public function testPutNotFoundUserActionAPI()
@@ -199,13 +209,13 @@ class UserControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains("amlTest58@alu.ua.es", $response);
     }
 
     public function testDeleteUserActionAPI()
@@ -241,5 +251,41 @@ class UserControllerAPITest extends WebTestCase
         
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
         $this->assertContains(Literals::UserNotFound, $response);
+    }
+
+    public function testloginCorrect(){
+
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user = $repository->findOneByEmail("amlTest58@alu.ua.es");
+
+        $this->client->request('GET', '/api/user/login/' . $user->getEmail() . '/' . $user->getPassword());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('true', $response);
+    }
+
+    public function testloginIncorrectUserIncorrect(){
+
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user = $repository->findOneByEmail("amlTest58@alu.ua.es");
+
+        $this->client->request('GET', '/api/user/login/' . 'incorrect' . '/' . $user->getPassword());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::UserIncorrect, $response);
+    }
+
+    public function testloginIncorrectPasswordIncorrect(){
+
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user = $repository->findOneByEmail("amlTest58@alu.ua.es");
+
+        $this->client->request('GET', '/api/user/login/' . $user->getEmail() . '/' . 'incorrect');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::PasswordIncorrect, $response);
     }
 }

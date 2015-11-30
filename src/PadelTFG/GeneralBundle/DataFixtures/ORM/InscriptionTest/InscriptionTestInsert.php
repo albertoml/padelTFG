@@ -74,13 +74,11 @@ class InscriptionTestInsert implements FixtureInterface
 		$userAdmin = $repository->findOneByName('UserInscriptionTest');
 		$tournament->setAdmin($userAdmin);
 		$tournament->setName('CategoryTournamentName');
-		$tournament->setCreationDate(new \DateTime());
 		$tournament->addCategory($category1);
 		$tournament->addCategory($category2);
 		$userAdmin = $repository->findOneByName('UserInscriptionTest1');
 		$tournament2->setAdmin($userAdmin);
 		$tournament2->setName('CategoryTournamentName1');
-		$tournament2->setCreationDate(new \DateTime());
 		$tournament2->setRegisteredLimit(2);
 		$tournament2->addCategory($category3);
 

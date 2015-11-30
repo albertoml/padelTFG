@@ -3,6 +3,7 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
 
 /**
@@ -27,7 +28,8 @@ class Observation implements JsonSerializable
 	/** @ORM\Column(type="datetime") */
 	protected $endDate;
 
-	/** @ORM\Column(type="boolean") */
+	/** @ORM\Column(type="boolean") 
+		@Assert\NotBlank() */
 	protected $available;
 
 

@@ -23,22 +23,22 @@ class TournamentTestInsert implements FixtureInterface
 		$manager->flush();
 
 		$Tournaments = array(
-			array('admin' => $admin, 'name' => 'Torneo TFG', 'creationDate' => new \DateTime(), 'startInscriptionDate' => new \DateTime(),
+			array('admin' => $admin, 'name' => 'Torneo TFG', 'startInscriptionDate' => new \DateTime(),
 				'endInscriptionDate' => new \DateTime(), 'startGroupDate' => new \DateTime(), 'endGroupDate' => new \DateTime(),
 				'startFinalDate' => new \DateTime(), 'endFinalDate' => new \DateTime(), 'registeredLimit' => 10, 'image' => ''),
-			array('admin' => $admin, 'name' => 'Torneo TFG2', 'creationDate' => new \DateTime(), 'startInscriptionDate' => new \DateTime(),
+			array('admin' => $admin, 'name' => 'Torneo TFG2', 'startInscriptionDate' => new \DateTime(),
 				'endInscriptionDate' => new \DateTime(), 'startGroupDate' => new \DateTime(), 'endGroupDate' => new \DateTime(),
 				'startFinalDate' => new \DateTime(), 'endFinalDate' => new \DateTime(), 'registeredLimit' => 10, 'image' => ''),
-			array('admin' => $admin, 'name' => 'Torneo TFG3', 'creationDate' => new \DateTime(), 'startInscriptionDate' => new \DateTime(),
+			array('admin' => $admin, 'name' => 'Torneo TFG3', 'startInscriptionDate' => new \DateTime(),
 				'endInscriptionDate' => new \DateTime(), 'startGroupDate' => new \DateTime(), 'endGroupDate' => new \DateTime(),
 				'startFinalDate' => new \DateTime(), 'endFinalDate' => new \DateTime(), 'registeredLimit' => 10, 'image' => ''),
-			array('admin' => $admin, 'name' => 'Torneo TFG4', 'creationDate' => new \DateTime(), 'startInscriptionDate' => new \DateTime(),
+			array('admin' => $admin, 'name' => 'Torneo TFG4', 'startInscriptionDate' => new \DateTime(),
 				'endInscriptionDate' => new \DateTime(), 'startGroupDate' => new \DateTime(), 'endGroupDate' => new \DateTime(),
 				'startFinalDate' => new \DateTime(), 'endFinalDate' => new \DateTime(), 'registeredLimit' => 10, 'image' => ''),
-			array('admin' => $admin, 'name' => 'Torneo TFG5', 'creationDate' => new \DateTime(), 'startInscriptionDate' => new \DateTime(),
+			array('admin' => $admin, 'name' => 'Torneo TFG5', 'startInscriptionDate' => new \DateTime(),
 				'endInscriptionDate' => new \DateTime(), 'startGroupDate' => new \DateTime(), 'endGroupDate' => new \DateTime(),
 				'startFinalDate' => new \DateTime(), 'endFinalDate' => new \DateTime(), 'registeredLimit' => 10, 'image' => ''),
-			array('admin' => $admin, 'name' => 'Torneo TFGDELETE', 'creationDate' => new \DateTime(), 'startInscriptionDate' => new \DateTime(),
+			array('admin' => $admin, 'name' => 'Torneo TFGDELETE', 'startInscriptionDate' => new \DateTime(),
 				'endInscriptionDate' => new \DateTime(), 'startGroupDate' => new \DateTime(), 'endGroupDate' => new \DateTime(),
 				'startFinalDate' => new \DateTime(), 'endFinalDate' => new \DateTime(), 'registeredLimit' => 10, 'image' => '')
 		);
@@ -48,7 +48,6 @@ class TournamentTestInsert implements FixtureInterface
 
 			$entity->setAdmin($key['admin']);
 			$entity->setName($key['name']);
-			$entity->setCreationDate($key['creationDate']);
 			$entity->setStartInscriptionDate($key['startInscriptionDate']);
 			$entity->setEndInscriptionDate($key['endInscriptionDate']);
 			$entity->setStartGroupDate($key['startGroupDate']);

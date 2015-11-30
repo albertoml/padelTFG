@@ -3,10 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JsonSerializable;
 
 /**
 * @ORM\Entity
+* @UniqueEntity("email")
 */
 
 class User implements JsonSerializable
@@ -17,10 +20,12 @@ class User implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(type="string", length=100)
+		@Assert\NotBlank() */
 	protected $name;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(type="string", length=100)
+		@Assert\NotBlank() */
 	protected $lastName;
 
 	/** @ORM\Column(type="string", length=9, nullable=true) */
@@ -29,7 +34,9 @@ class User implements JsonSerializable
 	/** @ORM\Column(type="string", length=9, nullable=true) */
 	protected $secondPhone;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(type="string", length=100)
+		@Assert\NotBlank()
+		@Assert\Email() */
 	protected $email;
 
 	/** @ORM\Column(type="string", length=200, nullable=true) */
@@ -44,7 +51,8 @@ class User implements JsonSerializable
 	/** @ORM\Column(type="string", length=10, nullable=true) */
 	protected $cp;
 
-	/** @ORM\Column(type="string", length=500) */
+	/** @ORM\Column(type="string", length=500)
+		@Assert\NotBlank() */
 	protected $password;
 
 	/** @ORM\Column(type="string", length=500, nullable=true) */

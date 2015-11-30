@@ -3,6 +3,7 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
 
 /**
@@ -18,31 +19,45 @@ class Tournament implements JsonSerializable
 	protected $id;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User", inversedBy="tournament")
-	@ORM\JoinColumn(name="admin_id", onDelete="cascade") */
+	@ORM\JoinColumn(name="admin_id", onDelete="cascade")
+	@Assert\NotBlank() */
 	protected $admin;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(type="string", length=100)
+	@Assert\NotBlank() */
 	protected $name;
 
 	/** @ORM\Column(type="datetime") */
 	protected $creationDate;
 
-	/** @ORM\Column(type="datetime", nullable=true) */
+	/** @ORM\Column(type="datetime", nullable=true)
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $startInscriptionDate;
 
-	/** @ORM\Column(type="datetime", nullable=true) */
+	/** @ORM\Column(type="datetime", nullable=true)
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $endInscriptionDate;
 
-	/** @ORM\Column(type="datetime", nullable=true) */
+	/** @ORM\Column(type="datetime", nullable=true)
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $startGroupDate;
 
-	/** @ORM\Column(type="datetime", nullable=true) */
+	/** @ORM\Column(type="datetime", nullable=true)
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $endGroupDate;
 
-	/** @ORM\Column(type="datetime", nullable=true) */
+	/** @ORM\Column(type="datetime", nullable=true)
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $startFinalDate;
 
-	/** @ORM\Column(type="datetime", nullable=true) */
+	/** @ORM\Column(type="datetime", nullable=true)
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $endFinalDate;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\TournamentStatus") */
@@ -60,6 +75,7 @@ class Tournament implements JsonSerializable
 	public function __construct() {
         $this->sponsor = new \Doctrine\Common\Collections\ArrayCollection();
         $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->creationDate = new \DateTime();
     }
 
 	public function getId(){

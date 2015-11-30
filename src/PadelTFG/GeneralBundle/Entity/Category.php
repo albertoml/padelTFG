@@ -3,6 +3,7 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
 
 /**
@@ -17,7 +18,8 @@ class Category implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=50) */
+	/** @ORM\Column(type="string", length=50)
+		@Assert\NotBlank() */
 	protected $name;
 
 	/** @ORM\Column(type="integer", nullable=true) */

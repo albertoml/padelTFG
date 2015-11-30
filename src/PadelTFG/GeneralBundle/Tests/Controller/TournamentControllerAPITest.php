@@ -102,15 +102,15 @@ class TournamentControllerAPITest extends WebTestCase
         $server = array();
         $content = json_encode(array(
             'admin' => "notExists",
-            'name' => 'Torneo POST',
-            'creationDate' => "15-06-2015"
+            'name' => 'Torneo POST'
         ));
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::AdminIncorrect, $response);
+        $this->assertContains('Tournament).admin:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
 
@@ -129,8 +129,9 @@ class TournamentControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $expectedError = Literals::AdminEmpty . Literals::NameEmpty . Literals::CreationDateEmpty;
-        $this->assertContains($expectedError, $response);
+        $this->assertContains('Tournament).admin:', $response);
+        $this->assertContains('Tournament).name:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPostEmptyContentTournamentActionAPI()
@@ -140,13 +141,15 @@ class TournamentControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertContains('Tournament).admin:', $response);
+        $this->assertContains('Tournament).name:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPutTournamentActionAPI()
@@ -170,28 +173,6 @@ class TournamentControllerAPITest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('"registeredLimit":17', $response);
         $this->assertContains("Torneo TFG", $response);
-    }
-
-    public function testPutNotCorrectAdminTournamentActionAPI()
-    {
-
-        $repository = $this->em->getRepository('GeneralBundle:Tournament');
-        $tournament = $repository->findOneByName("Torneo TFG");
-
-        $method = 'PUT';
-        $uri = '/api/tournament/' . $tournament->getId();
-        $parameters = array();
-        $files = array();
-        $server = array();
-        $content = json_encode(array(
-            'admin' => 'notExists'
-        ));
-
-        $this->client->request($method, $uri, $parameters, $files, $server, $content);
-        $response = $this->client->getResponse()->getContent();
-        
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::AdminIncorrect, $response);
     }
 
     public function testPutNotFoundTournamentActionAPI()
@@ -222,13 +203,13 @@ class TournamentControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Torneo TFG', $response);
     }
 
     public function testDeleteTournamentActionAPI()

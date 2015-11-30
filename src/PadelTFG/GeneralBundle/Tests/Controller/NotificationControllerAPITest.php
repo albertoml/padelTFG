@@ -120,8 +120,8 @@ class NotificationControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::TournamentIncorrect, $response);
+        $this->assertContains('Notification).tournament:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
 
@@ -140,8 +140,9 @@ class NotificationControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $expectedError = Literals::TextEmpty . Literals::TournamentEmpty . Literals::NotificationDateEmpty;
-        $this->assertContains($expectedError, $response);
+        $this->assertContains('Notification).text:', $response);
+        $this->assertContains('Notification).tournament:', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPostEmptyContentNotificationActionAPI()
@@ -151,13 +152,17 @@ class NotificationControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertContains('Notification).tournament:', $response);
+        $this->assertContains('Notification).text:', $response);
+        $this->assertContains('Notification).notificationDate:', $response);
+        $this->assertContains('This value should not be null.', $response);
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPostNotificationIncorrectNotificationDateActionAPI()
@@ -184,7 +189,8 @@ class NotificationControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::NotificationDateIncorrect, $response);
+        $this->assertContains('Notification).notificationDate:', $response);
+        $this->assertContains('This value should be greater than', $response);
     }
 
     public function testPutNotificationActionAPI()
@@ -206,28 +212,6 @@ class NotificationControllerAPITest extends WebTestCase
         
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('"text":"Modify Notification"', $response);
-    }
-
-    public function testPutNotCorrectTournamentNotificationActionAPI()
-    {
-
-        $repository = $this->em->getRepository('GeneralBundle:Notification');
-        $notification = $repository->findOneByText("Notification TFG");
-
-        $method = 'PUT';
-        $uri = '/api/notification/' . $notification->getId();
-        $parameters = array();
-        $files = array();
-        $server = array();
-        $content = json_encode(array(
-            'tournament' => "tournamentIncorrect"
-        ));
-
-        $this->client->request($method, $uri, $parameters, $files, $server, $content);
-        $response = $this->client->getResponse()->getContent();
-        
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::TournamentIncorrect, $response);
     }
 
     public function testPutNotificationIncorrectNotificationDateActionAPI()
@@ -252,7 +236,8 @@ class NotificationControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::NotificationDateIncorrect, $response);
+        $this->assertContains('Notification).notificationDate:', $response);
+        $this->assertContains('This value should be greater than', $response);
     }
 
     public function testPutNotFoundNotificationActionAPI()
@@ -283,13 +268,13 @@ class NotificationControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Notification TFG', $response);
     }
 
     public function testDeleteNotificationActionAPI()

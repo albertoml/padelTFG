@@ -210,7 +210,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertContains('2 ' . Literals::Inscriptions, $response);
     }
 
@@ -227,8 +227,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $expectedError = Literals::PairEmpty . Literals::CategoryEmpty . Literals::TournamentEmpty;
-        $this->assertContains($expectedError, $response);
+        $this->assertContains(Literals::CategoryNotFound, $response);
     }
 
     public function testPostInscriptionEmptyContentActionAPI()
@@ -244,7 +243,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertContains(Literals::CategoryNotFound, $response);
     }
 
     public function testPostInscriptionCategoryNotFoundActionAPI()
@@ -349,7 +348,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertContains('0 ' . Literals::PairNotFound, $response);
         $this->assertContains('1 ' . Literals::Inscriptions, $response);
     }
@@ -378,7 +377,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertContains($pair1->getId() . ' ' . Literals::PairDuplicate, $response);
         $this->assertContains('1 ' . Literals::Inscriptions, $response);
     }
@@ -406,7 +405,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        //$this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertContains('1 ' . Literals::Inscriptions, $response);
     }
 
@@ -432,10 +431,9 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertContains($pair3->getId() . ' ' . Literals::ObservationIncorrect, $response);
-        $expectedError = Literals::StartDateEmpty . Literals::EndDateEmpty . Literals::AvailableEmpty;
-        $this->assertContains($expectedError, $response);
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Observation).available', $response);
+        $this->assertContains('This value should not be blank.', $response);
         $this->assertContains('1 ' . Literals::Inscriptions, $response);
     }
 
@@ -461,7 +459,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertContains($pair1->getId . ' ' . Literals::TournamentInscriptionLimit, $response);
     }
 
@@ -487,7 +485,7 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         $this->assertContains($pair1->getId . ' ' . Literals::CategoryInscriptionLimitMax, $response);
     }
 }

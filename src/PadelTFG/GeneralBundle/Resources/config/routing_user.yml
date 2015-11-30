@@ -30,3 +30,9 @@ user_delete:
     requirements:
         _method: DELETE
         id: "\d+"
+
+user_login:
+    path:  /user/login/{email}/{password}
+    defaults: { _controller: GeneralBundle:User:loginUser, _format: ~ }
+    requirements:
+        _method: GET

@@ -20,46 +20,4 @@ class Utils
         $response->setStatusCode($status);
         return $response;
     }
-
-    public function factoryStatusController($manager, $entity){
-        $repository = null;
-        switch ($entity) {
-            case 'user':
-                $repository = $manager->getRepository('GeneralBundle:UserStatus');
-                break;
-            case 'tournament':
-                $repository = $manager->getRepository('GeneralBundle:TournamentStatus');
-                break;
-            case 'sponsor':
-                $repository = $manager->getRepository('GeneralBundle:SponsorStatus');
-                break;
-            case 'recordal':
-                $repository = $manager->getRepository('GeneralBundle:RecordalStatus');
-                break;
-            case 'notification':
-                $repository = $manager->getRepository('GeneralBundle:NotificationStatus');
-                break;
-            case 'game':
-                $repository = $manager->getRepository('GeneralBundle:GameStatus');
-                break;
-            case 'annotation':
-                $repository = $manager->getRepository('GeneralBundle:AnnotationStatus');
-                break;
-            case 'inscription':
-            $repository = $manager->getRepository('GeneralBundle:InscriptionStatus');
-            break;
-        }
-        return $repository;
-    }
-
-    public function getStatus($manager, $entity, $statusName){
-        $repository = $this->factoryStatusController($manager, $entity);
-        if($repository!=null){
-            $status = $repository->findOneByValue($statusName);
-            if($status != null){
-                return $status; 
-            }
-        }
-        return null; 
-    }
 }

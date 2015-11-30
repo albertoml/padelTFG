@@ -3,6 +3,7 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
 
 /**
@@ -18,19 +19,22 @@ class Inscription implements JsonSerializable
 	protected $id;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair")
-	@ORM\JoinColumn(name="pair_id", onDelete="cascade") */
+		@ORM\JoinColumn(name="pair_id", onDelete="cascade") 
+		@Assert\NotBlank() */
 	protected $pair;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Category")
-	@ORM\JoinColumn(name="category_id", onDelete="cascade") */
+		@ORM\JoinColumn(name="category_id", onDelete="cascade") 
+		@Assert\NotBlank() */
 	protected $category;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament")
-	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
+		@ORM\JoinColumn(name="tournament_id", onDelete="cascade") 
+		@Assert\NotBlank() */
 	protected $tournament;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory")
-	@ORM\JoinColumn(name="group_id", onDelete="cascade") */
+		@ORM\JoinColumn(name="group_id", onDelete="cascade") */
 	protected $group;
 
 	/** @ORM\Column(type="integer", nullable=true) */

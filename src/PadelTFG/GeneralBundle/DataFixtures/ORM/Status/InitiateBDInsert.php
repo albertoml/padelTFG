@@ -74,12 +74,10 @@ class InitiateBDInsert implements FixtureInterface
 		$userAdmin = $repository->findOneByName('Servando');
 		$tournament->setAdmin($userAdmin);
 		$tournament->setName('Los Rebeldes');
-		$tournament->setCreationDate(new \DateTime());
 		$tournament->addCategory($category1);
 		$tournament->addCategory($category2);
 		$tournament2->setAdmin($userAdmin);
 		$tournament2->setName('Los Vampiros');
-		$tournament2->setCreationDate(new \DateTime());
 		$tournament2->addCategory($category3);
 		$tournament2->setRegisteredLimit(4);
 

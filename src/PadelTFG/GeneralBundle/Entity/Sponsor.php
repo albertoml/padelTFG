@@ -3,10 +3,13 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JsonSerializable;
 
 /**
 * @ORM\Entity
+* @UniqueEntity("cif")
 */
 
 class Sponsor implements JsonSerializable
@@ -17,10 +20,12 @@ class Sponsor implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=100) */
+	/** @ORM\Column(type="string", length=100)
+		@Assert\NotBlank() */
 	protected $name;
 
-	/** @ORM\Column(type="string", length=20) */
+	/** @ORM\Column(type="string", length=20)
+		@Assert\NotBlank() */
 	protected $cif;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\SponsorStatus") */

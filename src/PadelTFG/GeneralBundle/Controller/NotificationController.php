@@ -5,32 +5,34 @@ namespace PadelTFG\GeneralBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 
 use PadelTFG\GeneralBundle\Resources\globals\Utils as Util;
+use PadelTFG\GeneralBundle\Service\NotificationService as NotificationService;
+use PadelTFG\GeneralBundle\Service\TournamentService as TournamentService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
 use PadelTFG\GeneralBundle\Entity\Notification;
-use PadelTFG\GeneralBundle\Entity\Tournament;
 
 class NotificationController extends FOSRestController{
 
     var $util;
+    var $notificationService;
 
     function __construct(){ 
         $this->util = new Util();
+        $this->notificationService = new NotificationService();
     } 
 
 	public function allNotificationAction(){
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:Notification');
-        $notifications = $repository->findAll();
+        $this->notificationService->setManager($this->getDoctrine()->getManager());
+        $notifications = $this->notificationService->allNotifications();
         $dataToSend = json_encode(array('notification' => $notifications));
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 
     public function getNotificationAction($id){
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:Notification');
-
-        $notification = $repository->find($id);
+        $this->notificationService->setManager($this->getDoctrine()->getManager());
+        $notification = $this->notificationService->getNotification($id);
 
         if (!$notification instanceof Notification) {
             return $this->util->setResponse(404, Literals::NotificationNotFound);
@@ -39,133 +41,46 @@ class NotificationController extends FOSRestController{
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 
-    private function setNotificationPost($notification, $params, $tournament){
-        $notification->setText($params['text']);
-        $notification->setTournament($tournament);
-        $notification->setNotificationDate(new \DateTime($params['notificationDate']));
-        $notification->setStatus($this->util->getStatus($this->getDoctrine()->getManager(), 'notification', 'created'));
-
-        return $notification;
-    }
-
-    private function checkNotification($params){
-        $isFail = false;
-        $message = "";
-        if(empty($params['text'])){
-            $isFail = true;
-            $message .= Literals::TextEmpty;
-        }
-        if(empty($params['tournament'])){
-            $isFail = true;
-            $message .= Literals::TournamentEmpty;
-        }
-        if(empty($params['notificationDate'])){
-            $isFail = true;
-            $message .= Literals::NotificationDateEmpty;
-        }
-        else{
-            if(new \DateTime() > new \DateTime($params['notificationDate'])){
-                $isFail = true;
-                $message .= Literals::NotificationDateIncorrect;
-            }
-        }
-
-        if($isFail){
-            return $message;
-        }
-        else{
-            return null;
-        }
-    }
-
     public function postNotificationAction(){
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('GeneralBundle:Notification');
-        $repositoryTournament = $em->getRepository('GeneralBundle:Tournament');
+        $this->notificationService->setManager($this->getDoctrine()->getManager());
 
     	$params = array();
     	$content = $this->get("request")->getContent();
 
-    	if (!empty($content)){
+    	$params = json_decode($content, true);
 
-	    	$params = json_decode($content, true);
-            $checked = $this->checkNotification($params);
-            if($checked != null){
-                return $this->util->setResponse(400, $checked);
-            }
+        $tournamentService = new TournamentService();
+        $tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournament = $tournamentService->getTournament(trim($params['tournament']));
 
-            $tournament = $repositoryTournament->find(trim($params['tournament']));
-            if($tournament != null){
-
-                $notification = new Notification();
-                $notification = $this->setNotificationPost($notification, $params, $tournament);
-
-                $em->persist($notification);
-                $em->flush();
-
-                $dataToSend = json_encode(array('notification' => $notification));
-                return $this->util->setJsonResponse(201, $dataToSend);
-            }
-            else{
-                return $this->util->setResponse(400, Literals::TournamentIncorrect);
-            }
-
-        } else {
-            return $this->util->setResponse(400, Literals::EmptyContent);
+        $notification = $this->notificationService->saveNotification($params, $tournament, $this);
+        if($notification['result'] == 'fail'){
+            $dataToSend = json_encode(array('error' => $notification['message']));
+            return $this->util->setResponse(400, $dataToSend);
         }
-    }
-
-    private function setNotificationPut($notification, $params, $tournament){
-        if($tournament != null){
-            $notification->setTournament($tournament);
-        }
-        $notification->setText(isset($params['text']) ? $params['text'] : $notification->getText());
-        $notification->setNotificationDate(isset($params['notificationDate']) ? new \DateTime($params['notificationDate']) : $notification->getNotificationDate());
-        $notification->setStatus(isset($params['status']) ? $params['status'] : $notification->getStatus());
-
-        return $notification;
+        $dataToSend = json_encode(array('notification' => $notification['message']));
+        return $this->util->setJsonResponse(201, $dataToSend);
     }
 
     public function putNotificationAction($id){
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('GeneralBundle:Notification');
-        $notification = $repository->find($id);
+        $this->notificationService->setManager($this->getDoctrine()->getManager());
+        $notification = $this->notificationService->getNotification($id);
 
         if ($notification instanceof Notification) {
+
             $params = array();
             $content = $this->get("request")->getContent();
-
-            if (!empty($content)){
-
-                $params = json_decode($content, true);
-
-                if(empty($params['notificationDate']) || new \DateTime() < new \DateTime($params['notificationDate'])){
-
-                    if(!empty($params['tournament'])){
-                    
-                        $repositoryTournament = $em->getRepository('GeneralBundle:Tournament');
-                        $tournament = $repositoryTournament->find($params['tournament']);
-                        if($tournament == null){
-                            return $this->util->setResponse(400, Literals::TournamentIncorrect);
-                        }
-                    } else {
-                        $tournament = null;
-                    }
-                    $notification = $this->setNotificationPut($notification, $params, $tournament);
-
-                    $em->persist($notification);
-                    $em->flush();
-
-                    $dataToSend = json_encode(array('notification' => $notification));
-                    return $this->util->setJsonResponse(200, $dataToSend);
-                } else {
-                    return $this->util->setResponse(400, Literals::NotificationDateIncorrect);
-                }
-            } else {
-                return $this->util->setResponse(400, Literals::EmptyContent);
+            $params = json_decode($content, true);
+            $notification = $this->notificationService->modifyNotification($notification, $params, $this);
+            if($notification['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $notification['message']));
+                return $this->util->setResponse(400, $dataToSend);
             }
+            $dataToSend = json_encode(array('notification' => $notification['message']));
+            return $this->util->setJsonResponse(200, $dataToSend);
+            
         } else {
             return $this->util->setResponse(404, Literals::NotificationNotFound);
         }
@@ -173,14 +88,12 @@ class NotificationController extends FOSRestController{
 
     public function deleteNotificationAction($id){
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('GeneralBundle:Notification');
-        $notification = $repository->find($id);
+        $this->notificationService->setManager($this->getDoctrine()->getManager());
+        $notification = $this->notificationService->getNotification($id);
 
         if ($notification instanceof Notification) {
-            $em->remove($notification);
-            $em->flush();
-
+            
+            $notification = $this->notificationService->deleteNotification($notification);
             return $this->util->setResponse(200, Literals::NotificationDeleted);
         } else {
             return $this->util->setResponse(404, Literals::NotificationNotFound);

@@ -3,6 +3,7 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
 
 /**
@@ -17,13 +18,19 @@ class Recordal implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=500) */
+	/** @ORM\Column(type="string", length=500) 
+		@Assert\NotBlank() */
 	protected $text;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime") 
+		@Assert\NotBlank()
+		@Assert\DateTime() */
 	protected $creationDate;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime", nullable=true) 
+		@Assert\NotNull()
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $recordalDate;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\RecordalStatus") */

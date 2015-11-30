@@ -18,6 +18,9 @@ abstract class Literals
 	const EmailEmpty = "email is Empty;";
 	const PasswordEmpty = "password is Empty;";
 
+	const PasswordIncorrect = "Password Incorrect";
+	const UserIncorrect = "User Incorrect";
+
 	//TournamentController
 	const TournamentNotFound = "Tournament not found";
 	const CategoryNotFound = "Category not found";

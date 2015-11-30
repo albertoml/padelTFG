@@ -5,6 +5,7 @@ namespace PadelTFG\GeneralBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 
 use PadelTFG\GeneralBundle\Resources\globals\Utils as Util;
+use PadelTFG\GeneralBundle\Service\RecordalService as RecordalService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
 use PadelTFG\GeneralBundle\Entity\Recordal;
@@ -12,24 +13,25 @@ use PadelTFG\GeneralBundle\Entity\Recordal;
 class RecordalController extends FOSRestController{
 
     var $util;
+    var $recordalService;
 
     function __construct(){ 
         $this->util = new Util();
-    } 
+        $this->recordalService = new RecordalService();
+    }  
 
 	public function allRecordalAction(){
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:Recordal');
-        $recordals = $repository->findAll();
+        $this->recordalService->setManager($this->getDoctrine()->getManager());
+        $recordals = $this->recordalService->allRecordals();
         $dataToSend = json_encode(array('recordal' => $recordals));
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 
     public function getRecordalAction($id){
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:Recordal');
-
-        $recordal = $repository->find($id);
+        $this->recordalService->setManager($this->getDoctrine()->getManager());
+        $recordal = $this->recordalService->getRecordal($id);
 
         if (!$recordal instanceof Recordal) {
             return $this->util->setResponse(404, Literals::RecordalNotFound);
@@ -38,107 +40,40 @@ class RecordalController extends FOSRestController{
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 
-    private function setRecordalPost($recordal, $params){
-        $recordal->setText($params['text']);
-        $recordal->setRecordalDate(new \DateTime($params['recordalDate']));
-        $recordal->setStatus($this->util->getStatus($this->getDoctrine()->getManager(), 'recordal', 'created'));
-
-        return $recordal;
-    }
-
-    private function checkRecordal($params){
-        $isFail = false;
-        $message = "";
-        if(empty($params['text'])){
-            $isFail = true;
-            $message .= Literals::TextEmpty;
-        }
-        if(empty($params['recordalDate'])){
-            $isFail = true;
-            $message .= Literals::RecordalDateEmpty;
-        }
-        else{
-            if(new \DateTime() > new \DateTime($params['recordalDate'])){
-                $isFail = true;
-                $message .= Literals::RecordalDateIncorrect;
-            }
-        }
-
-        if($isFail){
-            return $message;
-        }
-        else{
-            return null;
-        }
-    }
-
     public function postRecordalAction(){
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('GeneralBundle:Recordal');
+        $this->recordalService->setManager($this->getDoctrine()->getManager());
 
-    	$params = array();
-    	$content = $this->get("request")->getContent();
-
-    	if (!empty($content)){
-
-	    	$params = json_decode($content, true);
-            $checked = $this->checkRecordal($params);
-            if($checked != null){
-                return $this->util->setResponse(400, $checked);
-            }
-
-            $recordal = new Recordal();
-            $recordal = $this->setRecordalPost($recordal, $params);
-
-            $em->persist($recordal);
-            $em->flush();
-
-            $dataToSend = json_encode(array('recordal' => $recordal));
-            return $this->util->setJsonResponse(201, $dataToSend);
-
-        } else {
-            return $this->util->setResponse(400, Literals::EmptyContent);
+        $params = array();
+        $content = $this->get("request")->getContent();
+        $params = json_decode($content, true);
+        $recordal = $this->recordalService->saveRecordal($params, $this);
+        if($recordal['result'] == 'fail'){
+            $dataToSend = json_encode(array('error' => $recordal['message']));
+            return $this->util->setResponse(400, $dataToSend);
         }
-    }
-
-    private function setRecordalPut($recordal, $params){
-        $recordal->setText(isset($params['text']) ? $params['text'] : $recordal->getText());
-        $recordal->setRecordalDate(isset($params['recordalDate']) ? new \DateTime($params['recordalDate']) : $recordal->getRecordalDate());
-        $recordal->setStatus(isset($params['status']) ? $params['status'] : $recordal->getStatus());
-
-        return $recordal;
+        $dataToSend = json_encode(array('recordal' => $recordal['message']));
+        return $this->util->setJsonResponse(201, $dataToSend);
     }
 
     public function putRecordalAction($id){
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('GeneralBundle:Recordal');
-        $recordal = $repository->find($id);
+        $this->recordalService->setManager($this->getDoctrine()->getManager());
+        $recordal = $this->recordalService->getRecordal($id);
 
         if ($recordal instanceof Recordal) {
+
             $params = array();
             $content = $this->get("request")->getContent();
-
-            if (!empty($content)){
-
-                $params = json_decode($content, true);
-
-                if(empty($params['recordalDate']) || new \DateTime() < new \DateTime($params['recordalDate'])){
-
-                    $recordal = $this->setRecordalPut($recordal, $params);
-
-                    $em->persist($recordal);
-                    $em->flush();
-
-                    $dataToSend = json_encode(array('recordal' => $recordal));
-                    return $this->util->setJsonResponse(200, $dataToSend);
-                } else {
-                    return $this->util->setResponse(400, Literals::RecordalDateIncorrect);
-                }
-            } else {
-                return $this->util->setResponse(400, Literals::EmptyContent);
+            $params = json_decode($content, true);
+            $recordal = $this->recordalService->modifyRecordal($recordal, $params, $this);
+            if($recordal['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $recordal['message']));
+                return $this->util->setResponse(400, $dataToSend);
             }
+            $dataToSend = json_encode(array('recordal' => $recordal['message']));
+            return $this->util->setJsonResponse(200, $dataToSend);
+            
         } else {
             return $this->util->setResponse(404, Literals::RecordalNotFound);
         }
@@ -146,14 +81,12 @@ class RecordalController extends FOSRestController{
 
     public function deleteRecordalAction($id){
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('GeneralBundle:Recordal');
-        $recordal = $repository->find($id);
+        $this->recordalService->setManager($this->getDoctrine()->getManager());
+        $recordal = $this->recordalService->getRecordal($id);
 
         if ($recordal instanceof Recordal) {
-            $em->remove($recordal);
-            $em->flush();
-
+            
+            $recordal = $this->recordalService->deleteRecordal($recordal);
             return $this->util->setResponse(200, Literals::RecordalDeleted);
         } else {
             return $this->util->setResponse(404, Literals::RecordalNotFound);

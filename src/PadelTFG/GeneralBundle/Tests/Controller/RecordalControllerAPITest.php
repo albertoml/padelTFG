@@ -115,7 +115,8 @@ class RecordalControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::RecordalDateIncorrect, $response);
+        $this->assertContains('Recordal).recordalDate:', $response);
+        $this->assertContains('This value should be greater than', $response);
     }
 
     public function testPostEmptyRequiredFieldsRecordalActionAPI()
@@ -133,8 +134,10 @@ class RecordalControllerAPITest extends WebTestCase
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $expectedError = Literals::TextEmpty . Literals::RecordalDateEmpty;
-        $this->assertContains($expectedError, $response);
+        $this->assertContains('Recordal).text:', $response);
+        $this->assertContains('Recordal).recordalDate:', $response);
+        $this->assertContains('This value should not be blank.', $response);
+        $this->assertContains('This value should not be null.', $response);
     }
 
     public function testPostEmptyContentRecordalActionAPI()
@@ -144,13 +147,16 @@ class RecordalControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertContains('Recordal).recordalDate:', $response);
+        $this->assertContains('Recordal).text:', $response);
+        $this->assertContains('This value should not be blank.', $response);
+        $this->assertContains('This value should not be null.', $response);
     }
 
     public function testPutRecordalActionAPI()
@@ -195,8 +201,9 @@ class RecordalControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::RecordalDateIncorrect, $response);
+        //$this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Recordal).recordalDate:', $response);
+        $this->assertContains('This value should be greater than', $response);
     }
 
     public function testPutNotFoundRecordalActionAPI()
@@ -227,13 +234,13 @@ class RecordalControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = array();
+        $content = '';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains(Literals::EmptyContent, $response);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Recordal TFG', $response);
     }
 
     public function testDeleteTournamentActionAPI()

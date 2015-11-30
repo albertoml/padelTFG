@@ -26,7 +26,6 @@ class NotificationTestInsert implements FixtureInterface
         $tournament = new Tournament();
 		$tournament->setAdmin($admin);
 		$tournament->setName('TournamentNotificationTest');
-		$tournament->setCreationDate(new \DateTime());
 		$manager->persist($tournament);
 		$manager->flush();
 
@@ -45,7 +44,7 @@ class NotificationTestInsert implements FixtureInterface
 
 			$entity->setText($key['text']);
 			$entity->setNotificationDate($key['notificationDate']);
-
+			$entity->setTournament($key['tournament']);
 			$manager->persist($entity);	
 		}
 
