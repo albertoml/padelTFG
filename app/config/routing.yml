@@ -2,3 +2,7 @@ general:
     type: rest
     resource: "@GeneralBundle/Resources/config/routing_general.yml"
     prefix: /api
+
+#web:
+#    path:  /
+#    defaults: { _controller: GeneralBundle:Web:index, _format: ~ }

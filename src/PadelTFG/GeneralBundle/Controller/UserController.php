@@ -86,7 +86,6 @@ class UserController extends FOSRestController{
 
         if ($user instanceof User) {
             $user = $this->userService->deleteUser($user);
-
             return $this->util->setResponse(200, Literals::UserDeleted);
         } else {
             return $this->util->setResponse(404, Literals::UserNotFound);
@@ -96,12 +95,13 @@ class UserController extends FOSRestController{
     public function loginUserAction($email, $password){
 
         $this->userService->setManager($this->getDoctrine()->getManager());
-        $result = $this->userService->loginUser($email, $password);
-        if($result == 'true'){
-            return $this->util->setResponse(200, 'true');
+        $user = $this->userService->loginUser($email, $password);
+        if($user['result'] == 'ok'){
+            $dataToSend = json_encode(array('user' => $user['message']));
+            return $this->util->setJsonResponse(200, $dataToSend);
         }
         else{
-            return $this->util->setResponse(400, $result);
+            return $this->util->setResponse(400, $user['message']);
         }
     }
 }

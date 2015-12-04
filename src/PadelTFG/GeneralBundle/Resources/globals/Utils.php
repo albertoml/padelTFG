@@ -10,6 +10,7 @@ class Utils
         $response = new Response();
         $response->setStatusCode($status);
         $response->headers->set('Content-Type', 'application/text');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         $response->setContent($content);
         return $response;
     }
@@ -17,6 +18,7 @@ class Utils
     public function setJsonResponse($status, $content){
         $response = new Response($content);
         $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         $response->setStatusCode($status);
         return $response;
     }

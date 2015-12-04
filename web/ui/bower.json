@@ -1,0 +1,25 @@
+{
+  "name": "padelTFG/frontEnd",
+  "version": "0.0.1",
+  "homepage": "https://github.com/albertoml/padelTFG",
+  "authors": [
+    "Alberto Martinez <albertoml.ohara@gmail.com>"
+  ],
+  "description": "client for api, padelTFG",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": null,
+    "backbone-amd": null,
+    "underscore-amd": null,
+    "requirejs": null,
+    "requirejs-text": null,
+    "bootstrap": null
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

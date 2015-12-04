@@ -1,0 +1,16 @@
+<section class="container">
+    <section class="login-form">
+        <div class="login-container">
+            <img src="../images/login/logo.png" class="img-responsive" alt="" />
+            <input type="email" name="email" placeholder="<%= data.userLogin %>" required class="form-control input-lg" />
+            <input type="password" name="password" placeholder="<%= data.passLogin %>" required class="form-control input-lg" />
+            <button type="submit" name="sendLogin" class="btn btn-lg btn-primary btn-block"><%= data.submitLogin %></button>
+            <div>
+                <a href="#"><%= data.registerUser %></a> <%= data.intersectionOR %> <a href="#"><%= data.resetPassword %></a>
+            </div>
+        </div>
+        <div class="form-links">
+            <a href="#"><%= data.webSite %></a>
+        </div>
+    </section>
+</section>

@@ -61,6 +61,9 @@ class User implements JsonSerializable
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\UserStatus") */
 	protected $status;
 
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\UserRole") */
+	protected $role;
+
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Notification", mappedBy="user") */
 	protected $notification;
 
@@ -147,6 +150,9 @@ class User implements JsonSerializable
 	}
 	public function getStatus(){
 		return $this->status;
+	}
+	public function getRole(){
+		return $this->role;
 	}
 	public function getNotification(){
 		return $this->notification;

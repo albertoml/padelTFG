@@ -115,14 +115,14 @@ class UserService{
         $user = $this->getUserByEmail($email);
         if ($user instanceof User) {
             if($password == $user->getPassword()){
-                return 'true';
+                return array('result' => 'ok', 'message' => $user);
             }
             else{
-                return Literals::PasswordIncorrect;
+                return array('result' => 'fail', 'message' => Literals::PasswordIncorrect);
             }
         }
         else{
-            return Literals::UserIncorrect;
+            return array('result' => 'fail', 'message' => Literals::UserIncorrect);
         }
     }
 }
