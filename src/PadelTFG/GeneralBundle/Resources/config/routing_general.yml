@@ -13,6 +13,11 @@ status:
     resource: routing_status.yml
     name_prefix:  status_
 
+userRole:
+    type: rest
+    resource: routing_userRole.yml
+    name_prefix:  userRole_
+
 sponsor:
     type: rest
     resource: routing_sponsor.yml

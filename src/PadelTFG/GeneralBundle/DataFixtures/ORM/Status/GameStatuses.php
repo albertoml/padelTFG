@@ -11,12 +11,12 @@ class GameStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$GameStatuses = array(
-			array('id' => '1', 'value' => 'created'),
-			array('id' => '2', 'value' => 'in process to change'),
-			array('id' => '3', 'value' => 'pending'),
-			array('id' => '4', 'value' => 'played'),
-			array('id' => '5', 'value' => 'won'),
-			array('id' => '6', 'value' => 'losed'),
+			array('id' => '1', 'value' => 'Created'),
+			array('id' => '2', 'value' => 'In Process to Change'),
+			array('id' => '3', 'value' => 'Pending'),
+			array('id' => '4', 'value' => 'Played'),
+			array('id' => '5', 'value' => 'Won'),
+			array('id' => '6', 'value' => 'Losed'),
 		);
 
 		foreach ($GameStatuses as $key) {

@@ -11,10 +11,10 @@ class InscriptionStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$InscriptionStatuses = array(
-			array('id' => '1', 'value' => 'tournament not started'),
-			array('id' => '2', 'value' => 'not classified'),
-			array('id' => '3', 'value' => 'classified'),
-			array('id' => '4', 'value' => 'finished')
+			array('id' => '1', 'value' => 'Tournament Not Started'),
+			array('id' => '2', 'value' => 'Not Classified'),
+			array('id' => '3', 'value' => 'Classified'),
+			array('id' => '4', 'value' => 'Finished')
 		);
 
 		foreach ($InscriptionStatuses as $key) {

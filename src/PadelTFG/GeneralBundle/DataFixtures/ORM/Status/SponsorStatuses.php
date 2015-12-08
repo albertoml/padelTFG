@@ -11,10 +11,10 @@ class SponsorStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$SponsorStatuses = array(
-			array('id' => '1', 'value' => 'active'),
-			array('id' => '2', 'value' => 'defaulter'),
-			array('id' => '3', 'value' => 'hidden'),
-			array('id' => '4', 'value' => 'deleted'),
+			array('id' => '1', 'value' => 'Active'),
+			array('id' => '2', 'value' => 'Defaulter'),
+			array('id' => '3', 'value' => 'Hidden'),
+			array('id' => '4', 'value' => 'Deleted'),
 		);
 
 		foreach ($SponsorStatuses as $key) {

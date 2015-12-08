@@ -4,14 +4,14 @@ define([
     'text!templates/login/login.html',
     'i18n!nls/loginLiterals.js'], function(Backbone, _, loginTemplate, literals) {
  
-    var HomeView = Backbone.View.extend({
-        el: '.page-content',
+    var LoginView = Backbone.View.extend({
+        el: '.wrapperHome',
         events: {
             'click button[name="sendLogin"]':'sendLogin',
             'keypress':'keyPressLogin'
         },
-        initialize: function(){
-            this.sendLoginURL = "http://localhost:8000/api/user/login/{email}/{password}";
+        initialize: function(urls){
+            this.sendLoginURL = urls.sendLoginURL;
         },
         render: function() {
             var _self = this;
@@ -34,13 +34,14 @@ define([
                 type: 'GET',
                 url: urlToSend,
                 success: function (response) {
-                    alert('hecho');
+                    localStorage.setItem('idUser', response.user.user.id);
+                    $('.common').trigger('showSuccesAlert', [literals.successMessageText]);
                 },
                 error: function (msg) {
-                    alert('mal');
+                    $('.common').trigger('showErrorAlert', [msg.responseText]);
                 }
             });
         }    
     });
-    return HomeView;
+    return LoginView;
 });

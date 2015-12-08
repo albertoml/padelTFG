@@ -11,12 +11,12 @@ class TournamentStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$TournamentStatuses = array(
-			array('id' => '1', 'value' => 'created'),
-			array('id' => '2', 'value' => 'in inscription date'),
-			array('id' => '3', 'value' => 'in group date'),
-			array('id' => '4', 'value' => 'in finals date'),
-			array('id' => '5', 'value' => 'finished'),
-			array('id' => '6', 'value' => 'deleted'),
+			array('id' => '1', 'value' => 'Created'),
+			array('id' => '2', 'value' => 'In Inscription Date'),
+			array('id' => '3', 'value' => 'In Group Date'),
+			array('id' => '4', 'value' => 'In Finals Date'),
+			array('id' => '5', 'value' => 'Finished'),
+			array('id' => '6', 'value' => 'Deleted'),
 		);
 
 		foreach ($TournamentStatuses as $key) {

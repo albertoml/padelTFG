@@ -13,7 +13,10 @@
     "underscore-amd": null,
     "requirejs": null,
     "requirejs-text": null,
-    "bootstrap": null
+    "bootstrap": null,
+    "fontawesome": null,
+    "DataTables": null,
+    "waypoints": null
   },
   "ignore": [
     "**/.*",

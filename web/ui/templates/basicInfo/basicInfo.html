@@ -1,0 +1,14 @@
+<ul id="<%= listId %>col1" class="display list-group col-lg-6">
+    <% _.each(dataTemplate.col1, function(item) { %>
+        <li class="<%= item.key %> list-group-item" style="height:40px">
+            <label class="col-lg-6"><%= item.text %></label><span class="col-lg-6"><%= item.data %></span>
+        </li>
+    <% }); %>
+</ul>
+<ul id="<%= listId %>col2" class="display list-group col-lg-6">
+    <% _.each(dataTemplate.col2, function(item) { %>
+        <li class="<%= item.key %> list-group-item" style="height:40px">
+            <label class="col-lg-6"><%= item.text %></label><span class="col-lg-6"><%= item.data %></span>
+        </li>
+    <% }); %>
+</ul>

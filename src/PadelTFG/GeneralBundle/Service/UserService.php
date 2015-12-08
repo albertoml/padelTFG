@@ -111,11 +111,23 @@ class UserService{
         $this->em->flush();
     }
 
+    public function getUserRoleByUser($user){
+        $repository = $this->em->getRepository('GeneralBundle:UserUserRole');
+        $roles = $repository->findByUser($user);
+        $rolesToSend = [];
+        foreach ($roles as $role) {
+            array_push($rolesToSend, $role->getRole());
+        }
+        return $rolesToSend;
+    }
+
     public function loginUser($email, $password){
         $user = $this->getUserByEmail($email);
         if ($user instanceof User) {
-            if($password == $user->getPassword()){
-                return array('result' => 'ok', 'message' => $user);
+            if($user->isPassEqual($password)){
+                $roles = $this->getUserRoleByUser($user);
+                $userToSend = array('user' => $user, 'roles' => $roles);
+                return array('result' => 'ok', 'message' => $userToSend);
             }
             else{
                 return array('result' => 'fail', 'message' => Literals::PasswordIncorrect);

@@ -11,10 +11,10 @@ class UserStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$UserStatuses = array(
-			array('id' => '1', 'value' => 'registered'),
-			array('id' => '2', 'value' => 'in tournament'),
-			array('id' => '3', 'value' => 'tournament admin'),
-			array('id' => '4', 'value' => 'deleted'),
+			array('id' => '1', 'value' => 'Registered'),
+			array('id' => '2', 'value' => 'In Tournament'),
+			array('id' => '3', 'value' => 'Tournament Admin'),
+			array('id' => '4', 'value' => 'Deleted'),
 		);
 
 		foreach ($UserStatuses as $key) {

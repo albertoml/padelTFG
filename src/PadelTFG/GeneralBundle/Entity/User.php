@@ -9,6 +9,7 @@ use JsonSerializable;
 
 /**
 * @ORM\Entity
+* @ORM\HasLifecycleCallbacks()
 * @UniqueEntity("email")
 */
 
@@ -61,7 +62,7 @@ class User implements JsonSerializable
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\UserStatus") */
 	protected $status;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\UserRole") */
+	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\UserUserRole", mappedBy="user") */
 	protected $role;
 
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Notification", mappedBy="user") */
@@ -88,7 +89,9 @@ class User implements JsonSerializable
 	public function __construct(){
 		$this->notification = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->tournament = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->role = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->registrationDate = new \DateTime();
+		$this->salt = $this->registrationDate->format('Y-m-d H:i:s') . 'PadelTFG';
 	}
 
 	/**
@@ -96,9 +99,7 @@ class User implements JsonSerializable
 	 */
 	public function setCreatedAtValue()
 	{
-	    $this->registrationDate = new \DateTime();
-	    $this->salt = $this->registrationDate + 'PadelTFG';
-	    $this->password = password_hash($this->password, PASSWORD_DEFAULT, $this->salt);
+	    $this->password = password_hash($this->password, PASSWORD_DEFAULT, array('salt' => $this->salt));
 	}
 
 	public function isPassEqual($pass){

@@ -11,11 +11,11 @@ class NotificationStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$NotificationStatuses = array(
-			array('id' => '1', 'value' => 'created'),
-			array('id' => '2', 'value' => 'sent'),
-			array('id' => '3', 'value' => 'read'),
-			array('id' => '4', 'value' => 'hidden'),
-			array('id' => '5', 'value' => 'deleted'),
+			array('id' => '1', 'value' => 'Dreated'),
+			array('id' => '2', 'value' => 'Sent'),
+			array('id' => '3', 'value' => 'Read'),
+			array('id' => '4', 'value' => 'Hidden'),
+			array('id' => '5', 'value' => 'Deleted'),
 		);
 
 		foreach ($NotificationStatuses as $key) {

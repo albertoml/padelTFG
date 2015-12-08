@@ -36,7 +36,7 @@ class UserController extends FOSRestController{
         if (!$user instanceof User) {
             return $this->util->setResponse(404, Literals::UserNotFound);
         }
-        $dataToSend = json_encode(array('user' => $user));
+        $dataToSend = json_encode($user);
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 

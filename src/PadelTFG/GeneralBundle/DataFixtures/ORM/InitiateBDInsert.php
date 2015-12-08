@@ -7,6 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PadelTFG\GeneralBundle\Entity\Category;
 use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\User;
+use PadelTFG\GeneralBundle\Entity\UserStatus;
+use PadelTFG\GeneralBundle\Entity\UserUserRole;
 use PadelTFG\GeneralBundle\Entity\Pair;
 use PadelTFG\GeneralBundle\Entity\Inscription;
 
@@ -14,6 +16,11 @@ use PadelTFG\GeneralBundle\Entity\Inscription;
 class InitiateBDInsert implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
+
+		$repository = $manager->getRepository('GeneralBundle:UserRole');
+		$playerRole = $repository->findOneByValue('Player');
+		$repository = $manager->getRepository('GeneralBundle:UserStatus');
+		$userStatus = $repository->findOneByValue('Registered');
 
 		$Users = array(
 			array('name' => 'Natalia', 'lastName' => 'Perez', 'email' => 'nape',
@@ -46,15 +53,21 @@ class InitiateBDInsert implements FixtureInterface
 			$entity->setLastName($key['lastName']);
 			$entity->setEmail($key['email']);
 			$entity->setPassword($key['password']);
+			$entity->setStatus($userStatus);
+			$entityRole = new UserUserRole();
+			$entityRole->setUser($entity);
+			$entityRole->setRole($playerRole);
 			$manager->persist($entity);	
+			$manager->persist($entityRole);	
 		}
 		$manager->flush();
+
 
 		$Categories = array(
 			array('name' => 'Category Femenina'),
 			array('name' => 'Category Masculina'),
 			array('name' => 'Category Mixta')
-			);
+		);
 
 		foreach ($Categories as $key) {
 			$entity = new Category();
@@ -104,7 +117,7 @@ class InitiateBDInsert implements FixtureInterface
 			array('user1' => $user1Pair4, 'user2' => $user2Pair4),
 			array('user1' => $user1Pair5, 'user2' => $user2Pair5)
 
-			);
+		);
 
 		foreach ($Pairs as $key) {
 			$entity = new Pair();
@@ -133,7 +146,7 @@ class InitiateBDInsert implements FixtureInterface
 			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category3),
 			array('pair' => $pair3, 'tournament' => $tournament1, 'category' => $category3),
 			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category3)
-			);
+		);
 
 		foreach ($Inscriptions as $key) {
 			$entity = new Inscription();

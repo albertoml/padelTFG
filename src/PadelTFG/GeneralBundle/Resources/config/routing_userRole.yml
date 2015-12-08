@@ -1,0 +1,5 @@
+userRoles_all:
+    path: /userRole
+    defaults: { _controller: GeneralBundle:UserRole:allUserRole, _format: ~ }
+    requirements:
+        _method: GET

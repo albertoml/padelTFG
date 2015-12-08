@@ -5,5 +5,6 @@ define({
 	"registerUser": "Create account",
 	"intersectionOR": "or",
 	"resetPassword": "reset password",
-	"submitLogin": "Sign in"
+	"submitLogin": "Sign in",
+	"successMessageText": "Login Succesfully"
 });

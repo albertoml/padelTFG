@@ -11,10 +11,10 @@ class RecordalStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$RecordalStatuses = array(
-			array('id' => '1', 'value' => 'created'),
-			array('id' => '2', 'value' => 'read'),
-			array('id' => '3', 'value' => 'hidden'),
-			array('id' => '4', 'value' => 'deleted'),
+			array('id' => '1', 'value' => 'Created'),
+			array('id' => '2', 'value' => 'Read'),
+			array('id' => '3', 'value' => 'Hidden'),
+			array('id' => '4', 'value' => 'Deleted'),
 		);
 
 		foreach ($RecordalStatuses as $key) {
