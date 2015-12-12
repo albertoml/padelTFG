@@ -8,18 +8,27 @@ require.config({
 		'templates': '../templates',
 		'nls': '../nls',
 		'i18n': '../vendor/i18n',
-		'datejs': 'vendor/datejs/date'
-	}
+		'datejs': 'vendor/datejs/date',
+		'jquery-modal': 'vendor/jquery-modal/jquery.modal'
+	},
+	shim: {
+        'jquery-modal': {
+            deps: ['jquery']
+        }
+    }
 });
  
-require(['backbone', 'views/login/login', 'views/common/common', 'views/home/home', 'dataTables', 'datejs'], 
+require(['backbone', 'views/login/login', 'views/common/common', 'views/home/home', 'dataTables', 'datejs', 'jquery-modal'], 
 	function(Backbone, LoginView, CommonView, HomeView) {
 
 	var host = 'http://localhost:8000';
-	var urls = {
-		'sendLoginURL' : host + '/api/user/login/{email}/{password}'
+	
+	var params = {
+		'host' : 'http://localhost:8000',
+		'sendLoginURL' : host + '/api/user/login/{email}/{password}',
+		'getUserPreferences' : host + '/api/userPreference/{idUser}'
 	};
-	var commonView = new CommonView();
+	var commonView = new CommonView(params);
 	commonView.render();
 	var Router = Backbone.Router.extend({
 		routes: {
@@ -27,11 +36,11 @@ require(['backbone', 'views/login/login', 'views/common/common', 'views/home/hom
 			'home': 'home'
 		},
 		login: function(){
-			var login = new LoginView(urls);
+			var login = new LoginView(params);
 			login.render();
 		},
 		home: function(){
-			var home = new HomeView(urls);
+			var home = new HomeView(params);
 			home.render();
 		}
 	});

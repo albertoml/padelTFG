@@ -14,6 +14,10 @@ define([
             'showErrorAlert':'showErrorAlert',
             'click button[id="menu-toggle-2"]':'hideMenu'
         },
+        initialize: function(params){
+            this.model = {};
+            this.params = params;
+        },
         render: function(){
             var template = _.template(NavTemplate, {
                 nameSite: literals.nameSite
@@ -29,8 +33,8 @@ define([
             });
             $('.alertModal').remove();
             _self.$el.append(template);
-            e.currentTarget.addEventListener("animationstart", _self.listenerAlert, false);
-            e.currentTarget.addEventListener("animationend", _self.listenerAlert, false);
+            e.currentTarget.addEventListener("animationstart", function(){_self.listenerAlertStart(_self, e)}, false);
+            e.currentTarget.addEventListener("animationend", function(){_self.listenerAlertEnd(_self, e)}, false);
         },
         showErrorAlert: function(e, errorText) {
             var _self = this;
@@ -41,23 +45,18 @@ define([
             $('.alertModal').remove();
             _self.$el.append(template);
         },
-        listenerAlert: function(e) {
-            var _self = this;
-            switch(e.type) {
-                case "animationstart":
-                    var home = new HomeView;
-                    $('.login-form').html('');
-                    setTimeout(function(){
-                        $('.active').show();
-                        home.render();
-                    }, 2000);
-                    e.currentTarget.removeEventListener("animationstart", _self.listenerAlert, false);
-                    break;
-                case "animationend":
-                    $('.alertModal').remove();
-                    e.currentTarget.removeEventListener("animationend", _self.listenerAlert, false);
-                    break;
-            }
+        listenerAlertEnd: function(model, e) {
+            $('.alertModal').remove();
+            e.currentTarget.removeEventListener("animationend", model.listenerAlert, false);
+        },
+        listenerAlertStart: function(model, e){
+            var home = new HomeView(model.params);
+            $('.login-form').html('');
+            setTimeout(function(){
+                $('.active').show();
+                home.render();
+            }, 2000);
+            e.currentTarget.removeEventListener("animationstart", model.listenerAlert, false);
         },
         hideMenu: function(e){
             e.preventDefault();

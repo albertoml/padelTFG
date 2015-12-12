@@ -1,0 +1,26 @@
+user_all:
+    path:  /userPreference
+    defaults: { _controller: GeneralBundle:UserPreference:allUserPreferences, _format: ~ }
+    requirements:
+        _method: GET
+
+user_get:
+    path:  /userPreference/{id}
+    defaults: { _controller: GeneralBundle:UserPreference:getUserPreference, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+user_put:
+    path:  /userPreference/{id}
+    defaults: { _controller: GeneralBundle:UserPreference:putUserPreference, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+user_delete:
+    path:  /userPreference/{id}
+    defaults: { _controller: GeneralBundle:UserPreference:deleteUserPreference, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"

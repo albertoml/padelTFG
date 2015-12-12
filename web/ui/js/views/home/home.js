@@ -17,7 +17,7 @@ define([
         events: {
             
         },
-        initialize: function(urls){
+        initialize: function(params){
             this.sections = [
             {'key':'basicInfo', 'text':'Basic Information'},
             {'key':'annotations', 'text':'Annotations'},
@@ -26,6 +26,7 @@ define([
             {'key':'pairs', 'text':'My pairs Info'},
             ];
             this.model = {};
+            this.params = params;
         },
         render: function() {
             var _self = this;
@@ -74,7 +75,7 @@ define([
             });
         },
         renderSections: function(){
-            var basicInfo = new BasicInfoView(this.model);
+            var basicInfo = new BasicInfoView(this.model, this.params);
             basicInfo.render();
             var annotations = new AnnotationsView();
             annotations.render();

@@ -5,7 +5,8 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
-
+use PadelTFG\GeneralBundle\Service\UserPrerenceService as UserPrerenceService;
+ 
 class UserService{
 
     var $em;
@@ -67,7 +68,10 @@ class UserService{
             $errorsString = (string) $errors;
             return array('result' => 'fail', 'message' => $errorsString);
         }
+        $userPreference = new UserPrerenceService();
         $this->em->persist($user);
+        $userPreference->saveUserPreference($user->getId());
+        $this->em->persist($userPreference);
         $this->em->flush();
         return array('result' => 'ok', 'message' => $user);
     }

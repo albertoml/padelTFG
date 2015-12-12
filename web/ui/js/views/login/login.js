@@ -10,8 +10,8 @@ define([
             'click button[name="sendLogin"]':'sendLogin',
             'keypress':'keyPressLogin'
         },
-        initialize: function(urls){
-            this.sendLoginURL = urls.sendLoginURL;
+        initialize: function(params){
+            this.sendLoginURL = params.sendLoginURL;
         },
         render: function() {
             var _self = this;

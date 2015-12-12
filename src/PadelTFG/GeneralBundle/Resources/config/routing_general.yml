@@ -3,6 +3,11 @@ user:
     resource: routing_user.yml
     name_prefix:  user_
 
+userPreference:
+    type: rest
+    resource: routing_userPreference.yml
+    name_prefix:  userPreference_
+
 tournament:
     type: rest
     resource: routing_tournament.yml

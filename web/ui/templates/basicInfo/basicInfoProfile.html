@@ -1,0 +1,46 @@
+<div class="<%= profileId %>">
+    <div class="col-lg-6">
+    <% _.each(dataTemplate, function(item, index) {
+        if(index < dataTemplate.length/2) { 
+            if(item.editable == false){
+                var disabled = 'disabled';
+            } else {
+                var disabled = '';
+            }
+            if(item.visible == true){
+                var checked = 'checked';
+            } else {
+                var checked = '';
+            } %>
+            <div class="input-group" style="margin-bottom: 10px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" aria-label="..." <%= checked %>>
+                </span>
+                <input type="text" class="form-control" aria-label="..." value="<%= item.data %>" placeholder="<%= item.text %>" <%= disabled %>>
+            </div><!-- /input-group -->
+    <%  }
+    }); %>
+    </div>
+    <div class="col-lg-6">
+    <% _.each(dataTemplate, function(item, index) {
+        if(index >= dataTemplate.length/2) { 
+            if(item.editable == false){
+                var disabled = 'disabled';
+            } else {
+                var disabled = '';
+            }
+            if(item.visible == true){
+                var checked = 'checked';
+            } else {
+                var checked = '';
+            } %>
+            <div class="input-group" style="margin-bottom: 10px;">
+                <span class="input-group-addon">
+                    <input type="checkbox" aria-label="..." <%= checked %>>
+                </span>
+                <input type="text" class="form-control" aria-label="..." value="<%= item.data %>" placeholder="<%= item.text %>" <%= disabled %>>
+            </div><!-- /input-group -->
+    <%  }
+    }); %>
+    </div>
+</div><!-- /.col-lg-6 -->
