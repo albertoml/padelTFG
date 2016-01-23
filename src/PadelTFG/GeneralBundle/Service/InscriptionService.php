@@ -56,6 +56,21 @@ class InscriptionService{
         return $inscriptions;
     }
 
+    public function getInscriptionsByUser($idUser){
+        $pairService = new PairService();
+        $pairService->setManager($this->em);
+        $pairs = $pairService->getPairByUser($idUser);
+        $inscriptions = array();
+
+        foreach ($pairs as $pair) {
+            foreach($this->getInscriptionsByPair($pair->getId()) as $ins){
+                $inscriptions[] = $ins;
+            }
+        }
+
+        return $inscriptions;
+    }
+
     public function getInscriptionsByGroup($idGroup){
         $repository = $this->em->getRepository('GeneralBundle:Inscription');
         $inscriptions = $repository->findByGroup($idGroup);
@@ -137,6 +152,8 @@ class InscriptionService{
         ));
         $inscription = $query->getResult();
 
+        $checked['message'] = "";
+
         if($inscription == null){
             $pair = $this->getPairFromId($pairId);
             if(!$pair instanceof Pair){
@@ -165,6 +182,7 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
         $observationService = new ObservationService();
         $observationService->setManager($this->em);
         $resumeToObservationsInsert = null;
+        $resumeToObservationsInsert['message'] = "";
         foreach ($observations as $objObs) {
             $result = $observationService->saveObservation($objObs, $inscription, $controller);
             if($result['result'] == 'fail'){
@@ -183,32 +201,59 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
         if($failCheckAttributes == null){
 
             $checked = null;
+            $checked['message'] = "";
             $inscriptions = 0;
             foreach ($params['pair'] as $objIns) {
-                $pairId = $objIns['pairId'];
-                $checked['result'] = false;
-                $checked = $this->checkPair($category, $tournament, $pairId, $checked);
-                if($checked['result']){
-                    $newInscription = new Inscription();
-                    $pair = $this->getPairFromId($pairId);
-                    $newInscription = $this->setInscriptionSave($newInscription, $pair, $category, $tournament);
-                    $this->em->persist($newInscription);
-                    $this->em->flush();
-                    $inscriptions += 1;
-                    if(!empty($objIns['observations'])){
-                        $resumeToObservationsInsert = $this->saveObservations($objIns['observations'], $newInscription, $controller);
-                        if($resumeToObservationsInsert['result'] == 'fail'){
-                            $checked['message'] .= $resumeToObservationsInsert['message'];
+                if(!empty($objIns['pairId'])){
+                    $pairId = $objIns['pairId'];
+                    $checked['result'] = false;
+                    $checked = $this->checkPair($category, $tournament, $pairId, $checked);
+                    if($checked['result']){
+                        $newInscription = new Inscription();
+                        $pair = $this->getPairFromId($pairId);
+                        $newInscription = $this->setInscriptionSave($newInscription, $pair, $category, $tournament);
+                        $this->em->persist($newInscription);
+                        $this->em->flush();
+                        $inscriptions += 1;
+                        if(!empty($objIns['observations'])){
+                            $resumeToObservationsInsert = $this->saveObservations($objIns['observations'], $newInscription, $controller);
+                            if($resumeToObservationsInsert['result'] == 'fail'){
+                                $checked['message'] .= $resumeToObservationsInsert['message'];
+                            }
+                            else{
+                                $newInscription->setHasObservations(true);
+                                $this->em->persist($newInscription);
+                            }
+                        }
+                        else{
+                            $newInscription->setHasObservations(false);
+                            $this->em->persist($newInscription);
                         }
                     }
                 }
+                else{
+                    $checked['message'] .= Literals::PairNotFound;
+                }
             }
-            $checked['message'] .= $inscriptions . ' ' . Literals::Inscriptions;
-            return array('result' => 'ok', 'message' => $checked['message']);
+            $this->em->flush();
+            
+            if($inscriptions == 0){
+                return array('result' => 'fail', 'message' => $checked['message']);
+            }
+            else{
+                $checked['message'] .= $inscriptions . ' ' . Literals::Inscriptions;
+                return array('result' => 'ok', 'message' => $checked['message']);
+            }
+            
         }
         else {
             return array('result' => 'fail', 'message' => $failCheckAttributes);
         }
+    }
+
+    public function deleteInscription($inscription){
+        $this->em->remove($inscription);
+        $this->em->flush();
     }
     
 }

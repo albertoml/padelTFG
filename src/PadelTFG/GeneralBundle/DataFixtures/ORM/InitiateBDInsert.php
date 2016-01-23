@@ -24,27 +24,27 @@ class InitiateBDInsert implements FixtureInterface
 		$userStatus = $repository->findOneByValue('Registered');
 
 		$Users = array(
-			array('name' => 'Natalia', 'lastName' => 'Perez', 'email' => 'nape',
+			array('name' => 'Natalia', 'lastName' => 'Perez', 'email' => 'nape@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Servando', 'lastName' => 'Escobar', 'email' => 'sees',
+			array('name' => 'Servando', 'lastName' => 'Escobar', 'email' => 'sees@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Victoria', 'lastName' => 'Abril', 'email' => 'viab',
+			array('name' => 'Victoria', 'lastName' => 'Abril', 'email' => 'viab@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Alberto', 'lastName' => 'Martinez', 'email' => 'alma',
+			array('name' => 'Alberto', 'lastName' => 'Martinez', 'email' => 'alma@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Cecilia', 'lastName' => 'Soriano', 'email' => 'ceso',
+			array('name' => 'Cecilia', 'lastName' => 'Soriano', 'email' => 'ceso@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Saray', 'lastName' => 'Lozano', 'email' => 'salo',
+			array('name' => 'Saray', 'lastName' => 'Lozano', 'email' => 'salo@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Ana', 'lastName' => 'Guardiola', 'email' => 'angu',
+			array('name' => 'Ana', 'lastName' => 'Guardiola', 'email' => 'angu@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Andrea', 'lastName' => 'Garcia', 'email' => 'anga',
+			array('name' => 'Andrea', 'lastName' => 'Garcia', 'email' => 'anga@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Rocio', 'lastName' => 'Lopez', 'email' => 'rolo',
+			array('name' => 'Rocio', 'lastName' => 'Lopez', 'email' => 'rolo@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Francisco', 'lastName' => 'Garcia', 'email' => 'frga',
+			array('name' => 'Francisco', 'lastName' => 'Garcia', 'email' => 'frga@PadelTFG.com',
 				'password' => 'password'),
-			array('name' => 'Juan', 'lastName' => 'Martinez', 'email' => 'juma',
+			array('name' => 'Juan', 'lastName' => 'Martinez', 'email' => 'juma@PadelTFG.com',
 				'password' => 'password')
 			);
 

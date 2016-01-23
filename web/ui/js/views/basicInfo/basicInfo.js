@@ -15,9 +15,14 @@ define([
         },
         initialize: function(model, params){
             var _self = this;
-            if(!_.isUndefined(model)){
-                _self.model = model;
-                var urlToSend = params.getUserPreferences.replace('{idUser}', model.get('id'));
+            this.params = params;
+            this.model = model;
+        },
+        render: function() {
+            var _self = this;
+            this.setElement(this.el);
+            if(!_.isUndefined(this.model)){
+                var urlToSend = this.params.getUserPreferences.replace('{idUser}', this.model.get('id'));
                 $.ajax({
                     type: 'GET',
                     async: false,
@@ -27,10 +32,6 @@ define([
                     }
                 });
             }
-        },
-        render: function() {
-            this.setElement(this.el);
-            var _self = this;
             var dataRender = _self.dataRender();
             var dataTemplate = [];
             _.each(dataRender, function(item){
@@ -44,92 +45,90 @@ define([
                 dataLiterals : literals
             });
             _self.$el.html(template);
-            _self.modal = _self.renderModal();
-            _self.$el.append(_self.modal);
         },
         dataRender: function(){
             var _self = this;
             var dataRender = [
                 {
                     'key': 'email',
-                    'text': 'Email',
+                    'text': literals.fields.email,
                     'data': this.model.get('email'),
                     'visible': _self.userPreferences.email,
                     'editable': true
                 },
                 {
                     'key': 'name',
-                    'text': 'Name',
+                    'text': literals.fields.name,
                     'data': this.model.get('name'),
                     'visible': _self.userPreferences.name,
                     'editable': true
                 },
                 {
                     'key': 'lastName',
-                    'text': 'Lastname',
+                    'text': literals.fields.lastName,
                     'data': this.model.get('lastName'),
                     'visible': _self.userPreferences.lastName,
                     'editable': true
                 },
                 {
                     'key': 'registrationDate',
-                    'text': 'Registration Date',
+                    'text': literals.fields.registrationDate,
                     'data': new Date(this.model.get('registrationDate').date).toString('d-MM-yyyy'),
                     'visible': _self.userPreferences.registrationDate,
                     'editable': false
                 },
                 {
                     'key': 'status',
-                    'text': 'Status',
+                    'text': literals.fields.status,
                     'data': this.model.get('status').value,
                     'visible': _self.userPreferences.status,
                     'editable': false
                 },
                 {
                     'key': 'address',
-                    'text': 'Address',
+                    'text': literals.fields.address,
                     'data': this.model.get('address'),
                     'visible': _self.userPreferences.address,
                     'editable': true
                 },
                 {
                     'key': 'city',
-                    'text': 'City',
+                    'text': literals.fields.city,
                     'data': this.model.get('city'),
                     'visible': _self.userPreferences.city,
                     'editable': true
                 },
                 {
                     'key': 'country',
-                    'text': 'Country',
+                    'text': literals.fields.country,
                     'data': this.model.get('country'),
                     'visible': _self.userPreferences.country,
                     'editable': true
                 },
                 {
                     'key': 'cp',
-                    'text': 'Postal Code',
+                    'text': literals.fields.cp,
                     'data': this.model.get('cp'),
                     'visible': _self.userPreferences.cp,
                     'editable': true
                 },
                 {
                     'key': 'firstPhone',
-                    'text': 'First Phone',
+                    'text': literals.fields.firstPhone,
                     'data': this.model.get('firstPhone'),
                     'visible': _self.userPreferences.firstPhone,
                     'editable': true
                 },
                 {
                     'key': 'gameLevel',
-                    'text': 'Game Level',
+                    'text': literals.fields.gameLevel,
                     'data': this.model.get('gameLevel'),
                     'visible': _self.userPreferences.gameLevel,
                     'editable': false
                 },
                 {
                     'key': 'secondPhone',
-                    'text': 'Second Phone',
+                    'text': literals.fields.secondPhone,
                     'data': this.model.get('secondPhone'),
                     'visible': _self.userPreferences.secondPhone,
                     'editable': true
@@ -155,9 +154,9 @@ define([
         },
         showProfileModal: function(){
             var _self = this;
-            $("#" + _self.modalID).modal();
-            $("#" + _self.modalID).addClass('in');
-            //$('#' + this.modalID).modal('toggle');
+            var modal = _self.renderModal();
+            $(modal).modal();
+            $('#' + this.modalID + ' .modal-dialog').css({'width':'800px'});
             this.setElement(_self.$el.add('#' + this.modalID));
         },
         loadProfileInfo: function(){
@@ -174,20 +173,57 @@ define([
             var _self = this;
             var result = confirm(literals.confirmSaveProfile);
             if(result){
-                Backbone.emulateHTTP = true;
-                _self.model.save();
-                $('#' + this.modalID).modal('hide');
-                $("#" + _self.modalID).removeClass('in');
-                _self.setElement(_self.$el.not('#' + this.modalID));
-                this.render();
+                var changes = _self.getChanges();
+                var changesPreferences = _self.getPreferencesChanges();
+                _self.model.save(changes);
+                var urlToSend = _self.params.getUserPreferences.replace('{idUser}', _self.model.get('id'));
+                $.ajax({
+                    type: 'PUT',
+                    data: JSON.stringify(changesPreferences),
+                    url: urlToSend,
+                    success: function (response) {
+                        _self.userPreferences = response.userPreference;
+                        _self.render();
+                    }
+                });
             }
+            $('#' + this.modalID).modal('hide');
         },
         cancelProfile: function(){
             var _self = this;
-            //$('#' + this.modalID).modal('hide');
-            //$("#" + _self.modalID).removeClass('in');
-            _self.setElement(_self.$el.not('#' + this.modalID));
+            $('#' + this.modalID).modal('hide');
             this.render();
+        },
+        getChanges: function(){
+            var changes = {
+                "email": $('.emailProfile input[type="text"]').val(),
+                "name": $('.nameProfile input[type="text"]').val(),
+                "lastName": $('.lastNameProfile input[type="text"]').val(),
+                "address": $('.addressProfile input[type="text"]').val(),
+                "city": $('.cityProfile input[type="text"]').val(),
+                "country": $('.countryProfile input[type="text"]').val(),
+                "cp": $('.cpProfile input[type="text"]').val(),
+                "firstPhone": $('.firstPhoneProfile input[type="text"]').val(),
+                "secondPhone": $('.secondPhoneProfile input[type="text"]').val()
+            };
+            return changes;
+        },
+        getPreferencesChanges: function(){
+            var changes = {
+                "email": $('.emailProfile input[type="checkbox"]').is(':checked'),
+                "name": $('.nameProfile input[type="checkbox"]').is(':checked'),
+                "lastName": $('.lastNameProfile input[type="checkbox"]').is(':checked'),
+                "registrationDate": $('.registrationDateProfile input[type="checkbox"]').is(':checked'),
+                "status": $('.statusProfile input[type="checkbox"]').is(':checked'),
+                "address": $('.addressProfile input[type="checkbox"]').is(':checked'),
+                "city": $('.cityProfile input[type="checkbox"]').is(':checked'),
+                "country": $('.countryProfile input[type="checkbox"]').is(':checked'),
+                "cp": $('.cpProfile input[type="checkbox"]').is(':checked'),
+                "firstPhone": $('.firstPhoneProfile input[type="checkbox"]').is(':checked'),
+                "gameLevel": $('.gameLevelProfile input[type="checkbox"]').is(':checked'),
+                "secondPhone": $('.secondPhoneProfile input[type="checkbox"]').is(':checked')
+            };
+            return changes;
         }
     });
     return BasicInfoView;

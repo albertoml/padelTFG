@@ -17,3 +17,10 @@ observation_by_inscription:
     requirements:
         _method: GET
         id: "\d+"
+
+observation_delete:
+    path:  /observation/{id}
+    defaults: { _controller: GeneralBundle:Observation:deleteObservation, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"

@@ -22,7 +22,8 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
         "friendsofsymfony/rest-bundle": "^1.7",
-        "jms/serializer-bundle": "~0.13"
+        "jms/serializer-bundle": "~0.13",
+        "nelmio/cors-bundle": "^1.4"
     },
     "scripts": {
         "post-install-cmd": [

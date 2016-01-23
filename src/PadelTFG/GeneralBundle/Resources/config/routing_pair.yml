@@ -38,3 +38,9 @@ pair_by_tournament:
     requirements:
         _method: GET
         id: "\d+"
+
+pair_post:
+    path:  /pair
+    defaults: { _controller: GeneralBundle:Pair:postPair, _format: ~ }
+    requirements:
+        _method: POST

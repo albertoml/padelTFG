@@ -17,7 +17,7 @@ define([
                 tableId : 'annotationsTable'
             });
             _self.$el.html(template);
-            $('#annotationsTable').dataTable();
+            //$('#annotationsTable').dataTable();
         }    
     });
     return AnnotationsView;

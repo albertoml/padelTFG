@@ -17,21 +17,26 @@ if( typeof(onCloseAction) == "undefined" || !onCloseAction){
     var protection = 'data-backdrop="static" data-keyboard="false"';
     var onclosebutton = 'action="'+onCloseAction+'"';
 }
-%><div id="<%= id %>" class="modal fade <%= container %>" <%= protection %> dialog="true" role="dialog" >
-<% if(typeof(showHeader) == "undefined" || showHeader === true){ %>
-    <div class="modal-header">
-    <% if( !_.isUndefined(title) && title){%>
-    <h3 id="myModalLabel"><%= title %></h3>
-    <% } %>
-    </div>
-<% } %>
-<div class="modal-body">
-    <%= content %>
-</div>
+%><div id="<%= id %>" class="modal fade <%= container %>" <%= protection %> tabindex="-1" role="dialog" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <% if(typeof(showHeader) == "undefined" || showHeader === true){ %>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <% if( !_.isUndefined(title) && title){%>
+                    <h4 id="myModalLabel"><%= title %></h4>
+                    <% } %>
+                </div>
+            <% } %>
+            <div class="modal-body">
+                <%= content %>
+            </div>
 
-<% if(typeof(buttons) != "undefined" && buttons && buttons != false){ %>
-    <div class="modal-footer">
-    <%= buttons %>
+            <% if(typeof(buttons) != "undefined" && buttons && buttons != false){ %>
+                <div class="modal-footer">
+                <%= buttons %>
+                </div>
+            <% } %>
+        </div>
     </div>
-<% } %>
 </div>

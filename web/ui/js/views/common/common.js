@@ -4,8 +4,7 @@ define([
     'text!templates/common/alertSuccess.html',
     'text!templates/common/alertError.html',
     'text!templates/common/nav.html',
-    'i18n!nls/commonLiterals.js',
-    'views/home/home'], function(Backbone, _, alertSuccessTemplate, alertErrorTemplate, NavTemplate, literals, HomeView) {
+    'i18n!nls/commonLiterals.js'], function(Backbone, _, alertSuccessTemplate, alertErrorTemplate, NavTemplate, literals) {
  
     var CommonView = Backbone.View.extend({
         el: '.common',
@@ -44,18 +43,14 @@ define([
             });
             $('.alertModal').remove();
             _self.$el.append(template);
+            e.currentTarget.addEventListener("animationstart", function(){_self.listenerAlertStart(_self, e)}, false);
+            e.currentTarget.addEventListener("animationend", function(){_self.listenerAlertEnd(_self, e)}, false);
         },
         listenerAlertEnd: function(model, e) {
             $('.alertModal').remove();
             e.currentTarget.removeEventListener("animationend", model.listenerAlert, false);
         },
         listenerAlertStart: function(model, e){
-            var home = new HomeView(model.params);
-            $('.login-form').html('');
-            setTimeout(function(){
-                $('.active').show();
-                home.render();
-            }, 2000);
             e.currentTarget.removeEventListener("animationstart", model.listenerAlert, false);
         },
         hideMenu: function(e){

@@ -1,0 +1,1908 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"pa",
+				"pair"
+			],
+			[
+				"pair",
+				"pairId"
+			],
+			[
+				"us",
+				"user2"
+			],
+			[
+				"use",
+				"user1"
+			],
+			[
+				"nma",
+				"nameSearch"
+			],
+			[
+				"nam",
+				"nameSearch"
+			],
+			[
+				"z",
+				"z-index"
+			],
+			[
+				"cat",
+				"category"
+			],
+			[
+				"cate",
+				"categories"
+			],
+			[
+				"selec",
+				"select2"
+			],
+			[
+				"ins",
+				"inscriptions"
+			],
+			[
+				"to",
+				"tournamentId"
+			],
+			[
+				"tournament",
+				"tournamentId"
+			],
+			[
+				"tou",
+				"tournamentId"
+			],
+			[
+				"tour",
+				"tournamentId"
+			],
+			[
+				"op",
+				"option	Tag"
+			],
+			[
+				"ob",
+				"observations"
+			],
+			[
+				"boo",
+				"bootstrap"
+			],
+			[
+				"b",
+				"bootstrap-modalmanager"
+			],
+			[
+				"get",
+				"getObservations"
+			],
+			[
+				"save",
+				"saveInscription"
+			],
+			[
+				"is",
+				"isEmpty"
+			],
+			[
+				"sen",
+				"sendRegister"
+			],
+			[
+				"mo",
+				"model"
+			],
+			[
+				"chan",
+				"changesPreferences"
+			],
+			[
+				"cha",
+				"changes"
+			],
+			[
+				"first",
+				"firstPhone"
+			],
+			[
+				"ta",
+				"tableTools"
+			],
+			[
+				"chang",
+				"changed"
+			],
+			[
+				"mod",
+				"model"
+			],
+			[
+				"rende",
+				"renderModal"
+			],
+			[
+				"moda",
+				"modalID"
+			],
+			[
+				"sav",
+				"saveProfile"
+			],
+			[
+				"bu",
+				"button"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"dat",
+				"dataTemplate"
+			],
+			[
+				"data",
+				"dataTemplate"
+			],
+			[
+				"fir",
+				"firstPhone"
+			],
+			[
+				"add",
+				"address"
+			],
+			[
+				"ren",
+				"renderHomeView"
+			],
+			[
+				"par",
+				"params"
+			],
+			[
+				"ent",
+				"entity"
+			],
+			[
+				"User",
+				"UserPreference"
+			],
+			[
+				"U",
+				"UserPrerenceService"
+			],
+			[
+				"S",
+				"Service"
+			],
+			[
+				"userPR",
+				"userPreference"
+			],
+			[
+				"jq",
+				"jquery-modal"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"wa",
+				"waypoints"
+			],
+			[
+				"en",
+				"entity"
+			],
+			[
+				"hom",
+				"homeModel"
+			],
+			[
+				"id",
+				"idUser"
+			],
+			[
+				"H",
+				"HomeModel"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"o",
+				"onclick	Attr"
+			],
+			[
+				"sec",
+				"section"
+			],
+			[
+				"comm",
+				"commonView"
+			],
+			[
+				"B",
+				"BasicInfoView"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"Co",
+				"CommonView"
+			],
+			[
+				"role",
+				"rolesToSend"
+			],
+			[
+				"pla",
+				"playerRole"
+			],
+			[
+				"user",
+				"userUserRole"
+			],
+			[
+				"getUse",
+				"getUserRoleByUser"
+			],
+			[
+				"key",
+				"keyPressLogin"
+			],
+			[
+				"url",
+				"urlToSend"
+			],
+			[
+				"va",
+				"val"
+			],
+			[
+				"n",
+				"null"
+			],
+			[
+				"_",
+				"_self"
+			],
+			[
+				"inco",
+				"incorrect"
+			],
+			[
+				"getUs",
+				"getUserByEmail"
+			],
+			[
+				"che",
+				"checked"
+			],
+			[
+				"sa",
+				"saveObservations"
+			],
+			[
+				"Ob",
+				"Observation"
+			],
+			[
+				"setIn",
+				"setInscriptionSave"
+			],
+			[
+				"nw",
+				"newInscription"
+			],
+			[
+				"check",
+				"checkPair"
+			],
+			[
+				"t",
+				"tournament"
+			],
+			[
+				"fail",
+				"failCheckAttributes"
+			],
+			[
+				"Grou",
+				"GroupCategory"
+			],
+			[
+				"Pai",
+				"Pair"
+			],
+			[
+				"In",
+				"idInscription"
+			],
+			[
+				"obser",
+				"observations"
+			],
+			[
+				"Obs",
+				"ObservationService"
+			],
+			[
+				"sta",
+				"StatusService"
+			],
+			[
+				"con",
+				"controller"
+			],
+			[
+				"rec",
+				"recordal"
+			],
+			[
+				"notif",
+				"notificationDate"
+			],
+			[
+				"reco",
+				"recordalService"
+			],
+			[
+				"Rec",
+				"RecordalNotFound"
+			],
+			[
+				"recor",
+				"recordalService"
+			],
+			[
+				"record",
+				"recordals"
+			],
+			[
+				"not",
+				"notification"
+			],
+			[
+				"no",
+				"notificationService"
+			],
+			[
+				"car",
+				"categories"
+			],
+			[
+				"Tour",
+				"Tournament"
+			],
+			[
+				"ca",
+				"categories"
+			],
+			[
+				"ann",
+				"annotation"
+			],
+			[
+				"err",
+				"errorsString"
+			],
+			[
+				"Ann",
+				"AnnotationService"
+			],
+			[
+				"an",
+				"annotations"
+			],
+			[
+				"new",
+				"newInscription"
+			],
+			[
+				"class",
+				"classified"
+			],
+			[
+				"ran",
+				"rankingMark"
+			],
+			[
+				"cl",
+				"classifiedPosition"
+			],
+			[
+				"cla",
+				"classified"
+			],
+			[
+				"gr",
+				"groupC"
+			],
+			[
+				"gro",
+				"groupA"
+			],
+			[
+				"Gro",
+				"GroupCategory"
+			],
+			[
+				"find",
+				"find"
+			],
+			[
+				"nu",
+				"numPairForGroup"
+			],
+			[
+				"Cate",
+				"CategoryNotFound"
+			],
+			[
+				"obs",
+				"observations"
+			],
+			[
+				"end",
+				"endDate"
+			],
+			[
+				"in",
+				"inscriptions"
+			],
+			[
+				"Tou",
+				"TournamentNotFound"
+			],
+			[
+				"Category",
+				"CategoryNotFound"
+			],
+			[
+				"findBy",
+				"findByCategory"
+			],
+			[
+				"findOne",
+				"findOneByName"
+			],
+			[
+				"getR",
+				"getRepository"
+			],
+			[
+				"Pair",
+				"PairNotFound"
+			],
+			[
+				"T",
+				"Tournament"
+			],
+			[
+				"Cat",
+				"CategoryNotFound"
+			],
+			[
+				"findB",
+				"findByPair"
+			],
+			[
+				"inscrip",
+				"inscription"
+			],
+			[
+				"em",
+				"em"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "web/ui/js/views/tournaments/tournaments.js",
+			"settings":
+			{
+				"buffer_size": 10604,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Applications/XAMPP/xamppfiles/etc/php.ini",
+			"settings":
+			{
+				"buffer_size": 69647,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/js/views/home/home.js",
+			"settings":
+			{
+				"buffer_size": 3120,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/nls/root/homeLiterals.js",
+			"settings":
+			{
+				"buffer_size": 1525,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/js/views/inscriptions/inscriptions.js",
+			"settings":
+			{
+				"buffer_size": 1091,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/PadelTFG/GeneralBundle/Service/InscriptionService.php",
+			"settings":
+			{
+				"buffer_size": 9059,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/PadelTFG/GeneralBundle/Service/ObservationService.php",
+			"settings":
+			{
+				"buffer_size": 2222,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "composer.json",
+			"settings":
+			{
+				"buffer_size": 2277,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/templates/tournament/observation.html",
+			"settings":
+			{
+				"buffer_size": 595,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/js/views/common/common.js",
+			"settings":
+			{
+				"buffer_size": 2526,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/styles/login/login.less",
+			"settings":
+			{
+				"buffer_size": 1304,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/js/app.js",
+			"settings":
+			{
+				"buffer_size": 3173,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/PadelTFG/GeneralBundle/Resources/config/routing_inscription.yml",
+			"settings":
+			{
+				"buffer_size": 1391,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/js/views/login/login.js",
+			"settings":
+			{
+				"buffer_size": 4251,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/ui/templates/tournament/inscription.html",
+			"settings":
+			{
+				"buffer_size": 1192,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix",
+				"name": "Xdebug Context",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix",
+				"name": "Xdebug Watch",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix",
+				"name": "Xdebug Stack",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "=> /Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ObservationService.php\n	|+| 51\n",
+			"settings":
+			{
+				"buffer_size": 116,
+				"line_ending": "Unix",
+				"name": "Xdebug Breakpoint",
+				"read_only": true,
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 87.0,
+		"last_filter": "Package Control: install",
+		"selected_items":
+		[
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/globals",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/Controller",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/src/js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/basicInfo",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/common",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/inscriptions",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/login",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/pairs",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/tournaments",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/listTree",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/basicInfo",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournament"
+	],
+	"file_history":
+	[
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/README.md",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/UPGRADE-2.2.md",
+		"/Users/Alberto/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Applications/XAMPP/xamppfiles/htdocs/logs/xdebug/xdebug.log",
+		"/Applications/XAMPP/xamppfiles/etc/php.ini",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/Observation.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root/homeLiterals.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/InscriptionService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/app.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_user.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/UserController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/basicInfo/basicInfo.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/basicInfo/basicInfo.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/css/select2.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/css/select2.min.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login/login.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/js/select2.full.min.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/bower.json",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/Controller/InscriptionControllerAPITest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournament/observation.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournament/inscription.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ObservationService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/ObservationTest/ObservationTestInsert.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/bootstrap-3.3.5/js/bootstrap.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/bootstrap-3.3.5/css/bootstrap.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/bootstrap-3.3.5/css/bootstrap.min.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap-modal/css/bootstrap-modal.css",
+		"/Users/Alberto/Library/Application Support/Sublime Text 3/Packages/GoSublime/CHANGELOG.md",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/common.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/login/login.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/login/registerUser.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root/loginLiterals.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/config.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/login/login.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home/home.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/common/common.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/tournaments/tournaments.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/UserPreferenceController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserPreferenceService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/basicInfo/basicInfoProfile.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/AppKernel.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/genericModal.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/matchs/matchs.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/pairs/pairs.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/default.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/bootstrap.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/annotations/annotations.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/jquery-modal/jquery.modal.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/dataTable.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/tournament/tournament.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/home/home.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/globals/Utils.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/listTree/listTree.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InitiateBDInsert.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserPreference.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_userPreference.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_general.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserPreferences.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/nav.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/jquery-modal/jquery.modal.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/listTree.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/waypoints/lib/jquery.waypoints.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/section.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/waypoints/jquery.smooth-scroll.min.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/waypoints/waypoints.min.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/TournamentStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/SponsorStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/RecordalStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/NotificationStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/InscriptionStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/GameStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/AnnotationStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/UserStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/UserRoles.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/annotation/annotation.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/pair/pair.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/match/match.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/annotations/annotations.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/annotation/annotation.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home/basicInfo.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/DataTables/media/css/jquery.dataTables.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/DataTables/media/js/jquery.dataTables.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/datatables.net/Readme.md",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/basicInfo.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/notesListTree.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/pageContent.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root/commonLiterals.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/alertSuccess.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/alertError.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/User.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserUserRole.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserRole.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/login.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/alert.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/User-UserRole.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/User_UserRole.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/UserRoleController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_userRole.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/InitiateBDInsert.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserRoleService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Users/Users.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/RemoveBD/InitiateBDRemove.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/routing.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/WebController.php",
+		"/Users/Alberto/Downloads/descarga (1)",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/loginLiterals.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/routing_dev.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/homeLiterals.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login/login.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/login.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/variables.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/styles.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/buttons.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/modified/assets/css/styles.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/modified/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/nuget/styles.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/template-simple-login-form-with-logo/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/build/build.sh",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/dist/build/build.sh",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/.bowerrc",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/templates/home.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/build/ui.build.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/jquery/src/jquery.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"xdebug",
+			"[",
+			"xdebug",
+			"xDebug",
+			"x",
+			"alert",
+			"HomeView",
+			"ajax",
+			"z-ind",
+			"checked",
+			"obser",
+			"alert",
+			"profil",
+			"loadProfileInfo",
+			"userPre",
+			"litera",
+			"dataRender",
+			"'",
+			"jquery",
+			"col-",
+			"col",
+			"blocker",
+			"current",
+			"ajax",
+			"z-in",
+			"this.modalID",
+			"notifica",
+			"urls",
+			"userPreference",
+			"public function ",
+			"$",
+			"width",
+			"toggled-",
+			"jquery",
+			"DataTable()",
+			"DataTable",
+			"addData",
+			"alert",
+			"home",
+			"./",
+			"getPairFr",
+			"getP",
+			"util",
+			"Util",
+			"util",
+			"Util",
+			"util",
+			"Util",
+			"util",
+			"Tournament",
+			"Ann",
+			"creati",
+			" 'creationDate' => new \\DateTime(),",
+			"Object(PadelTFG\\GeneralBundle\\Entity\\",
+			"url",
+			"anno",
+			"Notification",
+			"notification",
+			"Notification",
+			"//",
+			"EmptyConte",
+			"Annotation",
+			"annotation",
+			"Annotation",
+			"annotation",
+			"        $",
+			"group",
+			"memory",
+			"+\"",
+			"Category",
+			"category",
+			"pair",
+			"Recordal",
+			"recordal",
+			"recor",
+			"tournamentIncorrect",
+			"0",
+			"TournamentEmpty",
+			"recordal",
+			"findOneByName",
+			"tournament",
+			"Recordal",
+			"recordal",
+			"user",
+			"Recordal",
+			"recordal",
+			"Recordal",
+			"recordal",
+			"sponsor",
+			"textEm",
+			"nameE",
+			"findOneByName",
+			"date_for",
+			"format",
+			"formatç",
+			"date_for",
+			"format",
+			"DateTime",
+			"DateTime()",
+			"date_for",
+			"DateTime",
+			"text",
+			"{\n",
+			"Literals::",
+			"user",
+			"setAdmin",
+			"tour",
+			"tournam",
+			"tourn",
+			"tournament",
+			"user",
+			"$this->em",
+			"getStat",
+			"new Response",
+			"Response",
+			"getSta",
+			"status",
+			"getStatus",
+			");\n",
+			"user",
+			"$this->setReponse",
+			"Exceptio",
+			"pattern",
+			"getStatus",
+			" setContent",
+			"user",
+			"Annotation",
+			"()"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"\"",
+			"entityPreference",
+			"$entityPreference->",
+			"vendor/jquery/src/",
+			"statusService",
+			"StatusService",
+			"statusService",
+			"StatusService",
+			"statusService",
+			"StatusService",
+			"statusService",
+			"",
+			"Recordal",
+			"recordal",
+			"Recordal",
+			"Notification",
+			"notification",
+			"Notification",
+			"notification",
+			"Inscription",
+			"inscription",
+			"Annotation",
+			"annotation",
+			"Annotation",
+			"Notification",
+			"notification",
+			"recordal",
+			"sponsor",
+			"tournament",
+			"Notification",
+			"notification",
+			"Notification",
+			"notification",
+			"Notification",
+			"notification",
+			"$this->getDoctrine()->getManager()",
+			"$this->util->setResponse",
+			"path",
+			"setContent",
+			"User",
+			"Tournament",
+			"Sponsor",
+			"Recordal",
+			"Notification",
+			"Game",
+			"($)",
+			"set",
+			"4"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 7,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "web/ui/js/views/tournaments/tournaments.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10604,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								459,
+								459
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 7.0,
+						"translation.y": 3.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Applications/XAMPP/xamppfiles/etc/php.ini",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 69647,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								35006,
+								35006
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 14962.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "web/ui/js/views/home/home.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3120,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								243,
+								243
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "web/ui/nls/root/homeLiterals.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1525,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								253,
+								253
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "web/ui/js/views/inscriptions/inscriptions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1091,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								562,
+								583
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/PadelTFG/GeneralBundle/Service/InscriptionService.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9059,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6404,
+								6404
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2972.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/PadelTFG/GeneralBundle/Service/ObservationService.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2222,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1616,
+								1616
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 618.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "composer.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2277,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 465.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "web/ui/templates/tournament/observation.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 595,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								472,
+								472
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "web/ui/js/views/common/common.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2526,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1975,
+								1975
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 69.0,
+						"translation.y": 309.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "web/ui/styles/login/login.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1304,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1073,
+								1073
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 531.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "web/ui/js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3173,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2460,
+								2460
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1006.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "src/PadelTFG/GeneralBundle/Resources/config/routing_inscription.yml",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "web/ui/js/views/login/login.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2528,
+								2528
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1109.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "web/ui/templates/tournament/inscription.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1192,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								659,
+								659
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 15,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 17,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 116,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								116,
+								116
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				2,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.7,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.9o:///Users/Alberto/Documents/universidad/4ºcurso/SDS/PRACTICAS/go/src/PassGestorAux":
+	{
+		"height": 100.0
+	},
+	"output.GoSublime-main-output":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.xdebug":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "padelTFG.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pairco",
+				"src/PadelTFG/GeneralBundle/Controller/PairController.php"
+			],
+			[
+				"annotationstat",
+				"src/PadelTFG/GeneralBundle/Entity/AnnotationStatus.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false,
+			"restore_index":
+			{
+				"103":
+				{
+					"group": 0,
+					"index": 9
+				},
+				"105":
+				{
+					"group": 0,
+					"index": 7
+				},
+				"107":
+				{
+					"group": 0,
+					"index": 5
+				},
+				"110":
+				{
+					"group": 0,
+					"index": 6
+				},
+				"111":
+				{
+					"group": 0,
+					"index": 2
+				},
+				"114":
+				{
+					"group": 0,
+					"index": 4
+				},
+				"115":
+				{
+					"group": 0,
+					"index": 3
+				},
+				"116":
+				{
+					"group": 0,
+					"index": 11
+				},
+				"118":
+				{
+					"group": 0,
+					"index": 1
+				},
+				"33":
+				{
+					"group": 0,
+					"index": 0
+				},
+				"54":
+				{
+					"group": 0,
+					"index": 13
+				},
+				"93":
+				{
+					"group": 0,
+					"index": 12
+				},
+				"96":
+				{
+					"group": 0,
+					"index": 10
+				},
+				"98":
+				{
+					"group": 0,
+					"index": 8
+				}
+			},
+			"restore_layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			}
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 328.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

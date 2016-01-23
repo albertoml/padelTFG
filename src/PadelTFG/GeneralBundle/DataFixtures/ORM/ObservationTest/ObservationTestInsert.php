@@ -96,16 +96,17 @@ class ObservationTestInsert implements FixtureInterface
 		$inscription2 = $repository->findOneByPair($pair2);
 
 		$Observations = array(
-			array('startDate' => new \DateTime(), 'endDate' => new \DateTime(), 'available' => true,
+			array('date' => new \DateTime(), 'fromHour' => 10, 'toHour' => 14, 'available' => true,
 				'inscription' => $inscription1),
-			array('startDate' => new \DateTime(), 'endDate' => new \DateTime(), 'available' => false,
+			array('date' => new \DateTime(), 'fromHour' => 16, 'toHour' => 18, 'available' => false,
 				'inscription' => $inscription2)
 			);
 
 		foreach ($Observations as $key) {
 			$entity = new Observation();
-			$entity->setStartDate($key['startDate']);
-			$entity->setEndDate($key['endDate']);
+			$entity->setDate($key['date']);
+			$entity->setFromHour($key['fromHour']);
+			$entity->setToHour($key['toHour']);
 			$entity->setAvailable($key['available']);
 			$entity->setInscription($key['inscription']);
 			$manager->persist($entity);	

@@ -77,4 +77,19 @@ class PairController extends FOSRestController{
             return $this->util->setJsonResponse(200, $dataToSend);
         }
     }
+
+    public function postPairAction(){
+        $this->pairService->setManager($this->getDoctrine()->getManager());
+
+        $params = array();
+        $content = $this->get("request")->getContent();
+        $params = json_decode($content, true);
+        $pair = $this->pairService->savePair($params, $this);
+        if($pair['result'] == 'fail'){
+            $dataToSend = json_encode(array('error' => $pair['message']));
+            return $this->util->setResponse(400, $dataToSend);
+        }
+        $dataToSend = json_encode(array('pair' => $pair['message']));
+        return $this->util->setJsonResponse(201, $dataToSend);
+    }
 }

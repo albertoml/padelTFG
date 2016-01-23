@@ -49,6 +49,11 @@ class Inscription implements JsonSerializable
 	/** @ORM\Column(type="integer", nullable=true) */
 	protected $rankingMark;
 
+	/** @ORM\Column(type="boolean", nullable=true) */
+	protected $hasObservations;
+
+
+
 
     public function getId(){
 		return $this->id;
@@ -77,6 +82,9 @@ class Inscription implements JsonSerializable
 	public function getRankingMark(){
 		return $this->rankingMark;
 	}
+	public function getHasObservations(){
+		return $this->hasObservations;
+	}
 
 	public function setPair(Pair $pair){
 		$this->pair = $pair;
@@ -102,6 +110,9 @@ class Inscription implements JsonSerializable
 	public function setRankingMark($rankingMark){
 		$this->rankingMark = $rankingMark;
 	}
+	public function setHasObservations($hasObservations){
+		$this->hasObservations = $hasObservations;
+	}
 
     public function jsonSerialize()
     {
@@ -114,7 +125,8 @@ class Inscription implements JsonSerializable
             'seeded' => $this->seeded,
             'status' => $this->status,
             'classifiedPosition' => $this->classifiedPosition,
-            'rankingMark' => $this->rankingMark
+            'rankingMark' => $this->rankingMark,
+            'hasObservations' => $this->hasObservations
         );
     }
 }

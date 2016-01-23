@@ -1,30 +1,25 @@
 define([
     'backbone', 
     'underscore',
-    'models/home/home',
+    'models/user/user',
+    'i18n!nls/homeLiterals.js',
     'views/basicInfo/basicInfo',
     'views/annotations/annotations',
     'views/tournaments/tournaments',
+    'views/inscriptions/inscriptions',
     'views/matchs/matchs',
     'views/pairs/pairs',
     'text!templates/home/section.html',
     'text!templates/home/listTree.html',
     'text!templates/home/pageContent.html'], 
-    function(Backbone, _, HomeModel, BasicInfoView, AnnotationsView, TournamentsView, MatchsView, PairsView, SectionTemplate, ListTreeTemplate, PageContentTemplate) {
+    function(Backbone, _, UserModel, Literals, BasicInfoView, AnnotationsView, TournamentsView, InscriptionsView, MatchsView, PairsView, SectionTemplate, ListTreeTemplate, PageContentTemplate) {
 
     var HomeView = Backbone.View.extend({
         el: '.wrapperHome',
         events: {
-            
         },
         initialize: function(params){
-            this.sections = [
-            {'key':'basicInfo', 'text':'Basic Information'},
-            {'key':'annotations', 'text':'Annotations'},
-            {'key':'tournaments', 'text':'Tournaments'},
-            {'key':'matchs', 'text':'Matchs'},
-            {'key':'pairs', 'text':'My pairs Info'},
-            ];
+            this.sections = Literals.sections;
             this.model = {};
             this.params = params;
         },
@@ -66,24 +61,26 @@ define([
         getModel: function(){
             var _self = this;
             var idUser = localStorage.getItem('idUser');
-            var homeModel = new HomeModel({id: idUser});
-            homeModel.fetch({
+            var userModel = new UserModel({id: idUser});
+            userModel.fetch({
                 success: function(model){
-                    _self.model = model;
+                    _self.userModel = model;
                     _self.renderSections();
                 }
             });
         },
         renderSections: function(){
-            var basicInfo = new BasicInfoView(this.model, this.params);
+            var basicInfo = new BasicInfoView(this.userModel, this.params);
             basicInfo.render();
             var annotations = new AnnotationsView();
             annotations.render();
-            var tournaments = new TournamentsView();
+            var tournaments = new TournamentsView(this.userModel, this.params);
             tournaments.render();
+            var inscriptions = new InscriptionsView(this.userModel, this.params);
+            inscriptions.render();
             var matchs = new MatchsView();
             matchs.render();
-            var pairs = new PairsView();
+            var pairs = new PairsView(this.userModel, this.params);
             pairs.render();
             this.renderJSForListTree();
         }

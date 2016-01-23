@@ -17,7 +17,7 @@ define([
                 tableId : 'matchsTable'
             });
             _self.$el.html(template);
-            $('#matchsTable').dataTable();
+            //$('#matchsTable').dataTable();
         }    
     });
     return MatchsView;

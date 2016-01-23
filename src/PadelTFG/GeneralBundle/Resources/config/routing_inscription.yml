@@ -32,6 +32,13 @@ inscription_by_pair:
         _method: GET
         id: "\d+"
 
+inscription_by_user:
+    path:  /inscription/user/{idUser}
+    defaults: { _controller: GeneralBundle:Inscription:getInscriptionByUser, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
 inscription_by_group:
     path:  /inscription/group/{idGroup}
     defaults: { _controller: GeneralBundle:Inscription:getInscriptionByGroup, _format: ~ }
@@ -44,3 +51,10 @@ inscription_post:
     defaults: { _controller: GeneralBundle:Inscription:postInscription, _format: ~ }
     requirements:
         _method: POST
+
+inscription_delete:
+    path:  /inscription/{id}
+    defaults: { _controller: GeneralBundle:Inscription:deleteInscription, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"

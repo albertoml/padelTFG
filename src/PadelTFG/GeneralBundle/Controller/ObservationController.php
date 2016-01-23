@@ -58,4 +58,18 @@ class ObservationController extends FOSRestController
             return $this->util->setJsonResponse(200, $dataToSend);
         }
     }
+
+    public function deleteObservationAction($id){
+
+        $this->observationService->setManager($this->getDoctrine()->getManager());
+        $observation = $this->observationService->getObservation($id);
+
+        if ($observation instanceof Observation) {
+            $observation = $this->observationService->deleteObservation($observation);
+
+            return $this->util->setResponse(200, Literals::ObservationDeleted);
+        } else {
+            return $this->util->setResponse(404, Literals::ObservationNotFound);
+        }
+    }
 }

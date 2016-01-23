@@ -11,6 +11,8 @@ class Utils
         $response->setStatusCode($status);
         $response->headers->set('Content-Type', 'application/text');
         $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
         $response->setContent($content);
         return $response;
     }
@@ -19,6 +21,8 @@ class Utils
         $response = new Response($content);
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
         $response->setStatusCode($status);
         return $response;
     }

@@ -50,8 +50,8 @@ class UserPreferenceController extends FOSRestController{
             $params = array();
             $content = $this->get("request")->getContent();
             $params = json_decode($content, true);
-            $userPreference = $this->userPrefenceService->modifyUserPreference($user, $params);
-            $dataToSend = json_encode(array('userPreferences' => $user['message']));
+            $userPreference = $this->userPrefenceService->modifyUserPreference($userPreference, $params);
+            $dataToSend = json_encode(array('userPreferences' => $userPreference['message']));
             return $this->util->setJsonResponse(200, $dataToSend);
             
         } else {

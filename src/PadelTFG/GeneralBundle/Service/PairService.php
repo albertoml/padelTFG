@@ -5,6 +5,7 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\Pair;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
+use PadelTFG\GeneralBundle\Service\UserService as UserService;
 
 class PairService{
 
@@ -56,5 +57,34 @@ class PairService{
         ));
         $pairs2 = $query->getResult();
         return array_merge($pairs, $pairs2);
+    }
+
+    public function savePair($params, $controller){
+
+        if(empty($this->getPairByUsers($params['user1'], $params['user2']))){
+
+            $userService = new UserService();
+            $userService->setManager($this->em);
+            $user1 = $userService->getUser($params['user1']);
+            $user2 = $userService->getUser($params['user2']);
+
+
+            $pair = new Pair();
+            $pair->setUser1($user1);
+            $pair->setUser2($user2);
+            $validator = $controller->get('validator');
+            $errors = $validator->validate($pair);
+
+            if (count($errors) > 0) {
+                $errorsString = (string) $errors;
+                return array('result' => 'fail', 'message' => $errorsString);
+            }
+            $this->em->persist($pair);
+            $this->em->flush();
+            return array('result' => 'ok', 'message' => $pair);
+        }
+        else{
+            return array('result' => 'fail', 'message' => Literals::PairDuplicate);
+        }
     }
 }

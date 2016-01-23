@@ -38,14 +38,16 @@ class ObservationService{
     }
 
     private function setObservationSave($observation, $params, $inscription){
-        $observation->setStartDate(new \DateTime($params['startDate']));
-        $observation->setEndDate(new \DateTime($params['endDate']));
+        $observation->setDate(new \DateTime($params['date']));
+        $observation->setFromHour($params['fromHour']);
+        $observation->setToHour($params['toHour']);
         $observation->setAvailable($params['available'] == 'si' ? true : false);
         $observation->setInscription($inscription);
         return $observation;
     }
 
     public function saveObservation($params, $inscription, $controller){
+        
         $observation = new Observation();
         $observation = $this->setObservationSave($observation, $params, $inscription);
         $validator = $controller->get('validator');
@@ -55,8 +57,13 @@ class ObservationService{
             $errorsString = (string) $errors;
             return array('result' => 'fail', 'message' => $errorsString);
         }
-        $this->em->persist($observation);
+        $this->em->persist($observation);   
         $this->em->flush();
-        return array('result' => 'ok', 'message' => $observation);
+        return array('result' => 'ok', 'message' => 'Ok');
+    }
+
+    public function deleteObservation($observation){
+        $this->em->remove($observation);
+        $this->em->flush();
     }
 }

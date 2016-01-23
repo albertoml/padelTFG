@@ -3,9 +3,11 @@
 namespace PadelTFG\GeneralBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Request;
 
 use PadelTFG\GeneralBundle\Resources\globals\Utils as Util;
 use PadelTFG\GeneralBundle\Service\UserService as UserService;
+use PadelTFG\GeneralBundle\Service\PairService as PairService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
 use PadelTFG\GeneralBundle\Entity\User;
@@ -71,7 +73,7 @@ class UserController extends FOSRestController{
                 $dataToSend = json_encode(array('error' => $user['message']));
                 return $this->util->setResponse(400, $dataToSend);
             }
-            $dataToSend = json_encode(array('user' => $user['message']));
+            $dataToSend = json_encode($user['message']);
             return $this->util->setJsonResponse(200, $dataToSend);
             
         } else {
@@ -103,5 +105,16 @@ class UserController extends FOSRestController{
         else{
             return $this->util->setResponse(400, $user['message']);
         }
+    }
+
+    public function searchUserByNameAction(){
+
+        $request = Request::createFromGlobals();
+        $name = $request->query->get('term');
+        $this->userService->setManager($this->getDoctrine()->getManager());
+        $users = $this->userService->searchUser($name);
+
+        $dataToSend = json_encode(array('user' => $users));
+        return $this->util->setJsonResponse(200, $dataToSend);
     }
 }

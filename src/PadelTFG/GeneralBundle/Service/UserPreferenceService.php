@@ -63,23 +63,23 @@ class UserPreferenceService{
     }
 
     private function setUserPreferenceModify($userPreference, $params){
-        $userPreference->setName($params['name']);
-        $userPreference->setLastName($params['lastName']);
-        $userPreference->setEmail($params['email']);
-        $userPreference->setStatus($params['status']);
-        $userPreference->setRole($params['role']);
-        $userPreference->setFirstPhone($params['firstPhone']);
-        $userPreference->setSecondPhone($params['secondPhone']);
-        $userPreference->setAddress($params['address']);
-        $userPreference->setCity($params['city']);
-        $userPreference->setCountry($params['country']);
-        $userPreference->setCP($params['cp']);
-        $userPreference->setBirthDate($params['birthDate']);
-        $userPreference->setProfileImage($params['profileImage']);
-        $userPreference->setGameLevel($params['gameLevel']);
-        $userPreference->setAlias($params['alias']);
-        $userPreference->setNotification($params['notification']);
-        $userPreference->setRegistrationDate($params['registrationDate']);
+        $userPreference->setName(isset($params['name']) ? $params['name'] : false );
+        $userPreference->setLastName(isset($params['lastName']) ? $params['lastName'] : false );
+        $userPreference->setEmail(isset($params['email']) ? $params['email'] : false );
+        $userPreference->setStatus(isset($params['status']) ? $params['status'] : false );
+        $userPreference->setRole(isset($params['role']) ? $params['role'] : false );
+        $userPreference->setFirstPhone(isset($params['firstPhone']) ? $params['firstPhone'] : false );
+        $userPreference->setSecondPhone(isset($params['secondPhone']) ? $params['secondPhone'] : false );
+        $userPreference->setAddress(isset($params['address']) ? $params['address'] : false );
+        $userPreference->setCity(isset($params['city']) ? $params['city'] : false );
+        $userPreference->setCountry(isset($params['country']) ? $params['country'] : false );
+        $userPreference->setCP(isset($params['cp']) ? $params['cp'] : false );
+        $userPreference->setBirthDate(isset($params['birthDate']) ? $params['birthDate'] : false );
+        $userPreference->setProfileImage(isset($params['profileImage']) ? $params['profileImage'] : false );
+        $userPreference->setGameLevel(isset($params['gameLevel']) ? $params['gameLevel'] : false );
+        $userPreference->setAlias(isset($params['alias']) ? $params['alias'] : false );
+        $userPreference->setNotification(isset($params['notification']) ? $params['notification'] : false );
+        $userPreference->setRegistrationDate(isset($params['registrationDate']) ? $params['registrationDate'] : false );
 
         return $userPreference;
     }

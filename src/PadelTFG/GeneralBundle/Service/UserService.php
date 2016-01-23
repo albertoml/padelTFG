@@ -5,7 +5,7 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
-use PadelTFG\GeneralBundle\Service\UserPrerenceService as UserPrerenceService;
+use PadelTFG\GeneralBundle\Service\UserPreferenceService as UserPreferenceService;
  
 class UserService{
 
@@ -18,6 +18,7 @@ class UserService{
 
     public function setManager($em){ 
         $this->em = $em;
+        $this->statusService->setManager($em);
     } 
 
 	public function allUsers(){
@@ -43,7 +44,7 @@ class UserService{
         $user->setLastName($params['lastName']);
         $user->setEmail($params['email']);
         $user->setPassword($params['password']);
-        $user->setStatus($this->statusService->getStatus($this->em, 'user', 'registered'));
+        $user->setStatus($this->statusService->getStatus('user', 'Registered'));
         $user->setFirstPhone(isset($params['firstPhone']) ? $params['firstPhone'] : '');
         $user->setSecondPhone(isset($params['secondPhone']) ? $params['secondPhone'] : '');
         $user->setAddress(isset($params['address']) ? $params['address'] : '');
@@ -68,11 +69,11 @@ class UserService{
             $errorsString = (string) $errors;
             return array('result' => 'fail', 'message' => $errorsString);
         }
-        $userPreference = new UserPrerenceService();
+        $userPreference = new UserPreferenceService();
+        $userPreference->setManager($this->em);
         $this->em->persist($user);
-        $userPreference->saveUserPreference($user->getId());
-        $this->em->persist($userPreference);
         $this->em->flush();
+        $userPreference->saveUserPreference($user->getId());
         return array('result' => 'ok', 'message' => $user);
     }
 
@@ -81,7 +82,6 @@ class UserService{
         $user->setLastName(isset($params['lastName']) ? $params['lastName'] : $user->getLastName());
         $user->setEmail(isset($params['email']) ? $params['email'] : $user->getEmail());
         $user->setPassword(isset($params['password']) ? $params['password'] : $user->getPassword());
-        $user->setStatus(isset($params['status']) ? $params['status'] : $user->getStatus());
         $user->setFirstPhone(isset($params['firstPhone']) ? $params['firstPhone'] : $user->getFirstPhone());
         $user->setSecondPhone(isset($params['secondPhone']) ? $params['secondPhone'] : $user->getSecondPhone());
         $user->setAddress(isset($params['address']) ? $params['address'] : $user->getAddress());
@@ -140,5 +140,15 @@ class UserService{
         else{
             return array('result' => 'fail', 'message' => Literals::UserIncorrect);
         }
+    }
+
+    public function searchUser($name){
+
+        $result = $this->em->getRepository("GeneralBundle:User")->createQueryBuilder('u')
+       ->where('u.name LIKE :name')
+       ->setParameter('name', '%'.$name.'%')
+       ->getQuery()
+       ->getResult();
+        return $result;
     }
 }

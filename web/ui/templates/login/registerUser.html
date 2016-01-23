@@ -1,0 +1,18 @@
+<section class="container">
+    <section class="login-form">
+        <div class="login-container">
+            <img src="../images/login/logo.png" class="img-responsive" alt="" />
+            <input type="text" name="name" placeholder="<%= data.nameLogin %>" required class="form-control input-lg" />
+            <input type="text" name="lastName" placeholder="<%= data.lastNameLogin %>" required class="form-control input-lg" />
+            <input type="email" name="email" placeholder="<%= data.userLogin %>" required class="form-control input-lg" />
+            <input type="password" name="password" placeholder="<%= data.passLogin %>" required class="form-control input-lg" />
+            <button type="submit" name="sendRegister" class="btn btn-lg btn-primary btn-block"><%= data.submitRegister %></button>
+            <div>
+                <a href="#"><%= data.backToLogin %></a>
+            </div>
+        </div>
+        <div class="form-links">
+            <a href="<%= data.webSite %>"><%= data.webSite %></a>
+        </div>
+    </section>
+</section>

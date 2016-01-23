@@ -23,10 +23,13 @@ class Observation implements JsonSerializable
 	protected $inscription;
 
 	/** @ORM\Column(type="datetime") */
-	protected $startDate;
+	protected $date;
 
-	/** @ORM\Column(type="datetime") */
-	protected $endDate;
+	/** @ORM\Column(type="integer") */
+	protected $fromHour;
+
+	/** @ORM\Column(type="integer") */
+	protected $toHour;
 
 	/** @ORM\Column(type="boolean") 
 		@Assert\NotBlank() */
@@ -36,11 +39,14 @@ class Observation implements JsonSerializable
 	public function getId(){
 		return $this->id;
 	}
-	public function getStartDate(){
-		return $this->startDate;
+	public function getDate(){
+		return $this->date;
 	}
-	public function getEndDate(){
-		return $this->endDate;
+	public function getFromHour(){
+		return $this->fromHour;
+	}
+	public function getToHour(){
+		return $this->toHour;
 	}
 	public function getAvailable(){
 		return $this->available;
@@ -49,11 +55,14 @@ class Observation implements JsonSerializable
 		return $this->inscription;
 	}
 
-	public function setStartDate($startDate){
-		$this->startDate = $startDate;
+	public function setDate($date){
+		$this->date = $date;
 	}
-	public function setEndDate($endDate){
-		$this->endDate = $endDate;
+	public function setFromHour($fromHour){
+		$this->fromHour = $fromHour;
+	}
+	public function setToHour($toHour){
+		$this->toHour = $toHour;
 	}
 	public function setAvailable($available){
 		$this->available = $available;
@@ -66,8 +75,9 @@ class Observation implements JsonSerializable
     {
         return array(
         	'id' => $this->id,
-            'startDate' => $this->startDate,
-            'endDate' => $this->endDate,
+            'date' => $this->date,
+            'fromHour' => $this->fromHour,
+            'toHour' => $this->toHour,
             'available' => $this->available,
             'inscription' => $this->inscription
         );

@@ -36,3 +36,9 @@ user_login:
     defaults: { _controller: GeneralBundle:User:loginUser, _format: ~ }
     requirements:
         _method: GET
+
+user_search:
+    path:  /user/search
+    defaults: { _controller: GeneralBundle:User:searchUserByName, _format: ~ }
+    requirements:
+        _method: GET

@@ -9,6 +9,7 @@ use PadelTFG\GeneralBundle\Service\InscriptionService as InscriptionService;
 use PadelTFG\GeneralBundle\Service\TournamentService as TournamentService;
 use PadelTFG\GeneralBundle\Service\CategoryService as CategoryService;
 use PadelTFG\GeneralBundle\Service\PairService as PairService;
+use PadelTFG\GeneralBundle\Service\UserService as UserService;
 use PadelTFG\GeneralBundle\Service\GroupService as GroupService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
@@ -16,6 +17,7 @@ use PadelTFG\GeneralBundle\Entity\Inscription;
 use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\Category;
 use PadelTFG\GeneralBundle\Entity\Pair;
+use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Entity\GroupCategory;
 
 class InscriptionController extends FOSRestController
@@ -101,6 +103,24 @@ class InscriptionController extends FOSRestController
         }
     }
 
+    public function getInscriptionByUserAction($idUser){
+
+        $this->inscriptionService->setManager($this->getDoctrine()->getManager());
+        $inscriptions = $this->inscriptionService->getInscriptionsByUser($idUser);
+
+        $userService = new UserService();
+        $userService->setManager($this->getDoctrine()->getManager());
+        $user = $userService->getUser($idUser);
+
+        if(!$user instanceof User){
+            return $this->util->setResponse(400, Literals::UserNotFound);
+        }
+        else{
+            $dataToSend = json_encode(array('inscription' => $inscriptions));
+            return $this->util->setJsonResponse(200, $dataToSend);
+        }
+    }
+
     public function getInscriptionByGroupAction($idGroup){
 
         $this->inscriptionService->setManager($this->getDoctrine()->getManager());
@@ -133,5 +153,19 @@ class InscriptionController extends FOSRestController
         }
         $dataToSend = json_encode(array('inscription' => $inscription['message']));
         return $this->util->setJsonResponse(201, $dataToSend);
+    }
+
+    public function deleteInscriptionAction($id){
+
+        $this->inscriptionService->setManager($this->getDoctrine()->getManager());
+        $inscription = $this->inscriptionService->getInscription($id);
+
+        if ($inscription instanceof Inscription) {
+            $inscription = $this->inscriptionService->deleteInscription($inscription);
+
+            return $this->util->setResponse(200, Literals::InscriptionDeleted);
+        } else {
+            return $this->util->setResponse(404, Literals::InscriptionNotFound);
+        }
     }
 }

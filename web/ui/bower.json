@@ -16,8 +16,9 @@
     "bootstrap": null,
     "fontawesome": null,
     "DataTables": null,
-    "waypoints": null,
-    "jquery-modal": null
+    "bootstrap-modal": null,
+    "datatables-tabletools": null,
+    "select2": null
   },
   "ignore": [
     "**/.*",

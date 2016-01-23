@@ -1,8 +1,66 @@
 define({
+	"sections":[
+            {'key':'basicInfo', 'text':'Basic Information'},
+            {'key':'annotations', 'text':'Annotations'},
+            {'key':'tournaments', 'text':'Tournaments'},
+            {'key':'inscriptions', 'text':'Inscriptions'},
+            {'key':'matchs', 'text':'Matchs'},
+            {'key':'pairs', 'text':'My pairs Info'},
+    ],
+	"fields":{
+		"email":"Email",
+		"name":"Name",
+		"lastName":"LastName",
+		"registrationDate":"Registration Date",
+		"status":"Status",
+		"address":"Address",
+		"city":"City",
+		"country":"Country",
+		"cp":"Postal Code",
+		"firstPhone":"First Phone",
+		"gameLevel":"Game Level",
+		"secondPhone":"Second Phone"
+	},
 	"buttonBasicInfo":"Edit Profile",
 	"cancelButtonTitle":"Cancel",
 	"saveButtonTitle":"Save",
 	"loadingMessage":"Loading",
 	"modalTitleProfile":"Edit Profile",
-	"confirmSaveProfile":"Are you sure save changes?"
+	"modalTitleInscription":"Do Inscription To",
+	"confirmSaveProfile":"Are you sure save changes?",
+	"tournamentsFields":{
+		"name":"Name",
+		"admin":"Admin",
+		"startInscriptionDate":"Start Inscription Date",
+		"startGroupDate":"Start Tournament",
+		"status":"Status",
+		"options":"Options"
+	},
+	"inscriptionsFields":{
+		"pair":"Pair",
+		"category":"Category",
+		"group":"Group",
+		"status":"Status",
+		"options":"Options"
+	},
+	"pairsFields":{
+		"pair":"Pair"
+	},
+	"doInscription":"Sign Up",
+	"viewObservation":"View Observations",
+	"deleteInscription": "Delete Observation",
+	"AreSureDeleteInscription": "Are you sure to delete Inscription?",
+	"pair":"Pair",
+	"category":"Category",
+	"placeholderPair":"Insert your pair name",
+	"placeholderCategory":"-- Select your category --",
+	"observations":"Observations",
+	"addObservation":"Add Observation",
+	"date":"date",
+	"fromHour":"From Hour",
+	"toHour":"To Hour",
+	"available":"Available",
+	"successMessageTextInscription":"Your inscription send succesfully",
+	"successMessageDeleteInscription":"Your inscription has deleted succesfully",
+	"errorMessageDeleteInscription":"Your inscription has not been deleted"
 });

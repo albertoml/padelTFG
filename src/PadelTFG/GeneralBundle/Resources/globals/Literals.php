@@ -63,6 +63,7 @@ abstract class Literals
 
 	//InscriptionController
 	const InscriptionNotFound = "Inscription not found";
+	const InscriptionDeleted = "Inscription deleted";
 	const PairEmpty = "pair empty;";
 	const CategoryEmpty = "category empty;";
 	const CategoryIncorrect = "Error in select category";
@@ -77,6 +78,7 @@ abstract class Literals
 
 	//ObservationController
 	const ObservationNotFound = "Observation not found";
+	const ObservationDeleted = "Observation deleted";
 
 	//GroupController
 	const GroupNotFound = "Group not found";
