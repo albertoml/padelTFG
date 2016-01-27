@@ -31,10 +31,6 @@ class Observation implements JsonSerializable
 	/** @ORM\Column(type="integer") */
 	protected $toHour;
 
-	/** @ORM\Column(type="boolean") 
-		@Assert\NotBlank() */
-	protected $available;
-
 
 	public function getId(){
 		return $this->id;
@@ -47,9 +43,6 @@ class Observation implements JsonSerializable
 	}
 	public function getToHour(){
 		return $this->toHour;
-	}
-	public function getAvailable(){
-		return $this->available;
 	}
 	public function getInscription(){
 		return $this->inscription;
@@ -64,9 +57,6 @@ class Observation implements JsonSerializable
 	public function setToHour($toHour){
 		$this->toHour = $toHour;
 	}
-	public function setAvailable($available){
-		$this->available = $available;
-	}
 	public function setInscription(Inscription $inscription){
 		$this->inscription = $inscription;
 	}
@@ -78,7 +68,6 @@ class Observation implements JsonSerializable
             'date' => $this->date,
             'fromHour' => $this->fromHour,
             'toHour' => $this->toHour,
-            'available' => $this->available,
             'inscription' => $this->inscription
         );
     }

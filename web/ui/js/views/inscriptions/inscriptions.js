@@ -2,14 +2,19 @@ define([
     'backbone', 
     'underscore',
     'text!templates/home/dataTable.html',
-    'i18n!nls/homeLiterals.js'], function(Backbone, _, DataTableTemplate, literals) {
+    'text!templates/tournament/observation.html',
+    'text!templates/common/genericModal.html',
+    'i18n!nls/homeLiterals.js'], function(Backbone, _, DataTableTemplate, ObservationTemplate, genericModalTemplate, literals) {
  
     var InscriptionsView = Backbone.View.extend({
         el: '.inscriptions',
         events: {
             'click button[id="viewObservations"]' : 'viewObservations',
             'refreshSection' : 'render',
-            'click button[id="deleteInscription"]' : 'deleteInscription'
+            'click button[id="deleteInscription"]' : 'deleteInscription',
+            'click button[id="insertObservation"]': 'addObservation',
+            'click button[id="deleteObservation"]': 'deleteObservation',
+            'click button[id="saveObservations"]': 'saveObservations'
         },
         initialize: function(model, params){
             var _self = this;
@@ -85,20 +90,92 @@ define([
                 }, {
                     'sTitle': literals.inscriptionsFields.options,
                     'mRender': function (data, type, full) {
-                        var disabled = "";
+                        var addClass = "";
                         if(!full.hasObservations){
-                            disabled = "disabled";
+                            addClass = "noObservations";
                         }
-                        var button = "<button " + disabled + " id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
-                        button += "<button title=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
+                        else{
+                            addClass = "hasObservations";
+                        }
+
+                        var button = "<button class=" + addClass + " id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
+                        button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
                         return button;
                     }
                 }],
                 aaData: _self.inscriptions
             });
         },
-        viewObservations: function(){
+        viewObservations: function(e){
+            var _self = this;
+            _self.inscriptionId = e.target.name;
+            if(e.target.className.indexOf("hasObservations") > -1){
+                var observations = _self.getObservations(e.target.name);
+            }
+            else{
+                var observations = null;
+            }
+            var modal = _self.renderModal(observations);
+            $(modal).modal();
+            $('#' + this.modalID + ' .modal-dialog').css({'width':'600px'});
+            this.setElement(_self.$el.add('#' + this.modalID));
+        },
+        getObservations: function(inscriptionId){
+            var _self = this;
+            var urlToSend = _self.params.getObservations.replace('{idInscription}', inscriptionId);
+            var observations = [];
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: urlToSend,
+                success: function (response) {
+                    observations = response.observation;
+                }
+            });
+            return observations;
+        },
+        renderModal: function(observations){
+            var _self = this;
+            this.modalID = 'myObservationsModal';
+            var myModal = $(this.modalID);
+            var buttons = '<button id="saveObservations" title="' + literals.saveButtonTitle + '" class="buttonObservations btn btn-default col-lg-6">' + literals.saveButtonTitle + '</button>' + 
+            '<button id="cancelObservations" title="' + literals.cancelButtonTitle + '" class="buttonInscription btn btn-default" data-dismiss="modal">' + literals.cancelButtonTitle + '</button>';
 
+            var modalContent = '<div class="col-lg-12" id="observations">';
+            _.each(observations, function(obs){
+                var template = _.template(ObservationTemplate, {
+                    dataLiterals : literals,
+                    content : obs
+                });
+                modalContent += template;
+            });
+            modalContent += '</div>';
+            modalContent += '<div style="margin-top:20px" class="buttons col-lg-12"><button id="insertObservation">' + literals.addObservation + '</button></div>';
+
+
+            var modal = _.template(genericModalTemplate, {
+                id: this.modalID,
+                title: literals.modalTitleObservation,
+                content: modalContent,
+                buttons: buttons,
+                onCloseAction: 'closeModal'
+            });
+            return modal;
+        },
+        addObservation: function(){
+            var _self = this;
+            var template = _.template(ObservationTemplate, {
+                dataLiterals : literals
+            });
+            $('#observations').append(template);
+        },
+        deleteObservation: function(e){
+            if(e.target.tagName == "I"){
+                e.target.parentElement.parentElement.parentElement.remove();
+            }
+            else{
+                e.target.parentElement.parentElement.remove();
+            }
         },
         deleteInscription: function(e){
             var _self = this;
@@ -123,6 +200,47 @@ define([
                     }
                 });
             }
+        },
+        saveObservations: function(e){
+            var _self = this;
+            var observations = [];
+            var observationsInvalid = false;
+            _.each($('.observation'), function(obs){
+                var date = obs.getElementsByClassName('date')[0].value;
+                var fromHour = obs.getElementsByClassName('fromHour')[0].value;
+                var toHour = obs.getElementsByClassName('toHour')[0].value;
+
+                if(date!="" && fromHour!="" && toHour!=""){
+                    var observation = {
+                        "date": date,
+                        "fromHour": fromHour,
+                        "toHour": toHour
+                    };
+                    observations.push(observation);
+                }
+                else{
+                    observationsInvalid=true;
+                }
+            });
+            if(observationsInvalid){
+                alert(literals.someObservationsAreInvalid);
+            }
+            var observationsToSend = {
+                "inscription" : _self.inscriptionId,
+                "observations" : observations
+            };
+            $.ajax({
+                type: 'POST',
+                url: _self.params.saveObservations,
+                data: JSON.stringify(observationsToSend),
+                success: function (response) {
+                    $('.common').trigger('showSuccesAlert', [literals.successMessageTextObservations]);
+                    $('#' + _self.modalID).modal('hide');
+                },
+                error: function(msg){
+                    $('.common').trigger('showErrorAlert', [msg.responseJSON.error]);
+                }
+            });
         }    
     });
     return InscriptionsView;

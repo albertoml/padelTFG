@@ -18,6 +18,12 @@ observation_by_inscription:
         _method: GET
         id: "\d+"
 
+observations_post:
+    path:  /observation/all
+    defaults: { _controller: GeneralBundle:Observation:postObservations, _format: ~ }
+    requirements:
+        _method: POST
+
 observation_delete:
     path:  /observation/{id}
     defaults: { _controller: GeneralBundle:Observation:deleteObservation, _format: ~ }

@@ -178,21 +178,6 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
         return $checked;
     }
 
-    private function saveObservations($observations, $inscription, $controller){
-        $observationService = new ObservationService();
-        $observationService->setManager($this->em);
-        $resumeToObservationsInsert = null;
-        $resumeToObservationsInsert['message'] = "";
-        foreach ($observations as $objObs) {
-            $result = $observationService->saveObservation($objObs, $inscription, $controller);
-            if($result['result'] == 'fail'){
-                $resumeToObservationsInsert['message'] .= $inscription->getId() . '|' . $result['message'] . ';';
-                $resumeToObservationsInsert['result'] = 'fail';
-            }
-        }
-        return $resumeToObservationsInsert;
-    }
-
     public function saveInscriptions($params, $controller){
 
         $category = $this->getCategoryFromParams($params);
@@ -216,7 +201,9 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
                         $this->em->flush();
                         $inscriptions += 1;
                         if(!empty($objIns['observations'])){
-                            $resumeToObservationsInsert = $this->saveObservations($objIns['observations'], $newInscription, $controller);
+                            $observationService = new ObservationService();
+                            $observationService->setManager($this->em);
+                            $resumeToObservationsInsert = $observationService->saveObservations($objIns['observations'], $newInscription, $controller);
                             if($resumeToObservationsInsert['result'] == 'fail'){
                                 $checked['message'] .= $resumeToObservationsInsert['message'];
                             }
@@ -243,8 +230,7 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
             else{
                 $checked['message'] .= $inscriptions . ' ' . Literals::Inscriptions;
                 return array('result' => 'ok', 'message' => $checked['message']);
-            }
-            
+            }     
         }
         else {
             return array('result' => 'fail', 'message' => $failCheckAttributes);

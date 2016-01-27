@@ -27,6 +27,7 @@ define({
 	"loadingMessage":"Loading",
 	"modalTitleProfile":"Edit Profile",
 	"modalTitleInscription":"Do Inscription To",
+	"modalTitleObservation": "Edit Observations",
 	"confirmSaveProfile":"Are you sure save changes?",
 	"tournamentsFields":{
 		"name":"Name",
@@ -56,11 +57,14 @@ define({
 	"placeholderCategory":"-- Select your category --",
 	"observations":"Observations",
 	"addObservation":"Add Observation",
-	"date":"date",
+	"date":"Date",
 	"fromHour":"From Hour",
 	"toHour":"To Hour",
 	"available":"Available",
+	"noObservations":"Don´t have observations in this inscription",
+	"someObservationsAreInvalid":"Some observations are invalid, there was not saved",
 	"successMessageTextInscription":"Your inscription send succesfully",
 	"successMessageDeleteInscription":"Your inscription has deleted succesfully",
+	"successMessageTextObservations":"Your observations saved succesfully",
 	"errorMessageDeleteInscription":"Your inscription has not been deleted"
 });

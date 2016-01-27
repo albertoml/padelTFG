@@ -1,15 +1,36 @@
-<div class="col-lg-12 observation">
+<div class="col-lg-12 observation" style="margin-top:10px">
 	<div class="col-lg-4">
-		<input type="date" class="date" placeholder="<%= dataLiterals.date %>">
+		<% if(typeof(content) == "undefined" || !content){ %>
+			<input type="date" class="date" placeholder="<%= dataLiterals.date %>">
+		<% } else {
+    		var d = new Date(content.date.date);
+    		var month = d.getMonth() + 1;
+			var fullMonth = ("0" + month).slice(-2);
+			var day = d.getDate();
+			var fullDay = ("0" + day).slice(-2);
+            fragments = [
+            	d.getFullYear(),
+                fullMonth,
+                fullDay
+            ]; 
+        	var dateToPrint = fragments.join('-'); %>
+
+			<input type="date" class="date" placeholder="<%= dataLiterals.date %>" value="<%= dateToPrint %>">
+		<% } %>
 	</div>
 	<div class="col-lg-3">
-		<input type="text" class="fromHour" placeholder="<%= dataLiterals.fromHour %>">
+		<% if(typeof(content) == "undefined" || !content){ %>
+			<input type="text" class="fromHour" placeholder="<%= dataLiterals.fromHour %>">
+		<% } else { %>
+			<input type="text" class="fromHour" placeholder="<%= dataLiterals.fromHour %>" value="<%= content.fromHour %>">
+		<% } %>
 	</div>
 	<div class="col-lg-3">
-		<input type="text" class="toHour" placeholder="<%= dataLiterals.toHour %>">
-	</div>
-	<div class="col-lg-1">
-		<input type="checkbox" class="available" placeholder="<%= dataLiterals.available %>">
+		<% if(typeof(content) == "undefined" || !content){ %>
+			<input type="text" class="toHour" placeholder="<%= dataLiterals.toHour %>">
+		<% } else { %>
+			<input type="text" class="toHour" placeholder="<%= dataLiterals.toHour %>" value="<%= content.toHour %>">
+		<% } %>
 	</div>
 	<div class="col-lg-1">
 		<button id="deleteObservation"><i class="fa fa-times"></i></button>

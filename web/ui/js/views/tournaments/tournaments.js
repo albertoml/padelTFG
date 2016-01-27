@@ -119,12 +119,15 @@ define([
                 delay: 250,
                 processResults: function (data) {
                     var users = [];
+                    var nameLogged = this.$element[0].name;
                     _.each(data.user, function(u){
-                        var user = {
-                            'id' : u.id,
-                            'text' : u.name
+                        if(nameLogged != u.name){
+                            var user = {
+                                'id' : u.id,
+                                'text' : u.name
+                            }
+                            users.push(user);
                         }
-                        users.push(user);
                     });
                     return {
                         results: users
@@ -154,7 +157,8 @@ define([
             var template = _.template(InscriptionTemplate, {
                 profileId : 'bodyInscription',
                 dataLiterals : literals,
-                tournamentId: tournamentId
+                tournamentId: tournamentId,
+                userLogged: _self.model.get('name')
             });
             return template;
         },
@@ -195,21 +199,28 @@ define([
         },
         getObservations: function(){
             var observations = [];
+            var observationsInvalid = false;
             _.each($('.observation'), function(obs){
                 var date = obs.getElementsByClassName('date')[0].value;
                 var fromHour = obs.getElementsByClassName('fromHour')[0].value;
                 var toHour = obs.getElementsByClassName('toHour')[0].value;
-                var available = obs.getElementsByClassName('available')[0].value;
 
-                var observation = {
-                    "date": date,
-                    "fromHour": fromHour,
-                    "toHour": toHour,
-                    "available": available
-                };
-                observations.push(observation);
+                if(date!="" && fromHour!="" && toHour!=""){
+                    var observation = {
+                        "date": date,
+                        "fromHour": fromHour,
+                        "toHour": toHour
+                    };
+                    observations.push(observation);
+                }
+                else{
+                    observationsInvalid=true;
+                }
             });
-            return observations
+            if(observationsInvalid){
+                alert(literals.someObservationsAreInvalid);
+            }
+            return observations;
         },
         getPair: function(user1, user2){
             var _self = this;

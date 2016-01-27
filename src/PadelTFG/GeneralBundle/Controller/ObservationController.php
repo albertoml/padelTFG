@@ -59,6 +59,21 @@ class ObservationController extends FOSRestController
         }
     }
 
+    public function postObservationsAction(){
+        $this->observationService->setManager($this->getDoctrine()->getManager());
+
+        $params = array();
+        $content = $this->get("request")->getContent();
+        $params = json_decode($content, true);
+        $observations = $this->observationService->saveObservationsPOST($params, $this);
+        if($observations['result'] == 'fail'){
+            $dataToSend = json_encode(array('error' => $observations['message']));
+            return $this->util->setResponse(400, $dataToSend);
+        }
+        $dataToSend = json_encode(array('observations' => $observations['message']));
+        return $this->util->setJsonResponse(201, $dataToSend);
+    }
+
     public function deleteObservationAction($id){
 
         $this->observationService->setManager($this->getDoctrine()->getManager());
@@ -66,7 +81,6 @@ class ObservationController extends FOSRestController
 
         if ($observation instanceof Observation) {
             $observation = $this->observationService->deleteObservation($observation);
-
             return $this->util->setResponse(200, Literals::ObservationDeleted);
         } else {
             return $this->util->setResponse(404, Literals::ObservationNotFound);

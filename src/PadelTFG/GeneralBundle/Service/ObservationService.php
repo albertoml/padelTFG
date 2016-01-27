@@ -5,6 +5,7 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\Observation;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
+use PadelTFG\GeneralBundle\Service\InscriptionService as InscriptionService;
 
 class ObservationService{
 
@@ -41,9 +42,45 @@ class ObservationService{
         $observation->setDate(new \DateTime($params['date']));
         $observation->setFromHour($params['fromHour']);
         $observation->setToHour($params['toHour']);
-        $observation->setAvailable($params['available'] == 'si' ? true : false);
         $observation->setInscription($inscription);
         return $observation;
+    }
+
+    public function saveObservations($observations, $inscription, $controller){
+        
+        $resumeToObservationsInsert = null;
+        $resumeToObservationsInsert['message'] = "";
+        $resumeToObservationsInsert['result'] = "ok";
+        foreach ($observations as $objObs) {
+            $result = $this->saveObservation($objObs, $inscription, $controller);
+            if($result['result'] == 'fail'){
+                $resumeToObservationsInsert['message'] .= $inscription->getId() . '|' . $result['message'] . ';';
+                $resumeToObservationsInsert['result'] = 'fail';
+            }
+        }
+        return $resumeToObservationsInsert;
+    }
+
+    public function saveObservationsPOST($params, $controller){
+        
+        $resumeToObservationsInsert = null;
+        $resumeToObservationsInsert['message'] = "";
+        $resumeToObservationsInsert['result'] = "ok";
+        $inscriptionService = new InscriptionService();
+        $inscriptionService->setManager($this->em);
+        $inscription = $inscriptionService->getInscription($params['inscription']);
+        $observations = $this->getObservationByInscription($params['inscription']);
+        foreach ($observations as $obs) {
+            $this->deleteObservation($obs);
+        }
+        foreach ($params['observations'] as $objObs) {
+            $result = $this->saveObservation($objObs, $inscription, $controller);
+            if($result['result'] == 'fail'){
+                $resumeToObservationsInsert['message'] .= $inscription->getId() . '|' . $result['message'] . ';';
+                $resumeToObservationsInsert['result'] = 'fail';
+            }
+        }
+        return $resumeToObservationsInsert;
     }
 
     public function saveObservation($params, $inscription, $controller){

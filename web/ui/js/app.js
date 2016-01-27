@@ -71,13 +71,15 @@ require(['backbone', 'views/login/login', 'views/common/common', 'views/home/hom
 		'getUserPreferences' : host + '/api/userPreference/{idUser}',
 		'getTournaments' : host + '/api/tournament',
 		'getCategories' : host + '/api/category/tournament/{idTournament}',
+		'getObservations' : host + '/api/observation/inscription/{idInscription}',
 		'getInscriptionsByUser' : host + '/api/inscription/user/{idUser}',
 		'getPairsByUser' : host + '/api/pair/user/{idUser}',
 		'inscriptionAdminURL' : host + '/api/inscription',
 		'userAdminURL' : host + '/api/user',
 		'pairAdminURL' : host + '/api/pair',
 		'searchUser' : host + '/api/user/search',
-		'getPair2Id' : host + '/api/pair/user/{idUser1}/{idUser2}'
+		'getPair2Id' : host + '/api/pair/user/{idUser1}/{idUser2}',
+		'saveObservations' : host + '/api/observation/all'
 	};
 
 	var commonView = new CommonView(params);
