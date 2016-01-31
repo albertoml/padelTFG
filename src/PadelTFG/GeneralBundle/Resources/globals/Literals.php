@@ -76,6 +76,13 @@ abstract class Literals
 	const TournamentInscriptionLimit = "tournament inscription limit";
 	const CategoryInscriptionLimitMax = "category inscription limit";
 
+	const IncorrectGender = "Incorrect inscription due to pair gender";
+
+	//Genders
+	const GenderMale = "Male";
+	const GenderFemale = "Female";
+	const GenderMixed = "Mixed";
+
 	//ObservationController
 	const ObservationNotFound = "Observation not found";
 	const ObservationDeleted = "Observation deleted";

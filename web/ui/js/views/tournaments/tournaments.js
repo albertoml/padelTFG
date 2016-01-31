@@ -253,7 +253,7 @@ define([
                 'user1' : user1,
                 'user2' : user2
             };
-            var result = "p";
+            var result = "";
             $.ajax({
                 type: 'POST',
                 url: _self.params.pairAdminURL,

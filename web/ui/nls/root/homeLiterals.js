@@ -4,7 +4,7 @@ define({
             {'key':'annotations', 'text':'Annotations'},
             {'key':'tournaments', 'text':'Tournaments'},
             {'key':'inscriptions', 'text':'Inscriptions'},
-            {'key':'matchs', 'text':'Matchs'},
+            {'key':'games', 'text':'Games'},
             {'key':'pairs', 'text':'My pairs Info'},
     ],
 	"fields":{
@@ -19,7 +19,8 @@ define({
 		"cp":"Postal Code",
 		"firstPhone":"First Phone",
 		"gameLevel":"Game Level",
-		"secondPhone":"Second Phone"
+		"secondPhone":"Second Phone",
+		"gender":"Gender"
 	},
 	"buttonBasicInfo":"Edit Profile",
 	"cancelButtonTitle":"Cancel",
@@ -28,7 +29,9 @@ define({
 	"modalTitleProfile":"Edit Profile",
 	"modalTitleInscription":"Do Inscription To",
 	"modalTitleObservation": "Edit Observations",
+	"modalTitleAnnotation": "Insert Annotation",
 	"confirmSaveProfile":"Are you sure save changes?",
+	"confirmDeleteAnnotation": "Are you sure delete annotation",
 	"tournamentsFields":{
 		"name":"Name",
 		"admin":"Admin",
@@ -47,8 +50,24 @@ define({
 	"pairsFields":{
 		"pair":"Pair"
 	},
+	"annotationsFields":{
+		"creationDate":"Creation Date",
+		"text":"Text",
+		"status":"Status",
+		"options":"Options"
+	},
+	"gamesFields":{
+		"gameDate":"Match Date",
+		"tournament":"Tournament",
+		"status":"Status",
+		"options":"Options"
+	},
 	"doInscription":"Sign Up",
 	"viewObservation":"View Observations",
+	"modifyAnnotation": "Modify Annotation",
+	"deleteAnnotation": "Delete Annotation",
+	"createAnnotation": "New Annotation",
+	"insertAnnotation": "Insert text",
 	"deleteInscription": "Delete Observation",
 	"AreSureDeleteInscription": "Are you sure to delete Inscription?",
 	"pair":"Pair",

@@ -20,7 +20,11 @@
                     <span class="input-group-addon">
                         <input type="checkbox" aria-label="..." <%= checked %>>
                     </span>
-                    <input type="text" class="form-control" aria-label="..." value="<%= item.data %>" placeholder="<%= item.text %>" <%= disabled %>>
+                    <% if(item.type == 'text'){ %>
+                        <input type="text" class="form-control" aria-label="..." value="<%= item.data %>" placeholder="<%= item.text %>" <%= disabled %>>
+                    <% } if (item.type == 'select'){ %>
+                        <select id="gender" style="width:100%" <%= disabled %>></select>
+                    <% } %>
                 </div><!-- /input-group -->
             </div>
     <%  }
@@ -47,7 +51,11 @@
                     <span class="input-group-addon">
                         <input type="checkbox" aria-label="..." <%= checked %>>
                     </span>
-                    <input type="text" class="form-control" aria-label="..." value="<%= item.data %>" placeholder="<%= item.text %>" <%= disabled %>>
+                    <% if(item.type == 'text'){ %>
+                        <input type="text" class="form-control" aria-label="..." value="<%= item.data %>" placeholder="<%= item.text %>" <%= disabled %>>
+                    <% } if (item.type == 'select'){ %>
+                        <select id="gender" style="width:100%" <%= disabled %>></select>
+                    <% } %>
                 </div><!-- /input-group -->
             </div>
     <%  }

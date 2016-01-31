@@ -28,6 +28,10 @@ class Category implements JsonSerializable
 	/** @ORM\Column(type="integer", nullable=true) */
 	protected $registeredLimitMin;
 
+	/** @ORM\Column(type="string", nullable=true)
+		@Assert\Choice(callback = {"PadelTFG\GeneralBundle\Resources\globals\Utils", "getGenders"}, message = "Choose a valid gender.") */
+	protected $gender;
+
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="category")
 	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
 	protected $tournament;
@@ -47,6 +51,9 @@ class Category implements JsonSerializable
 	public function getRegisteredLimitMin(){
 		return $this->registeredLimitMin;
 	}
+	public function getGender(){
+		return $this->gender;
+	}
 
 	public function setName($name){
 		$this->name = $name;
@@ -60,13 +67,17 @@ class Category implements JsonSerializable
 	public function setRegisteredLimitMin($registeredLimitMin){
 		$this->registeredLimitMin = $registeredLimitMin;
 	}
+	public function setGender($gender){
+		$this->gender = $gender;
+	}
 
     public function jsonSerialize()
     {
         return array(
         	'id' => $this->id,
             'name' => $this->name,
-            'tournament' => isset($this->tournament) ? $this->tournament->getId() : null
+            'tournament' => isset($this->tournament) ? $this->tournament->getId() : null,
+            'gender' => $this->gender
         );
     }
 }

@@ -51,6 +51,7 @@ define([
             var dataRender = [
                 {
                     'key': 'email',
+                    'type': 'text',
                     'text': literals.fields.email,
                     'data': this.model.get('email'),
                     'visible': _self.userPreferences.email,
@@ -58,6 +59,7 @@ define([
                 },
                 {
                     'key': 'name',
+                    'type': 'text',
                     'text': literals.fields.name,
                     'data': this.model.get('name'),
                     'visible': _self.userPreferences.name,
@@ -65,6 +67,7 @@ define([
                 },
                 {
                     'key': 'lastName',
+                    'type': 'text',
                     'text': literals.fields.lastName,
                     'data': this.model.get('lastName'),
                     'visible': _self.userPreferences.lastName,
@@ -72,6 +75,7 @@ define([
                 },
                 {
                     'key': 'registrationDate',
+                    'type': 'text',
                     'text': literals.fields.registrationDate,
                     'data': new Date(this.model.get('registrationDate').date).toString('d-MM-yyyy'),
                     'visible': _self.userPreferences.registrationDate,
@@ -79,6 +83,7 @@ define([
                 },
                 {
                     'key': 'status',
+                    'type': 'text',
                     'text': literals.fields.status,
                     'data': this.model.get('status').value,
                     'visible': _self.userPreferences.status,
@@ -86,6 +91,7 @@ define([
                 },
                 {
                     'key': 'address',
+                    'type': 'text',
                     'text': literals.fields.address,
                     'data': this.model.get('address'),
                     'visible': _self.userPreferences.address,
@@ -93,6 +99,7 @@ define([
                 },
                 {
                     'key': 'city',
+                    'type': 'text',
                     'text': literals.fields.city,
                     'data': this.model.get('city'),
                     'visible': _self.userPreferences.city,
@@ -100,6 +107,7 @@ define([
                 },
                 {
                     'key': 'country',
+                    'type': 'text',
                     'text': literals.fields.country,
                     'data': this.model.get('country'),
                     'visible': _self.userPreferences.country,
@@ -107,6 +115,7 @@ define([
                 },
                 {
                     'key': 'cp',
+                    'type': 'text',
                     'text': literals.fields.cp,
                     'data': this.model.get('cp'),
                     'visible': _self.userPreferences.cp,
@@ -114,6 +123,7 @@ define([
                 },
                 {
                     'key': 'firstPhone',
+                    'type': 'text',
                     'text': literals.fields.firstPhone,
                     'data': this.model.get('firstPhone'),
                     'visible': _self.userPreferences.firstPhone,
@@ -121,6 +131,7 @@ define([
                 },
                 {
                     'key': 'gameLevel',
+                    'type': 'text',
                     'text': literals.fields.gameLevel,
                     'data': this.model.get('gameLevel'),
                     'visible': _self.userPreferences.gameLevel,
@@ -128,9 +139,18 @@ define([
                 },
                 {
                     'key': 'secondPhone',
+                    'type': 'text',
                     'text': literals.fields.secondPhone,
                     'data': this.model.get('secondPhone'),
                     'visible': _self.userPreferences.secondPhone,
+                    'editable': true
+                },
+                {
+                    'key': 'gender',
+                    'type': 'select',
+                    'text': literals.fields.gender,
+                    'data': this.model.get('gender'),
+                    'visible': _self.userPreferences.gender,
                     'editable': true
                 }
             ];
@@ -152,12 +172,36 @@ define([
             });
             return modal;
         },
+        getGenders: function(){
+            var _self = this;
+            var genders = [];
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: _self.params.getUserGenders,
+                success: function (response) {
+                    _.each(response.genders, function(g, index){
+                        var gen = {
+                            'id' : g,
+                            'text' : g
+                        }
+                        genders.push(gen);
+                    });
+                }
+            });
+            return genders;
+        },
         showProfileModal: function(){
             var _self = this;
+            var genders = _self.getGenders();
             var modal = _self.renderModal();
             $(modal).modal();
             $('#' + this.modalID + ' .modal-dialog').css({'width':'800px'});
             this.setElement(_self.$el.add('#' + this.modalID));
+            $("#gender").select2({
+                data: genders
+            });
+            $('#gender').val(_self.model.get('gender')).change();
         },
         loadProfileInfo: function(){
             var _self = this;
@@ -204,7 +248,8 @@ define([
                 "country": $('.countryProfile input[type="text"]').val(),
                 "cp": $('.cpProfile input[type="text"]').val(),
                 "firstPhone": $('.firstPhoneProfile input[type="text"]').val(),
-                "secondPhone": $('.secondPhoneProfile input[type="text"]').val()
+                "secondPhone": $('.secondPhoneProfile input[type="text"]').val(),
+                "gender": $('.genderProfile :selected').text()
             };
             return changes;
         },
@@ -221,7 +266,8 @@ define([
                 "cp": $('.cpProfile input[type="checkbox"]').is(':checked'),
                 "firstPhone": $('.firstPhoneProfile input[type="checkbox"]').is(':checked'),
                 "gameLevel": $('.gameLevelProfile input[type="checkbox"]').is(':checked'),
-                "secondPhone": $('.secondPhoneProfile input[type="checkbox"]').is(':checked')
+                "secondPhone": $('.secondPhoneProfile input[type="checkbox"]').is(':checked'),
+                "gender": $('.genderProfile input[type="checkbox"]').is(':checked')
             };
             return changes;
         }

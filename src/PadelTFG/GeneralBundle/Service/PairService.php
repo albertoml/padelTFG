@@ -18,6 +18,7 @@ class PairService{
 
     public function setManager($em){ 
         $this->em = $em;
+        $this->statusService->setManager($this->em);
     } 
 
 	public function allPairs(){
@@ -59,6 +60,24 @@ class PairService{
         return array_merge($pairs, $pairs2);
     }
 
+    public function setPairGender($gender1, $gender2){
+        if($gender1 == $gender2){
+            return $gender1;
+        }
+        else{
+            return Literals::GenderMixed;
+        }
+    }
+
+    public function modifyPairGender($userId){
+        $pairs = $this->getPairByUser($userId);
+        foreach ($pairs as $pair) {
+            $pair->setGender($this->setPairGender($pair->getUser1()->getGender(), $pair->getUser2()->getGender()));
+            $this->em->persist($pair);
+            $this->em->flush();
+        }
+    }
+
     public function savePair($params, $controller){
 
         if(empty($this->getPairByUsers($params['user1'], $params['user2']))){
@@ -68,10 +87,10 @@ class PairService{
             $user1 = $userService->getUser($params['user1']);
             $user2 = $userService->getUser($params['user2']);
 
-
             $pair = new Pair();
             $pair->setUser1($user1);
             $pair->setUser2($user2);
+            $pair->setGender($this->setPairGender($user1->getGender(), $user2->getGender()));
             $validator = $controller->get('validator');
             $errors = $validator->validate($pair);
 

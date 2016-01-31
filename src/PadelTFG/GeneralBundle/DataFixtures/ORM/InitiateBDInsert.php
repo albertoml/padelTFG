@@ -25,27 +25,27 @@ class InitiateBDInsert implements FixtureInterface
 
 		$Users = array(
 			array('name' => 'Natalia', 'lastName' => 'Perez', 'email' => 'nape@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Female'),
 			array('name' => 'Servando', 'lastName' => 'Escobar', 'email' => 'sees@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Male'),
 			array('name' => 'Victoria', 'lastName' => 'Abril', 'email' => 'viab@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Female'),
 			array('name' => 'Alberto', 'lastName' => 'Martinez', 'email' => 'alma@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Male'),
 			array('name' => 'Cecilia', 'lastName' => 'Soriano', 'email' => 'ceso@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Female'),
 			array('name' => 'Saray', 'lastName' => 'Lozano', 'email' => 'salo@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Female'),
 			array('name' => 'Ana', 'lastName' => 'Guardiola', 'email' => 'angu@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Female'),
 			array('name' => 'Andrea', 'lastName' => 'Garcia', 'email' => 'anga@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Female'),
 			array('name' => 'Rocio', 'lastName' => 'Lopez', 'email' => 'rolo@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Female'),
 			array('name' => 'Francisco', 'lastName' => 'Garcia', 'email' => 'frga@PadelTFG.com',
-				'password' => 'password'),
+				'password' => 'password', 'gender' => 'Male'),
 			array('name' => 'Juan', 'lastName' => 'Martinez', 'email' => 'juma@PadelTFG.com',
-				'password' => 'password')
+				'password' => 'password', 'gender' => 'Male')
 			);
 
 		foreach ($Users as $key) {
@@ -54,6 +54,7 @@ class InitiateBDInsert implements FixtureInterface
 			$entity->setLastName($key['lastName']);
 			$entity->setEmail($key['email']);
 			$entity->setPassword($key['password']);
+			$entity->setGender($key['gender']);
 			$entity->setStatus($userStatus);
 			$entityRole = new UserUserRole();
 			$entityRole->setUser($entity);
@@ -80,20 +81,22 @@ class InitiateBDInsert implements FixtureInterface
 	        $entityPreference->setAlias(false);
 	        $entityPreference->setNotification(false);
 	        $entityPreference->setRegistrationDate(false);
+	        $entityPreference->setGender(false);
 	        $manager->persist($entityPreference);
 		}
 		$manager->flush();
 
 
 		$Categories = array(
-			array('name' => 'Category Femenina'),
-			array('name' => 'Category Masculina'),
-			array('name' => 'Category Mixta')
+			array('name' => 'Category Femenina', 'gender' => 'Female'),
+			array('name' => 'Category Masculina', 'gender' => 'Male'),
+			array('name' => 'Category Mixta', 'gender' => 'Mixed')
 		);
 
 		foreach ($Categories as $key) {
 			$entity = new Category();
 			$entity->setName($key['name']);
+			$entity->setGender($key['gender']);
 			$manager->persist($entity);	
 		}
 		$manager->flush();
@@ -133,11 +136,11 @@ class InitiateBDInsert implements FixtureInterface
 		$user2Pair5 = $repository->findOneByName('Juan');
 
 		$Pairs = array(
-			array('user1' => $user1Pair1, 'user2' => $user2Pair1),
-			array('user1' => $user1Pair2, 'user2' => $user2Pair2),
-			array('user1' => $user1Pair3, 'user2' => $user2Pair3),
-			array('user1' => $user1Pair4, 'user2' => $user2Pair4),
-			array('user1' => $user1Pair5, 'user2' => $user2Pair5)
+			array('user1' => $user1Pair1, 'user2' => $user2Pair1, 'gender' => 'Female'),
+			array('user1' => $user1Pair2, 'user2' => $user2Pair2, 'gender' => 'Mixed'),
+			array('user1' => $user1Pair3, 'user2' => $user2Pair3, 'gender' => 'Female'),
+			array('user1' => $user1Pair4, 'user2' => $user2Pair4, 'gender' => 'Female'),
+			array('user1' => $user1Pair5, 'user2' => $user2Pair5, 'gender' => 'Male')
 
 		);
 
@@ -145,36 +148,7 @@ class InitiateBDInsert implements FixtureInterface
 			$entity = new Pair();
 			$entity->setUser1($key['user1']);
 			$entity->setUser2($key['user2']);
-			$manager->persist($entity);	
-		}
-		$manager->flush();
-
-		$repository = $manager->getRepository('GeneralBundle:Pair');
-		$pair1 = $repository->findOneByUser1($user1Pair1);
-		$pair2 = $repository->findOneByUser1($user1Pair2);
-		$pair3 = $repository->findOneByUser1($user1Pair3);
-		$pair4 = $repository->findOneByUser1($user1Pair4);
-		$repository = $manager->getRepository('GeneralBundle:Tournament');
-		$tournament = $repository->findOneByName('Los Rebeldes');
-		$tournament1 = $repository->findOneByName('Los Vampiros');
-
-
-		$Inscriptions = array(
-			array('pair' => $pair1, 'tournament' => $tournament, 'category' => $category1),
-			array('pair' => $pair2, 'tournament' => $tournament, 'category' => $category2),
-			array('pair' => $pair3, 'tournament' => $tournament, 'category' => $category2),
-			array('pair' => $pair4, 'tournament' => $tournament, 'category' => $category1),
-			array('pair' => $pair1, 'tournament' => $tournament1, 'category' => $category3),
-			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category3),
-			array('pair' => $pair3, 'tournament' => $tournament1, 'category' => $category3),
-			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category3)
-		);
-
-		foreach ($Inscriptions as $key) {
-			$entity = new Inscription();
-			$entity->setPair($key['pair']);
-			$entity->setTournament($key['tournament']);
-			$entity->setCategory($key['category']);
+			$entity->setGender($key['gender']);
 			$manager->persist($entity);	
 		}
 		$manager->flush();

@@ -1,0 +1,11 @@
+util_gender:
+    path: /util/gender
+    defaults: { _controller: GeneralBundle:Util:getGenders, _format: ~ }
+    requirements:
+        _method: GET
+
+util_Usergender:
+    path: /util/userGender
+    defaults: { _controller: GeneralBundle:Util:getUserGenders, _format: ~ }
+    requirements:
+        _method: GET

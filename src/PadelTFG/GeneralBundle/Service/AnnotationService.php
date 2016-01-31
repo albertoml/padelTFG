@@ -5,6 +5,7 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\Annotation;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
+use PadelTFG\GeneralBundle\Service\UserService as UserService;
 
 class AnnotationService{
 
@@ -17,6 +18,7 @@ class AnnotationService{
 
     public function setManager($em){ 
         $this->em = $em;
+        $this->statusService->setManager($this->em);
     } 
 
 	public function allAnnotations(){
@@ -31,9 +33,19 @@ class AnnotationService{
         return $annotation;
     }
 
+    public function getAnnotationByUser($userId){
+        $repository = $this->em->getRepository('GeneralBundle:Annotation');
+        $annotations = $repository->findByUser($userId);
+        return $annotations;
+    }
+
     private function setAnnotationSave($annotation, $params){
         $annotation->setText(isset($params['text']) ? $params['text'] : '');
-        $annotation->setStatus($this->statusService->getStatus($this->em, 'annotation', 'created'));
+        $annotation->setStatus($this->statusService->getStatus('annotation', 'created'));
+        $userService = new UserService();
+        $userService->setManager($this->em);
+        $user = $userService->getUser(isset($params['user']) ? $params['user'] : '');
+        $annotation->setUser($user);
         return $annotation;
     }
 

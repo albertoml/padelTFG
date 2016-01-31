@@ -7,12 +7,12 @@ define([
     'views/annotations/annotations',
     'views/tournaments/tournaments',
     'views/inscriptions/inscriptions',
-    'views/matchs/matchs',
+    'views/games/games',
     'views/pairs/pairs',
     'text!templates/home/section.html',
     'text!templates/home/listTree.html',
     'text!templates/home/pageContent.html'], 
-    function(Backbone, _, UserModel, Literals, BasicInfoView, AnnotationsView, TournamentsView, InscriptionsView, MatchsView, PairsView, SectionTemplate, ListTreeTemplate, PageContentTemplate) {
+    function(Backbone, _, UserModel, Literals, BasicInfoView, AnnotationsView, TournamentsView, InscriptionsView, GamesView, PairsView, SectionTemplate, ListTreeTemplate, PageContentTemplate) {
 
     var HomeView = Backbone.View.extend({
         el: '.wrapperHome',
@@ -72,14 +72,14 @@ define([
         renderSections: function(){
             var basicInfo = new BasicInfoView(this.userModel, this.params);
             basicInfo.render();
-            var annotations = new AnnotationsView();
+            var annotations = new AnnotationsView(this.userModel, this.params);
             annotations.render();
             var tournaments = new TournamentsView(this.userModel, this.params);
             tournaments.render();
             var inscriptions = new InscriptionsView(this.userModel, this.params);
             inscriptions.render();
-            var matchs = new MatchsView();
-            matchs.render();
+            var games = new GamesView(this.userModel, this.params);
+            games.render();
             var pairs = new PairsView(this.userModel, this.params);
             pairs.render();
             this.renderJSForListTree();

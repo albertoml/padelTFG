@@ -73,13 +73,16 @@ require(['backbone', 'views/login/login', 'views/common/common', 'views/home/hom
 		'getCategories' : host + '/api/category/tournament/{idTournament}',
 		'getObservations' : host + '/api/observation/inscription/{idInscription}',
 		'getInscriptionsByUser' : host + '/api/inscription/user/{idUser}',
+		'getAnnotationsByUser' : host + '/api/annotation/user/{idUser}',
+		'getGamesByUser' : host + '/api/game/user/{idUser}',
 		'getPairsByUser' : host + '/api/pair/user/{idUser}',
 		'inscriptionAdminURL' : host + '/api/inscription',
 		'userAdminURL' : host + '/api/user',
 		'pairAdminURL' : host + '/api/pair',
 		'searchUser' : host + '/api/user/search',
 		'getPair2Id' : host + '/api/pair/user/{idUser1}/{idUser2}',
-		'saveObservations' : host + '/api/observation/all'
+		'saveObservations' : host + '/api/observation/all',
+		'getUserGenders' : host + '/api/util/userGender'
 	};
 
 	var commonView = new CommonView(params);

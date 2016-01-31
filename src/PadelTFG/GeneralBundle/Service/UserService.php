@@ -5,6 +5,7 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
+use PadelTFG\GeneralBundle\Service\PairService as PairService;
 use PadelTFG\GeneralBundle\Service\UserPreferenceService as UserPreferenceService;
  
 class UserService{
@@ -55,6 +56,7 @@ class UserService{
         $user->setProfileImage(isset($params['profileImage']) ? $params['profileImage'] : '');
         $user->setGameLevel(isset($params['gameLevel']) ? $params['gameLevel'] : 0);
         $user->setAlias(isset($params['alias']) ? $params['alias'] : '');
+        $user->setGender(isset($params['gender']) ? $params['gender'] : '');
 
         return $user;
     }
@@ -92,6 +94,7 @@ class UserService{
         $user->setProfileImage(isset($params['profileImage']) ? $params['profileImage'] : $user->getProfileImage());
         $user->setGameLevel(isset($params['gameLevel']) ? $params['gameLevel'] : $user->getGameLevel());
         $user->setAlias(isset($params['alias']) ? $params['alias'] : $user->getAlias());
+        $user->setGender(isset($params['gender']) ? $params['gender'] : $user->getGender());
 
         return $user;
     }
@@ -107,6 +110,9 @@ class UserService{
         }
         $this->em->persist($user);
         $this->em->flush();
+        $pairService = new PairService();
+        $pairService->setManager($this->em);
+        $pairService->modifyPairGender($user->getId());
         return array('result' => 'ok', 'message' => $user);
     }
 

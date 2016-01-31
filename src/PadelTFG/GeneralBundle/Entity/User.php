@@ -52,6 +52,10 @@ class User implements JsonSerializable
 	/** @ORM\Column(type="string", length=10, nullable=true) */
 	protected $cp;
 
+	/** @ORM\Column(type="string", nullable=true)
+	@Assert\Choice(callback = {"PadelTFG\GeneralBundle\Resources\globals\Utils", "getUserGenders"}, message = "Choose a valid gender.") */
+	protected $gender;
+
 	/** @ORM\Column(type="string", length=500)
 		@Assert\NotBlank() */
 	protected $password;
@@ -143,6 +147,9 @@ class User implements JsonSerializable
 	public function getCP(){
 		return $this->cp;
 	}
+	public function getGender(){
+		return $this->gender;
+	}
 	public function getPassword(){
 		return $this->password;
 	}
@@ -201,6 +208,9 @@ class User implements JsonSerializable
 	public function setCP($cp){
 		$this->cp = $cp;
 	}
+	public function setGender($gender){
+		$this->gender = $gender;
+	}
 	public function setPassword($password){
 		$this->password = $password;
 	}
@@ -242,6 +252,7 @@ class User implements JsonSerializable
             'city' => $this->city,
             'country' => $this->country,
             'cp'=> $this->cp,
+            'gender'=> $this->gender,
             'status' => $this->status,
             'notification' => $this->notification,
             'registrationDate' => $this->registrationDate,

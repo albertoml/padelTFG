@@ -24,6 +24,7 @@ class InscriptionService{
 
     public function setManager($em){ 
         $this->em = $em;
+        $this->statusService->setManager($this->em);
     } 
 
 	public function allInscriptions(){
@@ -166,6 +167,9 @@ $tournament->getRegisteredLimit() == $this->getCountInscriptionsInTournament($to
             else if($category->getRegisteredLimitMax() != null && 
 $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($category->getId())){
                 $checked['message'] .= $pairId . ' ' . Literals::CategoryInscriptionLimitMax;
+            }
+            else if($category->getGender() != Literals::GenderMale && $category->getGender()!=$pair->getGender()){
+                $checked['message'] .= $pairId . ' ' . Literals::IncorrectGender;
             }
             else{
                 $checked['result'] = true;

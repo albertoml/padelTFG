@@ -11,6 +11,13 @@ annotation_get:
         _method: GET
         id: "\d+"
 
+annotation_by_user:
+    path:  /annotation/user/{userId}
+    defaults: { _controller: GeneralBundle:Annotation:getAnnotationByUser, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
 annotation_post:
     path:  /annotation
     defaults: { _controller: GeneralBundle:Annotation:postAnnotation, _format: ~ }

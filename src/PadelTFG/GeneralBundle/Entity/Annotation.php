@@ -27,6 +27,10 @@ class Annotation implements JsonSerializable
 		@Assert\DateTime() */
 	protected $creationDate;
 
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User")
+		@ORM\JoinColumn(name="user_id", onDelete="cascade") */
+	protected $user;
+
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\AnnotationStatus")  */
 	protected $status;
 
@@ -46,6 +50,9 @@ class Annotation implements JsonSerializable
 	public function getStatus(){
 		return $this->status;
 	}
+	public function getUser(){
+		return $this->user;
+	}
 
 	public function setText($text){
 		$this->text = $text;
@@ -56,6 +63,9 @@ class Annotation implements JsonSerializable
 	public function setStatus($status){
 		$this->status = $status;
 	}
+	public function setUser($user){
+		$this->user = $user;
+	}
 
 	public function jsonSerialize()
     {
@@ -63,7 +73,8 @@ class Annotation implements JsonSerializable
         	'id' => $this->id,
             'text' => $this->text,
             'creationDate' => $this->creationDate,
-            'status' => $this->status
+            'status' => $this->status,
+            'user' => $this->user
         );
     }
 }

@@ -39,6 +39,14 @@ class AnnotationController extends FOSRestController{
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 
+    public function getAnnotationByUserAction($userId){
+
+        $this->annotationService->setManager($this->getDoctrine()->getManager());
+        $annotations = $this->annotationService->getAnnotationByUser($userId);
+        $dataToSend = json_encode(array('annotation' => $annotations));
+        return $this->util->setJsonResponse(200, $dataToSend);
+    }
+
     public function postAnnotationAction(){
 
         $this->annotationService->setManager($this->getDoctrine()->getManager());

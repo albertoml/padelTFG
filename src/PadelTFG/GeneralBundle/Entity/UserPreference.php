@@ -65,6 +65,9 @@ class UserPreference implements JsonSerializable
 	/** @ORM\Column(type="boolean") */
 	protected $profileImage;
 
+	/** @ORM\Column(type="boolean") */
+	protected $gender;
+
 	
 	public function getId(){
 		return $this->id;
@@ -110,6 +113,9 @@ class UserPreference implements JsonSerializable
 	}
 	public function getProfileImage(){
 		return $this->profileImage;
+	}
+	public function getGender(){
+		return $this->gender;
 	}
 	public function getGameLevel(){
 		return $this->gameLevel;
@@ -172,6 +178,9 @@ class UserPreference implements JsonSerializable
 	public function setAlias($alias){
 		$this->alias = $alias;
 	}
+	public function setGender($gender){
+		$this->gender = $gender;
+	}
 
 	public function jsonSerialize()
     {
@@ -192,7 +201,8 @@ class UserPreference implements JsonSerializable
             'birthDate' => $this->birthDate,
             'gameLevel' => $this->gameLevel,
             'alias' => $this->alias,
-            'profileImage' => $this->profileImage
+            'profileImage' => $this->profileImage,
+            'gender' => $this->gender
         );
     }
 }

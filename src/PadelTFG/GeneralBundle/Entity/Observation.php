@@ -22,7 +22,9 @@ class Observation implements JsonSerializable
 	@ORM\JoinColumn(name="inscription_id", onDelete="cascade") */
 	protected $inscription;
 
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="datetime")
+		@Assert\DateTime()
+		@Assert\GreaterThan("today") */
 	protected $date;
 
 	/** @ORM\Column(type="integer") */

@@ -17,6 +17,7 @@ class RecordalService{
 
     public function setManager($em){ 
         $this->em = $em;
+        $this->statusService->setManager($this->em);
     } 
 
 	public function allRecordals(){

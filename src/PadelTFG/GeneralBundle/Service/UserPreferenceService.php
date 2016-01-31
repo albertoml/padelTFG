@@ -17,6 +17,7 @@ class UserPreferenceService{
 
     public function setManager($em){ 
         $this->em = $em;
+        $this->statusService->setManager($this->em);
     } 
 
 	public function allUsersPreferences(){
@@ -50,6 +51,7 @@ class UserPreferenceService{
         $userPreference->setAlias(false);
         $userPreference->setNotification(false);
         $userPreference->setRegistrationDate(false);
+        $userPreference->setGender(false);
 
         return $userPreference;
     }
@@ -80,6 +82,7 @@ class UserPreferenceService{
         $userPreference->setAlias(isset($params['alias']) ? $params['alias'] : false );
         $userPreference->setNotification(isset($params['notification']) ? $params['notification'] : false );
         $userPreference->setRegistrationDate(isset($params['registrationDate']) ? $params['registrationDate'] : false );
+        $userPreference->setGender(isset($params['gender']) ? $params['gender'] : false );
 
         return $userPreference;
     }

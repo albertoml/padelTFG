@@ -18,6 +18,7 @@ class ObservationService{
 
     public function setManager($em){ 
         $this->em = $em;
+        $this->statusService->setManager($this->em);
     } 
 
 	public function allObservations(){

@@ -67,3 +67,8 @@ groupCategory:
     type: rest
     resource: routing_groupcategory.yml
     name_prefix:  group_
+
+util:
+    type: rest
+    resource: routing_util.yml
+    name_prefix:  util_
