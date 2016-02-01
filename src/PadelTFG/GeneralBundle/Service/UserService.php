@@ -7,6 +7,7 @@ use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
 use PadelTFG\GeneralBundle\Service\PairService as PairService;
 use PadelTFG\GeneralBundle\Service\UserPreferenceService as UserPreferenceService;
+use PadelTFG\GeneralBundle\Service\UserRoleService as UserRoleService;
  
 class UserService{
 
@@ -121,23 +122,11 @@ class UserService{
         $this->em->flush();
     }
 
-    public function getUserRoleByUser($user){
-        $repository = $this->em->getRepository('GeneralBundle:UserUserRole');
-        $roles = $repository->findByUser($user);
-        $rolesToSend = [];
-        foreach ($roles as $role) {
-            array_push($rolesToSend, $role->getRole());
-        }
-        return $rolesToSend;
-    }
-
     public function loginUser($email, $password){
         $user = $this->getUserByEmail($email);
         if ($user instanceof User) {
             if($user->isPassEqual($password)){
-                $roles = $this->getUserRoleByUser($user);
-                $userToSend = array('user' => $user, 'roles' => $roles);
-                return array('result' => 'ok', 'message' => $userToSend);
+                return array('result' => 'ok', 'message' => $user->getId());
             }
             else{
                 return array('result' => 'fail', 'message' => Literals::PasswordIncorrect);

@@ -7,6 +7,7 @@ define({
             {'key':'games', 'text':'Games'},
             {'key':'pairs', 'text':'My pairs Info'},
     ],
+    "adminTournamentsView":"My Admin Tournaments",
 	"fields":{
 		"email":"Email",
 		"name":"Name",

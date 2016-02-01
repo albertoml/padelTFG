@@ -11,5 +11,6 @@ define({
 	"submitLogin": "Sign in",
 	"submitRegister": "Register Now",
 	"successMessageTextLogin": "Login Succesfully",
-	"successMessageTextRegister": "Register Succesfully"
+	"successMessageTextRegister": "Register Succesfully",
+	"placeholderGender": "Select a Gender"
 });

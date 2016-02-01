@@ -13,25 +13,21 @@ class UserUserRole implements JsonSerializable
 {
     /**
     * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue */
+    * @ORM\Column(type="integer") */
     protected $id;
-
-    /** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User", inversedBy="role") */
-    protected $user;
 
     /** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\UserRole", inversedBy="id") */
     protected $role;
 
-	public function getUser(){
-		return $this->user;
+	public function getId(){
+		return $this->id;
 	}
 	public function getRole(){
 		return $this->role;
 	}
 
-    public function setUser(User $user){
-        $this->user = $user;
+    public function setId($id){
+        $this->id = $id;
     }
     public function setRole(UserRole $role){
         $this->role = $role;
@@ -39,7 +35,7 @@ class UserUserRole implements JsonSerializable
 
 	public function jsonSerialize(){
         return array(
-        	'user' => $this->user,
+        	'id' => $this->id,
             'role' => $this->role
         );
     }

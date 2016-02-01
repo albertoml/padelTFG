@@ -6,7 +6,10 @@ use FOS\RestBundle\Controller\FOSRestController;
 
 use PadelTFG\GeneralBundle\Resources\globals\Utils as Util;
 use PadelTFG\GeneralBundle\Service\UserRoleService as UserRoleService;
+use PadelTFG\GeneralBundle\Service\UserService as UserService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
+
+use PadelTFG\GeneralBundle\Entity\User;
 
 class UserRoleController extends FOSRestController
 {

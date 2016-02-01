@@ -20,6 +20,7 @@ class InitiateBDInsert implements FixtureInterface
 
 		$repository = $manager->getRepository('GeneralBundle:UserRole');
 		$playerRole = $repository->findOneByValue('Player');
+		$tournamentAdminRole = $repository->findOneByValue('TournamentAdmin');
 		$repository = $manager->getRepository('GeneralBundle:UserStatus');
 		$userStatus = $repository->findOneByValue('Registered');
 
@@ -56,12 +57,17 @@ class InitiateBDInsert implements FixtureInterface
 			$entity->setPassword($key['password']);
 			$entity->setGender($key['gender']);
 			$entity->setStatus($userStatus);
-			$entityRole = new UserUserRole();
-			$entityRole->setUser($entity);
-			$entityRole->setRole($playerRole);
-			$manager->persist($entityRole);
 			$manager->persist($entity);
 			$manager->flush();
+			$entityRole = new UserUserRole();
+			$entityRole->setId($entity->getId());
+			if($key['name'] == 'Servando'){
+				$entityRole->setRole($tournamentAdminRole);
+			}
+			else{
+				$entityRole->setRole($playerRole);
+			}
+			$manager->persist($entityRole);
 			$entityPreference = new UserPreference();
 			$entityPreference->setId($entity->getId());
 			$entityPreference->setName(true);

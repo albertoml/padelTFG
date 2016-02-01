@@ -32,6 +32,12 @@ class TournamentService{
         return $tournament;
     }
 
+    public function getTournamentsByAdmin($id){
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findByAdmin($id);
+        return $tournament;
+    }
+
     private function setTournamentSave($tournament, $params, $user){
         $tournament->setAdmin($user);
         $tournament->setName($params['name']);

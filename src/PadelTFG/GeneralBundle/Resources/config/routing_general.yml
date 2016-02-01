@@ -23,6 +23,11 @@ userRole:
     resource: routing_userRole.yml
     name_prefix:  userRole_
 
+userUserRole:
+    type: rest
+    resource: routing_userUserRole.yml
+    name_prefix:  userUserRole_
+
 sponsor:
     type: rest
     resource: routing_sponsor.yml

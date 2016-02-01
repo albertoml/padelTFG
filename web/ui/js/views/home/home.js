@@ -2,6 +2,7 @@ define([
     'backbone', 
     'underscore',
     'models/user/user',
+    'models/userRole/userRole',
     'i18n!nls/homeLiterals.js',
     'views/basicInfo/basicInfo',
     'views/annotations/annotations',
@@ -11,8 +12,9 @@ define([
     'views/pairs/pairs',
     'text!templates/home/section.html',
     'text!templates/home/listTree.html',
+    'text!templates/home/listTreeAdmin.html',
     'text!templates/home/pageContent.html'], 
-    function(Backbone, _, UserModel, Literals, BasicInfoView, AnnotationsView, TournamentsView, InscriptionsView, GamesView, PairsView, SectionTemplate, ListTreeTemplate, PageContentTemplate) {
+    function(Backbone, _, UserModel, UserRoleModel, Literals, BasicInfoView, AnnotationsView, TournamentsView, InscriptionsView, GamesView, PairsView, SectionTemplate, ListTreeTemplate, ListTreeAdmin, PageContentTemplate) {
 
     var HomeView = Backbone.View.extend({
         el: '.wrapperHome',
@@ -68,6 +70,14 @@ define([
                     _self.renderSections();
                 }
             });
+            var userRoleModel = new UserRoleModel({id: idUser});
+            userRoleModel.fetch({
+                success: function(modelAdmin){
+                    if(!_.isEmpty(modelAdmin.get('tournament'))){
+                        _self.renderAdminTreePanel(modelAdmin.get('tournament'));        
+                    }         
+                }
+            });
         },
         renderSections: function(){
             var basicInfo = new BasicInfoView(this.userModel, this.params);
@@ -83,6 +93,13 @@ define([
             var pairs = new PairsView(this.userModel, this.params);
             pairs.render();
             this.renderJSForListTree();
+        },
+        renderAdminTreePanel: function(tournaments){
+            var template = _.template(ListTreeAdmin, {
+                tournaments: tournaments,
+                literals: Literals
+            });
+            $('#menu').append(template);
         }
     });
     return HomeView;

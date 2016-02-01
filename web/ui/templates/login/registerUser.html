@@ -6,6 +6,9 @@
             <input type="text" name="lastName" placeholder="<%= data.lastNameLogin %>" required class="form-control input-lg" />
             <input type="email" name="email" placeholder="<%= data.userLogin %>" required class="form-control input-lg" />
             <input type="password" name="password" placeholder="<%= data.passLogin %>" required class="form-control input-lg" />
+            <select style="width:100%" id="gender">
+                <option selected="true"><%= data.placeholderGender %></option>
+            </select>
             <button type="submit" name="sendRegister" class="btn btn-lg btn-primary btn-block"><%= data.submitRegister %></button>
             <div>
                 <a href="#"><%= data.backToLogin %></a>

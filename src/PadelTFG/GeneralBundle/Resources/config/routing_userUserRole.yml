@@ -1,0 +1,12 @@
+userUserRoles_all:
+    path: /userUserRole
+    defaults: { _controller: GeneralBundle:UserUserRole:allUserUserRole, _format: ~ }
+    requirements:
+        _method: GET
+
+userUserRoles_get:
+    path:  /userUserRole/{id}
+    defaults: { _controller: GeneralBundle:UserUserRole:getUserUserRole, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"

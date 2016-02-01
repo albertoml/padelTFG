@@ -1,0 +1,6 @@
+<li disabled><%= literals.adminTournamentsView %></li>
+<% _.each(tournaments, function(tournament) { %>
+    <li>
+        <a href="#<%= tournament.id %>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span><%= tournament.name %></a>
+    </li>
+<% }); %>
