@@ -7,7 +7,7 @@ use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
 use PadelTFG\GeneralBundle\Service\PairService as PairService;
 use PadelTFG\GeneralBundle\Service\UserPreferenceService as UserPreferenceService;
-use PadelTFG\GeneralBundle\Service\UserRoleService as UserRoleService;
+use PadelTFG\GeneralBundle\Service\UserUserRoleService as UserUserRoleService;
  
 class UserService{
 
@@ -74,8 +74,11 @@ class UserService{
         }
         $userPreference = new UserPreferenceService();
         $userPreference->setManager($this->em);
+        $userUserRole = new UserUserRoleService();
+        $userUserRole->setManager($this->em);
         $this->em->persist($user);
         $this->em->flush();
+        $userUserRole->saveUserUserRole($user->getId());
         $userPreference->saveUserPreference($user->getId());
         return array('result' => 'ok', 'message' => $user);
     }

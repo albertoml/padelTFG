@@ -3,6 +3,8 @@
 namespace PadelTFG\GeneralBundle\Service;
 
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
+use PadelTFG\GeneralBundle\Entity\UserUserRole;
+use PadelTFG\GeneralBundle\Service\UserRoleService as UserRoleService;
 
 class UserUserRoleService{
 
@@ -22,5 +24,17 @@ class UserUserRoleService{
     	$repository = $this->em->getRepository('GeneralBundle:UserUserRole');
         $roles = $repository->find($id);
         return $roles;	
+    }
+
+    public function saveUserUserRole($id){
+        $userUserRole = new UserUserRole();
+        $userUserRole->setId($id);
+        $userRoleService = new UserRoleService();
+        $userRoleService->setManager($this->em);
+        $userRole = $userRoleService->getPlayerRole();
+        $userUserRole->setRole($userRole);
+        $this->em->persist($userUserRole);
+        $this->em->flush();
+        return array('result' => 'ok', 'message' => $userUserRole);
     }
 }
