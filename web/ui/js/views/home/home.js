@@ -74,7 +74,8 @@ define([
             userRoleModel.fetch({
                 success: function(modelAdmin){
                     if(!_.isEmpty(modelAdmin.get('tournament'))){
-                        _self.renderAdminTreePanel(modelAdmin.get('tournament'));        
+                        _self.renderAdminTreePanel(modelAdmin.get('tournament')); 
+                        _self.renderAdminSections(modelAdmin.get('tournament'));        
                     }         
                 }
             });
@@ -100,6 +101,11 @@ define([
                 literals: Literals
             });
             $('#menu').append(template);
+        },
+        renderAdminSections: function(tournaments){
+            var template = _.template(SectionTemplate, {
+
+            });
         }
     });
     return HomeView;

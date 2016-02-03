@@ -127,11 +127,25 @@ class InscriptionService{
         if(!$tournament instanceof Tournament){
             return Literals::TournamentNotFound;
         }
-
         if($category->getTournament()->getId() != $tournament->getId()){
             return Literals::CategoryIncorrect;
         }
         return null;
+    }
+
+    private function checkUsersInCategory($pair, $category){
+        $inscriptions = $this->getInscriptionsByCategory($category->getId());
+        $user1 = $pair->getUser1()->getId();
+        $user2 = $pair->getUser2()->getId();
+        foreach ($inscriptions as $ins) {
+            if($ins->getPair()->getUser1()->getId() == $user1 || $ins->getPair()->getUser2()->getId() == $user1){
+                return true;
+            }
+            else if($ins->getPair()->getUser1()->getId() == $user2 || $ins->getPair()->getUser2()->getId() == $user2){
+                return true;
+            }
+        }
+        return false;
     }
 
     private function setInscriptionSave($inscription, $pair, $category, $tournament){
@@ -159,6 +173,9 @@ class InscriptionService{
             $pair = $this->getPairFromId($pairId);
             if(!$pair instanceof Pair){
                 $checked['message'] .= $pairId . ' ' . Literals::PairNotFound;
+            }
+            else if($this->checkUsersInCategory($pair, $category)){
+                $checked['message'] .= $pairId . ' ' . Literals::UserDuplicate;
             }
             else if($tournament->getRegisteredLimit() != null && 
 $tournament->getRegisteredLimit() == $this->getCountInscriptionsInTournament($tournament->getId())){

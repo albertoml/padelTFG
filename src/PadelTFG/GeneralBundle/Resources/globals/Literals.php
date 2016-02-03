@@ -68,6 +68,7 @@ abstract class Literals
 	const CategoryEmpty = "category empty;";
 	const CategoryIncorrect = "Error in select category";
 	const PairDuplicate = "Pair duplicate";
+	const UserDuplicate = "User duplicate";
 	const Inscriptions = "Pairs registered succesfully";
 	const StartDateEmpty = "startDate empty";
 	const EndDateEmpty = "endDate empty";
