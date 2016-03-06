@@ -50,6 +50,7 @@ class CategoryService{
         $categoryEntity->setName(isset($category['name']) ? $category['name'] : '');
         $categoryEntity->setRegisteredLimitMax(isset($category['registeredLimitMax']) ? $category['registeredLimitMax'] : null);
         $categoryEntity->setRegisteredLimitMin(isset($category['registeredLimitMin']) ? $category['registeredLimitMin'] : null);
+        $categoryEntity->setGender(isset($category['gender']) ? $category['gender'] : null);
         $validator = $controller->get('validator');
         $errors = $validator->validate($categoryEntity);
 

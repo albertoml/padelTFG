@@ -1,6 +1,13 @@
-<li disabled><%= literals.adminTournamentsView %></li>
+<% if(!onlyTournaments){ %>
+	<li class="adminTreePanel" disabled><%= literals.adminTournamentsView %></li>
+<% } %>
 <% _.each(tournaments, function(tournament) { %>
-    <li>
-        <a href="#<%= tournament.id %>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span><%= tournament.name %></a>
+    <li class="adminTreePanel">
+        <a href="#tournamentAdmin<%= tournament.id %>" id="#tournamentAdmin<%= tournament.id %>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span><%= tournament.name %></a>
     </li>
 <% }); %>
+<% if(!onlyTournaments){ %>
+	<li class="adminTreePanel">
+		<button id="createNewTournament"><span class="fa-stack fa-lg pull-left"><i style="margin-left: 15px;" class="fa fa-plus-square-o fa-stack-1x"></i></span><%= literals.createNewTournament %></button>
+	</li>
+<% } %>

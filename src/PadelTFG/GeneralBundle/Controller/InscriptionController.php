@@ -168,4 +168,21 @@ class InscriptionController extends FOSRestController
             return $this->util->setResponse(404, Literals::InscriptionNotFound);
         }
     }
+
+    public function countInscriptionAction($idTournament){
+        $this->inscriptionService->setManager($this->getDoctrine()->getManager());
+        $inscriptions = $this->inscriptionService->getCountInscriptionsByTournamentByCategory($idTournament);
+
+        $tournamentService = new TournamentService();
+        $tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournament = $tournamentService->getTournament($idTournament);
+
+        if(!$tournament instanceof Tournament){
+            return $this->util->setResponse(400, Literals::TournamentNotFound);
+        }
+        else{
+            $dataToSend = json_encode(array('inscription' => $inscriptions));
+            return $this->util->setJsonResponse(200, $dataToSend);
+        }
+    }
 }

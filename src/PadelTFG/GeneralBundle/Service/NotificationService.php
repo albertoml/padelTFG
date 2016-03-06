@@ -34,7 +34,7 @@ class NotificationService{
 
     private function setNotificationSave($notification, $params, $tournament){
         $notification->setText(isset($params['text']) ? $params['text'] : '');
-        $notification->setNotificationDate(isset($params['notificationDate']) ? new \DateTime($params['notificationDate']) : null);
+        $notification->setNotificationDate(!empty($params['notificationDate']) ? \DateTime::createFromFormat('d/m/Y', $params['notificationDate']) : null);
         $notification->setTournament($tournament);
         $notification->setStatus($this->statusService->getStatus($this->em, 'notification', 'created'));
         return $notification;
@@ -58,7 +58,7 @@ class NotificationService{
     private function setNotificationModify($notification, $params){
         $notification->setText(isset($params['text']) ? $params['text'] : $notification->getText());
         $notification->setStatus(isset($params['status']) ? $params['status'] : $notification->getStatus());
-        $notification->setNotificationDate(isset($params['notificationDate']) ? new \DateTime($params['notificationDate']) : $notification->getNotificationDate());
+        $notification->setNotificationDate(!empty($params['notificationDate']) ? \DateTime::createFromFormat('d/m/Y', $params['notificationDate']) : $notification->getNotificationDate());
         return $notification;
     }
 

@@ -5,7 +5,9 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
-
+use PadelTFG\GeneralBundle\Service\CategoryService as CategoryService;
+use PadelTFG\GeneralBundle\Service\InscriptionService as InscriptionService;
+use PadelTFG\GeneralBundle\Service\GroupService as GroupService;
 class TournamentService{
 
     var $em;
@@ -41,15 +43,15 @@ class TournamentService{
     private function setTournamentSave($tournament, $params, $user){
         $tournament->setAdmin($user);
         $tournament->setName($params['name']);
-        $tournament->setStartInscriptionDate(isset($params['startInscriptionDate']) ? new \DateTime($params['startInscriptionDate']) : null);
-        $tournament->setEndInscriptionDate(isset($params['endInscriptionDate']) ? new \DateTime($params['endInscriptionDate']) : null);
-        $tournament->setStartGroupDate(isset($params['startGroupDate']) ? new \DateTime($params['startGroupDate']) : null);
-        $tournament->setEndGroupDate(isset($params['endGroupDate']) ? new \DateTime($params['endGroupDate']) : null);
-        $tournament->setStartFinalDate(isset($params['startFinalDate']) ? new \DateTime($params['startFinalDate']) : null);
-        $tournament->setEndFinalDate(isset($params['endFinalDate']) ? new \DateTime($params['endFinalDate']) : null);
-        $tournament->setRegisteredLimit(isset($params['registeredLimit']) ? $params['registeredLimit'] : 0);
-        $tournament->setImage(isset($params['image']) ? $params['image'] : '');
-        $tournament->setStatus($this->statusService->getStatus($this->em, 'tournament', 'created'));
+        $tournament->setStartInscriptionDate(!empty($params['startInscriptionDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startInscriptionDate']) : null);
+        $tournament->setEndInscriptionDate(!empty($params['endInscriptionDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endInscriptionDate']) : null);
+        $tournament->setStartGroupDate(!empty($params['startGroupDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startGroupDate']) : null);
+        $tournament->setEndGroupDate(!empty($params['endGroupDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endGroupDate']) : null);
+        $tournament->setStartFinalDate(!empty($params['startFinalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startFinalDate']) : null);
+        $tournament->setEndFinalDate(!empty($params['endFinalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endFinalDate']) : null);
+        $tournament->setRegisteredLimit(!empty($params['registeredLimit']) ? $params['registeredLimit'] : 0);
+        $tournament->setImage(!empty($params['image']) ? $params['image'] : '');
+        $tournament->setStatus($this->statusService->getStatus($this->em, 'tournament', 'Created'));
 
         return $tournament;
     }
@@ -72,13 +74,13 @@ class TournamentService{
     private function setTournamentModify($tournament, $params){
 
         $tournament->setName(isset($params['name']) ? $params['name'] : $tournament->getName());
-        $tournament->setCreationDate(isset($params['creationDate']) ? new \DateTime($params['creationDate']) : $tournament->getCreationDate());
-        $tournament->setStartInscriptionDate(isset($params['startInscriptionDate']) ? new \DateTime($params['startInscriptionDate']) : $tournament->getStartInscriptionDate());
-        $tournament->setEndInscriptionDate(isset($params['endInscriptionDate']) ? new \DateTime($params['endInscriptionDate']) : $tournament->getEndInscriptionDate());
-        $tournament->setStartGroupDate(isset($params['startGroupDate']) ? new \DateTime($params['startGroupDate']) : $tournament->getStartGroupDate());
-        $tournament->setEndGroupDate(isset($params['endGroupDate']) ? new \DateTime($params['endGroupDate']) : $tournament->getEndGroupDate());
-        $tournament->setStartFinalDate(isset($params['startFinalDate']) ? new \DateTime($params['startFinalDate']) : $tournament->getStartFinalDate());
-        $tournament->setEndFinalDate(isset($params['endFinalDate']) ? new \DateTime($params['endFinalDate']) : $tournament->getEndFinalDate());
+        $tournament->setCreationDate(!empty($params['creationDate']) ? \DateTime::createFromFormat('d/m/Y', $params['creationDate']) : $tournament->getCreationDate());
+        $tournament->setStartInscriptionDate(!empty($params['startInscriptionDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startInscriptionDate']) : $tournament->getStartInscriptionDate());
+        $tournament->setEndInscriptionDate(!empty($params['endInscriptionDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endInscriptionDate']) : $tournament->getEndInscriptionDate());
+        $tournament->setStartGroupDate(!empty($params['startGroupDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startGroupDate']) : $tournament->getStartGroupDate());
+        $tournament->setEndGroupDate(!empty($params['endGroupDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endGroupDate']) : $tournament->getEndGroupDate());
+        $tournament->setStartFinalDate(!empty($params['startFinalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startFinalDate']) : $tournament->getStartFinalDate());
+        $tournament->setEndFinalDate(!empty($params['endFinalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endFinalDate']) : $tournament->getEndFinalDate());
         $tournament->setRegisteredLimit(isset($params['registeredLimit']) ? $params['registeredLimit'] : $tournament->getRegisteredLimit());
         $tournament->setImage(isset($params['image']) ? $params['image'] : $tournament->getImage());
         $tournament->setStatus(isset($params['status']) ? $params['status'] : $tournament->getStatus());
@@ -103,5 +105,29 @@ class TournamentService{
     public function deleteTournament($tournament){
         $this->em->remove($tournament);
         $this->em->flush();
+    }
+
+    public function closeInscriptionTournament($tournament, $params){
+        $categoryService = new CategoryService();
+        $inscriptionService = new InscriptionService();
+        $groupService = new GroupService();
+        $categoryService->setManager($this->em);
+        $inscriptionService->setManager($this->em);
+        $groupService->setManager($this->em);
+
+        $categories = $categoryService->getCategoryByTournament($tournament->getId());
+        $inscriptionsToSend = array();
+
+        foreach ($categories as $category) {
+            $inscriptions = $inscriptionService->getInscriptionsByCategory($category->getId());
+            for ($i=0; $i < $params[$category->getName()]; $i++) { 
+                $group = array('name' => 'Group ' . $i,
+                                'category' => $category,
+                                'tournament' => $tournament);
+                $groupService->saveGroup($group);   
+            }
+        }
+        $result = array('result' => 'ok', 'message' => $inscriptionsToSend);
+        return $result;
     }
 }

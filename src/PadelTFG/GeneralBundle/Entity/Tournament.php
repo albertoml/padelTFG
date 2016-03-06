@@ -55,9 +55,7 @@ class Tournament implements JsonSerializable
 		@Assert\GreaterThan("today") */
 	protected $startFinalDate;
 
-	/** @ORM\Column(type="datetime", nullable=true)
-		@Assert\DateTime()
-		@Assert\GreaterThan("today") */
+	/** @ORM\Column(type="datetime", nullable=true) */
 	protected $endFinalDate;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\TournamentStatus") */

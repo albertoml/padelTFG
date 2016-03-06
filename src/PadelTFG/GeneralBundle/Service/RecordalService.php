@@ -34,7 +34,7 @@ class RecordalService{
 
     private function setRecordalSave($recordal, $params){
         $recordal->setText(isset($params['text']) ? $params['text'] : '');
-        $recordal->setRecordalDate(isset($params['recordalDate']) ? new \DateTime($params['recordalDate']) : null);
+        $recordal->setRecordalDate(!empty($params['recordalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['recordalDate']) : null);
         $recordal->setStatus($this->statusService->getStatus($this->em, 'recordal', 'created'));
         return $recordal;
     }
@@ -57,7 +57,7 @@ class RecordalService{
     private function setRecordalModify($recordal, $params){
         $recordal->setText(isset($params['text']) ? $params['text'] : $recordal->getText());
         $recordal->setStatus(isset($params['status']) ? $params['status'] : $recordal->getStatus());
-        $recordal->setRecordalDate(isset($params['recordalDate']) ? new \DateTime($params['recordalDate']) : $recordal->getRecordalDate());
+        $recordal->setRecordalDate(!empty($params['recordalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['recordalDate']) : $recordal->getRecordalDate());
         return $recordal;
     }
 

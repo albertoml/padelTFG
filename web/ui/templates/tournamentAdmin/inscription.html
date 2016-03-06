@@ -1,0 +1,21 @@
+<div class="inscriptionItem">
+	<div class="col-lg-5" style="margin-top: 15px">
+	    <label><%= dataLiterals.player1 %></label>
+	</div>
+	<div class="col-lg-5" style="margin-top: 15px">
+	    <label><%= dataLiterals.player2 %></label>
+	</div>
+	<div class="col-lg-5">
+	    <select class="player1" style="width:100%" name="<%= userLogged %>">
+	      <option value="PlayerUndefined" selected="selected"><%= dataLiterals.placeholderPair %></option>
+	    </select>
+	</div>
+	<div class="col-lg-5">
+	    <select class="player2" style="width:100%" name="<%= userLogged %>">
+	      <option value="PlayerUndefined" selected="selected"><%= dataLiterals.placeholderPair %></option>
+	    </select>
+	</div>
+	<div class="col-lg-1">
+	    <button id="deleteItemInscription"><i class="fa fa-times"></i></button>
+	</div>
+</div>

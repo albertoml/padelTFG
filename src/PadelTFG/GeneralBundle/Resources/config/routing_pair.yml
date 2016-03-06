@@ -44,3 +44,9 @@ pair_post:
     defaults: { _controller: GeneralBundle:Pair:postPair, _format: ~ }
     requirements:
         _method: POST
+
+check_pairs_by_users:
+    path:  /pair/checkAndCreatePairsByUsers
+    defaults: { _controller: GeneralBundle:Pair:checkAndCreatePairsByUsers, _format: ~ }
+    requirements:
+        _method: POST

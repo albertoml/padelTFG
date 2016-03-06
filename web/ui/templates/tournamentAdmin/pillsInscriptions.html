@@ -1,0 +1,27 @@
+<ul class="nav nav-tabs">
+    <% _.each(dataTemplate, function(item, index) { 
+        if(item.active == 1){ %>
+            <li class="active"><a data-toggle="tab" href="#<%= item.categoryName %>"><%= item.categoryKey %></a></li>
+        <% } else { %>
+            <li><a data-toggle="tab" href="#<%= item.categoryName %>"><%= item.categoryKey %></a></li>
+        <% }
+    }); %>
+</ul>
+
+<div class="tab-content">
+    <% _.each(dataTemplate, function(item, index) { 
+        if(item.active == 1){ %>
+            <div id="<%= item.categoryName %>" class="tab-pane fade in active">
+                <h3><%= item.categoryKey %></h3>
+                <%= item.dataTableCategory %>
+                <button id="addInscription" name="<%= item.categoryId %>" class="col-lg-5 btn btn-default buttonCloseTournament"><%= dataLiterals.addInscriptions %></button> 
+            </div>
+        <% } else { %>
+            <div id="<%= item.categoryName %>" class="tab-pane fade">
+                <h3><%= item.categoryKey %></h3>
+                <%= item.dataTableCategory %>
+                <button id="addInscription" name="<%= item.categoryId %>" class="col-lg-5 btn btn-default buttonCloseTournament"><%= dataLiterals.addInscriptions %></button> 
+            </div>
+        <% } %>
+    <% }); %>
+</div>

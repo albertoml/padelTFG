@@ -1,7 +1,7 @@
 <div class="col-lg-12 observation" style="margin-top:10px">
 	<div class="col-lg-4">
 		<% if(typeof(content) == "undefined" || !content){ %>
-			<input type="date" class="date" placeholder="<%= dataLiterals.date %>">
+			<input type="text" class="date form-control" placeholder="<%= dataLiterals.date %>">
 		<% } else {
     		var d = new Date(content.date.date);
     		var month = d.getMonth() + 1;
@@ -9,27 +9,27 @@
 			var day = d.getDate();
 			var fullDay = ("0" + day).slice(-2);
             fragments = [
-            	d.getFullYear(),
+            	fullDay,
                 fullMonth,
-                fullDay
+                d.getFullYear()
             ]; 
-        	var dateToPrint = fragments.join('-'); %>
+        	var dateToPrint = fragments.join('/'); %>
 
-			<input type="date" class="date" placeholder="<%= dataLiterals.date %>" value="<%= dateToPrint %>">
+			<input type="text" class="date form-control" placeholder="<%= dataLiterals.date %>" value="<%= dateToPrint %>">
 		<% } %>
 	</div>
 	<div class="col-lg-3">
 		<% if(typeof(content) == "undefined" || !content){ %>
-			<input type="text" class="fromHour" placeholder="<%= dataLiterals.fromHour %>">
+			<input type="number" class="fromHour form-control" placeholder="<%= dataLiterals.fromHour %>">
 		<% } else { %>
-			<input type="text" class="fromHour" placeholder="<%= dataLiterals.fromHour %>" value="<%= content.fromHour %>">
+			<input type="number" class="fromHour form-control" placeholder="<%= dataLiterals.fromHour %>" value="<%= content.fromHour %>">
 		<% } %>
 	</div>
 	<div class="col-lg-3">
 		<% if(typeof(content) == "undefined" || !content){ %>
-			<input type="text" class="toHour" placeholder="<%= dataLiterals.toHour %>">
+			<input type="number" class="toHour form-control" placeholder="<%= dataLiterals.toHour %>">
 		<% } else { %>
-			<input type="text" class="toHour" placeholder="<%= dataLiterals.toHour %>" value="<%= content.toHour %>">
+			<input type="number" class="toHour form-control" placeholder="<%= dataLiterals.toHour %>" value="<%= content.toHour %>">
 		<% } %>
 	</div>
 	<div class="col-lg-1">

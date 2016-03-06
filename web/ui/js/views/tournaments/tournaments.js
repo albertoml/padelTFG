@@ -11,6 +11,7 @@ define([
         el: '.tournaments',
         events: {
             'click button[id="doInscription"]': 'doInscription',
+            'refreshSection' : 'render',
             'click button[id="insertObservation"]': 'addObservation',
             'click button[id="deleteObservation"]': 'deleteObservation',
             'click button[id="saveInscription"]': 'saveInscription'
@@ -18,20 +19,26 @@ define([
         initialize: function(model, params){
             var _self = this;
             this.params = params;
+            _self.model = model;
             if(!_.isUndefined(model)){
-                _self.model = model;
-                $.ajax({
-                    type: 'GET',
-                    async: false,
-                    url: params.getTournaments,
-                    success: function (response) {
-                        _self.tournaments = response.tournament;
-                    }
-                });
+                
+                
             }
+        },
+        getData: function(){      
+            var _self = this;          
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: _self.params.tournamentAdminURL,
+                success: function (response) {
+                    _self.tournaments = response.tournament;
+                }
+            });
         },
         render: function() {
             var _self = this;
+            this.getData();
             var template = _.template(DataTableTemplate, {
                 tableId : 'tournamentsTable'
             });
@@ -124,7 +131,7 @@ define([
                         if(nameLogged != u.name){
                             var user = {
                                 'id' : u.id,
-                                'text' : u.name
+                                'text' : u.name + " " + u.lastName
                             }
                             users.push(user);
                         }
@@ -188,6 +195,13 @@ define([
                 dataLiterals : literals
             });
             $('#observations').append(template);
+            $('.date').last().datepicker({
+                format: "dd/mm/yyyy",
+                language: "en",
+                weekStart: 1,
+                daysOfWeekDisabled: "1,2,3,4",
+                daysOfWeekHighlighted: "5,6,0"
+            });
         },
         deleteObservation: function(e){
             if(e.target.tagName == "I"){
@@ -299,8 +313,6 @@ define([
                     $('.common').trigger('showErrorAlert', [msg.responseJSON.error]);
                 }
             });
-
-
         }
     });
     return TournamentsView;

@@ -1,0 +1,29 @@
+<div id="<%= profileId %>" class="<%= profileId %>" style="display:inline-block;width:100%">
+    <div class="col-lg-12">
+    <% _.each(dataTemplate, function(item, index) {
+        if(item.editable == false){
+            var disabled = 'disabled';
+        } else {
+            var disabled = '';
+        } %>
+        <div class="col-lg-12">
+            <div class="col-lg-4" style="margin-top: 8px;">
+                <label><%= item.text %></label>
+            </div>
+            <div class="input-group col-lg-8 <%= item.key %>NewTournament" style="margin-bottom: 10px;">
+                <% if(item.type == 'text' || item.type == 'date'){ %>
+                    <input type="text" class="form-control" aria-label="..." placeholder="<%= item.text %>" <%= disabled %>>
+                <% } if (item.type == 'select'){ %>
+                    <select id="select<%= item.key %>" style="width:100%" <%= disabled %>></select>
+                <% } %>
+                <% if (item.type == 'number'){ %>
+                    <input type="number" class="form-control" aria-label="..." placeholder="<%= item.text %>" <%= disabled %>>
+                <% } %>
+                <% if (item.type == 'file'){ %>
+                    <input type="file" class="form-control" aria-label="..." placeholder="<%= item.text %>" <%= disabled %>>
+                <% } %>
+            </div>
+        </div>
+    <% }); %>
+    </div>
+</div>

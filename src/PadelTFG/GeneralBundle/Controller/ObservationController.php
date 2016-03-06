@@ -74,6 +74,24 @@ class ObservationController extends FOSRestController
         return $this->util->setJsonResponse(201, $dataToSend);
     }
 
+    public function postOneObservationsAction(){
+        $this->observationService->setManager($this->getDoctrine()->getManager());
+        $inscriptionService = new InscriptionService();
+        $inscriptionService->setManager($this->getDoctrine()->getManager());
+
+        $params = array();
+        $content = $this->get("request")->getContent();
+        $params = json_decode($content, true);
+        $inscription = $inscriptionService->getInscription($params['inscription']);
+        $observations = $this->observationService->saveObservation($params['observation'], $inscription, $this);
+        if($observations['result'] == 'fail'){
+            $dataToSend = json_encode(array('error' => $observations['message']));
+            return $this->util->setResponse(400, $dataToSend);
+        }
+        $dataToSend = json_encode(array('observations' => $observations['message']));
+        return $this->util->setJsonResponse(201, $dataToSend);
+    }
+
     public function deleteObservationAction($id){
 
         $this->observationService->setManager($this->getDoctrine()->getManager());

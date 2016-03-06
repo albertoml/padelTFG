@@ -40,9 +40,29 @@ class InscriptionService{
     }
 
     public function getInscriptionsByTournament($idTournament){
-        $repository = $this->em->getRepository('GeneralBundle:Inscription');
-        $inscriptions = $repository->findByTournament($idTournament);
-        return $inscriptions;
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+        $categories = $categoryService->getCategoryByTournament($idTournament);
+        $returnInscriptions = array();
+        foreach ($categories as $category) {
+            $inscriptions = $this->getInscriptionsByCategory($category->getId());
+            $returnInscriptions[$category->getName() . ';' . $category->getId()] = $inscriptions;
+        }
+        return $returnInscriptions;
+    }
+
+    public function getCountInscriptionsByTournamentByCategory($idTournament){
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+        $categories = $categoryService->getCategoryByTournament($idTournament);
+        $returnInscriptions = array();
+        foreach ($categories as $category) {
+            $inscriptions = $this->getCountInscriptionsInCategory($category->getId());
+            $returnInscriptions[$category->getName()] = $inscriptions;
+        }
+        $returnInscriptionsTotal['totalTournament'] = $this->getCountInscriptionsInTournament($idTournament);
+        $returnInscriptionsTotal['category'] = $returnInscriptions;
+        return $returnInscriptionsTotal;
     }
 
     public function getInscriptionsByCategory($idCategory){

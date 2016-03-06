@@ -40,7 +40,7 @@ class ObservationService{
     }
 
     private function setObservationSave($observation, $params, $inscription){
-        $observation->setDate(new \DateTime($params['date']));
+        $observation->setDate(\DateTime::createFromFormat('d/m/Y', $params['date']));
         $observation->setFromHour($params['fromHour']);
         $observation->setToHour($params['toHour']);
         $observation->setInscription($inscription);
@@ -95,7 +95,9 @@ class ObservationService{
             $errorsString = (string) $errors;
             return array('result' => 'fail', 'message' => $errorsString);
         }
-        $this->em->persist($observation);   
+        $inscription->setHasObservations(true);
+        $this->em->persist($observation);
+        $this->em->persist($inscription);   
         $this->em->flush();
         return array('result' => 'ok', 'message' => 'Ok');
     }
@@ -103,5 +105,11 @@ class ObservationService{
     public function deleteObservation($observation){
         $this->em->remove($observation);
         $this->em->flush();
+        $inscription = $observation->getInscription();
+        if(empty($this->getObservationByInscription($inscription))){
+            $inscription->setHasObservations(false);
+            $this->em->persist($inscription);
+            $this->em->flush();
+        }    
     }
 }

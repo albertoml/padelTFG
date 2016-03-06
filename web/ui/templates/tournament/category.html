@@ -1,0 +1,37 @@
+<div class="col-lg-12 category" style="margin-top:10px">
+	<div class="col-lg-4">
+		<% if(typeof(content) == "undefined" || !content){ %>
+			<input type="text" class="name form-control" placeholder="<%= dataLiterals.name %>">
+		<% } else { %>
+			<input type="text" class="name form-control" placeholder="<%= dataLiterals.name %>" value="<%= content.name %>">
+		<% } %>
+	</div>
+	<div class="col-lg-3">
+        <% if(typeof(content) == "undefined" || !content){ %>
+            <select class="selectGender form-control" id="selectGender" placeholder="<%= dataLiterals.gender %>" style="width:100%">
+				<option selected="true"><%= dataLiterals.selectGenderPlaceholder %></option>
+            </select>
+        <% } else { %>
+            <select class="selectGender form-control" id="selectGender" placeholder="<%= dataLiterals.gender %>" style="width:100%">
+				<option selected="true"><%= dataLiterals.selectGenderPlaceholder %></option>
+            </select>
+        <% } %>
+    </div>
+	<div class="col-lg-2">
+        <% if(typeof(content) == "undefined" || !content){ %>
+            <input type="number" class="registeredLimit form-control" placeholder="<%= dataLiterals.registeredLimit %>">
+        <% } else { %>
+            <input type="number" class="registeredLimit form-control" placeholder="<%= dataLiterals.registeredLimit %>" value="<%= content.registeredLimit %>">
+        <% } %>
+    </div>
+    <div class="col-lg-2">
+        <% if(typeof(content) == "undefined" || !content){ %>
+            <input type="number" class="registeredMin form-control" placeholder="<%= dataLiterals.registeredMin %>">
+        <% } else { %>
+            <input type="number" class="registeredMin form-control" placeholder="<%= dataLiterals.registeredMin %>" value="<%= content.registeredMin %>">
+        <% } %>
+    </div>
+    <div class="col-lg-1">
+        <button id="deleteCategory"><i class="fa fa-times"></i></button>
+    </div>
+</div>

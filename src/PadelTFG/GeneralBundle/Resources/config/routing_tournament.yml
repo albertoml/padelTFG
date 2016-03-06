@@ -30,3 +30,10 @@ tournament_delete:
     requirements:
         _method: DELETE
         id: "\d+"
+
+tournament_close_inscription:
+    path:  /tournament/closeInscription/{id}
+    defaults: { _controller: GeneralBundle:Tournament:closeInscriptionTournament, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"

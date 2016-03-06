@@ -90,15 +90,7 @@ define([
                 }, {
                     'sTitle': literals.inscriptionsFields.options,
                     'mRender': function (data, type, full) {
-                        var addClass = "";
-                        if(!full.hasObservations){
-                            addClass = "noObservations";
-                        }
-                        else{
-                            addClass = "hasObservations";
-                        }
-
-                        var button = "<button class=" + addClass + " id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
+                        var button = "<button id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
                         button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
                         return button;
                     }
@@ -109,13 +101,14 @@ define([
         viewObservations: function(e){
             var _self = this;
             _self.inscriptionId = e.target.name;
-            if(e.target.className.indexOf("hasObservations") > -1){
-                var observations = _self.getObservations(e.target.name);
+            var observations = _self.getObservations(e.target.name);
+            if(observations.length > 0){
+                var modal = _self.renderModal(observations);
             }
             else{
-                var observations = null;
+                var modal = _self.renderModal(null);
             }
-            var modal = _self.renderModal(observations);
+            
             $(modal).modal();
             $('#' + this.modalID + ' .modal-dialog').css({'width':'600px'});
             this.setElement(_self.$el.add('#' + this.modalID));
@@ -168,6 +161,14 @@ define([
                 dataLiterals : literals
             });
             $('#observations').append(template);
+            $('.date').last().datepicker({
+                format: "dd/mm/yyyy",
+                startDate: new Date(),
+                language: "en",
+                weekStart: 1,
+                daysOfWeekHighlighted: "5,6,0",
+                autoclose: true
+            });
         },
         deleteObservation: function(e){
             if(e.target.tagName == "I"){
@@ -235,6 +236,7 @@ define([
                 data: JSON.stringify(observationsToSend),
                 success: function (response) {
                     $('.common').trigger('showSuccesAlert', [literals.successMessageTextObservations]);
+                    _self.render();
                     $('#' + _self.modalID).modal('hide');
                 },
                 error: function(msg){

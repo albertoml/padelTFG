@@ -18,7 +18,8 @@
     "DataTables": null,
     "bootstrap-modal": null,
     "datatables-tabletools": null,
-    "select2": null
+    "select2": null,
+    "bootstrap-datepicker": null
   },
   "ignore": [
     "**/.*",

@@ -20,6 +20,9 @@ class GroupCategory implements JsonSerializable
 	/** @ORM\Column(type="string", length=50) */
 	protected $name;
 
+	/** @ORM\Column(type="integer", nullable=true) */
+	protected $numPairs;
+
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament")
 	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
 	protected $tournament;
