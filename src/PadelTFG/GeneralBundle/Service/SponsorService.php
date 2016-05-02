@@ -32,8 +32,8 @@ class SponsorService{
     }
 
     private function setSponsorSave($sponsor, $params){
-        $sponsor->setName($params['name']);
-        $sponsor->setCif($params['cif']);
+        $sponsor->setName(!empty($params['name']) ? $params['name'] : '');
+        $sponsor->setCif(!empty($params['cif']) ? $params['cif'] : '');
         $sponsor->setStatus($this->statusService->getStatus($this->em, 'sponsor', 'active'));
 
         return $sponsor;
@@ -54,10 +54,9 @@ class SponsorService{
         return array('result' => 'ok', 'message' => $sponsor);
     }
 
-        private function setSponsorModify($sponsor, $params){
+    private function setSponsorModify($sponsor, $params){
 
         $sponsor->setName(isset($params['name']) ? $params['name'] : $sponsor->getName());
-        $sponsor->setCif(isset($params['cif']) ? $params['cif'] : $sponsor->getCif());
         $sponsor->setStatus(isset($params['status']) ? $params['status'] : $sponsor->getStatus());
 
         return $sponsor;

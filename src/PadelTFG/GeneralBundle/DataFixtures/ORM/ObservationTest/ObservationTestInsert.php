@@ -39,18 +39,18 @@ class ObservationTestInsert implements FixtureInterface
 		}
 		$manager->flush();
 
-		$category = new Category();
-		$category->setName('Category Observation');
-		$manager->persist($category);	
-		$manager->flush();
-
 		$tournament = new Tournament();
 		$repository = $manager->getRepository('GeneralBundle:User');
 		$userAdmin = $repository->findOneByName('UserObservationTest');
 		$tournament->setAdmin($userAdmin);
 		$tournament->setName('ObservationTournamentName');
-		$tournament->addCategory($category);
 		$manager->persist($tournament);	
+		$manager->flush();
+
+		$category = new Category();
+		$category->setName('Category Observation');
+		$category->setTournament($tournament);
+		$manager->persist($category);	
 		$manager->flush();
 
 		$repository = $manager->getRepository('GeneralBundle:User');
@@ -96,10 +96,8 @@ class ObservationTestInsert implements FixtureInterface
 		$inscription2 = $repository->findOneByPair($pair2);
 
 		$Observations = array(
-			array('date' => new \DateTime(), 'fromHour' => 10, 'toHour' => 14, 'available' => true,
-				'inscription' => $inscription1),
-			array('date' => new \DateTime(), 'fromHour' => 16, 'toHour' => 18, 'available' => false,
-				'inscription' => $inscription2)
+			array('date' => new \DateTime(), 'fromHour' => 10, 'toHour' => 14, 'inscription' => $inscription1),
+			array('date' => new \DateTime(), 'fromHour' => 16, 'toHour' => 18, 'inscription' => $inscription2)
 			);
 
 		foreach ($Observations as $key) {
@@ -107,7 +105,6 @@ class ObservationTestInsert implements FixtureInterface
 			$entity->setDate($key['date']);
 			$entity->setFromHour($key['fromHour']);
 			$entity->setToHour($key['toHour']);
-			$entity->setAvailable($key['available']);
 			$entity->setInscription($key['inscription']);
 			$manager->persist($entity);	
 		}

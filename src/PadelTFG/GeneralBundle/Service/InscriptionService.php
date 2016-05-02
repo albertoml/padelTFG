@@ -12,6 +12,8 @@ use PadelTFG\GeneralBundle\Service\TournamentService as TournamentService;
 use PadelTFG\GeneralBundle\Service\CategoryService as CategoryService;
 use PadelTFG\GeneralBundle\Service\PairService as PairService;
 use PadelTFG\GeneralBundle\Service\ObservationService as ObservationService;
+use PadelTFG\GeneralBundle\Service\GroupService as GroupService;
+
 
 class InscriptionService{
 
@@ -77,6 +79,17 @@ class InscriptionService{
         return $inscriptions;
     }
 
+    public function getInscriptionsByPairAndCategory($idPair, $idCategory){
+        $query = $this->em->createQuery(
+            'SELECT i FROM GeneralBundle:Inscription i WHERE i.category = :category AND i.pair = :pair'
+        )->setParameters(array(
+            'category' => $idCategory,
+            'pair' => $idPair
+        ));
+        $inscriptions = $query->getSingleResult();
+        return $inscriptions;
+    }
+
     public function getInscriptionsByUser($idUser){
         $pairService = new PairService();
         $pairService->setManager($this->em);
@@ -88,8 +101,30 @@ class InscriptionService{
                 $inscriptions[] = $ins;
             }
         }
-
         return $inscriptions;
+    }
+
+    public function getInscriptionsByGroupForATournament($idTournament){
+        $groupService = new GroupService();
+        $groupService->setManager($this->em);
+        $groupsinTournament = $groupService->getGroupsByTournament($idTournament);
+        $returnInscriptions = array();
+        foreach ($groupsinTournament as $indexCategory=>$groupsInCategory) {
+            $inscriptions = $this->getInscriptionsByGroupForACategory($groupsInCategory);
+            $returnInscriptions[$indexCategory] = $inscriptions;
+        }
+        return $returnInscriptions;
+    }
+
+    public function getInscriptionsByGroupForACategory($groupsInCategory){
+        $groupService = new GroupService();
+        $groupService->setManager($this->em);
+        $returnInscriptions = array();
+        foreach ($groupsInCategory as $group) {
+            $inscriptions = $this->getInscriptionsByGroup($group->getId());
+            $returnInscriptions[$group->getName() . ';' . $group->getId()] = $inscriptions;
+        }
+        return $returnInscriptions;
     }
 
     public function getInscriptionsByGroup($idGroup){
@@ -147,7 +182,7 @@ class InscriptionService{
         if(!$tournament instanceof Tournament){
             return Literals::TournamentNotFound;
         }
-        if($category->getTournament()->getId() != $tournament->getId()){
+        if($category->getTournament() != null && $category->getTournament()->getId() != $tournament->getId()){
             return Literals::CategoryIncorrect;
         }
         return null;
@@ -188,6 +223,7 @@ class InscriptionService{
         $inscription = $query->getResult();
 
         $checked['message'] = "";
+        $checked['result'] = false;
 
         if($inscription == null){
             $pair = $this->getPairFromId($pairId);
@@ -199,7 +235,7 @@ class InscriptionService{
             }
             else if($tournament->getRegisteredLimit() != null && 
 $tournament->getRegisteredLimit() == $this->getCountInscriptionsInTournament($tournament->getId())){
-                $checked['message'] .= $pairId . ' ' . Literals::TournamentInscriptionLimit;
+                $checked['message'] .= $tournament->getId() . ' ' . Literals::TournamentInscriptionLimit;
             }
             else if($category->getRegisteredLimitMax() != null && 
 $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($category->getId())){
@@ -228,6 +264,7 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
 
             $checked = null;
             $checked['message'] = "";
+            $messageToShow = "";
             $inscriptions = 0;
             foreach ($params['pair'] as $objIns) {
                 if(!empty($objIns['pairId'])){
@@ -246,7 +283,7 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
                             $observationService->setManager($this->em);
                             $resumeToObservationsInsert = $observationService->saveObservations($objIns['observations'], $newInscription, $controller);
                             if($resumeToObservationsInsert['result'] == 'fail'){
-                                $checked['message'] .= $resumeToObservationsInsert['message'];
+                                $messageToShow .= $resumeToObservationsInsert['message'];
                             }
                             else{
                                 $newInscription->setHasObservations(true);
@@ -258,19 +295,22 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
                             $this->em->persist($newInscription);
                         }
                     }
+                    else{
+                        $messageToShow .= $checked['message'];
+                    }
                 }
                 else{
-                    $checked['message'] .= Literals::PairNotFound;
+                    $messageToShow .= Literals::PairNotFound;
                 }
             }
             $this->em->flush();
             
             if($inscriptions == 0){
-                return array('result' => 'fail', 'message' => $checked['message']);
+                return array('result' => 'fail', 'message' => $messageToShow);
             }
             else{
-                $checked['message'] .= $inscriptions . ' ' . Literals::Inscriptions;
-                return array('result' => 'ok', 'message' => $checked['message']);
+                $messageToShow .= $inscriptions . ' ' . Literals::Inscriptions;
+                return array('result' => 'ok', 'message' => $messageToShow);
             }     
         }
         else {

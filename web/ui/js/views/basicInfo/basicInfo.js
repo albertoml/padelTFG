@@ -215,26 +215,31 @@ define([
         },
         saveProfile: function(){
             var _self = this;
-            var result = confirm(literals.confirmSaveProfile);
-            if(result){
-                var changes = _self.getChanges();
-                var changesPreferences = _self.getPreferencesChanges();
-                _self.model.save(changes);
-                var urlToSend = _self.params.getUserPreferences.replace('{idUser}', _self.model.get('id'));
-                $.ajax({
-                    type: 'PUT',
-                    data: JSON.stringify(changesPreferences),
-                    url: urlToSend,
-                    success: function (response) {
-                        _self.userPreferences = response.userPreference;
-                        _self.render();
-                    }
-                });
-            }
-            $('#' + this.modalID).modal('hide');
+            var changes = _self.getChanges();
+            var changesPreferences = _self.getPreferencesChanges();
+            _self.model.save(changes, {
+                error: function(model, error){
+                    $('.common').trigger('showErrorAlert', [error.responseText]);
+                    _self.model.attributes = _self.model.previousAttributes();
+                },
+                success: function(model){
+                    var urlToSend = _self.params.getUserPreferences.replace('{idUser}', _self.model.get('id'));
+                    $.ajax({
+                        type: 'PUT',
+                        data: JSON.stringify(changesPreferences),
+                        url: urlToSend,
+                        success: function (response) {
+                            _self.userPreferences = response.userPreference;
+                            _self.render();
+                        }
+                    });
+                    $('#' + _self.modalID).modal('hide');
+                }
+            });
         },
         cancelProfile: function(){
             var _self = this;
+            _self.model.attributes = _self.model.previousAttributes();
             $('#' + this.modalID).modal('hide');
             this.render();
         },

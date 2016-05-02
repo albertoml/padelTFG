@@ -5,32 +5,40 @@ namespace PadelTFG\GeneralBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 
 use PadelTFG\GeneralBundle\Resources\globals\Utils as Util;
+use PadelTFG\GeneralBundle\Service\GroupService as GroupService;
+use PadelTFG\GeneralBundle\Service\TournamentService as TournamentService;
+use PadelTFG\GeneralBundle\Service\CategoryService as CategoryService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
 use PadelTFG\GeneralBundle\Entity\GroupCategory;
+use PadelTFG\GeneralBundle\Entity\Tournament;
+use PadelTFG\GeneralBundle\Entity\Category;
 
 class GroupController extends FOSRestController
 {
 
     var $util;
+    var $groupService;
 
     function __construct(){ 
         $this->util = new Util();
+        $this->groupService = new GroupService();
     }
 
 	public function allGroupAction(){
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:GroupCategory');
-        $groups = $repository->findAll();
+
+        $this->groupService->setManager($this->getDoctrine()->getManager());
+        $groups = $this->groupService->allGroups();
         $dataToSend = json_encode(array('group' => $groups));
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 
     public function getGroupAction($id){
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:GroupCategory');
-        $group = $repository->find($id);
+        $this->groupService->setManager($this->getDoctrine()->getManager());
+        $group = $this->groupService->getGroup($id);
 
-        if (!$group instanceof Group) {
+        if (!$group instanceof GroupCategory) {
             return $this->util->setResponse(404, Literals::GroupNotFound);
         }
         $dataToSend = json_encode(array('group' => $group));
@@ -39,13 +47,14 @@ class GroupController extends FOSRestController
 
     public function getGroupByTournamentAction($idTournament){
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:GroupCategory');
-        $groups = $repository->findByTournament($idTournament);
+        $this->groupService->setManager($this->getDoctrine()->getManager());
+        $groups = $this->groupService->getGroupsByTournament($idTournament);
 
-        $repositoryTournament = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:Tournament');
-        $tournament = $repositoryTournament->find($idTournament);
+        $tournamentService = new TournamentService();
+        $tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournament = $tournamentService->getTournament($idTournament);
 
-        if($tournament==null){
+        if(!$tournament instanceof Tournament){
             return $this->util->setResponse(400, Literals::TournamentNotFound);
         }
         else{
@@ -56,13 +65,14 @@ class GroupController extends FOSRestController
 
     public function getGroupByCategoryAction($idCategory){
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:GroupCategory');
-        $groups = $repository->findByCategory($idCategory);
+        $this->groupService->setManager($this->getDoctrine()->getManager());
+        $groups = $this->groupService->getGroupsByCategory($idCategory);
 
-        $repositoryCategory = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:Category');
-        $category = $repositoryCategory->find($idCategory);
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->getDoctrine()->getManager());
+        $category = $categoryService->getCategory($idCategory);
 
-        if($category==null){
+        if(!$category instanceof Category){
             return $this->util->setResponse(400, Literals::CategoryNotFound);
         }
         else{
@@ -71,61 +81,38 @@ class GroupController extends FOSRestController
         }
     }
 
-    private function getInscriptionByCategoryOrderBySeeded($categoryId){
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery(
-            'SELECT i FROM GeneralBundle:Inscription i WHERE i.category = :category ORDER BY i.seeded ASC'
-        )->setParameters(array(
-            'category' => $categoryId
-        ));
-        $inscriptions = $query->getResult();
-        return $inscriptions;
-    }
+    public function postGroupAction(){
 
-    private function generateGroups($categoryId){
+        $this->groupService->setManager($this->getDoctrine()->getManager());
 
-        $inscriptions = $this->getInscriptionByCategoryOrderBySeeded($categoryId);
-        $repository = $this->getDoctrine()->getManager()->getRepository('GeneralBundle:GroupCategory');
-        $groups = $repository->findByCategory($categoryId);
-        $numGroups = count($inscriptions) / count($groups);
-        /*foreach ($inscriptions as $inscription) {
-
-        }*/
-        return $numGroups;
-    }
-
-    public function addGroupForTournamentAction($idTournament){
-            
-    }
-
-    public function addGroupForCategoryAction($idCategory){
-
-        $em = $this->getDoctrine()->getManager();
         $params = array();
         $content = $this->get("request")->getContent();
-        if (!empty($content)){
-
-            $params = json_decode($content, true);
-            if(!empty($params['group'])){
-
-                $repositoryCategory = $em->getRepository('GeneralBundle:Category');
-                $category = $repositoryCategory->find($idCategory);
-                foreach ($params['group'] as $group) {
-                    $groupEntity = new GroupCategory();
-                    $groupEntity->setName($group['name']);
-                    $groupEntity->setCategory($category);
-                    $groupEntity->setTournament($category->getTournament());
-                    $em->persist($groupEntity);
-                }
-                $em->flush();
-                $dataToSend = json_encode(array('group' => $category));
-                return $this->util->setJsonResponse(200, $dataToSend);
-
-            } else {
-                return $this->util->setResponse(400, Literals::GroupNotFound);
-            }
-        } else {
-            return $this->util->setResponse(400, Literals::EmptyContent);
+        $params = json_decode($content, true);
+        if(!empty($params['nextGroupTo'])){
+            $nextGroupTo = $this->groupService->getGroup((int) $params['nextGroupTo']);
+            $params['name'] = Literals::NewGroupLabel;
+            $params['tournament'] = $nextGroupTo->getTournament();
+            $params['category'] = $nextGroupTo->getCategory();
+            $params['numPairs'] = 0;
         }
+        $group = $this->groupService->saveGroup($params);
+        $dataToSend = json_encode(array('group' => $group['message']));
+        return $this->util->setJsonResponse(201, $dataToSend);
+    }
+
+    public function postGroupsTournamentAction(){
+
+        $this->groupService->setManager($this->getDoctrine()->getManager());
+
+        $params = array();
+        $content = $this->get("request")->getContent();
+        $params = json_decode($content, true);
+        $group = $this->groupService->saveGroupsTournament($params);
+        if($group['result'] == 'fail'){
+            $dataToSend = json_encode(array('error' => $group['message']));
+            return $this->util->setResponse(400, $dataToSend);
+        }
+        $dataToSend = json_encode(array('group' => $group['message']));
+        return $this->util->setJsonResponse(201, $dataToSend);
     }
 }

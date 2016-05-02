@@ -39,14 +39,6 @@ class ObservationService{
         return $observations;
     }
 
-    private function setObservationSave($observation, $params, $inscription){
-        $observation->setDate(\DateTime::createFromFormat('d/m/Y', $params['date']));
-        $observation->setFromHour($params['fromHour']);
-        $observation->setToHour($params['toHour']);
-        $observation->setInscription($inscription);
-        return $observation;
-    }
-
     public function saveObservations($observations, $inscription, $controller){
         
         $resumeToObservationsInsert = null;
@@ -82,6 +74,14 @@ class ObservationService{
             }
         }
         return $resumeToObservationsInsert;
+    }
+
+    private function setObservationSave($observation, $params, $inscription){
+        $observation->setDate(!empty($params['date']) ? \DateTime::createFromFormat('d/m/Y', $params['date']) : 'not date');
+        $observation->setFromHour(!empty($params['fromHour']) ? $params['fromHour'] : 0);
+        $observation->setToHour(!empty($params['toHour']) ? $params['toHour'] : 0);
+        $observation->setInscription($inscription);
+        return $observation;
     }
 
     public function saveObservation($params, $inscription, $controller){

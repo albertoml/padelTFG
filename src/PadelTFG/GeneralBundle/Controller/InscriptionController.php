@@ -139,6 +139,24 @@ class InscriptionController extends FOSRestController
         }
     }
 
+    public function getInscriptionByGroupForATournamentAction($idTournament){
+
+        $this->inscriptionService->setManager($this->getDoctrine()->getManager());
+        $inscriptions = $this->inscriptionService->getInscriptionsByGroupForATournament($idTournament);
+
+        $tournamentService = new TournamentService();
+        $tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournament = $tournamentService->getTournament($idTournament);
+
+        if(!$tournament instanceof Tournament){
+            return $this->util->setResponse(400, Literals::TournamentNotFound);
+        }
+        else{
+            $dataToSend = json_encode(array('inscription' => $inscriptions));
+            return $this->util->setJsonResponse(200, $dataToSend);
+        }
+    }
+
     public function postInscriptionAction(){
 
         $this->inscriptionService->setManager($this->getDoctrine()->getManager());
@@ -161,6 +179,7 @@ class InscriptionController extends FOSRestController
         $inscription = $this->inscriptionService->getInscription($id);
 
         if ($inscription instanceof Inscription) {
+
             $inscription = $this->inscriptionService->deleteInscription($inscription);
 
             return $this->util->setResponse(200, Literals::InscriptionDeleted);

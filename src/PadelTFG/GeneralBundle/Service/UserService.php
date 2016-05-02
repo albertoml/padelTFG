@@ -42,10 +42,10 @@ class UserService{
     }
 
     private function setUserSave($user, $params){
-        $user->setName($params['name']);
-        $user->setLastName($params['lastName']);
-        $user->setEmail($params['email']);
-        $user->setPassword($params['password']);
+        $user->setName(isset($params['name']) ? $params['name'] : '');
+        $user->setLastName(isset($params['lastName']) ? $params['lastName'] : '');
+        $user->setEmail(isset($params['email']) ? $params['email'] : '');
+        $user->setPassword(isset($params['password']) ? $params['password'] : '');
         $user->setStatus($this->statusService->getStatus('user', 'Registered'));
         $user->setFirstPhone(isset($params['firstPhone']) ? $params['firstPhone'] : '');
         $user->setSecondPhone(isset($params['secondPhone']) ? $params['secondPhone'] : '');

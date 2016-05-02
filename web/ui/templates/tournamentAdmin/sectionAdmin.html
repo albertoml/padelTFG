@@ -1,3 +1,15 @@
-<section id="viewTournamentInscriptionSection<%= tournamentId %>"></section>
+<section id="viewTournamentAdminSectionTemplate<%= tournamentId %>"></section>
 <hr style="width: 100%">
-<button id='closeTournamentInscription' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.closeTournamentInscriptionButton %></button> 
+
+<% if(tournamentStatus == dataLiterals.tournamentStatus.Created){ %>
+	<button id='startTournament' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.startTournament %></button>
+<% } if(tournamentStatus == dataLiterals.tournamentStatus.InGroupDate){ %>
+	<button id='editGroupsView' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.editGroupViewButton %></button> 
+<% } else { if(tournamentStatus == dataLiterals.tournamentStatus.InInscriptionDate){ %> 
+	<button id='closeTournamentInscription' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.closeTournamentInscriptionButton %></button>
+<% } else{ if(tournamentStatus == dataLiterals.tournamentStatus.MatchsDone){ %> 
+	<button id='showGameCalendar' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.hideGameCalendarButton %></button>
+	<div id='showCalendar<%= tournamentId %>' class="col-lg-12" style="margin-top: 20px">
+		<div id='calendar<%= tournamentId %>'></div>
+	</div>
+<% } }} %>

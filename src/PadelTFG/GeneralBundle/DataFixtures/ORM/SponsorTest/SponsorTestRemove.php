@@ -20,6 +20,7 @@ class SponsorTestRemove implements FixtureInterface
 			array('name' => 'Sponsor TFG4'),
 			array('name' => 'Sponsor TFG5'),
 			array('name' => 'Sponsor POST'),
+			array('name' => 'Sponsor TFGModify'),
 			array('name' => 'Sponsor TFGDELETE')
 		);
 

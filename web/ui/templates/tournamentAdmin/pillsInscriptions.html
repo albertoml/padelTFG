@@ -10,18 +10,18 @@
 
 <div class="tab-content">
     <% _.each(dataTemplate, function(item, index) { 
-        if(item.active == 1){ %>
-            <div id="<%= item.categoryName %>" class="tab-pane fade in active">
-                <h3><%= item.categoryKey %></h3>
-                <%= item.dataTableCategory %>
+        if(item.active == 1){ 
+            var active = 'active';
+        }else{
+            var active = '';
+        }
+        %>
+        <div id="<%= item.categoryName %>" class="tab-pane fade in <%= active %>">
+            <h4 style="margin: 10px"><%= item.typeMode %></h4>
+            <%= item.dataTableCategory %>
+            <% if(tournamentStatus == dataLiterals.tournamentStatus.Created || tournamentStatus == dataLiterals.tournamentStatus.InInscriptionDate){ %>
                 <button id="addInscription" name="<%= item.categoryId %>" class="col-lg-5 btn btn-default buttonCloseTournament"><%= dataLiterals.addInscriptions %></button> 
-            </div>
-        <% } else { %>
-            <div id="<%= item.categoryName %>" class="tab-pane fade">
-                <h3><%= item.categoryKey %></h3>
-                <%= item.dataTableCategory %>
-                <button id="addInscription" name="<%= item.categoryId %>" class="col-lg-5 btn btn-default buttonCloseTournament"><%= dataLiterals.addInscriptions %></button> 
-            </div>
-        <% } %>
+            <% } %>
+        </div>
     <% }); %>
 </div>

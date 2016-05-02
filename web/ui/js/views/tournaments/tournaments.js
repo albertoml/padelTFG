@@ -103,8 +103,11 @@ define([
                 }, {
                     'sTitle': literals.tournamentsFields.options,
                     'mRender': function (data, type, full) {
-                        var button = "<button id='doInscription' name=" + full.id + " title='" + full.name + "'>" + literals.doInscription + "</button>";
-                        return button;
+                        var buttons = "";
+                        if(full.status.value == literals.tournamentStatus.InInscriptionDate){
+                            buttons += "<button id='doInscription' name=" + full.id + " title='" + full.name + "'>" + literals.doInscription + "</button>";
+                        }
+                        return buttons;
                     }
                 }],
                 aaData: _self.tournaments

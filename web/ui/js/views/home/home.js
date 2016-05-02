@@ -3,6 +3,7 @@ define([
     'underscore',
     'models/user/user',
     'models/userRole/userRole',
+    'models/tournament/tournament',
     'i18n!nls/homeLiterals.js',
     'views/basicInfo/basicInfo',
     'views/annotations/annotations',
@@ -17,12 +18,10 @@ define([
     'text!templates/home/pageContent.html',
     'text!templates/common/genericModal.html',
     'text!templates/tournament/newTournamentStep1.html',
-    'text!templates/tournament/newTournamentStep3.html',
-    'text!templates/tournament/category.html',
-    'text!templates/tournament/range.html'], 
-    function(Backbone, _, UserModel, UserRoleModel, Literals, BasicInfoView, AnnotationsView, TournamentAdminView,
+    'text!templates/tournament/category.html'], 
+    function(Backbone, _, UserModel, UserRoleModel, TournamentModel, Literals, BasicInfoView, AnnotationsView, TournamentAdminView,
         TournamentsView, InscriptionsView, GamesView, PairsView, SectionTemplate, ListTreeTemplate, 
-        ListTreeAdmin, PageContentTemplate, genericModalTemplate, NewTournamentStep1Template, NewTournamentStep3Template, CategoryTemplate, RangeTemplate) {
+        ListTreeAdmin, PageContentTemplate, genericModalTemplate, NewTournamentStep1Template, CategoryTemplate) {
 
     var HomeView = Backbone.View.extend({
         el: '.wrapperHome',
@@ -185,10 +184,10 @@ define([
                     section: tr
                 });
                 _self.$('.content-home').append(template);
-                var tournamentAdminView = new TournamentAdminView(_self.userModel, _self.params, tr.key, t);
-                tournamentAdminView.render();
+                var tournamentAdminView = new TournamentAdminView(_self.userModel, _self.params, tr.key, new TournamentModel({id: t.id}));
             });
 
+            // smint for scroll menu
             $('#sidebar-wrapper').smint({
                 'scrollSpeed' : 800
             });
@@ -372,12 +371,14 @@ define([
                 'class="newTournamentStep2 col-lg-12" style="display:inline-block;"><div id="categories"></div>' +
                 '<div id="addCategory"><button style="margin-top:15px" id="insertCategory">' + Literals.addCategory + '</button></div></div>');
                 var categoryTemplate = _.template(CategoryTemplate, {
-                    dataLiterals: Literals.categoryFields
+                    dataLiterals: Literals.categoryFields,
+                    colorNumber: 0
                 });
                 $('#categories').append(categoryTemplate);
                 $('.selectGender').select2({
                     data: _self.genders
                 });
+                iColorPicker();
             }
             else{
                 $('#newTournamentStep2').fadeIn('slow');
@@ -393,20 +394,24 @@ define([
         },
         addCategory: function(){
             var _self = this;
+
+            var numCategory = $('#categories').find('.category').length;
             var template = _.template(CategoryTemplate, {
-                dataLiterals : Literals.categoryFields
+                dataLiterals : Literals.categoryFields,
+                colorNumber: numCategory
             });
             $('#categories').append(template);
             $('.selectGender').last().select2({
                 data: _self.genders
             });
+            iColorPicker();
         },
         deleteCategory: function(e){
             if(e.target.tagName == "I"){
-                e.target.parentElement.parentElement.parentElement.remove();
+                e.target.parentElement.parentElement.parentElement.parentElement.remove();
             }
             else{
-                e.target.parentElement.parentElement.remove();
+                e.target.parentElement.parentElement.parentElement.remove();
             }
         },
         getGenders: function(){
@@ -435,13 +440,15 @@ define([
                 var gender = cat.getElementsByClassName('selectGender')[0].value;
                 var registeredLimit = cat.getElementsByClassName('registeredLimit')[0].value;
                 var registeredMin = cat.getElementsByClassName('registeredMin')[0].value;
+                var categoryColor = cat.getElementsByClassName('categoryColor')[0].value;
 
                 if(name!="" && gender!=Literals.categoryFields.selectGenderPlaceholder){
                     var category = {
                         "name": name,
                         "gender": gender,
                         "registeredLimitMax": registeredLimit,
-                        "registeredLimitMin": registeredMin
+                        "registeredLimitMin": registeredMin,
+                        "bgColor": categoryColor
                     };
                     categories.push(category);
                 }
@@ -496,141 +503,6 @@ define([
                 }
             });
         }
-        /*renderModalStep3: function(){
-            var _self = this;
-            if($('#newTournamentStep3').length == 0){
-                var modalStep3Content = _.template(NewTournamentStep3Template, {
-                    profileId: 'newTournamentStep3',
-                    dataLiterals: Literals.rangeFields
-                });
-                $('#' + this.modalID + ' .modal-body').append('<div id="newTournamentStep3" ' +
-                'class="newTournamentStep3 col-lg-12" style="display:inline-block;">' + modalStep3Content + '</div>');
-            }
-            else{
-                $('#newTournamentStep3').fadeIn('slow');
-            }
-            $('#' + this.modalID + ' .modal-header > h4').text(Literals.modalTitleNewTournamentSchedule);
-            $('#' + this.modalID + ' .modal-footer').html('<button id="backToStep2NewTournament" title="' + 
-                Literals.backStepButtonTitle + '" class="buttonSaveTournament btn btn-default col-lg-2">' + 
-                Literals.backStepButtonTitle + '</button>' + '<button id="nextToStep4NewTournament" title="' + 
-                Literals.nextStepButtonTitle + '" class="buttonSaveTournament btn btn-default col-lg-4">' + 
-                Literals.nextStepButtonTitle + '</button>' + '<button id="cancelTournament" title="' + 
-                Literals.cancelButtonTitle + '" class="buttonSaveTournament btn btn-default" data-dismiss="modal">' + 
-                Literals.cancelButtonTitle + '</button>');
-
-        },
-        backToStep2NewTournament: function(){
-            var _self = this;
-            $('#newTournamentStep3').fadeOut('slow', function(){
-                $('#newTournamentStep2').fadeIn('slow');
-            });
-            $('#' + this.modalID + ' .modal-header > h4').text(Literals.modalTitleNewTournamentCategory);
-            $('#' + this.modalID + ' .modal-footer').html('<button id="backToStep1NewTournament" title="' + 
-                Literals.backStepButtonTitle + '" class="buttonSaveTournament btn btn-default col-lg-2">' + 
-                Literals.backStepButtonTitle + '</button>' + '<button id="nextToStep3NewTournament" title="' + 
-                Literals.nextStepButtonTitle + '" class="buttonSaveTournament btn btn-default col-lg-6">' + 
-                Literals.nextStepButtonTitle + '</button>' + '<button id="cancelTournament" title="' + 
-                Literals.cancelButtonTitle + '" class="buttonSaveTournament btn btn-default" data-dismiss="modal">' + 
-                Literals.cancelButtonTitle + '</button>');
-        },
-        nextToStep3NewTournament: function(){
-            var _self = this;
-            _self.saveStep2Fields();
-            if(_self.newTournamentToCreate.categories.length > 0){
-                $('#newTournamentStep2').fadeOut('slow', function(){
-                    _self.freeDays = _self.getFreeDaysForGroups();
-                    _self.renderModalStep3();
-                });     
-            }
-            else{
-                alert(Literals.categoryNotEmpty);
-            }
-        },
-        insertRangeToStep3: function(){
-            var _self = this;
-            var template = _.template(RangeTemplate, {
-                dataLiterals: Literals.rangeFields
-            });
-            $('#ranges').append(template);
-            $('.selectRange').last().select2({
-                placeholder: Literals.rangeFields.selectRangePlaceholder
-            });
-            $('.selectDays').last().select2({
-                data: _self.freeDays,
-                placeholder: Literals.rangeFields.selectDaysPlaceholder
-            }).on("select2:select", function(e) {
-                _self.updateFreeDays(true);
-            }).on("select2:unselect", function(e) {
-                _self.updateFreeDays(false);
-            });
-            _self.updateFreeDays(true);
-        },
-        deleteRange: function(e){
-            if(e.target.tagName == "I"){
-                e.target.parentElement.parentElement.parentElement.remove();
-            }
-            else{
-                e.target.parentElement.parentElement.remove();
-            }
-            this.updateFreeDays(false);
-        },
-        getFreeDaysForGroups: function(){
-            var _self = this;
-            var freeDates = [];
-
-            var startAux = _self.newTournamentToCreate.startGroupDate.split("/");
-            var startDate = new Date(startAux[2], startAux[1] - 1, startAux[0]);
-            var endAux = _self.newTournamentToCreate.endGroupDate.split("/");
-            var endDate = new Date(endAux[2], endAux[1] - 1, endAux[0]);
-
-            var textDates = [];
-            textDates[0] = Literals.SundayDay;
-            textDates[5] = Literals.FridayDay;
-            textDates[6] = Literals.SaturdayDay;
-
-
-            while(startDate <= endDate){
-                if(startDate.getDay() == 5 || startDate.getDay() == 6 || startDate.getDay() == 0){
-                    var date = {
-                        'id' : textDates[startDate.getDay()] + startDate.getDate().toString(),
-                        'text' : textDates[startDate.getDay()] + " " + startDate.getDate()
-                    }
-                    freeDates.push(date);
-                }
-                startDate.setDate(startDate.getDate() + 1);
-            }
-            return freeDates;
-        },
-        updateFreeDays: function(enable){
-            var _self = this;
-            var selectedDays = [];
-            if(enable){
-                _.each($('.selectDays'), function(sel, index){
-                    _.each(sel.selectedOptions, function(opt){
-                        if(selectedDays.indexOf(opt.value) == -1){
-                            selectedDays.push(opt.value);
-                        }
-                    });
-                });
-            }
-            else{
-                selectedDays = _.pluck(_self.freeDays, 'id');
-                _.each($('.selectDays'), function(sel, index){
-                    _.each(sel.selectedOptions, function(opt){
-                        var arrayIndex = selectedDays.indexOf(opt.value);
-                        if(arrayIndex != -1){
-                            selectedDays.splice(arrayIndex, 1);
-                        }
-                    });
-                });
-            }
-            _.each(selectedDays, function(day){
-                $('option[value=' + day + ']').prop('disabled', enable);
-                _.each($('.selectDays'), function(s, index){
-                    $('.selectDays:eq(' + index + ')').select2();
-                });
-            })
-        },*/
     });
     return HomeView;
 });

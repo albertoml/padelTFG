@@ -11,7 +11,7 @@ class NotificationStatuses implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 		$NotificationStatuses = array(
-			array('id' => '1', 'value' => 'Dreated'),
+			array('id' => '1', 'value' => 'Created'),
 			array('id' => '2', 'value' => 'Sent'),
 			array('id' => '3', 'value' => 'Read'),
 			array('id' => '4', 'value' => 'Hidden'),

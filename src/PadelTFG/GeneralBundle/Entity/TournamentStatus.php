@@ -16,7 +16,7 @@ class TournamentStatus implements JsonSerializable
 	* @ORM\Column(type="integer") */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=20) */
+	/** @ORM\Column(type="string", length=50) */
 	protected $value;
 
 	public function getId(){

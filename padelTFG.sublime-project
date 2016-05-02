@@ -3,11 +3,16 @@
 	[
 		{
 			"path": "."
+		},
+		{
+			"path": "/Users/Alberto/Documents/scripts/mostrarArchivos.app"
 		}
 	],
-    "settings": {
-        "xdebug": {
-             "url": "http://localhost:8080/#home",
-        }
-    }
+	"settings":
+	{
+		"xdebug":
+		{
+			"url": "http://localhost:8080/"
+		}
+	}
 }

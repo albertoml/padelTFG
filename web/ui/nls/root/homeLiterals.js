@@ -6,13 +6,35 @@ define({
 	"no": "No",
 	"add": "Add",	
 	"sections":[
-            {'key':'basicInfo', 'text':'Basic Information'},
-            {'key':'annotations', 'text':'Annotations'},
-            {'key':'tournaments', 'text':'Tournaments'},
-            {'key':'inscriptions', 'text':'Inscriptions'},
-            {'key':'games', 'text':'Games'},
-            {'key':'pairs', 'text':'My pairs Info'},
+        {'key':'basicInfo', 'text':'Basic Information'},
+        {'key':'annotations', 'text':'Annotations'},
+        {'key':'tournaments', 'text':'Tournaments'},
+        {'key':'inscriptions', 'text':'Inscriptions'},
+        {'key':'games', 'text':'Games'},
+        {'key':'pairs', 'text':'My pairs Info'}
     ],
+    "scoreSelectOptions":[
+        {'id':'-1', 'text':'- Set -'},
+        {'id':'0', 'text':'0'},
+        {'id':'1', 'text':'1'},
+        {'id':'2', 'text':'2'},
+        {'id':'3', 'text':'3'},
+        {'id':'4', 'text':'4'},
+        {'id':'5', 'text':'5'},
+        {'id':'6', 'text':'6'},
+        {'id':'7', 'text':'7'}
+    ],
+    "tournamentStatus":{
+    	"Created":"Created",
+    	"InInscriptionDate":"In Inscription Date",
+    	"InGroupDate":"In Group Date",
+    	"MatchsDone": "Group phase (Matchs done)"
+    },
+    "gameStatus":{
+    	"Created":"Created",
+    	"WonPair1":"Won Pair 1",
+    	"WonPair2":"Won Pair 2"
+    },
     "adminTournamentsView":"My Admin Tournaments",
 	"fields":{
 		"email":"Email",
@@ -29,22 +51,36 @@ define({
 		"secondPhone":"Second Phone",
 		"gender":"Gender"
 	},
+	"startTournament":"Start Tournament",
 	"buttonBasicInfo":"Edit Profile",
 	"cancelButtonTitle":"Cancel",
 	"saveButtonTitle":"Save",
+	"saveGroupsButtonTitle":"Save Groups",
+	"saveAndDoMatchsButtonTitle":"Save Groups and Do Matchs",
+	"saveDoMatchsButtonTitle":"Save Do Matchs",
 	"nextStepButtonTitle": "Next",
 	"backStepButtonTitle": "Back",
+	"editGroupViewButton" : "Edit Groups",
+	"dragAndDropForAddPairs": "Drag and Drop for add pairs",
+	"deleteGroupButton": "Delete Group",
+	"movementNotAllowed": "Movement not Allowed",
 	"loadingMessage":"Loading",
 	"modalTitleProfile":"Edit Profile",
 	"modalTitleInscription":"Do Inscription To",
 	"modalTitleObservation": "Edit Observations",
+	"noHaveObservationsAndNotCanInsert": "You not have observations and can`t insert because the matches are made",
 	"modalTitleAnnotation": "Insert Annotation",
 	"modalTitleNewTournamentType" : "New Tournament (Type of Tournament)",
 	"modalTitleNewTournamentBasicInfo": "New Tournament (Basic Info)",
 	"modalTitleNewTournamentCategory" : "New Tournament (Insert Categories)",
-	"modalTitleNewTournamentSchedule" : "New Tournament (Insert Shedule)",
+	"modalTitleInsertTournamentSchedule" : "Insert Tournament Shedule",
+	"modalTitleEditGroups" : "Edit grups",
+	"modalTitleScore" : "Edit Score",
+	"scoreIncorrect" : "Score is in incorrect format",
 	"createNewTournament":"Create Tournament",
 	"confirmSaveProfile":"Are you sure save changes?",
+	"DoGroupConfirm":"If close inscriptions any more can sing up in the tournament, Are you sure?",
+	"DoMatchsConfirm":"If do matchs you can´t do any changes in the groups, Are you sure?",
 	"confirmDeleteAnnotation": "Are you sure delete annotation",
 	"tournamentsFields":{
 		"name":"Name",
@@ -57,6 +93,7 @@ define({
 	"inscriptionsFields":{
 		"pair":"Pair",
 		"category":"Category",
+		"tournament":"Tournament",
 		"group":"Group",
 		"status":"Status",
 		"options":"Options"
@@ -74,21 +111,25 @@ define({
 		"gameDate":"Match Date",
 		"tournament":"Tournament",
 		"status":"Status",
-		"options":"Options"
+		"score":"Score",
+		"options":"Options",
+		"DateNotAvailable": "Date not available",
+		"GameNotPlayed":"Game not played"
 	},
 	"categoryFields":{
 		"name":"Name",
 		"gender":"Gender",
-		"registeredLimit":"MAX",
+		"registeredLimit":"MAX Inscriptions",
 		"selectGenderPlaceholder":"Gender",
-		"registeredMin":"MIN"
+		"registeredMin":"MIN Inscriptions"
 	},
 	"rangeFields":{
 		"selectTrack":"Insert number of tracks",
 		"insertRange":"Insert new range",
 		"range":"Range",
-		"selectRangePlaceholder":"Select ranges",
-		"selectDaysPlaceholder":"Select days for apply range"
+		"selectRangePlaceholder":"Insert hours ranges (Example '9 - 10:30')",
+		"selectDaysPlaceholder":"Select days for apply range",
+		"invalidRangeFormat": "Invalid format, Enter(16 - 17:30)"
 	},
 	"newTournamentFields":{
 		"name":"Name",
@@ -110,6 +151,18 @@ define({
 		"options":"Options",
 		"placeholderPair":"Insert your pair name",
 	},
+	"viewGamesAdmin":{
+		"pair1":"Pair 1",
+		"pair2":"Pair 2"
+	},
+	"fullCalendar":{
+		"track":"Track",
+		"addTrack":"Add Track",
+		"confirmDeleteTrack":"Are you sure you want to delete ",
+		"addTrackAlert":"Add Track name"
+	},
+	"InscriptionsMode":"Inscriptions",
+	"GamesMode":"Games",
 	"doInscription":"Sign Up",
 	"viewObservation":"View Observations",
 	"modifyAnnotation": "Modify Annotation",
@@ -126,17 +179,25 @@ define({
 	"observations":"Observations",
 	"addObservation":"Add Observation",
 	"addInscriptions":"Add Inscriptions",
-	"addInscription":"Add Inscription",
+	"addInscription":"Add Pair",
 	"addCategory":"Add Category",
+	"proposeGameChange":"Propose Change",
+	"changeDate":"Change Date",
+	"addScore":"Add Score",
+	"modifyScore":"Modify Score",
 	"date":"Date",
 	"fromHour":"From Hour",
 	"toHour":"To Hour",
 	"available":"Available",
+	"showGameCalendarButton":"Show Calendar",
+	"hideGameCalendarButton":"Hide Calendar",
+	"newGroupTitle": "New Group",
+	"ClickForAddGroup": "Click on + for add new group",
 	"closeTournamentInscriptionButton": "Close Inscription",
 	"closeTournamentInscriptionModalTitle": "Close Inscription",
 	"AddTournamentInscriptionModalTitle": "Add Inscriptions",
 	"totalInscriptionsTournament": "Total Inscripitons in Tournament:",
-	"insertNumberOfGroupsInEachCategory": "Insert number of groups in each category",
+	"insertNumberOfPairsInEachGroup": "Insert number of pairs in each group",
 	"errorNumberGroups": "All categories should be especified",
 	"inscriptionsInThisCategory": "Inscriptions in this category",
 	"viewTournamentInscriptionButton": "View Inscriptions",
@@ -150,9 +211,12 @@ define({
 	"successMessageTextInscription":"Your inscription send succesfully",
 	"successMessageDeleteInscription":"Your inscription has deleted succesfully",
 	"successMessageTextObservations":"Your observations saved succesfully",
-	"successMessageTournamentSaved":"Yourn tournament saved succesfully",
+	"successMessageTournamentSaved":"Your tournament saved succesfully",
+	"successMessageSaveScore":"Score added succesfully",
 	"errorMessageTournamentSaved":"Yourn tournament has not saved",
 	"errorMessageDeleteInscription":"Your inscription has not been deleted",
 	"errorMessageGetPairsInfo":"Error getting pairs information", 
-	"somePairsErroneusConfirm":"Some pairs have empty players, do you continue?"
+	"errorGroupsInvalid":"Groups are minimum 2 pairs please",
+	"somePairsErroneusConfirm":"Some pairs have empty players, do you continue?",
+	"notAddGroupsWhenSomeAreEmpty":"Can´t add groups when there are groups empty"
 });

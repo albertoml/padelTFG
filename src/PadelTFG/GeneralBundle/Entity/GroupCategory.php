@@ -53,6 +53,9 @@ class GroupCategory implements JsonSerializable
 	public function getGame(){
 		return $this->game;
 	}
+	public function getNumPairs(){
+		return $this->numPairs;
+	}
 
 	public function setName($name){
 		$this->name = $name;
@@ -62,6 +65,9 @@ class GroupCategory implements JsonSerializable
 	}
 	public function setCategory($category){
 		$this->category = $category;
+	}
+	public function setNumPairs($numPairs){
+		$this->numPairs = $numPairs;
 	}
     public function addGame(Game $game)
     {
@@ -76,7 +82,8 @@ class GroupCategory implements JsonSerializable
             'name' => $this->name,
             'tournament' => isset($this->tournament) ? $this->tournament->getId() : null ,
             'category' => isset($this->category) ? $this->category->getId() : null ,
-            'game' => $this->game
+            'game' => $this->game,
+            'numPairs' => $this->numPairs
         );
     }
 }

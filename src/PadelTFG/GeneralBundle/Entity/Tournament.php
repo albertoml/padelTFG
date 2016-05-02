@@ -32,7 +32,7 @@ class Tournament implements JsonSerializable
 
 	/** @ORM\Column(type="datetime", nullable=true)
 		@Assert\DateTime()
-		@Assert\GreaterThan("today") */
+		@Assert\GreaterThanOrEqual("today") */
 	protected $startInscriptionDate;
 
 	/** @ORM\Column(type="datetime", nullable=true)
@@ -70,9 +70,11 @@ class Tournament implements JsonSerializable
 	/** @ORM\Column(type="blob", nullable=true) */
 	protected $image;
 
+	/** @ORM\OneToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Schedule", inversedBy="tournament") */
+	protected $schedule;
+
 	public function __construct() {
         $this->sponsor = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate = new \DateTime();
     }
 
@@ -118,6 +120,9 @@ class Tournament implements JsonSerializable
 	public function getImage(){
 		return $this->image;
 	}
+	public function getSchedule(){
+		return $this->schedule;
+	}
 
 	public function setAdmin($admin){
 		$this->admin = $admin;
@@ -158,12 +163,10 @@ class Tournament implements JsonSerializable
 	public function setImage($image){
 		$this->image = $image;
 	}
+	public function setSchedule($schedule){
+		$this->schedule = $schedule;
+	}
 
-    public function addCategory(Category $category)
-    {
-        $category->setTournament($this);
-        $this->category[] = $category;
-    }
     public function addSponsor(Sponsor $sponsor)
     {
         $sponsor->addTournament($this);
@@ -185,7 +188,8 @@ class Tournament implements JsonSerializable
             'endFinalDate'=> $this->endFinalDate,
             'status' => $this->status,
             'sponsor' => $this->sponsor,
-            'registeredLimit' => $this->registeredLimit
+            'registeredLimit' => $this->registeredLimit,
+            'schedule' => $this->schedule
         );
     }
 }

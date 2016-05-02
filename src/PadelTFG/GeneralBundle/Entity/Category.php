@@ -28,6 +28,9 @@ class Category implements JsonSerializable
 	/** @ORM\Column(type="integer", nullable=true) */
 	protected $registeredLimitMin;
 
+	/** @ORM\Column(type="string", nullable=true) */
+	protected $bgColor;
+
 	/** @ORM\Column(type="string", nullable=true)
 		@Assert\Choice(callback = {"PadelTFG\GeneralBundle\Resources\globals\Utils", "getGenders"}, message = "Choose a valid gender.") */
 	protected $gender;
@@ -51,6 +54,9 @@ class Category implements JsonSerializable
 	public function getRegisteredLimitMin(){
 		return $this->registeredLimitMin;
 	}
+	public function getBgColor(){
+		return $this->bgColor;
+	}
 	public function getGender(){
 		return $this->gender;
 	}
@@ -67,6 +73,9 @@ class Category implements JsonSerializable
 	public function setRegisteredLimitMin($registeredLimitMin){
 		$this->registeredLimitMin = $registeredLimitMin;
 	}
+	public function setBgColor($bgColor){
+		$this->bgColor = $bgColor;
+	}
 	public function setGender($gender){
 		$this->gender = $gender;
 	}
@@ -77,7 +86,8 @@ class Category implements JsonSerializable
         	'id' => $this->id,
             'name' => $this->name,
             'tournament' => isset($this->tournament) ? $this->tournament->getId() : null,
-            'gender' => $this->gender
+            'gender' => $this->gender,
+            'bgColor' => $this->bgColor
         );
     }
 }

@@ -73,7 +73,22 @@ groupCategory:
     resource: routing_groupcategory.yml
     name_prefix:  group_
 
+game:
+    type: rest
+    resource: routing_game.yml
+    name_prefix:  game_
+
+schedule:
+    type: rest
+    resource: routing_schedule.yml
+    name_prefix:  schedule_
+
 util:
     type: rest
     resource: routing_util.yml
     name_prefix:  util_
+
+info:
+    type: rest
+    resource: routing_info.yml
+    name_prefix:  info_

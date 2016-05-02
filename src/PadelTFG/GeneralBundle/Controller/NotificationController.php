@@ -10,6 +10,7 @@ use PadelTFG\GeneralBundle\Service\TournamentService as TournamentService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
 use PadelTFG\GeneralBundle\Entity\Notification;
+use PadelTFG\GeneralBundle\Entity\Tournament;
 
 class NotificationController extends FOSRestController{
 
@@ -52,15 +53,20 @@ class NotificationController extends FOSRestController{
 
         $tournamentService = new TournamentService();
         $tournamentService->setManager($this->getDoctrine()->getManager());
-        $tournament = $tournamentService->getTournament(trim($params['tournament']));
-
-        $notification = $this->notificationService->saveNotification($params, $tournament, $this);
-        if($notification['result'] == 'fail'){
-            $dataToSend = json_encode(array('error' => $notification['message']));
-            return $this->util->setResponse(400, $dataToSend);
+        if(!empty($params['tournament'])){
+            $tournament = $tournamentService->getTournament(trim($params['tournament']));
+            if(!$tournament instanceof Tournament){
+                return $this->util->setResponse(404, Literals::TournamentNotFound);
+            }
+            $notification = $this->notificationService->saveNotification($params, $tournament, $this);
+            if($notification['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $notification['message']));
+                return $this->util->setResponse(400, $dataToSend);
+            }
+            $dataToSend = json_encode(array('notification' => $notification['message']));
+            return $this->util->setJsonResponse(201, $dataToSend);
         }
-        $dataToSend = json_encode(array('notification' => $notification['message']));
-        return $this->util->setJsonResponse(201, $dataToSend);
+        return $this->util->setResponse(404, Literals::TournamentNotFound);
     }
 
     public function putNotificationAction($id){

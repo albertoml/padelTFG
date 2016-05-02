@@ -48,9 +48,11 @@ class CategoryService{
     public function addCategoryToTournament($category, $tournament, $controller){
         $categoryEntity = new Category();
         $categoryEntity->setName(isset($category['name']) ? $category['name'] : '');
-        $categoryEntity->setRegisteredLimitMax(isset($category['registeredLimitMax']) ? $category['registeredLimitMax'] : null);
-        $categoryEntity->setRegisteredLimitMin(isset($category['registeredLimitMin']) ? $category['registeredLimitMin'] : null);
+        $categoryEntity->setBgColor(isset($category['bgColor']) ? $category['bgColor'] : '');
+        $categoryEntity->setRegisteredLimitMax(isset($category['registeredLimitMax']) && is_int($category['registeredLimitMax']) ? $category['registeredLimitMax'] : 0);
+        $categoryEntity->setRegisteredLimitMin(isset($category['registeredLimitMin']) && is_int($category['registeredLimitMin']) ? $category['registeredLimitMin'] : 0);
         $categoryEntity->setGender(isset($category['gender']) ? $category['gender'] : null);
+        $categoryEntity->setTournament($tournament);
         $validator = $controller->get('validator');
         $errors = $validator->validate($categoryEntity);
 
@@ -58,7 +60,6 @@ class CategoryService{
             $errorsString = (string) $errors;
             return array('result' => 'fail', 'message' => $errorsString);
         }
-        $tournament->addCategory($categoryEntity);
         $this->em->persist($categoryEntity);
         $this->em->flush();
         return array('result' => 'ok', 'message' => $categoryEntity);

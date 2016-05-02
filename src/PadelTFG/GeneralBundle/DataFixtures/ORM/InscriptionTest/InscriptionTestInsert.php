@@ -49,15 +49,31 @@ class InscriptionTestInsert implements FixtureInterface
 		}
 		$manager->flush();
 
+		$tournament = new Tournament();
+		$tournament2 = new Tournament();
+		$repository = $manager->getRepository('GeneralBundle:User');
+		$userAdmin = $repository->findOneByName('UserInscriptionTest');
+		$tournament->setAdmin($userAdmin);
+		$tournament->setName('CategoryTournamentName');
+		$userAdmin = $repository->findOneByName('UserInscriptionTest1');
+		$tournament2->setAdmin($userAdmin);
+		$tournament2->setName('CategoryTournamentName1');
+		$tournament2->setRegisteredLimit(3);
+
+		$manager->persist($tournament);	
+		$manager->persist($tournament2);	
+		$manager->flush();
+
 		$Categories = array(
-			array('name' => 'Category Tournament', 'registeredLimitMax' => null),
-			array('name' => 'Category Tournament1', 'registeredLimitMax' => 2),
-			array('name' => 'Category Tournament2', 'registeredLimitMax' => null)
+			array('name' => 'Category Tournament', 'registeredLimitMax' => null, 'tournament' => $tournament),
+			array('name' => 'Category Tournament1', 'registeredLimitMax' => 3, 'tournament' => $tournament),
+			array('name' => 'Category Tournament2', 'registeredLimitMax' => null, 'tournament' => $tournament2)
 			);
 
 		foreach ($Categories as $key) {
 			$entity = new Category();
 			$entity->setName($key['name']);
+			$entity->setTournament($key['tournament']);
 			$entity->setRegisteredLimitMax($key['registeredLimitMax']);
 			$manager->persist($entity);	
 		}
@@ -67,24 +83,6 @@ class InscriptionTestInsert implements FixtureInterface
 		$category1 = $repository->findOneByName('Category Tournament');
 		$category2 = $repository->findOneByName('Category Tournament1');
 		$category3 = $repository->findOneByName('Category Tournament2');
-
-		$tournament = new Tournament();
-		$tournament2 = new Tournament();
-		$repository = $manager->getRepository('GeneralBundle:User');
-		$userAdmin = $repository->findOneByName('UserInscriptionTest');
-		$tournament->setAdmin($userAdmin);
-		$tournament->setName('CategoryTournamentName');
-		$tournament->addCategory($category1);
-		$tournament->addCategory($category2);
-		$userAdmin = $repository->findOneByName('UserInscriptionTest1');
-		$tournament2->setAdmin($userAdmin);
-		$tournament2->setName('CategoryTournamentName1');
-		$tournament2->setRegisteredLimit(2);
-		$tournament2->addCategory($category3);
-
-		$manager->persist($tournament);	
-		$manager->persist($tournament2);	
-		$manager->flush();
 
 		$repository = $manager->getRepository('GeneralBundle:User');
 		$user1Pair1 = $repository->findOneByName('User1Pair1PairTest');
@@ -114,7 +112,7 @@ class InscriptionTestInsert implements FixtureInterface
 		$Groups = array(
 			array('name' => 'Group A', 'category' => $category2, 'tournament' => $tournament),
 			array('name' => 'Group B', 'category' => $category2, 'tournament' => $tournament),
-			array('name' => 'Group C', 'category' => $category2, 'tournament' => $tournament2)
+			array('name' => 'Group C', 'category' => $category3, 'tournament' => $tournament2)
 			);
 
 		foreach ($Groups as $key) {
@@ -141,7 +139,7 @@ class InscriptionTestInsert implements FixtureInterface
 
 
 		$Inscriptions = array(
-			array('pair' => $pair1, 'tournament' => $tournament, 'category' => $category1, 'group' => $groupA),
+			array('pair' => $pair1, 'tournament' => $tournament, 'category' => $category2, 'group' => $groupA),
 			array('pair' => $pair2, 'tournament' => $tournament, 'category' => $category2, 'group' => $groupB),
 			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category3, 'group' => $groupC),
 			array('pair' => $pair3, 'tournament' => $tournament, 'category' => $category2, 'group' => $groupB),

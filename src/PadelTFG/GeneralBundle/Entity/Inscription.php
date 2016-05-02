@@ -34,7 +34,7 @@ class Inscription implements JsonSerializable
 	protected $tournament;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory")
-		@ORM\JoinColumn(name="group_id", onDelete="cascade") */
+		@ORM\JoinColumn(name="group_id") */
 	protected $group;
 
 	/** @ORM\Column(type="integer", nullable=true) */

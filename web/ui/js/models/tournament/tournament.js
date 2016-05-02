@@ -6,5 +6,5 @@ define(['backbone'], function(Backbone) {
 	        
 	    }  
 	});
-	return HomeModel;
+	return TournamentModel;
 });

@@ -4,6 +4,60 @@ namespace PadelTFG\GeneralBundle\Resources\globals;
 
 abstract class Literals
 {
+    //User Status
+    const RegisteredUserStatus = "Registered";
+    const In_TournamentUserStatus = "In Tournament";
+    const Tournament_AdminUserStatus = "Tournament Admin";
+    const DeletedUserStatus = "Deleted";
+    
+    //Tournament Status
+    const CreatedTournamentStatus = "Created";
+    const In_Inscription_DateTournamentStatus = "In Inscription Date";
+    const In_Group_DateTournamentStatus = "In Group Date";
+    const Matchs_DoneTournamentStatus = "Group phase (Matchs done)";
+    const In_Finals_DateTournamentStatus = "In Finals Date";
+    const FinishedTournamentStatus = "Finished";
+    const DeletedTournamentStatus = "Deleted";
+
+    //Sponsor Status
+    const ActiveSponsorStatus = "Active";
+    const DefaulterSponsorStatus = "Defaulter";
+    const HiddenSponsorStatus = "Hidden";
+    const DeletedSponsorStatus = "Deleted";
+
+    //Recordal Status
+    const CreatedRecordalStatus = "Created";
+    const ReadRecordalStatus = "Read";
+    const HiddenRecordalStatus = "Hidden";
+    const DeletedRecordalStatus = "Deleted";
+
+	//Notification Status
+    const CreatedNotificationStatus = "Created";
+    const SentNotificationStatus = "Sent";
+    const ReadNotificationStatus = "Read";
+    const HiddenNotificationStatus = "Hidden";
+    const DeletedNotificationStatus = "Deleted";
+
+    //Game Status
+    const CreatedGameStatus = "Created";
+    const In_Process_To_ChangeGameStatus = "In Process To Change";
+    const PendingGameStatus = "Pending";
+    const PlayedGameStatus = "Played";
+    const WonGameStatus = "Won";
+    const LosedGameStatus = "Losed";
+    
+    //Annotation Status
+    const CreatedAnnotationStatus = "Created";
+    const ReadAnnotationStatus = "Read";
+    const HiddenAnnotationStatus = "Hidden";
+    const DeletedAnnotationStatus = "Deleted";
+
+    //Inscription Status
+    const Tournament_Not_StartedInscriptionStatus = "Tournament Not Started";
+    const Not_ClassifiedInscriptionStatus = "Not Classified";
+    const ClassifiedInscriptionStatus = "Classified";
+    const FinishedInscriptionStatus = "Finished";
+
 	//StatusController
 	const StatusNotFound = "Status not found";
 
@@ -79,6 +133,9 @@ abstract class Literals
 
 	const IncorrectGender = "Incorrect inscription due to pair gender";
 
+	//ScheduleController
+	const ScheduleNotFound = "Schedule not found";
+
 	//Genders
 	const GenderMale = "Male";
 	const GenderFemale = "Female";
@@ -90,4 +147,9 @@ abstract class Literals
 
 	//GroupController
 	const GroupNotFound = "Group not found";
+	const NewGroupLabel = "New Group";
+
+	//GameController
+	const GameNotFound = "Game not found";
+	const TournamentIdNotCorrect = "Tournament ID not correct";
 }

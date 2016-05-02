@@ -74,7 +74,13 @@ define([
                     'sTitle': literals.inscriptionsFields.group,
                     'mData': 'group',
                     'mRender': function (data, type, full) {
-                        return data;
+                        if(!_.isNull(data) && !_.isUndefined(data) && !_.isUndefined(data.name)){
+                            return data.name;    
+                        }
+                        else{
+                            return '';
+                        }
+                        
                     }
                 }, {
                     'sTitle': literals.inscriptionsFields.status,
@@ -90,8 +96,15 @@ define([
                 }, {
                     'sTitle': literals.inscriptionsFields.options,
                     'mRender': function (data, type, full) {
-                        var button = "<button id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
-                        button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
+                        var button = "";
+                        var observationsReadOnly = "";
+                        if(full.tournament.status.value != literals.tournamentStatus.InInscriptionDate && full.tournament.status.value != literals.tournamentStatus.InGroupDate){
+                            observationsReadOnly = "readOnly"
+                        }
+                        button += "<button available='" + observationsReadOnly + "' id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
+                        if(full.tournament.status.value == literals.tournamentStatus.InInscriptionDate){
+                            button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
+                        }                      
                         return button;
                     }
                 }],
@@ -103,10 +116,10 @@ define([
             _self.inscriptionId = e.target.name;
             var observations = _self.getObservations(e.target.name);
             if(observations.length > 0){
-                var modal = _self.renderModal(observations);
+                var modal = _self.renderModal(observations, e);
             }
             else{
-                var modal = _self.renderModal(null);
+                var modal = _self.renderModal(null, e);
             }
             
             $(modal).modal();
@@ -127,13 +140,25 @@ define([
             });
             return observations;
         },
-        renderModal: function(observations){
+        renderModal: function(observations, event){
             var _self = this;
             this.modalID = 'myObservationsModal';
-            var myModal = $(this.modalID);
-            var buttons = '<button id="saveObservations" title="' + literals.saveButtonTitle + '" class="buttonObservations btn btn-default col-lg-6">' + literals.saveButtonTitle + '</button>' + 
-            '<button id="cancelObservations" title="' + literals.cancelButtonTitle + '" class="buttonInscription btn btn-default" data-dismiss="modal">' + literals.cancelButtonTitle + '</button>';
-
+            var buttons = "";
+            var modal = "";
+            buttons += '<button id="cancelObservations" title="' + literals.cancelButtonTitle + '" class="buttonInscription btn btn-default" data-dismiss="modal">' + literals.cancelButtonTitle + '</button>';
+            if(_.isEmpty($(event.target).attr('available'))){
+                buttons += '<button id="saveObservations" title="' + literals.saveButtonTitle + '" class="buttonObservations btn btn-default col-lg-6">' + literals.saveButtonTitle + '</button>';
+            }
+            else if(_.isNull(observations)){
+                modal = _.template(genericModalTemplate, {
+                    id: this.modalID,
+                    title: literals.modalTitleObservation,
+                    content: literals.noHaveObservationsAndNotCanInsert,
+                    buttons: buttons,
+                    onCloseAction: 'closeModal'
+                });
+                return modal;
+            }
             var modalContent = '<div class="col-lg-12" id="observations">';
             _.each(observations, function(obs){
                 var template = _.template(ObservationTemplate, {
@@ -143,10 +168,12 @@ define([
                 modalContent += template;
             });
             modalContent += '</div>';
-            modalContent += '<div style="margin-top:20px" class="buttons col-lg-12"><button id="insertObservation">' + literals.addObservation + '</button></div>';
+            modalContent += '<div style="margin-top:20px" class="buttons col-lg-12">';
+            modalContent += '<button id="insertObservation">' + literals.addObservation + '</button>';
+            modalContent += '</div>';
 
 
-            var modal = _.template(genericModalTemplate, {
+            modal = _.template(genericModalTemplate, {
                 id: this.modalID,
                 title: literals.modalTitleObservation,
                 content: modalContent,

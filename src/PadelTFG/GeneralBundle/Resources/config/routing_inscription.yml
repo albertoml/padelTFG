@@ -46,6 +46,13 @@ inscription_by_group:
         _method: GET
         id: "\d+"
 
+inscription_by_group_for_a_tournament:
+    path:  /inscription/group/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Inscription:getInscriptionByGroupForATournament, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
 inscription_post:
     path:  /inscription
     defaults: { _controller: GeneralBundle:Inscription:postInscription, _format: ~ }

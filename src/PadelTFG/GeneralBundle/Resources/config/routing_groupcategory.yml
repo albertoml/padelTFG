@@ -25,16 +25,14 @@ group_by_category:
         _method: GET
         id: "\d+"
 
-add_groups_to_tournament:
-    path: /group/tournament/{idTournament}
-    defaults: { _controller: GeneralBundle:Group:addGroupForTournament, _format: ~ }
+group_post:
+    path:  /group
+    defaults: { _controller: GeneralBundle:Group:postGroup, _format: ~ }
     requirements:
         _method: POST
-        id: "\d+"
 
-add_groups_to_category:
-    path: /group/category/{idCategory}
-    defaults: { _controller: GeneralBundle:Group:addGroupForCategory, _format: ~ }
+group_post_tournament:
+    path:  /group/tournament
+    defaults: { _controller: GeneralBundle:Group:postGroupsTournament, _format: ~ }
     requirements:
         _method: POST
-        id: "\d+"

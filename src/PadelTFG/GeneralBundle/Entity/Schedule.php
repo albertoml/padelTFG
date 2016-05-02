@@ -17,45 +17,27 @@ class Schedule implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="datetime") */
-	protected $date;
-
-	/** @ORM\Column(type="string", length=50) */
-	protected $track;
-
-	/** @ORM\OneToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Game", mappedBy="schedule") */
-	protected $game;
+	/** @ORM\OneToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="schedule")
+	@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
+	protected $tournament;
 
 	public function getId(){
 		return $this->id;
 	}
-	public function getDate(){
-		return $this->date;
-	}
-	public function getTrack(){
-		return $this->track;
-	}
-	public function getGame(){
-		return $this->game;
+	public function getTournament(){
+		return $this->tournament;
 	}
 
-	public function setDate($date){
-		$this->date = $date;
-	}
-	public function setTrack($track){
-		$this->track = $track;
-	}
-	public function setGame($game){
-		$this->game = $game;
+	public function setTournament($tournament){
+		$this->tournament = $tournament;
+		//$tournament->setSchedule($this); debe de ir pero da fallo
 	}
 
 	public function jsonSerialize()
     {
         return array(
         	'id' => $this->id,
-            'date' => $this->date,
-            'track' => $this->track,
-            'game' => $this->game
+            'tournament' => $this->tournament
         );
     }
 	

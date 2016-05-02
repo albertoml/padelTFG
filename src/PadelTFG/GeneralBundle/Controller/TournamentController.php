@@ -10,6 +10,7 @@ use PadelTFG\GeneralBundle\Service\UserService as UserService;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 
 use PadelTFG\GeneralBundle\Entity\Tournament;
+use PadelTFG\GeneralBundle\Entity\User;
 
 class TournamentController extends FOSRestController
 {
@@ -36,7 +37,7 @@ class TournamentController extends FOSRestController
         if (!$tournament instanceof Tournament) {
             return $this->util->setResponse(404, Literals::TournamentNotFound);
         }
-        $dataToSend = json_encode(array('tournament' => $tournament));
+        $dataToSend = json_encode($tournament);
         return $this->util->setJsonResponse(200, $dataToSend);
 	}
 
@@ -51,15 +52,25 @@ class TournamentController extends FOSRestController
 
         $userService = new UserService();
         $userService->setManager($this->getDoctrine()->getManager());
-        $user = $userService->getUserByEmail(trim($params['admin']));
+        
+        if(!empty($params['admin'])){
+            $user = $userService->getUserByEmail(trim($params['admin']));
 
-        $tournament = $this->tournamentService->saveTournament($params, $user, $this);
-        if($tournament['result'] == 'fail'){
-            $dataToSend = json_encode(array('error' => $tournament['message']));
-            return $this->util->setResponse(400, $dataToSend);
+            if(!$user instanceof User){
+                return $this->util->setResponse(404, Literals::UserNotFound);
+            }
+
+            $tournament = $this->tournamentService->saveTournament($params, $user, $this);
+            if($tournament['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $tournament['message']));
+                return $this->util->setResponse(400, $dataToSend);
+            }
+            $dataToSend = json_encode(array('tournament' => $tournament['message']));
+            return $this->util->setJsonResponse(201, $dataToSend);
         }
-        $dataToSend = json_encode(array('tournament' => $tournament['message']));
-        return $this->util->setJsonResponse(201, $dataToSend);
+        else{
+            return $this->util->setResponse(404, Literals::UserNotFound);
+        }
     }
 
 	public function putTournamentAction($id){
@@ -115,7 +126,7 @@ class TournamentController extends FOSRestController
                 $dataToSend = json_encode(array('error' => $tournament['message']));
                 return $this->util->setResponse(400, $dataToSend);
             }
-            $dataToSend = json_encode(array('inscriptions' => $tournament['message']));
+            $dataToSend = json_encode(array('tournament' => $tournament['message']));
             return $this->util->setJsonResponse(200, $dataToSend);
             
         } else {

@@ -4,6 +4,9 @@ require.config({
 		'underscore': 'vendor/underscore-amd/underscore',
 		'backbone': 'vendor/backbone-amd/backbone',
 		'dataTables': 'vendor/dataTables/media/js/jquery.dataTables',
+		'caret': 'vendor/jquery-tag-editor/jquery.caret.min',
+		'tagEditor': 'vendor/jquery-tag-editor/jquery.tag-editor.min',
+		'colorpicker': 'vendor/colorpicker/iColorPicker',
 		'jquery-tableTools': 'vendor/datatables-tabletools/src/TableTools',
 		'text' : 'vendor/requirejs-text/text',
 		'templates': '../templates',
@@ -13,9 +16,13 @@ require.config({
 		'bootstrap': '../styles/bootstrap-3.3.5/js/bootstrap.min',
 		'bootstrap-modal': 'vendor/bootstrap-modal/js/bootstrap-modal',
 		'bootstrap-modal-manager': 'vendor/bootstrap-modal/js/bootstrap-modalmanager',
-		'select2': 'vendor/select2/dist/js/select2.full.min',
+		'select2': 'vendor/select2/dist/js/select2.full',
 		'datepicker': 'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min',
-		'smint-jquery': 'vendor/smint-jquery/js/jquery.smint'
+		'bs-editable': 'vendor/bootstrap-editable/src/js/bootstrap-editable',
+		'smint-jquery': 'vendor/smint-jquery/js/jquery.smint',
+		'moment': 'vendor/moment/min/moment.min',
+		'fullcalendar': 'vendor/fullcalendar/dist/fullcalendar.min',
+		'fullcalendar-scheduler': 'vendor/fullcalendar-scheduler/dist/scheduler.min'
 	},
 	shim: {
         'bootstrap-modal-manager': {
@@ -36,9 +43,28 @@ require.config({
         'datepicker': {
         	deps: ['jquery', 'bootstrap']
         },
+        'bs-editable': {
+        	deps: ['jquery', 'bootstrap']
+        },
         'smint-jquery': {
         	deps: ['jquery']
+        },
+        'fullcalendar': {
+        	deps: ['jquery', 'bootstrap', 'moment']
+        },
+        'fullcalendar-scheduler': {
+        	deps: ['fullcalendar']
+        },
+        'caret':{
+        	deps: ['jquery']
+        },
+        'tagEditor':{
+        	deps: ['jquery', 'caret']
+        },
+        'colorpicker':{
+        	deps: ['jquery', 'bootstrap']
         }
+
     },
     config: {
         //Set the config for the i18n
@@ -48,7 +74,9 @@ require.config({
     }
 });
  
-require(['backbone', 'views/login/login', 'views/common/common', 'views/home/home', 'dataTables', 'jquery-tableTools', 'datejs', 'select2','bootstrap', 'bootstrap-modal-manager', 'bootstrap-modal', 'datepicker', 'smint-jquery'], 
+require(['backbone', 'views/login/login', 'views/common/common', 'views/home/home', 'dataTables', 
+	'jquery-tableTools', 'datejs', 'select2','bootstrap', 'bootstrap-modal-manager', 'bootstrap-modal', 
+	'datepicker', 'bs-editable', 'smint-jquery', 'moment', 'fullcalendar', 'fullcalendar-scheduler', 'tagEditor', 'colorpicker'], 
 	function(Backbone, LoginView, CommonView, HomeView) {
 
 	TableTools.DEFAULTS.sSwfPath = '/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf';
@@ -83,12 +111,16 @@ require(['backbone', 'views/login/login', 'views/common/common', 'views/home/hom
 		'getInscriptionsByTournament' : host + '/api/inscription/tournament/{idTournament}',
 		'getAnnotationsByUser' : host + '/api/annotation/user/{idUser}',
 		'getGamesByUser' : host + '/api/game/user/{idUser}',
+		'getGamesByTournament' : host + '/api/game/tournament/{idTournament}',
 		'getPairsByUser' : host + '/api/pair/user/{idUser}',
 		'inscriptionAdminURL' : host + '/api/inscription',
 		'userAdminURL' : host + '/api/user',
+		'gameAdminURL' : host + '/api/game',
 		'pairAdminURL' : host + '/api/pair',
+		'scheduleAdminURL' : host + '/api/schedule',
 		'observationAdminURL' : host + '/api/observation',
 		'tournamentAdminURL' : host + '/api/tournament',
+		'groupAdminURL' : host + '/api/group',
 		'searchUser' : host + '/api/user/search',
 		'getPair2Id' : host + '/api/pair/user/{idUser1}/{idUser2}',
 		'saveObservations' : host + '/api/observation/all',
@@ -96,8 +128,11 @@ require(['backbone', 'views/login/login', 'views/common/common', 'views/home/hom
 		'getGenders' : host + '/api/util/gender',
 		'closeInscriptionTournament' : host + '/api/tournament/closeInscription/{idTournament}',
 		'addCategoryToTournament' : host + '/api/category/tournament/{idTournament}',
+		'getInscriptionsByGroupForATournament' : host + '/api/inscription/group/tournament/{idTournament}',
 		'countInscriptions' : host + '/api/inscription/tournamentCount/{idTournament}',
-		'checkAndCreatePairsByUsers' : host + '/api/pair/checkAndCreatePairsByUsers'
+		'checkAndCreatePairsByUsers' : host + '/api/pair/checkAndCreatePairsByUsers',
+		'saveGroupsForATournament' : host + '/api/group/tournament',
+		'doMatchsForATournament' : host + '/api/game/tournament'
 	};
 
 	var commonView = new CommonView(params);

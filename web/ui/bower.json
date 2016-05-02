@@ -19,7 +19,11 @@
     "bootstrap-modal": null,
     "datatables-tabletools": null,
     "select2": null,
-    "bootstrap-datepicker": null
+    "bootstrap-datepicker": null,
+    "bootstrap-editable": null,
+    "fullcalendar": null,
+    "fullcalendar-scheduler": null,
+    "jquery-tag-editor": null
   },
   "ignore": [
     "**/.*",

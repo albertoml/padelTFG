@@ -51,7 +51,7 @@ class TournamentService{
         $tournament->setEndFinalDate(!empty($params['endFinalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endFinalDate']) : null);
         $tournament->setRegisteredLimit(!empty($params['registeredLimit']) ? $params['registeredLimit'] : 0);
         $tournament->setImage(!empty($params['image']) ? $params['image'] : '');
-        $tournament->setStatus($this->statusService->getStatus($this->em, 'tournament', 'Created'));
+        $tournament->setStatus($this->statusService->getStatus('tournament', 'Created'));
 
         return $tournament;
     }
@@ -74,7 +74,6 @@ class TournamentService{
     private function setTournamentModify($tournament, $params){
 
         $tournament->setName(isset($params['name']) ? $params['name'] : $tournament->getName());
-        $tournament->setCreationDate(!empty($params['creationDate']) ? \DateTime::createFromFormat('d/m/Y', $params['creationDate']) : $tournament->getCreationDate());
         $tournament->setStartInscriptionDate(!empty($params['startInscriptionDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startInscriptionDate']) : $tournament->getStartInscriptionDate());
         $tournament->setEndInscriptionDate(!empty($params['endInscriptionDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endInscriptionDate']) : $tournament->getEndInscriptionDate());
         $tournament->setStartGroupDate(!empty($params['startGroupDate']) ? \DateTime::createFromFormat('d/m/Y', $params['startGroupDate']) : $tournament->getStartGroupDate());
@@ -83,7 +82,7 @@ class TournamentService{
         $tournament->setEndFinalDate(!empty($params['endFinalDate']) ? \DateTime::createFromFormat('d/m/Y', $params['endFinalDate']) : $tournament->getEndFinalDate());
         $tournament->setRegisteredLimit(isset($params['registeredLimit']) ? $params['registeredLimit'] : $tournament->getRegisteredLimit());
         $tournament->setImage(isset($params['image']) ? $params['image'] : $tournament->getImage());
-        $tournament->setStatus(isset($params['status']) ? $params['status'] : $tournament->getStatus());
+        $tournament->setStatus(isset($params['status']) ? $this->statusService->getStatus('tournament', $params['status']) : $tournament->getStatus());
 
         return $tournament;
     }
@@ -107,6 +106,60 @@ class TournamentService{
         $this->em->flush();
     }
 
+    public function calculateNumGroups($inscriptions, $pairsByGroup, $category, $tournament, $groupService){
+        $groups = array();
+        if($inscriptions != 0){
+            $numGroupsAux = $inscriptions / $pairsByGroup;
+            $numGroups = (int) $numGroupsAux;
+            if($numGroups == 0){
+                $groupContent = array('name' => 'Group ' . 1,
+                                    'category' => $category,
+                                    'tournament' => $tournament,
+                                    'numPairs' => $inscriptions);
+                $groupResult = $groupService->saveGroup($groupContent);
+                if($groupResult['result'] == 'ok'){
+                    $groups[] = $groupResult['message'];
+                }
+            }
+            else{
+                $i = 0;
+                for ($i=0; $i < $numGroups; $i++) { 
+                    $groupContent = array('name' => 'Group ' . ($i + 1),
+                                    'category' => $category,
+                                    'tournament' => $tournament,
+                                    'numPairs' => $pairsByGroup);
+                    $groupResult = $groupService->saveGroup($groupContent);
+                    if($groupResult['result'] == 'ok'){
+                        $groups[] = $groupResult['message'];
+                    }
+                }
+
+                $restDivision = $inscriptions % $pairsByGroup;
+                if($restDivision > 2){
+                    $numGroups = $numGroups + 1;
+                    $groupContent = array('name' => 'Group ' . ($i + 2),
+                                    'category' => $category,
+                                    'tournament' => $tournament,
+                                    'numPairs' => $restDivision);
+                    $groupResult = $groupService->saveGroup($groupContent);
+                    if($groupResult['result'] == 'ok'){
+                        $groups[] = $groupResult['message'];
+                    }
+                }
+                else{
+                    while($restDivision != 0){
+                        $groupModify = $groups[count($groups) - $restDivision];
+                        $groupModify->setNumPairs($groupModify->getNumPairs() + 1);
+                        $this->em->persist($groupModify);
+                        $this->em->flush();
+                        $restDivision = $restDivision - 1;
+                    }
+                }
+            }
+        }
+        return $groups;
+    }
+
     public function closeInscriptionTournament($tournament, $params){
         $categoryService = new CategoryService();
         $inscriptionService = new InscriptionService();
@@ -116,18 +169,23 @@ class TournamentService{
         $groupService->setManager($this->em);
 
         $categories = $categoryService->getCategoryByTournament($tournament->getId());
-        $inscriptionsToSend = array();
 
         foreach ($categories as $category) {
             $inscriptions = $inscriptionService->getInscriptionsByCategory($category->getId());
-            for ($i=0; $i < $params[$category->getName()]; $i++) { 
-                $group = array('name' => 'Group ' . $i,
-                                'category' => $category,
-                                'tournament' => $tournament);
-                $groupService->saveGroup($group);   
+            $countInscriptions = 0;
+            $groups = $this->calculateNumGroups(count($inscriptions), (int) $params[$category->getName()], $category, $tournament, $groupService);
+            foreach ($groups as $group) {
+                for($i = 0; $i < $group->getNumPairs(); $i++){
+                    $inscriptions[$countInscriptions]->setGroup($group);
+                    $this->em->persist($inscriptions[$i]);
+                    $countInscriptions = $countInscriptions + 1;
+                }   
             }
         }
-        $result = array('result' => 'ok', 'message' => $inscriptionsToSend);
+        $tournament->setStatus($this->statusService->getStatus('tournament', Literals::In_Group_DateTournamentStatus));
+        $this->em->persist($tournament);
+        $this->em->flush();
+        $result = array('result' => 'ok', 'message' => $inscriptionService->getInscriptionsByGroupForATournament($tournament->getId()));
         return $result;
     }
 }
