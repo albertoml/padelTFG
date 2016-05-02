@@ -1,0 +1,23 @@
+<div id="numRange<%= numRange %>" class="col-lg-12 range" style="margin-top:10px">
+	<div class="col-lg-5">
+        <% if(typeof(content) == "undefined" || !content){ %>
+            <input type="text" class="selectRange" id="selectRange" >
+            </input>
+        <% } else { %>
+            <input type="text" class="selectRange" id="selectRange" >
+            </input>
+        <% } %>
+    </div>
+    <div class="col-lg-5">
+        <% if(typeof(content) == "undefined" || !content){ %>
+            <select class="col-lg-12 selectDays" id="selectDays" multiple="multiple" >
+            </select>
+        <% } else { %>
+            <select class="col-lg-12 selectDays" id="selectDays" multiple="multiple" >
+            </select>
+        <% } %>
+    </div>
+    <div class="col-lg-1" style="margin-left:15px;">
+        <button id="deleteRange"><i class="fa fa-times"></i></button>
+    </div>
+</div>

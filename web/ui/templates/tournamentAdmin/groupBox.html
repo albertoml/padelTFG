@@ -1,0 +1,56 @@
+<section id="groupBox<%= groupId %>" class="col-lg-4">
+	<div class="panel panel-success">
+		<div class="panel-heading">
+	    	<a href="#" data-type="text" data-pk="1" data-title="Enter username" class="groupNameEditableField editable editable-click panel-title" style="display: inline;" id="groupName"><%= groupName %></a>
+	    	<!--<i class="fa fa-pencil-square-o" id="editIconForNameEditableField"></i>-->
+	  	</div>
+	  	<div class="panel-body groupBoxItemContainer" ondrop="drop(event)" ondragover="allowDrop(event)" style="min-height: 150px" id="groupBoxItemContainer<%= groupId %>">
+	  		<% if(inscriptions == null || inscriptions.length == 0) { %>
+	  			<div id="titleForEmptyGroup">
+					<h3 ><%= dataLiterals.dragAndDropForAddPairs %></h3>
+					<button id="deleteGroupBox" class="btn btn-default"><%= dataLiterals.deleteGroupButton %></button>
+				</div>
+			<% } else { %>
+		    	<% _.each(inscriptions, function(inscription) { %>
+		            <div class="groupBoxItem box" draggable="true" ondragstart="drag(event)" name="<%= inscription.pair.id %>" id="<%= inscription.pair.id %><%= groupId %>">
+		                <h5><%= inscription.pair.user1.name %> <%= inscription.pair.user1.lastName %></h5>
+		                <h5><%= inscription.pair.user2.name %> <%= inscription.pair.user2.lastName %></h5>
+		            </div>
+			    <% }); %>
+			<% } %>    
+	  	</div>
+	</div>
+</section>
+<script>
+	function drag(ev) {
+	    ev.dataTransfer.setData("text", ev.target.id);
+	    ev.dataTransfer.setData("parent", ev.target.parentElement.id);
+	}
+	function allowDrop(ev) {
+	    ev.preventDefault();
+	}
+	function drop(ev) {
+	    ev.preventDefault();
+	    var data = ev.dataTransfer.getData("text");
+	    var dataParent = ev.dataTransfer.getData("parent");
+
+	    var elementToAdd = $(ev.target.closest('.groupsCategoryBox')).find('#' + data);
+
+	    if(elementToAdd.length == 1){
+	    	$(ev.target.closest('.groupBoxItemContainer')).append(elementToAdd);
+	    	var element = $(ev.target.closest('.groupBoxItemContainer')).find('#titleForEmptyGroup');
+		    if(element.length > 0){
+		    	element[0].remove();
+		    }
+		    if($('#' + dataParent).find('.groupBoxItem').length == 0){
+		    	$('#' + dataParent).append(
+	    			'<div id="titleForEmptyGroup"><h3 ><%= dataLiterals.dragAndDropForAddPairs %></h3>' +
+					'<button class="btn btn-default" id="deleteGroupBox"><%= dataLiterals.deleteGroupButton %></button></div>'
+		    	)
+		    }
+	    }
+	    else{
+	    	alert('<%= dataLiterals.movementNotAllowed %>');
+	    }
+	}
+</script>

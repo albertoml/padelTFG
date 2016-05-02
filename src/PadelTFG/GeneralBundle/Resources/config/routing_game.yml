@@ -1,0 +1,59 @@
+game_all:
+    path:  /game
+    defaults: { _controller: GeneralBundle:Game:allGame, _format: ~ }
+    requirements:
+        _method: GET
+
+game_get:
+    path:  /game/{id}
+    defaults: { _controller: GeneralBundle:Game:getGame, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+game_by_tournament:
+    path:  /game/tournament/{idTournament}
+    defaults: { _controller: GeneralBundle:Game:getGameByTournament, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+game_by_category:
+    path:  /game/category/{idCategory}
+    defaults: { _controller: GeneralBundle:Game:getGameByCategory, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+game_by_group:
+    path:  /game/group/{idGroup}
+    defaults: { _controller: GeneralBundle:Game:getGameByGroup, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+game_by_user:
+    path:  /game/user/{idUser}
+    defaults: { _controller: GeneralBundle:Game:getGameByUser, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+game_post:
+    path:  /game
+    defaults: { _controller: GeneralBundle:Game:postGame, _format: ~ }
+    requirements:
+        _method: POST
+
+game_post_tournament:
+    path:  /game/tournament
+    defaults: { _controller: GeneralBundle:Game:postGamesTournament, _format: ~ }
+    requirements:
+        _method: POST
+
+game_put:
+    path:  /game/{id}
+    defaults: { _controller: GeneralBundle:Game:putGame, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"

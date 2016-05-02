@@ -1,0 +1,5 @@
+info_php:
+    path:  /infophp
+    defaults: { _controller: GeneralBundle:Info:infoPhp, _format: ~ }
+    requirements:
+        _method: GET

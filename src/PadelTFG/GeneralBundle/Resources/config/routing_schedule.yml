@@ -1,0 +1,12 @@
+schedule_get:
+    path:  /schedule/{id}
+    defaults: { _controller: GeneralBundle:Schedule:getSchedule, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+schedule_post:
+    path:  /schedule
+    defaults: { _controller: GeneralBundle:Schedule:postSchedule, _format: ~ }
+    requirements:
+        _method: POST
