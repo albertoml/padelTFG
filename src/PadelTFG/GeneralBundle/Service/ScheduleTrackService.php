@@ -19,13 +19,18 @@ class ScheduleTrackService{
         return $scheduleTrack;
     }
 
-    public function saveScheduleTrack($schedule, $i){
+    public function getScheduleTrackByScheduleId($scheduleId){
+        $repository = $this->em->getRepository('GeneralBundle:ScheduleTrack');
+        $scheduleTrack = $repository->findBySchedule($scheduleId);
+        return $scheduleTrack;
+    }
 
-        $track = new ScheduleTrack();
-        $track->setName('Track ' . $i);
-        $track->setNumber($i);
-        $track->setSchedule($schedule);
-        $this->em->persist($track);
+    public function saveScheduleTrack($schedule, $i){
+        $scheduleTrack = new ScheduleTrack();
+        $scheduleTrack->setTitle(Literals::Track . ' ' . $i);
+        $scheduleTrack->setSchedule($schedule);
+        $this->em->persist($scheduleTrack);
         $this->em->flush();
+        return $scheduleTrack;
     }
 }

@@ -70,7 +70,8 @@ class Tournament implements JsonSerializable
 	/** @ORM\Column(type="blob", nullable=true) */
 	protected $image;
 
-	/** @ORM\OneToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Schedule", inversedBy="tournament") */
+	/** @ORM\OneToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Schedule", inversedBy="tournament")
+	@ORM\JoinColumn(name="schedule_id", onDelete="SET NULL") */
 	protected $schedule;
 
 	public function __construct() {

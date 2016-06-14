@@ -31,9 +31,30 @@ tournament_delete:
         _method: DELETE
         id: "\d+"
 
+tournament_start:
+    path:  /tournament/startTournament/{id}
+    defaults: { _controller: GeneralBundle:Tournament:startTournament, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
 tournament_close_inscription:
     path:  /tournament/closeInscription/{id}
     defaults: { _controller: GeneralBundle:Tournament:closeInscriptionTournament, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+tournament_close_group:
+    path:  /tournament/closeGroups/{id}
+    defaults: { _controller: GeneralBundle:Tournament:closeGroupsTournament, _format: ~ }
+    requirements:
+        _method: PUT
+        id: "\d+"
+
+tournament_create_draw:
+    path:  /tournament/createDraw/{id}
+    defaults: { _controller: GeneralBundle:Tournament:createDrawTournament, _format: ~ }
     requirements:
         _method: PUT
         id: "\d+"

@@ -5,6 +5,7 @@ define([
     'text!templates/common/genericModal.html',
     'text!templates/tournamentAdmin/sectionAdmin.html',
     'text!templates/tournamentAdmin/closeInscription.html',
+    'text!templates/tournamentAdmin/closeGroupBox.html',
     'text!templates/tournamentAdmin/observation.html',
     'text!templates/tournamentAdmin/inscription.html',
     'text!templates/tournamentAdmin/pillsInscriptions.html',
@@ -13,13 +14,16 @@ define([
     'text!templates/tournamentAdmin/insertShedule.html',
     'text!templates/tournamentAdmin/range.html',
     'text!templates/games/score.html',
+    'text!templates/tournamentAdmin/drawTemplate/selectorCategory.html',
+    'text!templates/tournamentAdmin/drawTemplate/drawBlock.html',
+    'text!templates/tournamentAdmin/drawTemplate/drawMatch.html',
     'i18n!nls/homeLiterals.js'], function(Backbone, _, DataTableTemplate, genericModalTemplate, sectionAdminTemplate, 
-        closeInscriptionTemplate, observationTemplate, addInscriptionTemplate, pillsInscriptionTemplate, 
-        groupBoxTemplate, newGroupTemplate, insertScheduleTemplate, RangeTemplate, ScoreTemplate, literals) {
+        closeInscriptionTemplate, closeGroupsBoxTemplate, observationTemplate, addInscriptionTemplate, pillsInscriptionTemplate, 
+        groupBoxTemplate, newGroupTemplate, insertScheduleTemplate, RangeTemplate, ScoreTemplate, 
+        drawSelectorCategoryTemplate, drawBlockTemplate, drawMatchTemplate, literals) {
  
     var TournamentAdminView = Backbone.View.extend({
         events: {
-            'refreshSection' : 'render',
             'click button[id="closeTournamentInscription"]' : 'closeTournamentInscription',
             'click button[id="editGroupsView"]' : 'getGroupsWhenTournamentIsClosed',
             'click button[id="verifyCloseInscriptions"]' : 'verifyCloseInscriptions',
@@ -43,7 +47,11 @@ define([
             'click button[id="insertRange"]' : 'insertRangeToShedule',
             'click button[id="deleteRange"]' : 'deleteRange',
             'click button[id="backToEditGroups"]' : 'backToEditGroups',
-            'click button[id="saveShedule"]' : 'saveShedule'
+            'click button[id="saveShedule"]' : 'saveShedule',
+            'click button[id="closeTournamentGroups"]' : 'closeTournamentGroups',
+            'click button[id="closeGroups"]' : 'closeGroups',
+            'click button[id="selectPairInCloseGroupView"]' : 'selectPairInCloseGroupView',
+            'click button[id="showDraws"]' : 'showDrawsEvent'
         },
         initialize: function(model, params, elTournament, tournamentModel){
             var _self = this;
@@ -78,21 +86,27 @@ define([
             }
             else if(_self.tournamentModel.get('status').value == literals.tournamentStatus.MatchsDone){
                 if(!_.isUndefined(_self.categoryIdActivePills)){
-                    _self.viewTournamentGames(_self.categoryIdActivePills);
+                    _self.viewTournamentGames(_self.categoryIdActivePills, false);
                 }
                 else{
-                    _self.viewTournamentGames(0);
+                    _self.viewTournamentGames(0, false);
+                }
+            }
+            else if(_self.tournamentModel.get('status').value == literals.tournamentStatus.InFinalsDate){
+                if(!_.isUndefined(_self.categoryIdActivePills)){
+                    _self.viewTournamentGames(_self.categoryIdActivePills, true);
+                }
+                else{
+                    _self.viewTournamentGames(0, true);
                 }
             }
         },
         startTournament: function(){
             var _self = this;
-            var objToSend = {
-                'status' : literals.tournamentStatus.InInscriptionDate            }
+            var urlToSend = _self.params.startTournament.replace('{idTournament}', _self.tournamentModel.get('id'));
             $.ajax({
                 type: 'PUT',
-                data: JSON.stringify(objToSend),
-                url: _self.params.tournamentAdminURL + '/' + _self.tournamentModel.get('id'),
+                url: urlToSend,
                 success: function (response) {
                     _self.tournamentModel.attributes = response.tournament;
                     _self.render();
@@ -194,7 +208,7 @@ define([
                                                     observations += obs.fromHour;
                                                     observations += "  -  ";
                                                     observations += obs.toHour;
-                                                    observations += '<button modelid="' + full.id + '" style="margin-left:10px" name="' + obs.id + '" id="deleteObservation"><i class="fa fa-times"></i></button>';
+                                                    observations += '<button class"btn btn-default" modelid="' + full.id + '" style="margin-left:10px" name="' + obs.id + '" id="deleteObservation"><i class="fa fa-times"></i></button>';
                                                     observations += "</p>"
                                                 });
                                                 observations += '</div>';
@@ -218,7 +232,7 @@ define([
                                 'sClass': 'optionsCell',
                                 'mRender': function (data, type, full) {
                                     var button = '<button name=' + full.id + ' class="popoverObs btn btn-default">' + literals.addObservation + '</button>';
-                                    button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
+                                    button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton btn btn-default'><i class='fa fa-trash-o'></i></button>";
                                     return button;
                                 }
                             }],
@@ -257,22 +271,35 @@ define([
                 })
             }
         },
-        viewTournamentGames: function(categoryId){
+        viewTournamentGames: function(categoryId, isDraw){
             var _self = this;
+            if(!isDraw){
+                var gamesToShow = _self.gamesDone;
+            } 
+            else{
+                var gamesToShow = _self.gamesDrawDone;
+            }
 
-            if(_.isNull(_self.gamesDone) || _.isUndefined(_self.gamesDone)){
-                var urlToSend = _self.params.getGamesByTournament.replace('{idTournament}', _self.tournamentModel.get('id'));
+            if(_.isNull(gamesToShow) || _.isUndefined(gamesToShow)){
+                var urlToSend = _self.params.getGamesByTournament.replace('{idTournament}', _self.tournamentModel.get('id'));                    
+                var urlToSend = urlToSend.replace('{isDraw}', isDraw);                    
                 $.ajax({
                     type: 'GET',
                     url: urlToSend,
                     async: false,
                     success: function (response) {
-                        _self.gamesDone = response.game;
+                        if(isDraw){
+                            _self.gamesDrawDone = response.game;
+                        }
+                        else{
+                            _self.gamesDone = response.game;    
+                        }
+                        gamesToShow = response.game;
                     }
                 })
             }
-            _self.preProcessViewTournamentAdminSection(_self.gamesDone, categoryId, literals.GamesMode);
-            _.each(_self.gamesDone, function(games, catKey){
+            _self.preProcessViewTournamentAdminSection(gamesToShow, categoryId, literals.GamesMode);
+            _.each(gamesToShow, function(games, catKey){
                 var catInfo = catKey.split(';');
                 var catName = catInfo[0].replace(' ', '_');
 
@@ -285,10 +312,10 @@ define([
                     'bSort': false,
                     'aoColumns': [{
                         'sTitle': literals.gamesFields.gameDate,
-                        'mData': 'date',
+                        'mData': 'startDate',
                         'mRender': function (data, type, full) {
                             if(!_.isNull(data) && !_.isUndefined(data)){
-                                return new Date(data.date).toString('d-MM-yyyy');
+                                return data.replace('T', '--')
                             }
                             else{
                                 return literals.gamesFields.DateNotAvailable;
@@ -298,13 +325,24 @@ define([
                         'sTitle': literals.viewGamesAdmin.pair1,
                         'mData': '',
                         'mRender': function (data, type, full) {
-                            return full.pair1.user1.name + " " + full.pair1.user2.name;
+                            if(!_.isNull(full.pair1) && !_.isUndefined(full.pair1)){
+                                return full.pair1.user1.name + " " + full.pair1.user2.name;    
+                            }
+                            else{
+                                return '';
+                            }
+                            
                         }
                     }, {
                         'sTitle': literals.viewGamesAdmin.pair2,
                         'mData': '',
                         'mRender': function (data, type, full) {
-                            return full.pair2.user1.name + " " + full.pair2.user2.name;
+                            if(!_.isNull(full.pair2) && !_.isUndefined(full.pair2)){
+                                return full.pair2.user1.name + " " + full.pair2.user2.name;    
+                            }
+                            else{
+                                return '';
+                            }
                         }
                     }, {
                         'sTitle': literals.gamesFields.status,
@@ -332,12 +370,12 @@ define([
                         'sTitle': literals.gamesFields.options,
                         'mRender': function (data, type, full) {
                             var button = "";
-                            button += "<button alt=" + literals.changeDate + " id='changeGame' name=" + full.id + " class='deleteButton'>" + literals.changeDate + "</button>";    
+                            button += "<button alt=" + literals.changeDate + " id='changeGame' name=" + full.id + " class='deleteButton btn btn-default'>" + literals.changeDate + "</button>";    
                             if(!_.isUndefined(full.score) && !_.isNull(full.score) && !_.isEmpty(full.score)){
-                                button += "<button method='modify' alt=" + literals.modifyScore + " id='addScore' name=" + full.id + " class='deleteButton'>" + literals.modifyScore + "</button>";
+                                button += "<button method='modify' alt=" + literals.modifyScore + " id='addScore' name=" + full.id + " class='deleteButton  btn btn-default'>" + literals.modifyScore + "</button>";
                             }
                             else{
-                                button += "<button method='add' alt=" + literals.addScore + " id='addScore' name=" + full.id + " class='deleteButton'>" + literals.addScore + "</button>";
+                                button += "<button method='add' alt=" + literals.addScore + " id='addScore' name=" + full.id + " class='deleteButton  btn btn-default'>" + literals.addScore + "</button>";
                             }
 
                             return button;
@@ -347,13 +385,40 @@ define([
                 });
             })
 
+            var events = [];
+            var resources = [];
+            var startDate = "";
+            var maxRange = "";
+            var minRange = "";
+
+            $.ajax({
+                type: 'GET',
+                url: _self.params.scheduleAdminURL + '/' + _self.tournamentModel.get('schedule').id,
+                async: false,
+                success: function (response) {
+                    events = JSON.parse(response.scheduleJson);
+                    resources = JSON.parse(response.scheduleResourcesJson);
+                    startDate = response.startDate;
+                    maxRange = response.maxRange;
+                    minRange = response.minRange;
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+            var minNum = parseInt(minRange.split(':')[0]);
+            var maxNum = parseInt(maxRange.split(':')[0]);
+            var diference = maxNum - minNum;
+            var heightCalendar = 100 + (50 * diference);
+
             $('#calendar' + _self.tournamentModel.get('id')).fullCalendar({
                 schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
                 defaultView: 'agendaDay',
-                defaultDate: '2016-01-07',
-                maxTime: "22:00:00",
-                minTime: "8:00:00",
+                defaultDate: startDate,
+                maxTime: maxRange,
+                minTime: minRange,
                 allDaySlot: false,
+                height: heightCalendar,
                 firstDay: 1,
                 editable: true,
                 selectable: true,
@@ -387,18 +452,8 @@ define([
                 },
                 views: {
                 },
-                resources: [
-                    { id: 'a', title: 'Room A' },
-                    { id: 'b', title: 'Room B' },
-                    { id: 'c', title: 'Room C' },
-                    { id: 'd', title: 'Room D' }
-                ],
-                events: [
-                    { id: '2', resourceId: 'a', start: '2016-01-07T09:00:00', end: '2016-01-07T14:00:00', title: 'event 2', backgroundColor: '#342' },
-                    { id: '3', resourceId: 'b', start: '2016-01-07T12:00:00', end: '2016-01-08T06:00:00', title: 'event 3', backgroundColor: '#622' },
-                    { id: '4', resourceId: 'c', start: '2016-01-07T07:30:00', end: '2016-01-07T09:30:00', title: 'event 4', backgroundColor: '#842' },
-                    { id: '5', resourceId: 'd', start: '2016-01-07T10:00:00', end: '2016-01-07T15:00:00', title: 'event 5', backgroundColor: '#246' }
-                ],
+                resources: resources,
+                events: events,
 
                 select: function(start, end, jsEvent, view, resource) {
                     console.log(
@@ -693,7 +748,17 @@ define([
                     });
                     _self.tournamentModel.fetch({
                         success: function(){
-                            $(_self.el).trigger('refreshSection');
+                            var deleteIndex = -1;
+                            _.each(_self.$el, function(view, index){
+                                if(view == $('#' + _self.modalIDCloseTournament)[0]){
+                                    deleteIndex = index;
+                                }
+                            })
+                            if(deleteIndex != -1){
+                                _self.$el.splice(deleteIndex, 1); 
+                            }
+                            _self.render();
+                            _self.setElement(_self.$el.add('#' + this.modalIDCloseTournament));
                         }
                     });
                 }
@@ -1102,6 +1167,9 @@ define([
                                 invalid = true;
                             }
                             else{
+                                if(hour < 10){
+                                    hour = '0' + hour;
+                                }
                                 if(initial == "-1"){
                                     if(_.isUndefined(minutes)){
                                         initial = 'T' + hour + ':00:00';
@@ -1255,11 +1323,11 @@ define([
                 'tournament' : _self.tournamentModel.get('id')
             }
 
-            /*$.ajax({
+            $.ajax({
                 type: 'POST',
                 data: JSON.stringify(rangesObj),
                 url: _self.params.scheduleAdminURL,
-                success: function (response) {*/
+                success: function (response) {
                     $.ajax({
                         type: 'POST',
                         data: JSON.stringify(tournamentObj),
@@ -1274,11 +1342,11 @@ define([
                             })
                         }
                     });
-                /*},
+                },
                 error: function(error){
                     console.log(error);
                 }
-            });*/
+            });
         },
         changeGameDate: function(e){
             alert('NOT IMPLEMENTED YET');
@@ -1288,6 +1356,7 @@ define([
             var idGame = e.target.name; 
             var method = $(e.target).attr('method');
             var gameToReturn = {};
+            var games = $.extend( _self.gamesDone, _self.gamesDrawDone );
             _.each(_self.gamesDone, function(gamesCategory){
                 _.each(gamesCategory, function(game){
                     if(game.id == idGame){
@@ -1442,7 +1511,215 @@ define([
             else{
                 alert(literals.scoreIncorrect);
             }
+        },
+        closeTournamentGroupsModalContent: function(){
+            var _self = this;
+            _self.modalCloseGroupsID = 'myCloseGroupsModal';
+            var myModal = $(_self.modalCloseGroupsID);
+            var buttons = '<button id="closeGroups" title="' + literals.saveButtonTitle + '" class="buttonInscription btn btn-default col-lg-6">' + literals.saveButtonTitle + '</button>' + 
+            '<button id="cancelCloseGroups" title="' + literals.cancelButtonTitle + '" class="buttonInscription btn btn-default" data-dismiss="modal">' + literals.cancelButtonTitle + '</button>';
+            var modal = _.template(genericModalTemplate, {
+                id: _self.modalCloseGroupsID,
+                title: literals.modalTitleCloseGroups,
+                content: "",
+                buttons: buttons,
+                onCloseAction: 'closeModal'
+            });
+            return modal;
+        },
+        closeTournamentGroups: function(e){
+            var _self = this;
+            var modal = _self.closeTournamentGroupsModalContent();
+            $(modal).modal();
+            $('#' + this.modalCloseGroupsID + ' .modal-dialog').css({'width':'900px'});
+            this.setElement(_self.$el.add('#' + this.modalCloseGroupsID));
+
+            var urlToSend = _self.params.closeGroupsTournament.replace('{idTournament}', _self.tournamentModel.get('id'));
+            var categories = {};
+            $.ajax({
+                type: 'PUT',
+                url: urlToSend,
+                async: false,
+                success: function (response) {
+                    categories = response.tournament;
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+
+            $('#' + this.modalCloseGroupsID + ' .modal-body').append('<div id="closeGroupsBox" ' + 
+                'class="col-lg-12" style="display:inline-block;"></div>');
+
+            _.each(categories, function(groups, catKey){
+                if(!_.isEmpty(groups)){    
+
+                    var catInfo = catKey.split(';');
+                    var catName = catInfo[0];
+                    var catId = catInfo[1];
+                    $('#closeGroupsBox').append('<div id="closeGroupsCategoryBox' + catId + '" class="col-lg-12 closeGroupsCategoryBox"><h3>' + catName + '</h3></div>');
+                    var templateCategory = "";
+                    _.each(groups, function(inscriptions, groupKey){
+                        var groupInfo = groupKey.split(';');
+                        var groupName = groupInfo[0];
+                        var groupId = groupInfo[1];
+                        var template = _.template(closeGroupsBoxTemplate, {
+                            groupId : groupId,
+                            categoryId : catId,
+                            groupName: groupName,
+                            inscriptions: inscriptions,
+                            dataLiterals: literals
+                        });
+                        templateCategory += template;
+                    });
+                    $('#closeGroupsCategoryBox' + catId).append(templateCategory);
+                }
+            });
+        },
+        selectPairInCloseGroupView: function(e){
+            var _self = this;
+            var button = $(e.target.closest('button'));
+            var idToSelect = button.attr('name');
+
+            if(_.isUndefined(_self.pairsSelectedForCloseGroups)){
+                _self.pairsSelectedForCloseGroups = [];
+            }
+            var index = _self.pairsSelectedForCloseGroups.indexOf(idToSelect);
+            if(index > -1){
+                _self.pairsSelectedForCloseGroups.splice(index, 1); 
+                button.find('i').hide();
+                button.find('h5').css('color', '#000');
+                button.css('background-color', '#F2F2F2');
+            }
+            else{
+                _self.pairsSelectedForCloseGroups.push(idToSelect);            
+                button.find('i').show();
+                button.find('h5').css('color', '#fff');
+                button.css('background-color', '#151515');
+            }
+        },
+        closeGroups: function(){
+            var _self = this;
+            var arrayPairsByGroup = {};
+            _.each(_self.pairsSelectedForCloseGroups, function(item){
+                var category = item.split('/')[2];
+                var pair = item.split('/')[0];
+                if(_.isUndefined(arrayPairsByGroup[category])){
+                    arrayPairsByGroup[category] = [];
+                }
+                arrayPairsByGroup[category].push(pair);
+            });
+
+            if(confirm(literals.sureCloseGroups)){
+                this.verifyCloseGroups(arrayPairsByGroup);
+            }
+        },
+        verifyCloseGroups: function(arrayPairsByGroup){
+            var _self = this;
+            var urlToSend = _self.params.createDraws.replace('{idTournament}', _self.tournamentModel.get('id'));
+            $.ajax({
+                type: 'PUT',
+                url: urlToSend,
+                async: false,
+                data: JSON.stringify(arrayPairsByGroup),
+                success: function (response) {
+                    _self.gamesDrawDone = response.tournament;
+                    $('#closeGroupsBox').fadeOut('slow', function(){
+                        _self.showDraws(response.tournament);
+                    });
+                    _self.tournamentModel.fetch({
+                        success: function(){
+                            var deleteIndex = -1;
+                            _.each(_self.$el, function(view, index){
+                                if(view == $('#' + _self.modalCloseGroupsID)[0]){
+                                    deleteIndex = index;
+                                }
+                            })
+                            if(deleteIndex != -1){
+                                _self.$el.splice(deleteIndex, 1); 
+                            }
+                            _self.render();
+                            _self.setElement(_self.$el.add('#' + this.modalCloseGroupsID));
+                        }
+                    });
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+        },
+        showDraws: function(drawsInTournament){
+            var _self = this;
+
+            var categoriesKeys = _.keys(drawsInTournament);
+            var categories = [];
+            _.each(categoriesKeys, function(category){
+                var name = category.split(';')[0];
+                var id = category.split(';')[1];
+                categories.push({
+                    'name' : name,
+                    'id' : id
+                })
+            })
+            template = _.template(drawSelectorCategoryTemplate, {
+                categories : categories
+            });
+            $('#' + _self.modalCloseGroupsID + ' .modal-body').append(template);
+            $('#myModalLabel').text(literals.modalTitleDraw);
+            $('#' + _self.modalCloseGroupsID + ' .modal-footer').html('<button id="cancelEditDraws" title="' + 
+                literals.cancelButtonTitle + '" class="buttonSaveTournament btn btn-default" data-dismiss="modal">' + 
+                literals.cancelButtonTitle + '</button>');
+
+            var categorySelected = 0
+            _.each(drawsInTournament, function(drawCategory, categoryInfo){
+                var categoryId = categoryInfo.split(';')[1];
+                var gamesByBlock = {};
+                var roundAnt = 0;
+                _.each(drawCategory, function(game){
+                    var round = game.description.split('/')[0];
+                    if(roundAnt == round){
+                        gamesByBlock[round].push(game);
+                    }
+                    else{
+                        gamesByBlock[round] = [];
+                        gamesByBlock[round].push(game);
+                        roundAnt = round;
+                    }
+                });
+                var blocks = _.keys(gamesByBlock).map(function(item) {
+                    return parseInt(item, 10);
+                });
+                max = Math.max.apply(null,blocks);
+                var numShowBlock = literals.numMaxBlocks;
+                for(var i = 0; i < blocks.length - 1; i++){
+                    numShowBlock = numShowBlock / 2;
+                }
+                _.each(gamesByBlock, function(games, numBlock){
+                    template = _.template(drawBlockTemplate, {
+                        roundName : numBlock,
+                        numBlock : numShowBlock,
+                        numMaxBlock : max,
+                        categoryId : categoryId
+                    });
+                    $('#' + categoryId).prepend(template);
+                    template = _.template(drawMatchTemplate, {
+                        matchs : games,
+                        dataLiterals : literals
+                    });
+                    $('#block-' + numShowBlock + '-' + categoryId).prepend(template);
+                    numShowBlock = numShowBlock * 2;
+                })
+            })
+        },
+        showDrawsEvent: function(e){
+            var _self = this;
+            var modal = _self.closeTournamentGroupsModalContent();
+            $(modal).modal();
+            $('#' + this.modalCloseGroupsID + ' .modal-dialog').css({'width':'900px'});
+            this.setElement(_self.$el.add('#' + this.modalCloseGroupsID));
+            this.showDraws(_self.gamesDrawDone);
         }
+
     });
     return TournamentAdminView;
 });

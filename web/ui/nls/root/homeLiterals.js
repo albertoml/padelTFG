@@ -1,4 +1,5 @@
 define({
+	"numMaxBlocks": 16,
 	"FridayDay": "Friday",
 	"SaturdayDay": "Saturday",
 	"SundayDay": "Sunday",
@@ -28,7 +29,8 @@ define({
     	"Created":"Created",
     	"InInscriptionDate":"In Inscription Date",
     	"InGroupDate":"In Group Date",
-    	"MatchsDone": "Group phase (Matchs done)"
+    	"MatchsDone": "Group phase (Matchs done)",
+    	"InFinalsDate": "In Finals Date"
     },
     "gameStatus":{
     	"Created":"Created",
@@ -51,6 +53,16 @@ define({
 		"secondPhone":"Second Phone",
 		"gender":"Gender"
 	},
+	"finalOptions":[
+		{'id':'league', 'text':'league according (No Draw)'},
+		{'id':'draw2', 'text':'Draw 2 Pairs (final)'},
+		{'id':'draw4', 'text':'Draw 4 Pairs (semifinals)'},
+		{'id':'draw8', 'text':'Draw 8 Pairs (Quarter finals)'},
+		{'id':'draw16', 'text':'Draw 16 Pairs (Second round)'},
+		{'id':'draw32', 'text':'Draw 32 Pairs (Knockout phase)'},
+		{'id':'firstSecond', 'text':'First and Second for each group'},
+		{'id':'first', 'text':'Only first for each group'}
+	],
 	"startTournament":"Start Tournament",
 	"buttonBasicInfo":"Edit Profile",
 	"cancelButtonTitle":"Cancel",
@@ -76,12 +88,15 @@ define({
 	"modalTitleInsertTournamentSchedule" : "Insert Tournament Shedule",
 	"modalTitleEditGroups" : "Edit grups",
 	"modalTitleScore" : "Edit Score",
+	"modalTitleCloseGroups" : "Select pairs classified for each category",
+	"modalTitleDraw" : "Draws",
 	"scoreIncorrect" : "Score is in incorrect format",
 	"createNewTournament":"Create Tournament",
 	"confirmSaveProfile":"Are you sure save changes?",
 	"DoGroupConfirm":"If close inscriptions any more can sing up in the tournament, Are you sure?",
 	"DoMatchsConfirm":"If do matchs you can´t do any changes in the groups, Are you sure?",
 	"confirmDeleteAnnotation": "Are you sure delete annotation",
+	"sureCloseGroups": "Are you sure to close groups?",
 	"tournamentsFields":{
 		"name":"Name",
 		"admin":"Admin",
@@ -189,8 +204,12 @@ define({
 	"fromHour":"From Hour",
 	"toHour":"To Hour",
 	"available":"Available",
+	"startDateNotSet":"Not Set",
 	"showGameCalendarButton":"Show Calendar",
 	"hideGameCalendarButton":"Hide Calendar",
+	"closeTournamentGroupsButton":"Close Groups",
+	"showDrawsButton":"Draws",
+	"selectTypeOfDraw":"Select type of Draw",
 	"newGroupTitle": "New Group",
 	"ClickForAddGroup": "Click on + for add new group",
 	"closeTournamentInscriptionButton": "Close Inscription",

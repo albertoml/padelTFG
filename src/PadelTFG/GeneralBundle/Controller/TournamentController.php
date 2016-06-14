@@ -111,6 +111,25 @@ class TournamentController extends FOSRestController
         }
 	}
 
+    public function startTournamentAction($id){
+        $this->tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournament = $this->tournamentService->getTournament($id);
+
+        if ($tournament instanceof Tournament) {
+
+            $tournament = $this->tournamentService->startTournament($tournament);
+            if($tournament['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $tournament['message']));
+                return $this->util->setResponse(400, $dataToSend);
+            }
+            $dataToSend = json_encode(array('tournament' => $tournament['message']));
+            return $this->util->setJsonResponse(200, $dataToSend);
+            
+        } else {
+            return $this->util->setResponse(404, Literals::TournamentNotFound);
+        }
+    }
+
     public function closeInscriptionTournamentAction($id){
         $this->tournamentService->setManager($this->getDoctrine()->getManager());
         $tournament = $this->tournamentService->getTournament($id);
@@ -122,6 +141,48 @@ class TournamentController extends FOSRestController
             $params = json_decode($content, true);
 
             $tournament = $this->tournamentService->closeInscriptionTournament($tournament, $params);
+            if($tournament['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $tournament['message']));
+                return $this->util->setResponse(400, $dataToSend);
+            }
+            $dataToSend = json_encode(array('tournament' => $tournament['message']));
+            return $this->util->setJsonResponse(200, $dataToSend);
+            
+        } else {
+            return $this->util->setResponse(404, Literals::TournamentNotFound);
+        }
+    }
+
+    public function closeGroupsTournamentAction($id){
+        $this->tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournament = $this->tournamentService->getTournament($id);
+
+        if ($tournament instanceof Tournament) {
+
+            $tournament = $this->tournamentService->closeGroupTournament($tournament);
+            if($tournament['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $tournament['message']));
+                return $this->util->setResponse(400, $dataToSend);
+            }
+            $dataToSend = json_encode(array('tournament' => $tournament['message']));
+            return $this->util->setJsonResponse(200, $dataToSend);
+            
+        } else {
+            return $this->util->setResponse(404, Literals::TournamentNotFound);
+        }
+    }
+
+    public function createDrawTournamentAction($id){
+        $this->tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournament = $this->tournamentService->getTournament($id);
+
+        if ($tournament instanceof Tournament) {
+
+            $params = array();
+            $content = $this->get("request")->getContent();
+            $params = json_decode($content, true);
+
+            $tournament = $this->tournamentService->createDrawTournament($tournament, $params);
             if($tournament['result'] == 'fail'){
                 $dataToSend = json_encode(array('error' => $tournament['message']));
                 return $this->util->setResponse(400, $dataToSend);

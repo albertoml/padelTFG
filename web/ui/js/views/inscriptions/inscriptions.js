@@ -101,9 +101,9 @@ define([
                         if(full.tournament.status.value != literals.tournamentStatus.InInscriptionDate && full.tournament.status.value != literals.tournamentStatus.InGroupDate){
                             observationsReadOnly = "readOnly"
                         }
-                        button += "<button available='" + observationsReadOnly + "' id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
+                        button += "<button class='btn btn-default' available='" + observationsReadOnly + "' id='viewObservations' name=" + full.id + ">" + literals.viewObservation + "</button>";
                         if(full.tournament.status.value == literals.tournamentStatus.InInscriptionDate){
-                            button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
+                            button += "<button alt=" + literals.deleteInscription + " id='deleteInscription' name=" + full.id + " class='deleteButton btn btn-default'><i class='fa fa-trash-o'></i></button>";
                         }                      
                         return button;
                     }
@@ -169,7 +169,7 @@ define([
             });
             modalContent += '</div>';
             modalContent += '<div style="margin-top:20px" class="buttons col-lg-12">';
-            modalContent += '<button id="insertObservation">' + literals.addObservation + '</button>';
+            modalContent += '<button class="btn btn-default" id="insertObservation">' + literals.addObservation + '</button>';
             modalContent += '</div>';
 
 

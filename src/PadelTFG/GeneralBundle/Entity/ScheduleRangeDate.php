@@ -36,7 +36,6 @@ class ScheduleRangeDate implements JsonSerializable
     {
         return array(
         	'id' => $this->id,
-            'date' => $this->date,
             'schedule' => $this->schedule
         );
     }

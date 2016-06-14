@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: ulises_padeltfg
+    database_user: ulises_padeltfg
+    database_password: ulises_padeltfg
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: a10ad0524314af80534ebef85a959d8b3

@@ -2,14 +2,30 @@
 <hr style="width: 100%">
 
 <% if(tournamentStatus == dataLiterals.tournamentStatus.Created){ %>
+
 	<button id='startTournament' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.startTournament %></button>
-<% } if(tournamentStatus == dataLiterals.tournamentStatus.InGroupDate){ %>
+
+<% } else if(tournamentStatus == dataLiterals.tournamentStatus.InGroupDate){ %>
+
 	<button id='editGroupsView' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.editGroupViewButton %></button> 
-<% } else { if(tournamentStatus == dataLiterals.tournamentStatus.InInscriptionDate){ %> 
+
+<% } else if(tournamentStatus == dataLiterals.tournamentStatus.InInscriptionDate){ %> 
+
 	<button id='closeTournamentInscription' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.closeTournamentInscriptionButton %></button>
-<% } else{ if(tournamentStatus == dataLiterals.tournamentStatus.MatchsDone){ %> 
+
+<% } else if(tournamentStatus == dataLiterals.tournamentStatus.MatchsDone){ %> 
+
 	<button id='showGameCalendar' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.hideGameCalendarButton %></button>
+	<button id='closeTournamentGroups' style="float: right;" class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.closeTournamentGroupsButton %></button>
 	<div id='showCalendar<%= tournamentId %>' class="col-lg-12" style="margin-top: 20px">
 		<div id='calendar<%= tournamentId %>'></div>
 	</div>
-<% } }} %>
+
+<% } else if(tournamentStatus == dataLiterals.tournamentStatus.InFinalsDate){ %>
+	<button id='showGameCalendar' class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.hideGameCalendarButton %></button>
+	<button id='showDraws' style="float: right;" class='col-lg-5 btn btn-default buttonCloseTournament'><%= dataLiterals.showDrawsButton %></button>
+	<div id='showCalendar<%= tournamentId %>' class="col-lg-12" style="margin-top: 20px">
+		<div id='calendar<%= tournamentId %>'></div>
+	</div>
+
+<% } %>

@@ -176,7 +176,8 @@ class GameControllerAPITest extends WebTestCase
         $this->assertContains('"pair1":null', $response);
         $this->assertContains('"pair2":null', $response);
         $this->assertContains('"description":""', $response);
-        $this->assertContains('"date":null', $response);
+        $this->assertContains('"startDate":null', $response);
+        $this->assertContains('"endDate":null', $response);
         $this->assertContains('"score":""', $response);
     }
 
@@ -200,7 +201,8 @@ class GameControllerAPITest extends WebTestCase
         $this->assertContains('"pair1":null', $response);
         $this->assertContains('"pair2":null', $response);
         $this->assertContains('"description":""', $response);
-        $this->assertContains('"date":null', $response);
+        $this->assertContains('"startDate":null', $response);
+        $this->assertContains('"endDate":null', $response);
         $this->assertContains('"score":""', $response);
     }
 

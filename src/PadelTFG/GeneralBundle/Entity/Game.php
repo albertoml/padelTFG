@@ -18,7 +18,7 @@ class Game implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=500) */
+	/** @ORM\Column(type="string", length=500, nullable=true) */
 	protected $description;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair")
@@ -29,7 +29,7 @@ class Game implements JsonSerializable
 		@ORM\JoinColumn(name="pair2_id", onDelete="cascade") */
 	protected $pair2;
 
-	/** @ORM\Column(type="string", length=50) */
+	/** @ORM\Column(type="string", length=50, nullable=true) */
 	protected $score;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament")
@@ -47,21 +47,24 @@ class Game implements JsonSerializable
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GameStatus") */
 	protected $status;
 
-	/** @ORM\Column(type="datetime", nullable=true)
-		@Assert\DateTime()
-		@Assert\GreaterThanOrEqual("today") */
+	/** @ORM\Column(type="string", nullable=true) */
 	protected $startDate;
 
-	/** @ORM\Column(type="datetime", nullable=true)
-		@Assert\DateTime()
-		@Assert\GreaterThanOrEqual("today") */
+	/** @ORM\Column(type="string", nullable=true) */
 	protected $endDate;
 
-	/** @ORM\Column(type="string", length=50) */
+	/** @ORM\Column(type="string", length=50, nullable=true) */
 	protected $track;
 
 	/** @ORM\Column(type="string", nullable=true) */
 	protected $bgColor;
+
+	/** @ORM\Column(type="string", nullable=true) */
+	protected $numOfScheduleRange;
+
+	/** @ORM\Column(type="boolean", nullable=true) */
+	protected $isDrawGame;
+
 
 	public function __construct() {
         $this->pair = new \Doctrine\Common\Collections\ArrayCollection();
@@ -106,6 +109,12 @@ class Game implements JsonSerializable
 	public function getBgColor(){
 		return $this->bgColor;
 	}
+	public function getScheduleId(){
+		return $this->numOfScheduleRange;
+	}
+	public function getIsDrawGame(){
+		return $this->isDrawGame;
+	}
 
 	public function setDescription($description){
 		$this->description = $description;
@@ -143,6 +152,12 @@ class Game implements JsonSerializable
 	public function setBgColor($bgColor){
 		$this->bgColor = $bgColor;
 	}
+	public function setScheduleId($numOfScheduleRange){
+		$this->numOfScheduleRange = $numOfScheduleRange;
+	}
+	public function setIsDrawGame($isDrawGame){
+		$this->isDrawGame = $isDrawGame;
+	}
 
     public function jsonSerialize()
     {
@@ -160,6 +175,7 @@ class Game implements JsonSerializable
             'endDate' => $this->endDate,
             'track' => $this->track,
             'bgColor' => $this->bgColor,
+            'isDrawGame' => $this->isDrawGame
         );
     }
 }

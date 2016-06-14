@@ -1,0 +1,29 @@
+<div  id="draws-tournament">
+	<div class="selector-category" id="selector-draw-category">
+	    <div class="content">
+		    <ul class="nav nav-tabs">
+			    <% _.each(categories, function(cat, index) { 
+			        if(index == 0){ %>
+			            <li id="draw-<%= cat.id %>" class="button-category active"><a data-toggle="tab" href="#<%= cat.id %>"><%= cat.name %></a></li>
+			        <% } else { %>
+			            <li id="draw-<%= cat.id %>" class="button-category"><a data-toggle="tab" href="#<%= cat.id %>"><%= cat.name %></a></li>
+			        <% }
+			    }); %>
+			</ul>
+	    </div>
+	</div>
+	<div id="container-tournament">
+		<div id="draws" class="tab-content">
+		    <% _.each(categories, function(cat, index) { 
+		        if(index == 0){ 
+		            var active = 'active';
+		        }else{
+		            var active = '';
+		        }
+		        %>
+		        <div id="<%= cat.id %>" class="tab-pane fade in <%= active %>">
+		        </div>
+		    <% }); %>
+		</div>
+	</div>
+</div>

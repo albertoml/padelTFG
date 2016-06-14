@@ -4,6 +4,12 @@ namespace PadelTFG\GeneralBundle\Resources\globals;
 
 abstract class Literals
 {
+	//SystemParameters
+	const pointsToWinner = 3;
+	const pointsToLoser = 0;
+	const pointsToLoserIfWinSet = 0;
+	const doubleTieResolveByGame = "true";
+
     //User Status
     const RegisteredUserStatus = "Registered";
     const In_TournamentUserStatus = "In Tournament";
@@ -41,10 +47,9 @@ abstract class Literals
     //Game Status
     const CreatedGameStatus = "Created";
     const In_Process_To_ChangeGameStatus = "In Process To Change";
-    const PendingGameStatus = "Pending";
-    const PlayedGameStatus = "Played";
-    const WonGameStatus = "Won";
-    const LosedGameStatus = "Losed";
+    const CanceledGameStatus = "Canceled";
+    const WonPair1GameStatus = "Won Pair 1";
+    const WonPair2GameStatus = "Won Pair 2";
     
     //Annotation Status
     const CreatedAnnotationStatus = "Created";
@@ -152,4 +157,20 @@ abstract class Literals
 	//GameController
 	const GameNotFound = "Game not found";
 	const TournamentIdNotCorrect = "Tournament ID not correct";
+
+	//ScheduleService
+	const NotSet = "Not Set";
+	const vs = "vs";
+
+	//ScheduleTrackService
+	const Track = "Track";
+
+	//CategoryService
+	const ByePairName = "Bye";
+
+	//Draws
+	const Draw16 = [0, 15, 7, 8, 5, 10, 3, 12, 2, 13, 4, 11, 6, 9, 1, 14];
+	const Draw8 = [0, 7, 3, 4, 2, 5, 1, 6];
+	const Draw4 = [0, 3, 1, 2];
+	const Draw2 = [0, 1];
 }

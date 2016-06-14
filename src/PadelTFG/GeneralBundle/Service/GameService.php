@@ -53,6 +53,12 @@ class GameService{
         return $games;
     }
 
+    public function getGamesByTournamentInArray($idTournament){
+        $repository = $this->em->getRepository('GeneralBundle:Game');
+        $games = $repository->findByTournament($idTournament);
+        return $games;
+    }
+
     public function getGamesByTournament($idTournament){
         $categoryService = new CategoryService();
         $categoryService->setManager($this->em);
@@ -63,6 +69,26 @@ class GameService{
             $returnGames[$category->getName() . ';' . $category->getId()] = $games;
         }
         return $returnGames;
+    }
+
+    public function getGamesInDrawByTournament($idTournament){
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+        $categories = $categoryService->getCategoryByTournament($idTournament);
+        $returnGames = array();
+        foreach ($categories as $category) {
+            $games = $this->getGamesInDrawByCategory($category->getId());
+            $returnGames[$category->getName() . ';' . $category->getId()] = $games;
+        }
+        return $returnGames;
+    }
+
+    public function getGamesInDrawByCategory($idCategory){
+        $repository = $this->em->getRepository('GeneralBundle:Game');
+        $games = $repository->findBy(
+            array('category' => $idCategory, 'isDrawGame' => true)
+        );
+        return $games;
     }
 
     public function getGamesByPair($idPair){
@@ -142,6 +168,7 @@ class GameService{
         $game->setEndDate(!empty($params['endDate']) ? $params['endDate'] : null);
         $game->setTrack(!empty($params['track']) ? $params['track'] : '');
         $game->setBgColor(!empty($params['bgColor']) ? $params['bgColor'] : '');
+        $game->setIsDrawGame(!empty($params['isDrawGame']) ? $params['isDrawGame'] : false);
         return $game;
     }
 
@@ -163,7 +190,7 @@ class GameService{
             if($tournament instanceof Tournament){
                 $inscriptionService = new InscriptionService();
                 $inscriptionService->setManager($this->em);
-                $inscriptionsTournament = $inscriptionService->getInscriptionsByGroupForATournament($params['tournamentId']);
+                $inscriptionsTournament = $inscriptionService->getInscriptionsByGroupForATournament($params['tournamentId'], null);
                 foreach ($inscriptionsTournament as $categoryKey => $inscriptionsCategory) {
                     $gamesForGroup = array();
                     foreach ($inscriptionsCategory as $groupKey => $inscriptionsGroup) {
@@ -173,12 +200,12 @@ class GameService{
                 }  
                 $scheduleService = new ScheduleService();
                 $scheduleService->setManager($this->em);
-                $scheduleService->setDatesToMatchsInTournament($allGamesToReturnInCategory, $inscriptionsTournament);
+                $scheduleService->setDatesToMatchsInTournament($this->getGamesByTournamentInArray($tournament->getId()), $inscriptionService->getInscriptionsByTournamentInArray($tournament->getId()), $tournament->getId());
                 $tournament->setStatus($this->statusService->getStatus('tournament', Literals::Matchs_DoneTournamentStatus));
                 $this->em->persist($tournament);
                 $this->em->flush();
 
-                return array('result' => 'ok', 'message' => $allGamesToReturnInCategory);
+                return array('result' => 'ok', 'message' => $this->getGamesByTournament($tournament->getId()));
             }
             else{
                 return array('result' => 'fail', 'message' => Literals::TournamentIdNotCorrect);
@@ -224,6 +251,107 @@ class GameService{
         return $numMatchs;
     }
 
+    public function updateScore($score, $rank, $idPair1, $idPair2){
+        if(!is_null($score)){
+            $setsPair1 = 0;
+            $setsPair2 = 0;
+            $numGames = 0;
+            $gamesAnt = 0;        
+            for($i=0 ; $i<strlen($score) ; $i++){
+                if(substr($score,$i,1) != '/' && substr($score,$i,1) != ' '){
+                    $games = intval(substr($score,$i,1));
+                    if($numGames%2 == 0){
+                        $rank[$idPair1]['gamesWon'] = $rank[$idPair1]['gamesWon'] + $games;
+                        $rank[$idPair2]['gamesLost'] = $rank[$idPair2]['gamesLost'] + $games;
+                        $gamesAnt = $games;
+                    }
+                    else{
+                        $rank[$idPair1]['gamesLost'] = $rank[$idPair1]['gamesLost'] + $games;
+                        $rank[$idPair2]['gamesWon'] = $rank[$idPair2]['gamesWon'] + $games;
+                        if($gamesAnt > $games){
+                            $setsPair1 = $setsPair1 + 1;
+                            $rank[$idPair1]['setsWon'] = $rank[$idPair1]['setsWon'] + 1;
+                            $rank[$idPair2]['setsLost'] = $rank[$idPair2]['setsLost'] + 1;
+                        }
+                        else{
+                            $setsPair2 = $setsPair2 + 1;
+                            $rank[$idPair1]['setsLost'] = $rank[$idPair1]['setsLost'] + 1;
+                            $rank[$idPair2]['setsWon'] = $rank[$idPair2]['setsWon'] + 1;
+                        }
+                    }
+                    $numGames = $numGames + 1;
+                }
+            }
+            if($setsPair1 > $setsPair2){
+                $rank[$idPair1]['matchsWon'] = $rank[$idPair1]['matchsWon'] + 1;
+                $rank[$idPair1]['points'] = $rank[$idPair1]['points'] + Literals::pointsToWinner;
+                if($setsPair2 == 1){
+                    $rank[$idPair2]['points'] = $rank[$idPair2]['points'] + Literals::pointsToLoserIfWinSet;
+                }
+                else{
+                    $rank[$idPair2]['points'] = $rank[$idPair2]['points'] + Literals::pointsToLoser;
+                }
+            } 
+            else{
+                $rank[$idPair2]['matchsWon'] = $rank[$idPair2]['matchsWon'] + 1;
+                $rank[$idPair2]['points'] = $rank[$idPair2]['points'] + Literals::pointsToWinner;
+                if($setsPair1 == 1){
+                    $rank[$idPair1]['points'] = $rank[$idPair1]['points'] + Literals::pointsToLoserIfWinSet;
+                }
+                else{
+                    $rank[$idPair1]['points'] = $rank[$idPair1]['points'] + Literals::pointsToLoser;
+                }
+            }
+        }
+        return $rank;
+    }
+
+    public function wonGameByPairs($pair1, $pair2, $games){
+        foreach ($games as $game) {
+            if($game->getPair1()->getId() == $pair1 && $game->getPair2()->getId() == $pair2 || $game->getPair2()->getId() == $pair1 && $game->getPair1()->getId() == $pair2){
+                $result = $this->wonGameByScore($game->getScore());
+                if($result == 1){
+                    return $game->getPair1()->getId();
+                }
+                else{
+                    return $game->getPair2()->getId();
+                }
+            }
+        }
+    }
+
+    public function wonGameByScore($score){
+        
+        $setsPair1 = 0;
+        $setsPair2 = 0;
+        $numGames = 0;
+        $gamesAnt = 0; 
+        
+        for($i=0 ; $i<strlen($score) ; $i++){
+            if(substr($score,$i,1) != '/' && substr($score,$i,1) != ' '){
+                $games = intval(substr($score,$i,1));
+                if($numGames%2 == 0){
+                    $gamesAnt = $games;
+                }
+                else{
+                    if($gamesAnt > $games){
+                        $setsPair1 = $setsPair1 + 1;
+                    }
+                    else{
+                        $setsPair2 = $setsPair2 + 1;
+                    }
+                }
+                $numGames = $numGames + 1;
+            }
+        }
+        if($setsPair1 > $setsPair2){
+            return 1;
+        } 
+        else{
+            return 2;
+        }
+    }
+
     private function setGameModify($game, $params){
 
         $game->setDescription(!empty($params['description']) ? $params['description'] : $game->getDescription());
@@ -234,6 +362,7 @@ class GameService{
         $game->setEndDate(!empty($params['endDate']) ? $params['endDate'] : $game->getEndDate());
         $game->setTrack(!empty($params['track']) ? $params['track'] : $game->getTrack());
         $game->setBgColor(!empty($params['bgColor']) ? $params['bgColor'] : $game->getBgColor());
+        $game->setIsDrawGame(!empty($params['isDrawGame']) ? $params['isDrawGame'] : $game->getIsDrawGame());
         if(!empty($params['status'])){
             $game->setStatus($this->statusService->getStatus('game', $params['status']));
         }

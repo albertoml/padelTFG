@@ -124,7 +124,7 @@ class InscriptionController extends FOSRestController
     public function getInscriptionByGroupAction($idGroup){
 
         $this->inscriptionService->setManager($this->getDoctrine()->getManager());
-        $inscriptions = $this->inscriptionService->getInscriptionsByGroup($idGroup);
+        $inscriptions = $this->inscriptionService->getInscriptionsByGroup($idGroup, null);
 
         $groupService = new GroupService();
         $groupService->setManager($this->getDoctrine()->getManager());
@@ -142,7 +142,7 @@ class InscriptionController extends FOSRestController
     public function getInscriptionByGroupForATournamentAction($idTournament){
 
         $this->inscriptionService->setManager($this->getDoctrine()->getManager());
-        $inscriptions = $this->inscriptionService->getInscriptionsByGroupForATournament($idTournament);
+        $inscriptions = $this->inscriptionService->getInscriptionsByGroupForATournament($idTournament, null);
 
         $tournamentService = new TournamentService();
         $tournamentService->setManager($this->getDoctrine()->getManager());

@@ -54,8 +54,8 @@ class ScheduleRange implements JsonSerializable
     {
         return array(
         	'id' => $this->id,
-            'date' => $this->date,
-            'scheduleRangeDate' => $this->scheduleRangeDate
+            'fromHour' => $this->fromHour,
+            'toHour' => $this->toHour
         );
     }
 	

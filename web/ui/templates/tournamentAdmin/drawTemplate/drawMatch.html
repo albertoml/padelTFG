@@ -1,0 +1,55 @@
+<% _.each(matchs, function(match) { %>
+
+	<!-- calcular clase si es cs o cs-lost -->
+	<% if(_.isNull(match.pair1)){
+	match.pair1 = {};
+	match.pair1.user1 = {};
+	match.pair1.user1.name = "--";
+	match.pair1.user1.lastName = "";
+	match.pair1.user2 = {};
+	match.pair1.user2.name = "--";
+	match.pair1.user2.lastName = "";
+	}
+	if(_.isNull(match.pair2)){
+	match.pair2 = {};
+	match.pair2.user1 = {};
+	match.pair2.user1.name = "--";
+	match.pair2.user1.lastName = "";
+	match.pair2.user2 = {};
+	match.pair2.user2.name = "--";
+	match.pair2.user2.lastName = "";
+	}
+	if(_.isNull(match.startDate)){
+	match.startDate = dataLiterals.startDateNotSet;
+	}
+	%>
+	<div class="match">
+		<div class="line-up"></div>
+		<div class="container-match" id="<%= match.id %>">
+
+			<div class="schedule"><%= match.startDate %></div>
+
+			<div class="pair pair-1">
+		        <div class="player cs">
+		        	<%= match.pair1.user1.name %> <%= match.pair1.user1.lastName %>
+		        </div>
+		        <div class="player cs">
+		        	<%= match.pair1.user2.name %> <%= match.pair1.user2.lastName %>
+		        </div>
+			</div>			
+			<div class="vs">vs</div>
+			<div class="score">
+				<%= match.score %>
+			</div>
+			<div class="pair pair-2">
+		        <div class="player cs-lost">
+		        	<%= match.pair2.user1.name %> <%= match.pair2.user1.lastName %>                     
+		        </div>
+		        <div class="player cs-lost">
+		        	<%= match.pair2.user2.name %> <%= match.pair2.user2.lastName %>                      
+		        </div>
+			</div>		
+		</div>
+		<div class="line-down"></div>
+	</div>
+<% }); %>

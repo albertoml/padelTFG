@@ -12,7 +12,7 @@ game_get:
         id: "\d+"
 
 game_by_tournament:
-    path:  /game/tournament/{idTournament}
+    path:  /game/tournament/{idTournament}/{isDraw}
     defaults: { _controller: GeneralBundle:Game:getGameByTournament, _format: ~ }
     requirements:
         _method: GET

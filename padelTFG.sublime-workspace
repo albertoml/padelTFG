@@ -4,683 +4,559 @@
 		"selected_items":
 		[
 			[
-				"for",
-				"foreach	foreach …"
-			],
-			[
-				"pa",
-				"pair"
-			],
-			[
-				"pair",
-				"pairId"
-			],
-			[
-				"us",
-				"user2"
-			],
-			[
-				"use",
-				"user1"
-			],
-			[
-				"nma",
-				"nameSearch"
-			],
-			[
-				"nam",
-				"nameSearch"
-			],
-			[
-				"z",
-				"z-index"
-			],
-			[
-				"cat",
-				"category"
-			],
-			[
-				"cate",
-				"categories"
-			],
-			[
-				"selec",
-				"select2"
+				"in",
+				"inscription1"
 			],
 			[
 				"ins",
-				"inscriptions"
+				"inscription"
 			],
 			[
-				"to",
-				"tournamentId"
+				"num",
+				"numMatchsLength"
 			],
 			[
-				"tournament",
-				"tournamentId"
+				"fi",
+				"firstRound"
+			],
+			[
+				"gamesd",
+				"gamesDrawDone"
+			],
+			[
+				"games",
+				"gamesDrawDone"
+			],
+			[
+				"f",
+				"function"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
+				"parse",
+				"parseInt"
+			],
+			[
+				"draw",
+				"drawMatchTemplate"
+			],
+			[
+				"category",
+				"categoryId"
+			],
+			[
+				"drawB",
+				"drawBlockTemplate"
+			],
+			[
+				"categ",
+				"categoryId"
+			],
+			[
+				"round",
+				"roundAnt"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"cate",
+				"categoryEntity"
+			],
+			[
+				"drawse",
+				"drawSectionTemplate"
+			],
+			[
+				"sho",
+				"showDraws"
+			],
+			[
+				"game",
+				"gameSaved"
+			],
+			[
+				"gam",
+				"gamesOnDraw"
+			],
+			[
+				"para",
+				"paramsForDoGame"
 			],
 			[
 				"tou",
 				"tournamentId"
 			],
 			[
-				"tour",
-				"tournamentId"
+				"nu",
+				"numMatchs"
 			],
 			[
-				"op",
-				"option	Tag"
+				"inscri",
+				"inscriptionService"
 			],
 			[
-				"ob",
-				"observations"
+				"inscript",
+				"inscriptionsOrder"
 			],
 			[
-				"boo",
-				"bootstrap"
+				"pi",
+				"pivotGroup"
 			],
 			[
-				"b",
-				"bootstrap-modalmanager"
+				"inscription",
+				"inscription"
 			],
 			[
-				"get",
-				"getObservations"
+				"inscriptions",
+				"inscriptions"
 			],
 			[
-				"save",
-				"saveInscription"
+				"inscrip",
+				"inscriptions"
 			],
 			[
-				"is",
-				"isEmpty"
+				"inscr",
+				"inscriptions"
 			],
 			[
-				"sen",
-				"sendRegister"
+				"co",
+				"count"
 			],
 			[
-				"mo",
-				"model"
+				"insc",
+				"inscriptions"
 			],
 			[
-				"chan",
-				"changesPreferences"
+				"pair",
+				"pairId"
 			],
 			[
-				"cha",
-				"changes"
+				"cat",
+				"catId"
 			],
 			[
-				"first",
-				"firstPhone"
+				"gr",
+				"groupId"
 			],
 			[
-				"ta",
-				"tableTools"
+				"gro",
+				"groupService"
 			],
 			[
-				"chang",
-				"changed"
+				"arr",
+				"arrayPairsByGroup"
 			],
 			[
-				"mod",
-				"model"
-			],
-			[
-				"rende",
-				"renderModal"
-			],
-			[
-				"moda",
-				"modalID"
-			],
-			[
-				"sav",
-				"saveProfile"
-			],
-			[
-				"bu",
-				"button"
-			],
-			[
-				"re",
-				"result"
-			],
-			[
-				"w",
-				"width"
-			],
-			[
-				"dat",
-				"dataTemplate"
-			],
-			[
-				"data",
-				"dataTemplate"
-			],
-			[
-				"fir",
-				"firstPhone"
-			],
-			[
-				"add",
-				"address"
-			],
-			[
-				"ren",
-				"renderHomeView"
-			],
-			[
-				"par",
-				"params"
-			],
-			[
-				"ent",
-				"entity"
-			],
-			[
-				"User",
-				"UserPreference"
-			],
-			[
-				"U",
-				"UserPrerenceService"
-			],
-			[
-				"S",
-				"Service"
-			],
-			[
-				"userPR",
-				"userPreference"
-			],
-			[
-				"jq",
-				"jquery-modal"
-			],
-			[
-				"ba",
-				"background-color"
-			],
-			[
-				"wa",
-				"waypoints"
-			],
-			[
-				"en",
-				"entity"
-			],
-			[
-				"hom",
-				"homeModel"
-			],
-			[
-				"id",
-				"idUser"
-			],
-			[
-				"H",
-				"HomeModel"
-			],
-			[
-				"res",
-				"response"
-			],
-			[
-				"o",
-				"onclick	Attr"
-			],
-			[
-				"sec",
-				"section"
-			],
-			[
-				"comm",
-				"commonView"
-			],
-			[
-				"B",
-				"BasicInfoView"
-			],
-			[
-				"fun",
-				"function"
-			],
-			[
-				"Co",
-				"CommonView"
-			],
-			[
-				"role",
-				"rolesToSend"
-			],
-			[
-				"pla",
-				"playerRole"
-			],
-			[
-				"user",
-				"userUserRole"
-			],
-			[
-				"getUse",
-				"getUserRoleByUser"
-			],
-			[
-				"key",
-				"keyPressLogin"
-			],
-			[
-				"url",
-				"urlToSend"
-			],
-			[
-				"va",
-				"val"
-			],
-			[
-				"n",
-				"null"
+				"ind",
+				"indexOf"
 			],
 			[
 				"_",
 				"_self"
 			],
 			[
-				"inco",
-				"incorrect"
+				"pairs",
+				"pairsSelectedForCloseGroups"
 			],
 			[
-				"getUs",
-				"getUserByEmail"
+				"tmp",
+				"tmp1"
 			],
 			[
-				"che",
-				"checked"
+				"rank",
+				"rankNew"
 			],
 			[
-				"sa",
-				"saveObservations"
+				"pai",
+				"pair2"
 			],
 			[
-				"Ob",
-				"Observation"
+				"res",
+				"resultWonGame"
 			],
 			[
-				"setIn",
-				"setInscriptionSave"
+				"id",
+				"idGroup"
 			],
 			[
-				"nw",
-				"newInscription"
+				"isn",
+				"is_null"
 			],
 			[
-				"check",
-				"checkPair"
+				"or",
+				"orderBy"
 			],
 			[
-				"t",
-				"tournament"
+				"min",
+				"minNum"
 			],
 			[
-				"fail",
-				"failCheckAttributes"
+				"max",
+				"maxNum"
 			],
 			[
-				"Grou",
+				"start",
+				"startDate"
+			],
+			[
+				"en",
+				"entity"
+			],
+			[
+				"sc",
+				"scheduleRangeDate"
+			],
+			[
+				"sch",
+				"schedule"
+			],
+			[
+				"ScheduleRa",
+				"ScheduleRangeDate"
+			],
+			[
+				"Sch",
+				"ScheduleTrack"
+			],
+			[
+				"tour",
+				"tournament1"
+			],
+			[
+				"GROUP",
+				"group1M"
+			],
+			[
+				"Group",
 				"GroupCategory"
-			],
-			[
-				"Pai",
-				"Pair"
-			],
-			[
-				"In",
-				"idInscription"
-			],
-			[
-				"obser",
-				"observations"
-			],
-			[
-				"Obs",
-				"ObservationService"
-			],
-			[
-				"sta",
-				"StatusService"
-			],
-			[
-				"con",
-				"controller"
-			],
-			[
-				"rec",
-				"recordal"
-			],
-			[
-				"notif",
-				"notificationDate"
-			],
-			[
-				"reco",
-				"recordalService"
-			],
-			[
-				"Rec",
-				"RecordalNotFound"
-			],
-			[
-				"recor",
-				"recordalService"
-			],
-			[
-				"record",
-				"recordals"
-			],
-			[
-				"not",
-				"notification"
-			],
-			[
-				"no",
-				"notificationService"
-			],
-			[
-				"car",
-				"categories"
-			],
-			[
-				"Tour",
-				"Tournament"
 			],
 			[
 				"ca",
-				"categories"
+				"category2"
 			],
 			[
-				"ann",
-				"annotation"
+				"stat",
+				"status"
 			],
 			[
-				"err",
-				"errorsString"
+				"to",
+				"tournamentStatusCreated"
 			],
 			[
-				"Ann",
-				"AnnotationService"
+				"dele",
+				"deleteIndex"
 			],
 			[
-				"an",
-				"annotations"
-			],
-			[
-				"new",
-				"newInscription"
+				"spl",
+				"splice"
 			],
 			[
 				"class",
-				"classified"
+				"classification"
+			],
+			[
+				"tearD",
+				"tearDownGroupsAndGames"
+			],
+			[
+				"setup",
+				"setUpGroupsAndGames"
+			],
+			[
+				"shc",
+				"scheduleEntity"
+			],
+			[
+				"array_m",
+				"array_merge"
+			],
+			[
+				"numPa",
+				"numPairsByGroup"
+			],
+			[
+				"classi",
+				"classifiedPositionByGroups"
+			],
+			[
+				"index",
+				"indexes"
+			],
+			[
+				"inde",
+				"indexes"
+			],
+			[
+				"ga",
+				"games"
+			],
+			[
+				"ra",
+				"rank"
+			],
+			[
+				"act",
+				"actualPair"
+			],
+			[
+				"ac",
+				"actualPair"
+			],
+			[
+				"pivot",
+				"pivotPair"
+			],
+			[
+				"setsP",
+				"setsPair2"
+			],
+			[
+				"int",
+				"intval"
+			],
+			[
+				"sets",
+				"setsPair2"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"calculate",
+				"calculateClassficationByGroup"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"catego",
+				"categories"
+			],
+			[
+				"fa",
+				"false"
+			],
+			[
+				"close",
+				"closeTournamentGroups"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"closeTournm",
+				"closeTournamentGroups"
+			],
+			[
+				"hour",
+				"hourParsed"
+			],
+			[
+				"hou",
+				"hourArray"
+			],
+			[
+				"getTo",
+				"getToHour"
+			],
+			[
+				"assr",
+				"assertEquals"
+			],
+			[
+				"schedule",
+				"scheduleDate"
+			],
+			[
+				"scheduleTrac",
+				"scheduleTrack"
+			],
+			[
+				"scheduleTra",
+				"scheduleTracks"
+			],
+			[
+				"ro",
+				"rojo"
+			],
+			[
+				"dayR",
+				"dayRangeNew"
+			],
+			[
+				"day",
+				"dayRangeIndex"
+			],
+			[
+				"rang",
+				"rangesNew"
+			],
+			[
+				"jsco",
+				"json_encode"
+			],
+			[
+				"range",
+				"rangeIndex"
+			],
+			[
+				"idTo",
+				"idToDelete"
+			],
+			[
+				"scheduleC",
+				"scheduleComposeDeleteRange"
+			],
+			[
+				"idT",
+				"idToDelete"
 			],
 			[
 				"ran",
-				"rankingMark"
+				"rangeIndex"
 			],
 			[
-				"cl",
-				"classifiedPosition"
+				"jso",
+				"json_encode"
 			],
 			[
-				"cla",
-				"classified"
+				"is_n",
+				"is_null"
 			],
 			[
-				"gr",
-				"groupC"
+				"scheule",
+				"scheduleEntity"
 			],
 			[
-				"gro",
-				"groupA"
+				"s",
+				"scheduleEntity"
 			],
 			[
-				"Gro",
-				"GroupCategory"
+				"js",
+				"json_encode"
 			],
 			[
-				"find",
-				"find"
+				"ass",
+				"assertEquals"
 			],
 			[
-				"nu",
-				"numPairForGroup"
+				"getSchedule",
+				"getScheduleByTournamentId"
 			],
 			[
-				"Cate",
-				"CategoryNotFound"
+				"scheduleDay",
+				"scheduleDay"
 			],
 			[
-				"obs",
-				"observations"
+				"scheduleT",
+				"scheduleTracks"
 			],
 			[
-				"end",
-				"endDate"
+				"sche",
+				"scheduleRanges"
 			],
 			[
-				"in",
-				"inscriptions"
+				"fu",
+				"function"
 			],
 			[
-				"Tou",
-				"TournamentNotFound"
+				"scheduleRa",
+				"scheduleRangeDate"
 			],
 			[
-				"Category",
-				"CategoryNotFound"
+				"scheduleDa",
+				"scheduleDate1"
 			],
 			[
-				"findBy",
-				"findByCategory"
+				"Sched",
+				"Schedule"
 			],
 			[
-				"findOne",
-				"findOneByName"
+				"sh",
+				"schedule"
 			],
 			[
-				"getR",
-				"getRepository"
+				"getGames",
+				"getGamesByTournament"
 			],
 			[
-				"Pair",
-				"PairNotFound"
+				"schd",
+				"scheduleRangeDate"
 			],
 			[
-				"T",
-				"Tournament"
+				"schedul",
+				"scheduleDate"
 			],
 			[
-				"Cat",
-				"CategoryNotFound"
+				"Sc",
+				"ScheduleDate"
 			],
 			[
-				"findB",
-				"findByPair"
+				"fl",
+				"flush"
 			],
 			[
-				"inscrip",
-				"inscription"
+				"Schedu",
+				"ScheduleRange"
 			],
 			[
-				"em",
-				"em"
+				"is_i",
+				"is_int"
+			],
+			[
+				"save",
+				"saveScheduleTrack"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "web/ui/js/views/tournaments/tournaments.js",
+			"file": "web/ui/js/views/tournamentAdmin/tournamentAdmin.js",
 			"settings":
 			{
-				"buffer_size": 10604,
+				"buffer_size": 79215,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/Applications/XAMPP/xamppfiles/etc/php.ini",
+			"file": "src/PadelTFG/GeneralBundle/Tests/ServiceTest/CategoryServiceTest.php",
 			"settings":
 			{
-				"buffer_size": 69647,
+				"buffer_size": 19223,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "web/ui/js/views/home/home.js",
+			"file": "src/PadelTFG/GeneralBundle/Service/TournamentService.php",
 			"settings":
 			{
-				"buffer_size": 3120,
+				"buffer_size": 13801,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "web/ui/nls/root/homeLiterals.js",
+			"file": "src/PadelTFG/GeneralBundle/Service/CategoryService.php",
 			"settings":
 			{
-				"buffer_size": 1525,
+				"buffer_size": 5771,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "web/ui/js/views/inscriptions/inscriptions.js",
+			"file": "src/PadelTFG/GeneralBundle/Resources/globals/Literals.php",
 			"settings":
 			{
-				"buffer_size": 1091,
+				"buffer_size": 5740,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/PadelTFG/GeneralBundle/Service/InscriptionService.php",
-			"settings":
-			{
-				"buffer_size": 9059,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/PadelTFG/GeneralBundle/Service/ObservationService.php",
-			"settings":
-			{
-				"buffer_size": 2222,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "composer.json",
-			"settings":
-			{
-				"buffer_size": 2277,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "web/ui/templates/tournament/observation.html",
-			"settings":
-			{
-				"buffer_size": 595,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "web/ui/js/views/common/common.js",
-			"settings":
-			{
-				"buffer_size": 2526,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "web/ui/styles/login/login.less",
-			"settings":
-			{
-				"buffer_size": 1304,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "web/ui/js/app.js",
-			"settings":
-			{
-				"buffer_size": 3173,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/PadelTFG/GeneralBundle/Resources/config/routing_inscription.yml",
-			"settings":
-			{
-				"buffer_size": 1391,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "web/ui/js/views/login/login.js",
-			"settings":
-			{
-				"buffer_size": 4251,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "web/ui/templates/tournament/inscription.html",
-			"settings":
-			{
-				"buffer_size": 1192,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix",
-				"name": "Xdebug Context",
-				"read_only": true,
-				"scratch": true
-			}
-		},
-		{
-			"contents": "",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix",
-				"name": "Xdebug Watch",
-				"read_only": true,
-				"scratch": true
-			}
-		},
-		{
-			"contents": "",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix",
-				"name": "Xdebug Stack",
-				"read_only": true,
-				"scratch": true
-			}
-		},
-		{
-			"contents": "=> /Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ObservationService.php\n	|+| 51\n",
-			"settings":
-			{
-				"buffer_size": 116,
-				"line_ending": "Unix",
-				"name": "Xdebug Breakpoint",
-				"read_only": true,
-				"scratch": true
 			}
 		}
 	],
@@ -691,8 +567,8 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 87.0,
-		"last_filter": "Package Control: install",
+		"height": 107.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -743,169 +619,160 @@
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/globals",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/Controller",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/colorpicker",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/jquery-tag-editor",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/css",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/src/js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/basicInfo",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/common",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/inscriptions",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/login",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/pairs",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/tournaments",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/listTree",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/draw",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/basicInfo",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournament"
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/login",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/vendor"
 	],
 	"file_history":
 	[
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/README.md",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/UPGRADE-2.2.md",
-		"/Users/Alberto/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/Applications/XAMPP/xamppfiles/htdocs/logs/xdebug/xdebug.log",
-		"/Applications/XAMPP/xamppfiles/etc/php.ini",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/Observation.php",
+		"/private/etc/my.cnf",
+		"/usr/local/mysql-5.7.12-osx10.11-x86_64/support-files/my-default.cnf",
+		"/usr/local/mysql-5.7.12-osx10.11-x86_64/README",
+		"/Applications/XAMPP/xamppfiles/etc/my.cnf",
+		"/Applications/XAMPP/xamppfiles/var/mysql/MacBook-Air-de-Alberto.local.pid",
+		"/usr/local/mysql-5.6.23-osx10.8-x86_64/data/MacBook-Air-de-Alberto.local.pid",
+		"/usr/local/mysql-5.6.23-osx10.8-x86_64/data/MacBook-Air-de-Alberto.local.err",
+		"/usr/local/mysql-5.6.23-osx10.8-x86_64/my.cnf",
+		"/usr/local/mysql-5.6.23-osx10.8-x86_64/support-files/mysql.server",
+		"/Users/Alberto/Downloads/mysql-5.7.12-osx10.11-x86_64/mysql-5.7.12-osx10.11-x86_64 2/bin/mysqld_safe",
+		"/private/var/run/ntpd.pid",
+		"/private/var/run/mds.pid",
+		"/usr/local/mysql-5.6.23-osx10.8-x86_64/support-files/magic",
+		"/usr/local/mysql-5.6.23-osx10.8-x86_64/support-files/my-default.cnf",
+		"/usr/local/mysql-5.7.12-osx10.11-x86_64 2/README",
+		"/usr/local/mysql-5.6.23-osx10.8-x86_64/data/auto.cnf",
+		"/Applications/XAMPP/xamppfiles/man/man1/mysqld_safe.1",
+		"/Applications/XAMPP/xamppfiles/man/man8/mysqld.8",
+		"/Applications/XAMPP/xamppfiles/sbin/mysqld",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/info.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/GroupServiceTest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/GameServiceTest.php",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root/homeLiterals.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/InscriptionService.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/app.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_user.yml",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/UserController.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserService.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/basicInfo/basicInfo.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/basicInfo/basicInfo.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/css/select2.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/css/select2.min.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login/login.less",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/js/select2.full.min.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/index.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/bower.json",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/Controller/InscriptionControllerAPITest.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournament/observation.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournament/inscription.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ObservationService.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/ObservationTest/ObservationTestInsert.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/bootstrap-3.3.5/js/bootstrap.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/bootstrap-3.3.5/css/bootstrap.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/bootstrap-3.3.5/css/bootstrap.min.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap-modal/css/bootstrap-modal.css",
-		"/Users/Alberto/Library/Application Support/Sublime Text 3/Packages/GoSublime/CHANGELOG.md",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/common.less",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/login/login.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/login/registerUser.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root/loginLiterals.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/config.yml",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/login/login.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home/home.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/common/common.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/tournaments/tournaments.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/UserPreferenceController.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserPreferenceService.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/basicInfo/basicInfoProfile.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/AppKernel.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/genericModal.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/matchs/matchs.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/pairs/pairs.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/default.less",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/bootstrap.less",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/annotations/annotations.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/jquery-modal/jquery.modal.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/dataTable.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/tournament/tournament.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/home/home.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/globals/Utils.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/listTree/listTree.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawBlock.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/draw/draw.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/GameController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/GameService.php",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InitiateBDInsert.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserPreference.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_userPreference.yml",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_general.yml",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserPreferences.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/nav.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/jquery-modal/jquery.modal.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/listTree.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/waypoints/lib/jquery.waypoints.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/section.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/waypoints/jquery.smooth-scroll.min.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/waypoints/waypoints.min.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/TournamentStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/SponsorStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/RecordalStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/NotificationStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/InscriptionStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/GameStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/AnnotationStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/UserStatuses.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/UserRoles.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/annotation/annotation.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/pair/pair.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/match/match.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/models/annotations/annotations.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/annotation/annotation.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home/basicInfo.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/DataTables/media/css/jquery.dataTables.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/DataTables/media/js/jquery.dataTables.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/datatables.net/Readme.md",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/basicInfo.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home/notesListTree.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/pageContent.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/root/commonLiterals.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/alertSuccess.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/alertError.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/User.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserUserRole.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserRole.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/login.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/common/alert.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/User-UserRole.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/User_UserRole.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/UserRoleController.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_userRole.yml",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/InitiateBDInsert.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserRoleService.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Users/Users.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/RemoveBD/InitiateBDRemove.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/sectionAdmin.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_game.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/app.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/CategoryService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawMatch.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/selectorCategory.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/TournamentService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/inscriptions/inscriptions.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/games/games.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/Game.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/pillsInscriptions.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawSection.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/closeGroupBox.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/TournamentController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/CategoryServiceTest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/InscriptionService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/InscriptionServiceTest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/globals/Literals.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/GroupService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/Inscription.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_tournament.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/GroupCategory.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/common.less",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/InscriptionController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleDate.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/closeGroups.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/groupBox.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/ScheduleServiceTest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/TournamentServiceTest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest/GameControllerAPITest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/cuadrosTemplate/selectorCategory.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/cuadrosTemplate/drawBlock.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/cuadrosTemplate/drawMatch.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/cuadrosTemplate/drawSection.html",
+		"/Users/Alberto/Desktop/cuadros.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/default.less",
+		"/Users/Alberto/Library/Application Support/Sublime Text 3/Packages/GoSublime/CHANGELOG.md",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/CategoryController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/tournaments/tournaments.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/Schedule.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleTrackService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/Tournament.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleTrack.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_schedule.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_category.yml",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/routing.yml",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/WebController.php",
-		"/Users/Alberto/Downloads/descarga (1)",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/loginLiterals.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/routing_dev.yml",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/homeLiterals.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/home.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login/login.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/styles/login.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/login.less",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/variables.less",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/styles.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/less/buttons.less",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/modified/assets/css/styles.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/modified/index.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/nuget/styles.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/template-simple-login-form-with-logo/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/parameters.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/config.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/GameTest/GameTestInsert.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/User.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserRole.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ObservationService.php",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/build/build.sh",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/dist/build/build.sh",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/.bowerrc",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/templates/home.html",
 		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/build/ui.build.js",
-		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/jquery/src/jquery.js"
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleDateService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleRangeService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleRangeDate.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleRange.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleRangeDateService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/ScheduleController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/PairService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/login/login.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/login/login.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/home/home.js",
+		"/Applications/XAMPP/xamppfiles/etc/php.ini",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/tournamentAdmin/tournamentAdmin.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/app/config/parameters.yml.dist",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/bower.json",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/Category.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_general.yml",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/UserController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/insertShedule.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournament/category.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/select2/dist/js/select2.full.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/pairs/pairs.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/colorpicker/iColorPicker.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/tournamentAdmin/range.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Controller/GroupController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InitiateBDRemove.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InscriptionTest/InscriptionTestInsert.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest/StatusControllerAPITest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest/InscriptionControllerAPITest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/nls/homeLiterals.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/ObservationTest/ObservationTestInsert.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest/CategoryControllerAPITest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserUserRole.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserUserRoleService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Service/UserPreferenceService.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Entity/UserPreference.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/vendor/i18n.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/Status/GameStatuses.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/StatusServiceTest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/js/bootstrap-tooltip.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/vendor/bootstrap/js/bootstrap-popover.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/basicInfo/basicInfo.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/templates/games/score.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web/ui/js/views/annotations/annotations.js"
 	],
 	"find":
 	{
@@ -916,6 +783,8 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle,/Applications/XAMPP/xamppfiles/htdocs/padelTFG/web",
+			"/Applications/XAMPP/xamppfiles/htdocs/padelTFG/src/PadelTFG/GeneralBundle"
 		]
 	},
 	"find_state":
@@ -923,141 +792,194 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"xdebug",
-			"[",
-			"xdebug",
-			"xDebug",
-			"x",
-			"alert",
-			"HomeView",
-			"ajax",
-			"z-ind",
-			"checked",
-			"obser",
-			"alert",
-			"profil",
-			"loadProfileInfo",
-			"userPre",
-			"litera",
-			"dataRender",
-			"'",
-			"jquery",
-			"col-",
-			"col",
-			"blocker",
-			"current",
-			"ajax",
-			"z-in",
-			"this.modalID",
-			"notifica",
-			"urls",
-			"userPreference",
-			"public function ",
-			"$",
-			"width",
-			"toggled-",
-			"jquery",
-			"DataTable()",
-			"DataTable",
-			"addData",
-			"alert",
-			"home",
-			"./",
-			"getPairFr",
-			"getP",
-			"util",
-			"Util",
-			"util",
-			"Util",
-			"util",
-			"Util",
-			"util",
-			"Tournament",
-			"Ann",
-			"creati",
-			" 'creationDate' => new \\DateTime(),",
-			"Object(PadelTFG\\GeneralBundle\\Entity\\",
-			"url",
-			"anno",
-			"Notification",
-			"notification",
-			"Notification",
-			"//",
-			"EmptyConte",
-			"Annotation",
-			"annotation",
-			"Annotation",
-			"annotation",
-			"        $",
+			"pid",
+			"pif",
+			"pid",
+			"pidf",
+			".pid",
+			"pid",
+			"erver ",
+			"erver qui",
+			"erver quit withou",
+			"erver quit without updating PID file",
 			"group",
-			"memory",
-			"+\"",
+			"container-t",
+			"container",
+			"draws",
+			"prepend",
+			"blockNum",
+			"line-up",
+			"closeTournamentGroupsModalContent",
+			"getGamesByTournament",
+			"var",
+			"addGameScore",
+			"isDrawGam",
+			"            \n",
+			"showDraws",
+			"getGamesByTournament",
+			"_self.gamesDone",
+			"viewTournamentGames",
+			"changeGame",
+			"enterFinalsDateRanges",
+			"saveGame",
+			"game",
+			"new Game",
+			"bgColor",
+			"numOfScheduleRange",
+			"pair1",
+			"user1",
+			"pair1",
+			".block",
+			"liner",
+			"pair1",
+			"item",
+			"button",
+			"block-5",
+			"block-3",
+			"block-4",
+			"block-2",
+			"lock-16",
+			"block-1",
+			"block-5",
+			"block-3",
+			"block-4",
+			"block-3",
+			"gamesDone",
+			"full.pair1.user1.n",
+			"renderG",
+			"dra",
+			"closeInscriptionModalTemplate",
+			"renderGroupView",
+			"^",
+			"/",
+			"GET",
+			"inscriptionService",
+			"InscriptionService",
+			"pair1",
+			"setGroup",
+			"Group",
+			"Close Groups",
+			"startTo",
+			"put",
+			"startTournament",
+			"resolveDobulesDraws",
+			"resolveDraw",
+			"inscription",
+			"resolveDobulesDraws",
+			"alberto",
+			"getInscriptionsByGroup",
+			"getInscriptionsByGroupForACategory",
+			"getInscriptionsByGroupForATournament",
+			"closeGroupsTemplate",
+			"closeGroupsBoxTemplate",
+			"renderGroupView",
+			"groupsCategoryBox",
+			"groupBoxTemplate",
+			"int",
+			"fullCalendar",
+			"startDate",
+			"->getId()",
+			"getId()",
+			"Name",
+			"1043",
+			"1042",
+			"1041",
+			"1040",
+			"'date'",
+			"Date",
+			"date",
+			"title",
+			"$user1Pair",
+			"$user1Pair1",
+			"'user1'",
+			"user1",
+			"'pair'",
+			"pair",
+			"insertInSchedule",
+			"setSchedule",
 			"Category",
 			"category",
-			"pair",
-			"Recordal",
-			"recordal",
-			"recor",
-			"tournamentIncorrect",
-			"0",
-			"TournamentEmpty",
-			"recordal",
-			"findOneByName",
+			"category1",
+			"bgColor",
+			"gender",
 			"tournament",
-			"Recordal",
-			"recordal",
-			"user",
-			"Recordal",
-			"recordal",
-			"Recordal",
-			"recordal",
-			"sponsor",
-			"textEm",
-			"nameE",
-			"findOneByName",
-			"date_for",
-			"format",
-			"formatç",
-			"date_for",
-			"format",
-			"DateTime",
-			"DateTime()",
-			"date_for",
-			"DateTime",
-			"text",
-			"{\n",
-			"Literals::",
-			"user",
-			"setAdmin",
-			"tour",
-			"tournam",
-			"tourn",
-			"tournament",
-			"user",
-			"$this->em",
-			"getStat",
-			"new Response",
-			"Response",
-			"getSta",
-			"status",
-			"getStatus",
-			");\n",
-			"user",
-			"$this->setReponse",
-			"Exceptio",
-			"pattern",
-			"getStatus",
-			" setContent",
-			"user",
-			"Annotation",
-			"()"
+			"tournament1",
+			"$group",
+			"tournamentStatus",
+			"\\",
+			"show",
+			"set",
+			"modalIDCloseTournament",
+			"calculateClassficationByGroup",
+			"setHasObservations",
+			"error",
+			"okc",
+			"closeIns",
+			"persist",
+			"sortByScore",
+			"uksho",
+			"uks",
+			"Game"
 		],
-		"highlight": false,
+		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"block-1",
+			"block-4",
+			"block-2",
+			"block-8",
+			"block-16",
+			"block-4",
+			"block-8",
+			"block-4",
+			"' . $track4->getId() . '",
+			"' . $track3->getId() . '",
+			"' . $track2->getId() . '",
+			"' . $track1->getId() . '",
+			"get",
+			"getClassifiedPositionInGroup",
+			"'",
+			"pair",
+			"player",
+			"tournament",
+			"container",
+			"category",
+			"button",
+			"score",
+			"draws",
+			"schedule",
+			"round-name",
+			"container",
+			"line",
+			"match",
+			"block",
+			"",
+			"Not Set",
+			"2016-08-26",
+			"2016-08-25",
+			"2016-08-24",
+			"scheduleTrackService",
+			"' . $this->scheduleTrack3->getId() . '",
+			"' . $this->scheduleTrack2->getId() . '",
+			"' . $this->scheduleTrack1->getId() . '",
+			"resourceId",
+			"end",
+			"start",
+			"' . $this->scheduleTrack3->getId() . '",
+			"' . $this->scheduleTrack1->getId() . '",
+			"' . $this->scheduleTrack2->getId() . '",
+			"' . $this->scheduleTrack1->getId() . '",
+			"Schedule",
+			"\"",
+			"'",
+			"modalIDStep1",
+			"Game",
+			"game",
+			"Game",
+			"game",
 			"\"",
 			"entityPreference",
 			"$entityPreference->",
@@ -1116,527 +1038,76 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "web/ui/js/views/tournaments/tournaments.js",
+					"file": "web/ui/js/views/tournamentAdmin/tournamentAdmin.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10604,
+						"buffer_size": 79215,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								459,
-								459
+								76660,
+								76660
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 7.0,
-						"translation.y": 3.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/Applications/XAMPP/xamppfiles/etc/php.ini",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 69647,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								35006,
-								35006
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 14962.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "web/ui/js/views/home/home.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3120,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								243,
-								243
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "web/ui/nls/root/homeLiterals.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1525,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								253,
-								253
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "web/ui/js/views/inscriptions/inscriptions.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1091,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								562,
-								583
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/PadelTFG/GeneralBundle/Service/InscriptionService.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9059,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6404,
-								6404
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2972.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/PadelTFG/GeneralBundle/Service/ObservationService.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2222,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1616,
-								1616
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 618.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "composer.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2277,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 465.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "web/ui/templates/tournament/observation.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 595,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								472,
-								472
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "web/ui/js/views/common/common.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2526,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1975,
-								1975
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 69.0,
-						"translation.y": 309.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "web/ui/styles/login/login.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1304,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1073,
-								1073
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 531.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 16,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "web/ui/js/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3173,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2460,
-								2460
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1006.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "src/PadelTFG/GeneralBundle/Resources/config/routing_inscription.yml",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1391,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/YAML/YAML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "web/ui/js/views/login/login.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4251,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2528,
-								2528
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1109.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 17,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "web/ui/templates/tournament/inscription.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1192,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								659,
-								659
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 18,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 15,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
+						"translation.x": 3.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 17,
+					"buffer": 1,
+					"file": "src/PadelTFG/GeneralBundle/Tests/ServiceTest/CategoryServiceTest.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 19223,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17636,
+								17636
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6995.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/PadelTFG/GeneralBundle/Service/TournamentService.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13801,
 						"regions":
 						{
 						},
@@ -1649,44 +1120,85 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
-							"word_wrap": false
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4462.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 3,
+					"file": "src/PadelTFG/GeneralBundle/Service/CategoryService.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 116,
+						"buffer_size": 5771,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								116,
-								116
+								3833,
+								3886
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
-							"word_wrap": false
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1191.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/PadelTFG/GeneralBundle/Resources/globals/Literals.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5740,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5580,
+								5580
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -1730,7 +1242,7 @@
 		"rows":
 		[
 			0.0,
-			0.7,
+			0.931305803571,
 			1.0
 		]
 	},
@@ -1755,7 +1267,7 @@
 	"project": "padelTFG.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1765,12 +1277,516 @@
 		"selected_items":
 		[
 			[
-				"pairco",
-				"src/PadelTFG/GeneralBundle/Controller/PairController.php"
+				"groupser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/GroupServiceTest.php"
 			],
 			[
-				"annotationstat",
-				"src/PadelTFG/GeneralBundle/Entity/AnnotationStatus.php"
+				"groups",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/GroupServiceTest.php"
+			],
+			[
+				"gameser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/GameServiceTest.php"
+			],
+			[
+				"categoryser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/CategoryServiceTest.php"
+			],
+			[
+				"liter",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/globals/Literals.php"
+			],
+			[
+				"tournamentse",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/TournamentService.php"
+			],
+			[
+				"home",
+				"padelTFG/web/ui/nls/root/homeLiterals.js"
+			],
+			[
+				"draw",
+				"padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawBlock.html"
+			],
+			[
+				"draw.le",
+				"padelTFG/web/ui/styles/draw/draw.less"
+			],
+			[
+				"app.",
+				"padelTFG/web/ui/js/app.js"
+			],
+			[
+				"routing_ga",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_game.yml"
+			],
+			[
+				"ini",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InitiateBDInsert.php"
+			],
+			[
+				"tournamentsect",
+				"padelTFG/web/ui/templates/tournamentAdmin/sectionAdmin.html"
+			],
+			[
+				"gamec",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/GameController.php"
+			],
+			[
+				"app.s",
+				"padelTFG/web/ui/js/app.js"
+			],
+			[
+				"inscriptions.js",
+				"padelTFG/web/ui/js/views/inscriptions/inscriptions.js"
+			],
+			[
+				"games.js",
+				"padelTFG/web/ui/js/views/games/games.js"
+			],
+			[
+				"init",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InitiateBDInsert.php"
+			],
+			[
+				"intiate",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InitiateBDInsert.php"
+			],
+			[
+				"game",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Game.php"
+			],
+			[
+				"drawb",
+				"padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawBlock.html"
+			],
+			[
+				"selector",
+				"padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/selectorCategory.html"
+			],
+			[
+				"tournamentser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/TournamentService.php"
+			],
+			[
+				"hom",
+				"padelTFG/web/ui/nls/root/homeLiterals.js"
+			],
+			[
+				"pil",
+				"padelTFG/web/ui/templates/tournamentAdmin/pillsInscriptions.html"
+			],
+			[
+				"draws",
+				"padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawSection.html"
+			],
+			[
+				"dra",
+				"padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawMatch.html"
+			],
+			[
+				"tournamentsecto",
+				"padelTFG/web/ui/templates/tournamentAdmin/sectionAdmin.html"
+			],
+			[
+				"drawse",
+				"padelTFG/web/ui/templates/tournamentAdmin/drawTemplate/drawSection.html"
+			],
+			[
+				"inscriptse",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/InscriptionService.php"
+			],
+			[
+				"tour",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/TournamentController.php"
+			],
+			[
+				"inscriptionser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/InscriptionServiceTest.php"
+			],
+			[
+				"litera",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/globals/Literals.php"
+			],
+			[
+				"inscripit",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Inscription.php"
+			],
+			[
+				"clos",
+				"padelTFG/web/ui/templates/tournamentAdmin/closeGroupBox.html"
+			],
+			[
+				"app.js",
+				"padelTFG/web/ui/js/app.js"
+			],
+			[
+				"initia",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InitiateBDInsert.php"
+			],
+			[
+				"literas",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/globals/Literals.php"
+			],
+			[
+				"routi",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_tournament.yml"
+			],
+			[
+				"routing",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_tournament.yml"
+			],
+			[
+				"inscription.p",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Inscription.php"
+			],
+			[
+				"closegr",
+				"padelTFG/web/ui/templates/tournamentAdmin/closeGroupBox.html"
+			],
+			[
+				"groupcate",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/GroupCategory.php"
+			],
+			[
+				"tournaments",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/TournamentService.php"
+			],
+			[
+				"tournamentc",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/TournamentController.php"
+			],
+			[
+				"closeg",
+				"padelTFG/web/ui/templates/tournamentAdmin/closeGroupBox.html"
+			],
+			[
+				"groupservicet",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/GroupServiceTest.php"
+			],
+			[
+				"inscriptionc",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/InscriptionController.php"
+			],
+			[
+				"tourname",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/TournamentService.php"
+			],
+			[
+				"comm",
+				"padelTFG/web/ui/styles/common.less"
+			],
+			[
+				"groupb",
+				"padelTFG/web/ui/templates/tournamentAdmin/groupBox.html"
+			],
+			[
+				"games",
+				"padelTFG/web/ui/js/views/games/games.js"
+			],
+			[
+				"shceduleda",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleDate.php"
+			],
+			[
+				"scheduleser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleService.php"
+			],
+			[
+				"shceduleser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleService.php"
+			],
+			[
+				"inscription.ph",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Inscription.php"
+			],
+			[
+				"tournamenc",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/TournamentController.php"
+			],
+			[
+				"gamecontroller",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest/GameControllerAPITest.php"
+			],
+			[
+				"schedulese",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleService.php"
+			],
+			[
+				"inscir",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Inscription.php"
+			],
+			[
+				"gameserv",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ServiceTest/GameServiceTest.php"
+			],
+			[
+				"lit",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/globals/Literals.php"
+			],
+			[
+				"routing_t",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_tournament.yml"
+			],
+			[
+				"categoryc",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/CategoryController.php"
+			],
+			[
+				"tournaments.js",
+				"padelTFG/web/ui/js/views/tournaments/tournaments.js"
+			],
+			[
+				"tournament",
+				"padelTFG/web/ui/js/views/tournaments/tournaments.js"
+			],
+			[
+				"ho",
+				"padelTFG/web/ui/nls/root/homeLiterals.js"
+			],
+			[
+				"scheduletra",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleTrackService.php"
+			],
+			[
+				"scheduleda",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleDate.php"
+			],
+			[
+				"schedule",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Schedule.php"
+			],
+			[
+				"schedu",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Schedule.php"
+			],
+			[
+				"sheduletra",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleTrack.php"
+			],
+			[
+				"gameinser",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/GameTest/GameTestInsert.php"
+			],
+			[
+				"user",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/User.php"
+			],
+			[
+				"sched",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Schedule.php"
+			],
+			[
+				"observationser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ObservationService.php"
+			],
+			[
+				"tourn",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Tournament.php"
+			],
+			[
+				"schedulera",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleRangeDate.php"
+			],
+			[
+				"scheduletr",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleTrack.php"
+			],
+			[
+				"schedulec",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/ScheduleController.php"
+			],
+			[
+				"schedulerangedate",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleRangeDateService.php"
+			],
+			[
+				"schedulerange",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleRangeService.php"
+			],
+			[
+				"sheduleser",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/ScheduleService.php"
+			],
+			[
+				"pairs",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/PairService.php"
+			],
+			[
+				"gamecon",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/GameController.php"
+			],
+			[
+				"login",
+				"padelTFG/web/ui/templates/login/login.html"
+			],
+			[
+				"home.",
+				"padelTFG/web/ui/js/views/home/home.js"
+			],
+			[
+				"app.j",
+				"padelTFG/web/ui/js/app.js"
+			],
+			[
+				"tournamenta",
+				"padelTFG/web/ui/js/views/tournamentAdmin/tournamentAdmin.js"
+			],
+			[
+				"index",
+				"padelTFG/web/ui/index.html"
+			],
+			[
+				"bower",
+				"padelTFG/web/ui/bower.json"
+			],
+			[
+				"config.",
+				"padelTFG/app/config/config.yml"
+			],
+			[
+				"scheduleran",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleRangeDate.php"
+			],
+			[
+				"scheduled",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleDate.php"
+			],
+			[
+				"schedulet",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/ScheduleTrack.php"
+			],
+			[
+				"shedule",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Schedule.php"
+			],
+			[
+				"scheduleco",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/ScheduleController.php"
+			],
+			[
+				"categor",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Category.php"
+			],
+			[
+				"shcedule",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Schedule.php"
+			],
+			[
+				"routing_ge",
+				"padelTFG/src/PadelTFG/GeneralBundle/Resources/config/routing_general.yml"
+			],
+			[
+				"userco",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/UserController.php"
+			],
+			[
+				"select2.fu",
+				"padelTFG/web/ui/js/vendor/select2/dist/js/select2.full.js"
+			],
+			[
+				"game.",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Game.php"
+			],
+			[
+				"shedule.p",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Schedule.php"
+			],
+			[
+				"cate",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Category.php"
+			],
+			[
+				"bowe",
+				"padelTFG/web/ui/bower.json"
+			],
+			[
+				"category",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/Category.php"
+			],
+			[
+				"home.js",
+				"padelTFG/web/ui/js/views/home/home.js"
+			],
+			[
+				"categ",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/CategoryService.php"
+			],
+			[
+				"homelit",
+				"padelTFG/web/ui/nls/root/homeLiterals.js"
+			],
+			[
+				"range",
+				"padelTFG/web/ui/templates/tournamentAdmin/range.html"
+			],
+			[
+				"insert",
+				"padelTFG/web/ui/templates/tournamentAdmin/insertShedule.html"
+			],
+			[
+				"groupco",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/GroupController.php"
+			],
+			[
+				"status",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest/StatusControllerAPITest.php"
+			],
+			[
+				"inscription",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InscriptionTest/InscriptionTestInsert.php"
+			],
+			[
+				"inscri",
+				"padelTFG/src/PadelTFG/GeneralBundle/Tests/ControllerTest/InscriptionControllerAPITest.php"
+			],
+			[
+				"tournamens",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/TournamentService.php"
+			],
+			[
+				"pairsr",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/PairService.php"
+			],
+			[
+				"tournamentad",
+				"padelTFG/web/ui/js/views/tournamentAdmin/tournamentAdmin.js"
+			],
+			[
+				"categorys",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/CategoryService.php"
+			],
+			[
+				"inscriptionsc",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/InscriptionService.php"
+			],
+			[
+				"inscriptionstes",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InscriptionTest/InscriptionTestInsert.php"
+			],
+			[
+				"categoryse",
+				"padelTFG/src/PadelTFG/GeneralBundle/Service/CategoryService.php"
+			],
+			[
+				"categorycon",
+				"padelTFG/src/PadelTFG/GeneralBundle/Controller/CategoryController.php"
+			],
+			[
+				"observationt",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/ObservationTest/ObservationTestInsert.php"
+			],
+			[
+				"inscriptiontest",
+				"padelTFG/src/PadelTFG/GeneralBundle/DataFixtures/ORM/InscriptionTest/InscriptionTestInsert.php"
+			],
+			[
+				"useruse",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/UserUserRole.php"
+			],
+			[
+				"userr",
+				"padelTFG/src/PadelTFG/GeneralBundle/Entity/UserRole.php"
 			]
 		],
 		"width": 0.0
@@ -1801,75 +1817,50 @@
 			"hide_conflict": false,
 			"restore_index":
 			{
-				"103":
-				{
-					"group": 0,
-					"index": 9
-				},
-				"105":
-				{
-					"group": 0,
-					"index": 7
-				},
-				"107":
-				{
-					"group": 0,
-					"index": 5
-				},
-				"110":
-				{
-					"group": 0,
-					"index": 6
-				},
-				"111":
-				{
-					"group": 0,
-					"index": 2
-				},
-				"114":
-				{
-					"group": 0,
-					"index": 4
-				},
-				"115":
+				"1294":
 				{
 					"group": 0,
 					"index": 3
 				},
-				"116":
+				"1298":
 				{
 					"group": 0,
-					"index": 11
+					"index": 2
 				},
-				"118":
+				"1299":
 				{
 					"group": 0,
 					"index": 1
 				},
-				"33":
-				{
-					"group": 0,
-					"index": 0
-				},
-				"54":
-				{
-					"group": 0,
-					"index": 13
-				},
-				"93":
-				{
-					"group": 0,
-					"index": 12
-				},
-				"96":
-				{
-					"group": 0,
-					"index": 10
-				},
-				"98":
+				"1329":
 				{
 					"group": 0,
 					"index": 8
+				},
+				"1334":
+				{
+					"group": 0,
+					"index": 7
+				},
+				"1390":
+				{
+					"group": 0,
+					"index": 6
+				},
+				"1394":
+				{
+					"group": 0,
+					"index": 4
+				},
+				"1399":
+				{
+					"group": 0,
+					"index": 5
+				},
+				"344":
+				{
+					"group": 0,
+					"index": 0
 				}
 			},
 			"restore_layout":
@@ -1879,18 +1870,32 @@
 					[
 						0,
 						0,
-						1,
+						2,
 						1
+					],
+					[
+						0,
+						1,
+						1,
+						2
+					],
+					[
+						1,
+						1,
+						2,
+						2
 					]
 				],
 				"cols":
 				[
 					0.0,
+					0.5,
 					1.0
 				],
 				"rows":
 				[
 					0.0,
+					0.931305803571,
 					1.0
 				]
 			}
@@ -1900,7 +1905,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 328.0,
+	"side_bar_width": 371.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -49,10 +49,16 @@ class GameController extends FOSRestController
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 
-    public function getGameByTournamentAction($idTournament){
+    public function getGameByTournamentAction($idTournament, $isDraw){
 
         $this->gameService->setManager($this->getDoctrine()->getManager());
-        $games = $this->gameService->getGamesByTournament($idTournament);
+
+        if($isDraw == "true"){
+            $games = $this->gameService->getGamesInDrawByTournament($idTournament);
+        }
+        else{
+            $games = $this->gameService->getGamesByTournament($idTournament);
+        }
 
         $tournamentService = new TournamentService();
         $tournamentService->setManager($this->getDoctrine()->getManager());

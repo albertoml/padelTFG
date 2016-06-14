@@ -18,10 +18,7 @@ class ScheduleTrack implements JsonSerializable
 	protected $id;
 
 	/** @ORM\Column(type="string", length=50) */
-	protected $name;
-
-	/** @ORM\Column(type="integer") */
-	protected $number;
+	protected $title;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Schedule", inversedBy="scheduleTrack")
 	@ORM\JoinColumn(name="schedule_id", onDelete="cascade") */
@@ -30,21 +27,15 @@ class ScheduleTrack implements JsonSerializable
 	public function getId(){
 		return $this->id;
 	}
-	public function getName(){
-		return $this->name;
-	}
-	public function getNumber(){
-		return $this->number;
+	public function getTitle(){
+		return $this->title;
 	}
 	public function getSchedule(){
 		return $this->schedule;
 	}
 
-	public function setName($name){
-		$this->name = $name;
-	}
-	public function setNumber($number){
-		$this->number = $number;
+	public function setTitle($title){
+		$this->title = $title;
 	}
 	public function setSchedule($schedule){
 		$this->schedule = $schedule;
@@ -54,9 +45,7 @@ class ScheduleTrack implements JsonSerializable
     {
         return array(
         	'id' => $this->id,
-            'name' => $this->name,
-            'number' => $this->number,
-            'schedule' => $this->schedule
+            'title' => $this->title
         );
     }
 	

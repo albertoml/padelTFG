@@ -9,6 +9,7 @@ use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
 use PadelTFG\GeneralBundle\Service\CategoryService as CategoryService;
 use PadelTFG\GeneralBundle\Service\TournamentService as TournamentService;
 use PadelTFG\GeneralBundle\Service\InscriptionService as InscriptionService;
+use PadelTFG\GeneralBundle\Service\GameService as GameService;
 
 class GroupService{
 
@@ -40,6 +41,12 @@ class GroupService{
         $repository = $this->em->getRepository('GeneralBundle:GroupCategory');
         $groups = $repository->findByCategory($idCategory);
         return $groups;
+    }
+
+    public function getNumGroupsByCategory($idCategory){
+        $repository = $this->em->getRepository('GeneralBundle:GroupCategory');
+        $groups = $repository->findByCategory($idCategory);
+        return count($groups);
     }
 
     public function getGroupsByTournament($idTournament){
@@ -151,6 +158,161 @@ class GroupService{
             }
         }
         $this->em->flush();
+    }
+
+    public function calculateClassficationByGroup($inscriptions, $group){
+        $gameService = new GameService();
+        $gameService->setManager($this->em);
+        $rank = array();
+        foreach ($inscriptions as $inscription) {
+            $rank[$inscription->getPair()->getId()] = array('matchsWon' => 0, 'setsWon' => 0, 'setsLost' => 0, 'gamesWon' => 0, 'gamesLost' => 0, 'points' => 0, 'pair' => $inscription->getPair()->getId());
+        }
+
+        $games = $gameService->getGamesByGroup($group->getId());
+        foreach ($games as $game) {
+            if(!is_null($game->getScore()) && $game->getScore() != ''){
+                $rank = $gameService->updateScore($game->getScore(), $rank, $game->getPair1()->getId(), $game->getPair2()->getId());    
+            }
+        }
+        if(!is_null($rank)){
+            $rank = $this->sortByScore($rank);
+            if(Literals::doubleTieResolveByGame == "true"){
+                $rank = $this->resolveDobulesDraws($rank, $games);
+            }
+            $position = 0;
+            foreach ($rank as $r) {
+                foreach ($inscriptions as $inscription) {
+                    if($inscription->getPair()->getId() == $r['pair']){
+                        $inscription->setClassifiedPositionInGroup($position);
+                        $this->em->persist($inscription);
+                        $position = $position + 1;
+                    }
+                }
+            }
+        }
+        return $rank;
+    }
+
+    public function sortByScorePoints($a, $b){
+
+        if($a['points'] > $b['points']){
+            return -1;
+        }
+        else if($a['points'] < $b['points']){
+            return 1;
+        }
+        else{
+            if($a['matchsWon'] > $b['matchsWon']){
+                return -1;
+            }
+            else if($a['matchsWon'] < $b['matchsWon']){
+                return 1;
+            }
+            else{
+                if($a['setsWon'] > $b['setsWon']){
+                    return -1;
+                }
+                else if($a['setsWon'] < $b['setsWon']){
+                    return 1;
+                }
+                else{
+                    if($a['setsLost'] < $b['setsLost']){
+                        return -1;
+                    }
+                    else if($a['setsLost'] > $b['setsLost']){
+                        return 1;
+                    }
+                    else{
+                        if($a['gamesWon'] > $b['gamesWon']){
+                            return -1;
+                        }
+                        else if($a['gamesWon'] < $b['gamesWon']){
+                            return 1;
+                        }
+                        else{
+                            if($a['gamesLost'] < $b['gamesLost']){
+                                return -1;
+                            }
+                            else if($a['gamesLost'] > $b['gamesLost']){
+                                return 1;
+                            }
+                            else{
+                                return 0;
+                            } 
+                        } 
+                    } 
+                }   
+            }
+        }
+    }
+
+    public function sortByScore($rank){
+        
+        usort($rank ,array($this, "sortByScorePoints"));
+        return $rank;
+    }
+
+    public function resolveDobulesDraws($rank, $games){
+        $pivotPair = -1;
+        $pivotPoints = -1;
+        $drawFound = 0;
+        foreach ($rank as $r) {
+            $actualPoint = $r['points'];
+            $actualPair = $r['pair'];
+            if($pivotPoints == $actualPoint){
+                $drawFound = $drawFound + 1;
+                $tiePair = $actualPair;
+            }
+            else{
+                if($drawFound == 1){
+                    $rank = $this->resolveDraw($pivotPair, $tiePair, $rank, $games);
+                }
+                $pivotPair = $actualPair;
+                $pivotPoints = $actualPoint;
+                $drawFound = 0;
+            }
+        }
+        if($drawFound == 1){
+            $rank = $this->resolveDraw($pivotPair, $tiePair, $rank, $games);
+        }
+        return $rank;
+    }
+
+    public function resolveDraw($pair1, $pair2, $rank, $games){
+        
+        $gameService = new GameService();
+        $gameService->setManager($this->em);
+        $resultWonGame = $gameService->wonGameByPairs($pair1, $pair2, $games);
+        if($resultWonGame == $pair2){
+
+            $first = 0;
+                
+            foreach ($rank as $r) {
+                if($r['pair'] == $pair1){
+                    $tmp1 = $r;
+                }
+                else if($r['pair'] == $pair2){
+                    $tmp2 = $r;
+                }
+            }
+            $rankNew = array();
+            foreach ($rank as $r) {
+                if($r['pair'] == $pair1 || $r['pair'] == $pair2){
+                    if($first == 0){
+                        $rankNew[] = $tmp2;
+                        $first = 1;
+                    }
+                    else{
+                        $rankNew[] = $tmp1;
+                    }
+                }
+                else{
+                    $rankNew[] = $r;
+                }
+            }
+            return $rankNew;
+        }
+        return $rank;
     }
 
     private function setGroupModify($group, $params){

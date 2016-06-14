@@ -5,6 +5,8 @@ namespace PadelTFG\GeneralBundle\DataFixtures\ORM\Status;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PadelTFG\GeneralBundle\Entity\Category;
+use PadelTFG\GeneralBundle\Entity\Game;
+use PadelTFG\GeneralBundle\Entity\GroupCategory;
 use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Entity\UserPreference;
@@ -12,6 +14,11 @@ use PadelTFG\GeneralBundle\Entity\UserStatus;
 use PadelTFG\GeneralBundle\Entity\UserUserRole;
 use PadelTFG\GeneralBundle\Entity\Pair;
 use PadelTFG\GeneralBundle\Entity\Inscription;
+use PadelTFG\GeneralBundle\Entity\Schedule;
+use PadelTFG\GeneralBundle\Entity\ScheduleTrack;
+use PadelTFG\GeneralBundle\Entity\ScheduleDate;
+use PadelTFG\GeneralBundle\Entity\ScheduleRange;
+use PadelTFG\GeneralBundle\Entity\ScheduleRangeDate;
 
 
 class InitiateBDInsert implements FixtureInterface
@@ -123,11 +130,12 @@ class InitiateBDInsert implements FixtureInterface
 		$userAdmin = $repository->findOneByName('Alberto');
 
 		$repository = $manager->getRepository('GeneralBundle:TournamentStatus');
-		$tournamentStatus = $repository->findOneByValue('Created');
+		$tournamentStatusCreated = $repository->findOneByValue('Created');
+		$tournamentStatusMatchs = $repository->findOneByValue('Group phase (Matchs done)');
 
 		$Tournaments = array(
-			array('name' => 'Torneo Zoombie', 'admin' => $userAdmin, 'regLimit' => 50, 'startIns' => new \DateTime('2016-06-01'), 'endIns' => new \DateTime('2016-06-07'), 'startGroup' => new \DateTime('2016-06-09'), 'endGroup' => new \DateTime('2016-06-15'), 'startFinal' => new \DateTime('2016-06-16'), 'endFinal' => new \DateTime('2016-06-20')),
-			array('name' => 'Torneo UA', 'admin' => $userAdmin, 'regLimit' => 4, 'startIns' => new \DateTime('2016-06-01'), 'endIns' => new \DateTime('2016-06-07'), 'startGroup' => new \DateTime('2016-06-09'), 'endGroup' => new \DateTime('2016-06-15'), 'startFinal' => new \DateTime('2016-06-16'), 'endFinal' => new \DateTime('2016-06-20'))
+			array('name' => 'Torneo Zoombie', 'admin' => $userAdmin, 'regLimit' => 50, 'startIns' => new \DateTime('2016-06-01'), 'endIns' => new \DateTime('2016-06-07'), 'startGroup' => new \DateTime('2016-06-09'), 'endGroup' => new \DateTime('2016-06-15'), 'startFinal' => new \DateTime('2016-06-16'), 'endFinal' => new \DateTime('2016-06-20'), 'status' => $tournamentStatusMatchs),
+			array('name' => 'Torneo UA', 'admin' => $userAdmin, 'regLimit' => 4, 'startIns' => new \DateTime('2016-06-01'), 'endIns' => new \DateTime('2016-06-07'), 'startGroup' => new \DateTime('2016-06-09'), 'endGroup' => new \DateTime('2016-06-15'), 'startFinal' => new \DateTime('2016-06-16'), 'endFinal' => new \DateTime('2016-06-20'), 'status' => $tournamentStatusCreated)
 		);
 
 		foreach ($Tournaments as $key) {
@@ -141,7 +149,7 @@ class InitiateBDInsert implements FixtureInterface
 			$entity->setEndGroupDate($key['endGroup']);
 			$entity->setStartFinalDate($key['startFinal']);
 			$entity->setEndFinalDate($key['endFinal']);
-			$entity->setStatus($tournamentStatus);
+			$entity->setStatus($key['status']);
 			$manager->persist($entity);	
 		}
 		$manager->flush();
@@ -152,7 +160,7 @@ class InitiateBDInsert implements FixtureInterface
 
 		$Categories = array(
 			array('name' => 'Category Femenina', 'gender' => 'Female', 'tournament' => $tournament1, 'bgColor' => '#1d1363'),
-			array('name' => 'Category Masculina', 'gender' => 'Male', 'tournament' => $tournament1, 'bgColor' => '#cccccc'),
+			array('name' => 'Category Masculina', 'gender' => 'Male', 'tournament' => $tournament1, 'bgColor' => '#BFFF00'),
 			array('name' => 'Category Mixta', 'gender' => 'Mixed', 'tournament' => $tournament2, 'bgColor' => '#1d1363')
 		);
 
@@ -170,6 +178,30 @@ class InitiateBDInsert implements FixtureInterface
 		$category1 = $repository->findOneByName('Category Femenina');
 		$category2 = $repository->findOneByName('Category Masculina');
 		$category3 = $repository->findOneByName('Category Mixta');
+
+		$Groups = array(
+			array('name' => 'Group 1F', 'category' => $category1, 'tournament' => $tournament1, 'numPairs' => 3),
+			array('name' => 'Group 1M', 'category' => $category2, 'tournament' => $tournament1, 'numPairs' => 4),
+			array('name' => 'Group 2M', 'category' => $category2, 'tournament' => $tournament1, 'numPairs' => 4),
+			array('name' => 'Group 3M', 'category' => $category2, 'tournament' => $tournament1, 'numPairs' => 4)
+		);
+
+		foreach ($Groups as $key) {
+			$entity = new GroupCategory();
+			$entity->setName($key['name']);
+			$entity->setTournament($key['tournament']);
+			$entity->setCategory($key['category']);
+			$entity->setNumPairs($key['numPairs']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$repository = $manager->getRepository('GeneralBundle:GroupCategory');
+		$group1F = $repository->findOneByName('Group 1F');
+		$group1M = $repository->findOneByName('Group 1M');
+		$group2M = $repository->findOneByName('Group 2M');
+		$group3M = $repository->findOneByName('Group 3M');
+
 
 		$repository = $manager->getRepository('GeneralBundle:User');
 		$user1Pair1 = $repository->findOneByName('Natalia');
@@ -235,28 +267,25 @@ class InitiateBDInsert implements FixtureInterface
 		$pair11 = $repository->findOneByUser1($user1Pair11);
 		$pair12 = $repository->findOneByUser1($user1Pair12);
 
+		$repository = $manager->getRepository('GeneralBundle:InscriptionStatus');
+		$inscriptionStatusNotClassified = $repository->findOneByValue('Not Classified');
+
 		$Inscriptions = array(
-			array('pair' => $pair1, 'tournament' => $tournament1, 'category' => $category1),
-			array('pair' => $pair3, 'tournament' => $tournament1, 'category' => $category1),
-			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category1),
-			array('pair' => $pair1, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair3, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair5, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair6, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair7, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair8, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair9, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair10, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair11, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair12, 'tournament' => $tournament1, 'category' => $category2),
-			array('pair' => $pair2, 'tournament' => $tournament2, 'category' => $category3),
-			array('pair' => $pair6, 'tournament' => $tournament2, 'category' => $category3),
-			array('pair' => $pair7, 'tournament' => $tournament2, 'category' => $category3),
-			array('pair' => $pair8, 'tournament' => $tournament2, 'category' => $category3),
-			array('pair' => $pair9, 'tournament' => $tournament2, 'category' => $category3),
-			array('pair' => $pair11, 'tournament' => $tournament2, 'category' => $category3),
+			array('pair' => $pair1, 'tournament' => $tournament1, 'category' => $category1, 'group' => $group1F),
+			array('pair' => $pair3, 'tournament' => $tournament1, 'category' => $category1, 'group' => $group1F),
+			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category1, 'group' => $group1F),
+			array('pair' => $pair1, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M),
+			array('pair' => $pair2, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M),
+			array('pair' => $pair3, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M),
+			array('pair' => $pair4, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M),
+			array('pair' => $pair5, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M),
+			array('pair' => $pair6, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M),
+			array('pair' => $pair7, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M),
+			array('pair' => $pair8, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M),
+			array('pair' => $pair9, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M),
+			array('pair' => $pair10, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M),
+			array('pair' => $pair11, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M),
+			array('pair' => $pair12, 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M)
 		);
 
 		foreach ($Inscriptions as $key) {
@@ -264,6 +293,129 @@ class InitiateBDInsert implements FixtureInterface
 			$entity->setPair($key['pair']);
 			$entity->setTournament($key['tournament']);
 			$entity->setCategory($key['category']);
+			$entity->setGroup($key['group']);
+			$entity->setHasObservations(false);
+			$entity->setStatus($inscriptionStatusNotClassified);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$schedule = new Schedule();
+		$schedule->setStartDate('2016-06-10');
+		$schedule->setMaxRange('11:00:00');
+		$schedule->setMinRange('09:00:00');
+		$schedule->setTournament($tournament1);
+		$manager->persist($schedule);
+		$manager->flush();
+
+		$tournament1->setSchedule($schedule);
+		$manager->persist($tournament1);
+		$manager->flush();
+
+		$Tracks = array(
+			array('title' => 'Track 1', 'schedule' => $schedule),
+			array('title' => 'Track 2', 'schedule' => $schedule),
+			array('title' => 'Track 3', 'schedule' => $schedule),
+			array('title' => 'Track 4', 'schedule' => $schedule)
+		);
+
+		foreach ($Tracks as $key) {
+			$entity = new ScheduleTrack();
+			$entity->setTitle($key['title']);
+			$entity->setSchedule($key['schedule']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$scheduleRangeDate = new ScheduleRangeDate();
+		$scheduleRangeDate->setSchedule($schedule);
+		$manager->persist($scheduleRangeDate);	
+		$manager->flush();
+
+		$ScheduleDate = array(
+			array('date' => new \DateTime('2016-06-10 00:00:00'), 'scheduleRangeDate' => $scheduleRangeDate),
+			array('date' => new \DateTime('2016-06-11 00:00:00'), 'scheduleRangeDate' => $scheduleRangeDate),
+			array('date' => new \DateTime('2016-06-12 00:00:00'), 'scheduleRangeDate' => $scheduleRangeDate)
+		);
+
+		foreach ($ScheduleDate as $key) {
+			$entity = new ScheduleDate();
+			$entity->setScheduleRangeDate($key['scheduleRangeDate']);
+			$entity->setDate($key['date']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$ScheduleRange = array(
+			array('fromHour' => 'T09:00:00', 'toHour' => 'T10:00:00', 'scheduleRangeDate' => $scheduleRangeDate),
+			array('fromHour' => 'T10:00:00', 'toHour' => 'T11:00:00', 'scheduleRangeDate' => $scheduleRangeDate)
+		);
+
+		foreach ($ScheduleRange as $key) {
+			$entity = new ScheduleRange();
+			$entity->setScheduleRangeDate($key['scheduleRangeDate']);
+			$entity->setToHour($key['toHour']);
+			$entity->setFromHour($key['fromHour']);
+			$manager->persist($entity);	
+		}
+		$manager->flush();
+
+		$repository = $manager->getRepository('GeneralBundle:ScheduleTrack');
+		$track1 = $repository->findOneByTitle('Track 1');
+		$track2 = $repository->findOneByTitle('Track 2');
+		$track3 = $repository->findOneByTitle('Track 3');
+		$track4 = $repository->findOneByTitle('Track 4');
+
+		$schedule->setScheduleJson('[{"id":"1","start":"2016-06-10T09:00:00","end":"2016-06-10T10:00:00","resourceId":' . $track1->getId() . ',"title":"Natalia-Victoria\\nSaray-Ana","backgroundColor":"#1d1363"},{"id":"2","start":"2016-06-10T09:00:00","end":"2016-06-10T10:00:00","resourceId":' . $track2->getId() . ',"title":"Natalia-Victoria\\nAndrea-Rocio","backgroundColor":"#1d1363"},{"id":"3","start":"2016-06-10T09:00:00","end":"2016-06-10T10:00:00","resourceId":' . $track3->getId() . ',"title":"Saray-Ana\\nAndrea-Rocio","backgroundColor":"#1d1363"},{"id":"4","start":"2016-06-10T09:00:00","end":"2016-06-10T10:00:00","resourceId":' . $track4->getId() . ',"title":"Natalia-Victoria\\nAlberto-Cecilia","backgroundColor":"#BFFF00"},{"id":"5","start":"2016-06-10T10:00:00","end":"2016-06-10T11:00:00","resourceId":' . $track1->getId() . ',"title":"Natalia-Victoria\\nSaray-Ana","backgroundColor":"#BFFF00"},{"id":"6","start":"2016-06-10T10:00:00","end":"2016-06-10T11:00:00","resourceId":' . $track2->getId() . ',"title":"Natalia-Victoria\\nJose-Carlos","backgroundColor":"#BFFF00"},{"id":"7","start":"2016-06-10T10:00:00","end":"2016-06-10T11:00:00","resourceId":' . $track3->getId() . ',"title":"Alberto-Cecilia\\nSaray-Ana","backgroundColor":"#BFFF00"},{"id":"8","start":"2016-06-10T10:00:00","end":"2016-06-10T11:00:00","resourceId":' . $track4->getId() . ',"title":"Alberto-Cecilia\\nJose-Carlos","backgroundColor":"#BFFF00"},{"id":"9","start":"2016-06-11T09:00:00","end":"2016-06-11T10:00:00","resourceId":' . $track1->getId() . ',"title":"Saray-Ana\\nJose-Carlos","backgroundColor":"#BFFF00"},{"id":"10","start":"2016-06-11T09:00:00","end":"2016-06-11T10:00:00","resourceId":' . $track2->getId() . ',"title":"Andrea-Rocio\\nFrancisco-Juan","backgroundColor":"#BFFF00"},{"id":"11","start":"2016-06-11T09:00:00","end":"2016-06-11T10:00:00","resourceId":' . $track3->getId() . ',"title":"Andrea-Rocio\\nMacarena-Rodrigo","backgroundColor":"#BFFF00"},{"id":"12","start":"2016-06-11T09:00:00","end":"2016-06-11T10:00:00","resourceId":' . $track4->getId() . ',"title":"Andrea-Rocio\\nSilvia-Santiago","backgroundColor":"#BFFF00"},{"id":"13","start":"2016-06-11T10:00:00","end":"2016-06-11T11:00:00","resourceId":' . $track1->getId() . ',"title":"Francisco-Juan\\nMacarena-Rodrigo","backgroundColor":"#BFFF00"},{"id":"14","start":"2016-06-11T10:00:00","end":"2016-06-11T11:00:00","resourceId":' . $track2->getId() . ',"title":"Francisco-Juan\\nSilvia-Santiago","backgroundColor":"#BFFF00"},{"id":"15","start":"2016-06-11T10:00:00","end":"2016-06-11T11:00:00","resourceId":' . $track3->getId() . ',"title":"Macarena-Rodrigo\\nSilvia-Santiago","backgroundColor":"#BFFF00"},{"id":"16","start":"2016-06-11T10:00:00","end":"2016-06-11T11:00:00","resourceId":' . $track4->getId() . ',"title":"Lorenzo-Maria\\nAngel-Monica","backgroundColor":"#BFFF00"},{"id":"17","start":"2016-06-12T09:00:00","end":"2016-06-12T10:00:00","resourceId":' . $track1->getId() . ',"title":"Lorenzo-Maria\\nNerea-Risto","backgroundColor":"#BFFF00"},{"id":"18","start":"2016-06-12T09:00:00","end":"2016-06-12T10:00:00","resourceId":' . $track2->getId() . ',"title":"Lorenzo-Maria\\nMario-Servando","backgroundColor":"#BFFF00"},{"id":"19","start":"2016-06-12T09:00:00","end":"2016-06-12T10:00:00","resourceId":' . $track3->getId() . ',"title":"Angel-Monica\\nNerea-Risto","backgroundColor":"#BFFF00"},{"id":"20","start":"2016-06-12T09:00:00","end":"2016-06-12T10:00:00","resourceId":' . $track4->getId() . ',"title":"Angel-Monica\\nMario-Servando","backgroundColor":"#BFFF00"},{"id":"21","start":"2016-06-12T10:00:00","end":"2016-06-12T11:00:00","resourceId":' . $track1->getId() . ',"title":"Nerea-Risto\\nMario-Servando","backgroundColor":"#BFFF00"},{"id":"22","start":"2016-06-12T10:00:00","end":"2016-06-12T11:00:00","resourceId":' . $track2->getId() . ',"title":"Not Set","backgroundColor":"Not Set"},{"id":"23","start":"2016-06-12T10:00:00","end":"2016-06-12T11:00:00","resourceId":' . $track3->getId() . ',"title":"Not Set","backgroundColor":"Not Set"},{"id":"24","start":"2016-06-12T10:00:00","end":"2016-06-12T11:00:00","resourceId":' . $track4->getId() . ',"title":"Not Set","backgroundColor":"Not Set"}]');
+		$schedule->setScheduleResourcesJson('[{"id":' . $track1->getId() . ',"title":"Track 1"},{"id":' . $track2->getId() . ',"title":"Track 2"},{"id":' . $track3->getId() . ',"title":"Track 3"},{"id":' . $track4->getId() . ',"title":"Track 4"}]');
+
+		$manager->persist($schedule);
+		$manager->flush();
+
+
+		$repository = $manager->getRepository('GeneralBundle:GameStatus');
+		$gameStatus = $repository->findOneByValue('Created');
+	
+		$Games = array(
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category1, 'group' => $group1F, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair1, 'pair2' => $pair3, 'numOfScheduleRange' => 1, 'bgColor' => $category1->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category1, 'group' => $group1F, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair1, 'pair2' => $pair4, 'numOfScheduleRange' => 2, 'bgColor' => $category1->getBgColor(), 'score' => '3/6 2/6', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category1, 'group' => $group1F, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair3, 'pair2' => $pair4, 'numOfScheduleRange' => 3, 'bgColor' => $category1->getBgColor(), 'score' => '6/1 4/6 6/1', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair1, 'pair2' => $pair2, 'numOfScheduleRange' => 4, 'bgColor' => $category2->getBgColor(), 'score' => '0/6 0/6', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair1, 'pair2' => $pair3, 'numOfScheduleRange' => 5, 'bgColor' => $category2->getBgColor(), 'score' => '4/6 1/6', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair1, 'pair2' => $pair4, 'numOfScheduleRange' => 6, 'bgColor' => $category2->getBgColor(), 'score' => '6/3 6/2', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair2, 'pair2' => $pair3, 'numOfScheduleRange' => 7, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 1/6 6/4', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M, 'startDate' => '2016-06-10T09:00:00', 'endDate' => '2016-06-10T10:00:00', 'pair1' => $pair2, 'pair2' => $pair4, 'numOfScheduleRange' => 8, 'bgColor' => $category2->getBgColor(), 'score' => '3/6 7/5 1/6', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group1M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair3, 'pair2' => $pair4, 'numOfScheduleRange' => 9, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair5, 'pair2' => $pair6, 'numOfScheduleRange' => 10, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair5, 'pair2' => $pair7, 'numOfScheduleRange' => 11, 'bgColor' => $category2->getBgColor(), 'score' => '6/1 2/6 6/1', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair5, 'pair2' => $pair8, 'numOfScheduleRange' => 12, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair6, 'pair2' => $pair7, 'numOfScheduleRange' => 13, 'bgColor' => $category2->getBgColor(), 'score' => '6/1 6/2', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair6, 'pair2' => $pair8, 'numOfScheduleRange' => 14, 'bgColor' => $category2->getBgColor(), 'score' => '2/6 7/5 5/7', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group2M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair7, 'pair2' => $pair8, 'numOfScheduleRange' => 15, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M, 'startDate' => '2016-06-11T09:00:00', 'endDate' => '2016-06-11T10:00:00', 'pair1' => $pair9, 'pair2' => $pair10, 'numOfScheduleRange' => 16, 'bgColor' => $category2->getBgColor(), 'score' => '6/7 6/7', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M, 'startDate' => '2016-06-12T09:00:00', 'endDate' => '2016-06-12T10:00:00', 'pair1' => $pair9, 'pair2' => $pair11, 'numOfScheduleRange' => 17, 'bgColor' => $category2->getBgColor(), 'score' => '1/6 7/6 5/7', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M, 'startDate' => '2016-06-12T09:00:00', 'endDate' => '2016-06-12T10:00:00', 'pair1' => $pair9, 'pair2' => $pair12, 'numOfScheduleRange' => 18, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M, 'startDate' => '2016-06-12T09:00:00', 'endDate' => '2016-06-12T10:00:00', 'pair1' => $pair10, 'pair2' => $pair11, 'numOfScheduleRange' => 19, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M, 'startDate' => '2016-06-12T09:00:00', 'endDate' => '2016-06-12T10:00:00', 'pair1' => $pair10, 'pair2' => $pair12, 'numOfScheduleRange' => 20, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false),
+			array('description' => 'torneo zoombie', 'tournament' => $tournament1, 'category' => $category2, 'group' => $group3M, 'startDate' => '2016-06-12T09:00:00', 'endDate' => '2016-06-12T10:00:00', 'pair1' => $pair11, 'pair2' => $pair12, 'numOfScheduleRange' => 21, 'bgColor' => $category2->getBgColor(), 'score' => '6/4 7/5', 'isDrawGame' => false)
+
+		);
+
+		foreach ($Games as $key) {
+			$entity = new Game();
+			$entity->setDescription($key['description']);
+			$entity->setTournament($key['tournament']);
+			$entity->setCategory($key['category']);
+			$entity->setGroup($key['group']);
+			$entity->setStartDate($key['startDate']);
+			$entity->setEndDate($key['endDate']);
+			$entity->setPair1($key['pair1']);
+			$entity->setPair2($key['pair2']);
+			$entity->setScheduleId($key['numOfScheduleRange']);
+			$entity->setScore($key['score']);
+			$entity->setBgColor($key['bgColor']);
+			$entity->setStatus($gameStatus);
+			$entity->setIsDrawGame($key['isDrawGame']);
 			$manager->persist($entity);	
 		}
 		$manager->flush();

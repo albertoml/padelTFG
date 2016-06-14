@@ -46,10 +46,10 @@ define([
                 'bSort': false,
                 'aoColumns': [{
                     'sTitle': literals.gamesFields.gameDate,
-                    'mData': 'date',
+                    'mData': 'startDate',
                     'mRender': function (data, type, full) {
                         if(!_.isNull(data) && !_.isUndefined(data)){
-                            return new Date(data.date).toString('d-MM-yyyy');
+                                return data.replace('T', '--')
                         }
                         else{
                             return literals.gamesFields.DateNotAvailable;
@@ -87,12 +87,12 @@ define([
                     'sTitle': literals.gamesFields.options,
                     'mRender': function (data, type, full) {
                         var button = "";
-                        button += "<button alt=" + literals.proposeGameChange + " id='changeGame' name=" + full.id + " class='deleteButton'>" + literals.proposeGameChange + "</button>";    
+                        button += "<button alt=" + literals.proposeGameChange + " id='changeGame' name=" + full.id + " class='deleteButton btn btn-default'>" + literals.proposeGameChange + "</button>";    
                         if(!_.isUndefined(full.score) && !_.isNull(full.score) && !_.isEmpty(full.score)){
-                            button += "<button method='modify' alt=" + literals.modifyScore + " id='addScore' name=" + full.id + " class='deleteButton'>" + literals.modifyScore + "</button>";
+                            button += "<button method='modify' alt=" + literals.modifyScore + " id='addScore' name=" + full.id + " class='deleteButton btn btn-default'>" + literals.modifyScore + "</button>";
                         }
                         else{
-                            button += "<button method='add' alt=" + literals.addScore + " id='addScore' name=" + full.id + " class='deleteButton'>" + literals.addScore + "</button>";
+                            button += "<button method='add' alt=" + literals.addScore + " id='addScore' name=" + full.id + " class='deleteButton btn btn-default'>" + literals.addScore + "</button>";
                         }
 
                         return button;

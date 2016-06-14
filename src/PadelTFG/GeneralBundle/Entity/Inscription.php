@@ -34,7 +34,7 @@ class Inscription implements JsonSerializable
 	protected $tournament;
 
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory")
-		@ORM\JoinColumn(name="group_id") */
+		@ORM\JoinColumn(name="group_id", onDelete="cascade") */
 	protected $group;
 
 	/** @ORM\Column(type="integer", nullable=true) */
@@ -44,7 +44,10 @@ class Inscription implements JsonSerializable
 	protected $status;
 
 	/** @ORM\Column(type="integer", nullable=true) */
-	protected $classifiedPosition;
+	protected $classifiedPositionInGroup;
+
+	/** @ORM\Column(type="integer", nullable=true) */
+	protected $classifiedPositionByGroups;
 
 	/** @ORM\Column(type="integer", nullable=true) */
 	protected $rankingMark;
@@ -76,8 +79,11 @@ class Inscription implements JsonSerializable
 	public function getStatus(){
 		return $this->status;
 	}
-	public function getClassifiedPosition(){
-		return $this->classifiedPosition;
+	public function getClassifiedPositionInGroup(){
+		return $this->classifiedPositionInGroup;
+	}
+	public function getClassifiedPositionByGroups(){
+		return $this->classifiedPositionByGroups;
 	}
 	public function getRankingMark(){
 		return $this->rankingMark;
@@ -104,8 +110,11 @@ class Inscription implements JsonSerializable
 	public function setStatus($status){
 		$this->status = $status;
 	}
-	public function setClassifiedPosition($classifiedPosition){
-		$this->classifiedPosition = $classifiedPosition;
+	public function setClassifiedPositionInGroup($classifiedPositionInGroup){
+		$this->classifiedPositionInGroup = $classifiedPositionInGroup;
+	}
+	public function setClassifiedPositionByGroups($classifiedPositionByGroups){
+		$this->classifiedPositionByGroups = $classifiedPositionByGroups;
 	}
 	public function setRankingMark($rankingMark){
 		$this->rankingMark = $rankingMark;
@@ -124,7 +133,8 @@ class Inscription implements JsonSerializable
             'group' => $this->group,
             'seeded' => $this->seeded,
             'status' => $this->status,
-            'classifiedPosition' => $this->classifiedPosition,
+            'classifiedPositionInGroup' => $this->classifiedPositionInGroup,
+            'classifiedPositionByGroups' => $this->classifiedPositionByGroups,
             'rankingMark' => $this->rankingMark,
             'hasObservations' => $this->hasObservations
         );

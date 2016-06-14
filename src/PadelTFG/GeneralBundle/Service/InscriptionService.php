@@ -53,6 +53,12 @@ class InscriptionService{
         return $returnInscriptions;
     }
 
+    public function getInscriptionsByTournamentInArray($idTournament){
+        $repository = $this->em->getRepository('GeneralBundle:Inscription');
+        $inscriptions = $repository->findByTournament($idTournament);
+        return $inscriptions;
+    }
+
     public function getCountInscriptionsByTournamentByCategory($idTournament){
         $categoryService = new CategoryService();
         $categoryService->setManager($this->em);
@@ -104,32 +110,40 @@ class InscriptionService{
         return $inscriptions;
     }
 
-    public function getInscriptionsByGroupForATournament($idTournament){
+    public function getInscriptionsByGroupForATournament($idTournament, $orderBy){
         $groupService = new GroupService();
         $groupService->setManager($this->em);
         $groupsinTournament = $groupService->getGroupsByTournament($idTournament);
         $returnInscriptions = array();
         foreach ($groupsinTournament as $indexCategory=>$groupsInCategory) {
-            $inscriptions = $this->getInscriptionsByGroupForACategory($groupsInCategory);
+            $inscriptions = $this->getInscriptionsByGroupForACategory($groupsInCategory, $orderBy);
             $returnInscriptions[$indexCategory] = $inscriptions;
         }
         return $returnInscriptions;
     }
 
-    public function getInscriptionsByGroupForACategory($groupsInCategory){
+    public function getInscriptionsByGroupForACategory($groupsInCategory, $orderBy){
         $groupService = new GroupService();
         $groupService->setManager($this->em);
         $returnInscriptions = array();
         foreach ($groupsInCategory as $group) {
-            $inscriptions = $this->getInscriptionsByGroup($group->getId());
+            $inscriptions = $this->getInscriptionsByGroup($group->getId(), $orderBy);
             $returnInscriptions[$group->getName() . ';' . $group->getId()] = $inscriptions;
         }
         return $returnInscriptions;
     }
 
-    public function getInscriptionsByGroup($idGroup){
+    public function getInscriptionsByGroup($idGroup, $orderBy){
         $repository = $this->em->getRepository('GeneralBundle:Inscription');
-        $inscriptions = $repository->findByGroup($idGroup);
+        if(!is_null($orderBy)){
+            $inscriptions = $repository->findBy(
+             array('group'=> $idGroup), 
+             array($orderBy => 'ASC')
+            );
+        }
+        else{
+            $inscriptions = $repository->findByGroup($idGroup);
+        }
         return $inscriptions;
     }
 
@@ -207,7 +221,7 @@ class InscriptionService{
         $inscription->setPair($pair);
         $inscription->setCategory($category);
         $inscription->setTournament($tournament);
-        $inscription->setStatus($this->statusService->getStatus($this->em, 'inscription', 'tournament not started'));
+        $inscription->setStatus($this->statusService->getStatus('inscription', Literals::Tournament_Not_StartedInscriptionStatus));
         return $inscription;
     }
 
@@ -253,6 +267,34 @@ $category->getRegisteredLimitMax() == $this->getCountInscriptionsInCategory($cat
         }
 
         return $checked;
+    }
+
+    public function orderByClassified($inscriptions){
+        $groupService = new GroupService();
+        $groupService->setManager($this->em);
+        if(!is_null($inscriptions) && count($inscriptions) > 0){
+            $numGroups = $groupService->getNumGroupsByCategory($inscriptions[0]->getCategory()->getId());
+            $inscriptionsOrder = array();
+            $pivot = 0;
+            $pivotGroup = 0;
+
+            while(count($inscriptionsOrder) != count($inscriptions)){
+                foreach ($inscriptions as $inscription) {
+                    if($inscription->getClassifiedPositionInGroup() == $pivotGroup && $inscription->getClassifiedPositionByGroups() == $pivot){
+                        $inscriptionsOrder[] = $inscription;
+                    }
+                }
+                $pivot = $pivot + 1;
+                if($pivot >= $numGroups){
+                    $pivot = 0;
+                    $pivotGroup = $pivotGroup + 1;
+                }
+            }
+            return $inscriptionsOrder;
+        }
+        else{
+            return $inscriptions;
+        }
     }
 
     public function saveInscriptions($params, $controller){
