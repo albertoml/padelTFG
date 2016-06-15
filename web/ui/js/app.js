@@ -4,6 +4,7 @@ require.config({
 		'underscore': 'vendor/underscore-amd/underscore',
 		'backbone': 'vendor/backbone-amd/backbone',
 		'dataTables': 'vendor/datatables/media/js/jquery.dataTables',
+		'less': 'vendor/less/dist/less',
 		'caret': 'vendor/jquery-tag-editor/jquery.caret.min',
 		'tagEditor': 'vendor/jquery-tag-editor/jquery.tag-editor.min',
 		'colorpicker': 'vendor/colorpicker/iColorPicker',
@@ -74,7 +75,7 @@ require.config({
     }
 });
  
-require(['backbone', 'views/login/login', 'views/common/common', 'views/home/home', 'dataTables', 
+require(['backbone', 'views/login/login', 'views/common/common', 'views/home/home', 'dataTables', 'less', 
 	'jquery-tableTools', 'datejs', 'select2','bootstrap', 'bootstrap-modal-manager', 'bootstrap-modal', 
 	'datepicker', 'bs-editable', 'smint-jquery', 'moment', 'fullcalendar', 'fullcalendar-scheduler', 'tagEditor', 'colorpicker'], 
 	function(Backbone, LoginView, CommonView, HomeView) {
@@ -102,7 +103,8 @@ require(['backbone', 'views/login/login', 'views/common/common', 'views/home/hom
 	var host = 'http://localhost:8000';
 	var params = {
 		'host' : 'http://localhost:8000',
-		'hostLocal' : 'http://localhost:8080',
+		'hostLocal' : 'http://localhost',
+		'apiName' : 'api',
 		'sendLoginURL' : host + '/api/user/login/{email}/{password}',
 		'getUserPreferences' : host + '/api/userPreference/{idUser}',
 		'getCategories' : host + '/api/category/tournament/{idTournament}',

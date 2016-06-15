@@ -1,4 +1,7 @@
 define({
+	"host" : "http://localhost:8000",
+	"hostLocal" : "http://localhost",
+	"apiName" : "api",
 	"numMaxBlocks": 16,
 	"FridayDay": "Friday",
 	"SaturdayDay": "Saturday",

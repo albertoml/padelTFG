@@ -1,9 +1,9 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'i18n!nls/homeLiterals.js'], function(Backbone, l) {
 
 	var GameModel = Backbone.Model.extend({
-	    urlRoot: 'http://localhost:8000/api/game',
-	    initialize: function(urls){
-	        
+
+	    initialize: function(){
+	    	this.urlRoot = l.host + '/' + l.apiName + '/game'; 
 	    }  
 	});
 

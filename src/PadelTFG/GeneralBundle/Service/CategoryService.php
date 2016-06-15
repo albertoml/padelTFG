@@ -87,7 +87,7 @@ class CategoryService{
 
     public function assignPairForDrawGame($inscriptions, $numMatchsLength, $numMatch, $pair){
         
-        $nameLiteral = 'Draw' . $numMatchsLength*2;
+        $nameLiteral = 'draw' . $numMatchsLength*2;
 
         if($pair == 'pair1'){
             $index = Literals::$nameLiteral[$numMatch*2];

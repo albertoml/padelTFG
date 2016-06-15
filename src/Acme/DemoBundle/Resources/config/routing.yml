@@ -1,0 +1,13 @@
+_welcome:
+    defaults: { _controller: AcmeDemoBundle:Welcome:index }
+    prefix:   /acme
+
+_demo_secured:
+    resource: "@AcmeDemoBundle/Controller/SecuredController.php"
+    type:     annotation
+    prefix:   /acmeSecured
+
+_demo:
+    resource: "@AcmeDemoBundle/Controller/DemoController.php"
+    type:     annotation
+    prefix:   /demo

@@ -1,9 +1,10 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'i18n!nls/homeLiterals.js'], function(Backbone, l) {
 
-var PairModel = Backbone.Model.extend({
-    urlRoot: 'http://localhost:8000/api/pair/user',
-    initialize: function(urls){
-        
-    }
-    return UserModel;  
+	var PairModel = Backbone.Model.extend({
+
+	    initialize: function(){
+	    	this.urlRoot = l.host + '/' + l.apiName + '/pair'; 
+	    }
+	});
+	return PairModel;
 });

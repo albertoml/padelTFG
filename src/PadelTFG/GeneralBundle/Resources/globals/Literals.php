@@ -169,8 +169,8 @@ abstract class Literals
 	const ByePairName = "Bye";
 
 	//Draws
-	const Draw16 = [0, 15, 7, 8, 5, 10, 3, 12, 2, 13, 4, 11, 6, 9, 1, 14];
-	const Draw8 = [0, 7, 3, 4, 2, 5, 1, 6];
-	const Draw4 = [0, 3, 1, 2];
-	const Draw2 = [0, 1];
+	static $draw16 = [0, 15, 7, 8, 5, 10, 3, 12, 2, 13, 4, 11, 6, 9, 1, 14];
+	static $draw8 = [0, 7, 3, 4, 2, 5, 1, 6];
+	static $draw4 = [0, 3, 1, 2];
+	static $draw2 = [0, 1];
 }

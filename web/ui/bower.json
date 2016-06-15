@@ -23,7 +23,8 @@
     "bootstrap-editable": null,
     "fullcalendar": null,
     "fullcalendar-scheduler": null,
-    "jquery-tag-editor": null
+    "jquery-tag-editor": null,
+    "less": null
   },
   "ignore": [
     "**/.*",

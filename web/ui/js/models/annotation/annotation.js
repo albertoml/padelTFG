@@ -1,9 +1,9 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'i18n!nls/homeLiterals.js'], function(Backbone, l) {
 
 	var AnnotationModel = Backbone.Model.extend({
-	    urlRoot: 'http://localhost:8000/api/annotation',
-	    initialize: function(urls){
-	        
+
+	    initialize: function(){
+	    	this.urlRoot = l.host + '/' + l.apiName + '/annotation'; 
 	    }  
 	});
 
