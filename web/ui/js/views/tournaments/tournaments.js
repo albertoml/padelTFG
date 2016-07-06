@@ -105,7 +105,7 @@ define([
                     'mRender': function (data, type, full) {
                         var buttons = "";
                         if(full.status.value == literals.tournamentStatus.InInscriptionDate){
-                            buttons += "<button id='doInscription' name=" + full.id + " title='" + full.name + "'>" + literals.doInscription + "</button>";
+                            buttons += "<button class='btn btn-default' id='doInscription' name=" + full.id + " title='" + full.name + "'>" + literals.doInscription + "</button>";
                         }
                         return buttons;
                     }

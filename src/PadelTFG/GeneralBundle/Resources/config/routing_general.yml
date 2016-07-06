@@ -1,3 +1,8 @@
+web:
+    type: rest
+    resource: routing_web.yml
+    name_prefix: web_
+    
 user:
     type: rest
     resource: routing_user.yml
@@ -22,11 +27,6 @@ userRole:
     type: rest
     resource: routing_userRole.yml
     name_prefix:  userRole_
-
-userUserRole:
-    type: rest
-    resource: routing_userUserRole.yml
-    name_prefix:  userUserRole_
 
 sponsor:
     type: rest

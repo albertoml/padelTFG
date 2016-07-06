@@ -78,7 +78,7 @@ class PairService{
         }
     }
 
-    public function savePair($params, $controller){
+    public function savePair($params){
 
         if(empty($this->getPairByUsers($params['user1'], $params['user2']))){
 
@@ -91,13 +91,6 @@ class PairService{
             $pair->setUser1($user1);
             $pair->setUser2($user2);
             $pair->setGender($this->setPairGender($user1->getGender(), $user2->getGender()));
-            $validator = $controller->get('validator');
-            $errors = $validator->validate($pair);
-
-            if (count($errors) > 0) {
-                $errorsString = (string) $errors;
-                return array('result' => 'fail', 'message' => $errorsString);
-            }
             $this->em->persist($pair);
             $this->em->flush();
             return array('result' => 'ok', 'message' => $pair);

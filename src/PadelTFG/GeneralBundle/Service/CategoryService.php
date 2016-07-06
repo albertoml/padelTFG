@@ -5,6 +5,7 @@ namespace PadelTFG\GeneralBundle\Service;
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\Category;
 use PadelTFG\GeneralBundle\Entity\Pair;
+use PadelTFG\GeneralBundle\Entity\Game;
 use PadelTFG\GeneralBundle\Entity\Inscription;
 use PadelTFG\GeneralBundle\Service\InscriptionService as InscriptionService;
 use PadelTFG\GeneralBundle\Service\GameService as GameService;
@@ -85,24 +86,68 @@ class CategoryService{
         return $drawLength;
     }
 
+    public function checkPairToAddDraw($description){
+        $gameService = new GameService();
+        $gameService->setManager($this->em);
+        $game = $gameService->getGameByDescription($description);
+        if($game instanceof Game){
+            if(is_null($game->getPair1()) && !is_null($game->getPair2())){
+                $game->setStatus($this->statusService->getStatus('game', Literals::WonPair2GameStatus));
+                $this->em->persist($game);
+                $this->em->flush();
+                return $game->getPair2();
+            }
+            else if(is_null($game->getPair2()) && !is_null($game->getPair1())){
+                $game->setStatus($this->statusService->getStatus('game', Literals::WonPair1GameStatus));
+                $this->em->persist($game);
+                $this->em->flush();
+                return $game->getPair1();
+            }
+        }
+        return null;
+    }
+
     public function assignPairForDrawGame($inscriptions, $numMatchsLength, $numMatch, $pair){
         
-        $nameLiteral = 'draw' . $numMatchsLength*2;
-
         if($pair == 'pair1'){
-            $index = Literals::$nameLiteral[$numMatch*2];
+            $indexInc = 0;
         }
         else{
-            $index = Literals::$nameLiteral[$numMatch*2 + 1];   
+            $indexInc = 1;
         }
-                
-        $inscription = $inscriptions[$index];
-        if($inscription instanceof Pair){
-            return $inscription;
+
+        $index = -1;
+
+        switch ($numMatchsLength) {
+            case 1:
+                $index = Literals::$draw2[$numMatch*2 + $indexInc];
+                break;
+            case 2:
+                $index = Literals::$draw4[$numMatch*2 + $indexInc];
+                break;
+            case 4:
+                $index = Literals::$draw8[$numMatch*2 + $indexInc];
+                break;
+            case 8:
+                $index = Literals::$draw16[$numMatch*2 + $indexInc];
+                break;
+            default:
+                $index = -1;
+                break;
+        }
+
+        if($index > -1 && $index < count($inscriptions)){
+            $inscription = $inscriptions[$index];
+            if($inscription instanceof Inscription){
+                return $inscription->getPair();
+            }
+            else{
+                return null;
+            }
         }
         else{
             return null;
-        }
+        } 
     }
 
     public function generateDraw($inscriptions, $numMatchs, $categoryId, $tournamentId){
@@ -110,7 +155,7 @@ class CategoryService{
         $gameService->setManager($this->em);
 
         $gamesOnDraw = array();
-        $flagFirstRound = true;
+        $flagRound = 0;
 
         while($numMatchs > 0){
             for($i = 0; $i < $numMatchs; $i ++){
@@ -119,15 +164,25 @@ class CategoryService{
                     'tournament' => $tournamentId,
                     'isDrawGame' => true
                 );
-                if($flagFirstRound){
+                $paramsForDoGame['description'] = $tournamentId . ';' . $categoryId . '|' . $numMatchs . '/' . $i;
+                if($flagRound == 0){
                     $paramsForDoGame['pair1'] = $this->assignPairForDrawGame($inscriptions, $numMatchs, $i, 'pair1');    
                     $paramsForDoGame['pair2'] = $this->assignPairForDrawGame($inscriptions, $numMatchs, $i, 'pair2');    
                 }
-                $paramsForDoGame['description'] = $numMatchs . '/' . $i;
+                else if($flagRound == 1){
+                    $descriptionPair1 = $tournamentId . ';' . $categoryId . '|' . $numMatchs*2 . '/' . $i*2;    
+                    $paramsForDoGame['pair1'] = $this->checkPairToAddDraw($descriptionPair1);
+
+                    $index = $i*2;
+                    $index = $index + 1;
+                    $descriptionPair2 = $tournamentId . ';' . $categoryId . '|' . $numMatchs*2 . '/' . $index;
+
+                    $paramsForDoGame['pair2'] = $this->checkPairToAddDraw($descriptionPair2);   
+                }
                 $gameSaved = $gameService->saveGame($paramsForDoGame);
                 $gamesOnDraw[] = $gameSaved['message'];
             }
-            $flagFirstRound = false;
+            $flagRound ++;
             $numMatchs = $numMatchs / 2;
             $numMatchs = intval($numMatchs);
         }

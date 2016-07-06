@@ -2,3 +2,8 @@ services:
 #    general.example:
 #        class: PadelTFG\GeneralBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+ #   userManager:
+  #    class:  PadelTFG\GeneralBundle\Entity\User
+   #   arguments: 
+    #    - '@doctrine.orm.entity_manager'

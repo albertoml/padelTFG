@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 use PadelTFG\GeneralBundle\Resources\globals\Literals as Literals;
 use PadelTFG\GeneralBundle\Entity\Annotation;
+use PadelTFG\GeneralBundle\Entity\User;
 
 class AnnotationControllerAPITest extends WebTestCase
 {
@@ -70,6 +71,19 @@ class AnnotationControllerAPITest extends WebTestCase
         
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('Annotation TFG', $response);
+    }
+
+    public function testGetAnnotationByUserActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user = $repository->findOneByName("AnnotationManager");
+
+        $this->client->request('GET', '/api/annotation/user/' . $user->getId());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Annotation TFG', $response);
+        $this->assertContains('Annotation TFG2', $response);
     }
 
     public function testPostAnnotationActionAPI()
@@ -164,6 +178,27 @@ class AnnotationControllerAPITest extends WebTestCase
         
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
         $this->assertContains(Literals::AnnotationNotFound, $response);
+    }
+
+    public function testPutIncorrectTextAnnotationActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Annotation');
+        $annotation = $repository->findOneByText("Annotation TFG");
+
+        $method = 'PUT';
+        $uri = '/api/annotation/' . $annotation->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = json_encode(array(
+            'text' => ''
+        ));
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('This value should not be blank.', $response);
     }
 
     public function testPutEmptyContentAnnotationActionAPI()

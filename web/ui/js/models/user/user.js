@@ -4,7 +4,7 @@ define(['backbone', 'i18n!nls/homeLiterals.js'], function(Backbone, l) {
 
 	    initialize: function(){
 	    	this.urlRoot = l.host + '/' + l.apiName + '/user';   
-	    }  
+	    }
 	});
 	return UserModel;
 });

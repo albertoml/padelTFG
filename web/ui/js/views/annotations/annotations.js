@@ -73,8 +73,8 @@ define([
                 }, {
                     'sTitle': literals.annotationsFields.options,
                     'mRender': function (data, type, full) {
-                        var button = "<button id='modifyAnnotation' name=" + full.id + "><i class='fa fa-pencil-square-o'></i></button>";
-                        button += "<button alt=" + literals.deleteAnnotation + " id='deleteAnnotation' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
+                        var button = "<button class='btn btn-default' id='modifyAnnotation' name=" + full.id + "><i class='fa fa-pencil-square-o'></i></button>";
+                        button += "<button class='btn btn-default' alt=" + literals.deleteAnnotation + " id='deleteAnnotation' name=" + full.id + " class='deleteButton'><i class='fa fa-trash-o'></i></button>";
                         return button;
                     }
                 }],

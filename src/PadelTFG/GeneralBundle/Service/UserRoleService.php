@@ -21,7 +21,7 @@ class UserRoleService{
 
     public function getPlayerRole(){
     	$repository = $this->em->getRepository('GeneralBundle:UserRole');
-        $role = $repository->findOneByValue('Player');
+        $role = $repository->findOneByValue(Literals::Player);
         return $role;
     }
 }

@@ -5,15 +5,17 @@
 	  	</div>
 	  	<div class="panel-body groupBoxItemContainer"" style="min-height: 150px" id="groupBoxItemContainer<%= groupId %>">
 	    	<% _.each(inscriptions, function(inscription) { %>
-				<div class="col-lg-2">
-	            	<%= inscription.classifiedPositionInGroup %>
-	            	<%= inscription.classifiedPositionByGroups %>
-	            </div>
-	            <button class="btn btn-default col-lg-10 closeGroupBox" name="<%= inscription.pair.id %>/<%= groupId %>/<%= categoryId %>" id="selectPairInCloseGroupView">
-	                <i class="fa fa-check selectedPairCloseGroup" aria-hidden="true"></i>
-	                <h5><%= inscription.pair.user1.name %> <%= inscription.pair.user1.lastName %></h5>
-	                <h5><%= inscription.pair.user2.name %> <%= inscription.pair.user2.lastName %></h5>
-	            </button>
+	    		<div id="inscription">
+					<div class="col-lg-2">
+		            	<!-- <%= inscription.classifiedPositionInGroup %> -->
+		            	<%= inscription.classifiedPositionByGroups %>
+		            </div>
+		            <button class="btn btn-default col-lg-10 closeGroupBox" name="<%= inscription.pair.id %>/<%= groupId %>/<%= categoryId %>" id="selectPairInCloseGroupView">
+		                <i class="fa fa-check selectedPairCloseGroup" aria-hidden="true"></i>
+		                <h5><%= inscription.pair.user1.name %> <%= inscription.pair.user1.lastName %></h5>
+		                <h5><%= inscription.pair.user2.name %> <%= inscription.pair.user2.lastName %></h5>
+		            </button>
+		        </div>
 		    <% }); %>
 	  	</div>
 	</div>

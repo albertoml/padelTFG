@@ -15,8 +15,6 @@ class PairTestInsert implements FixtureInterface
 	public function load(ObjectManager $manager){
 
 		$Users = array(
-			array('name' => 'UserPairTest', 'lastName' => 'UserCategoryLastName', 'email' => 'emailCategoryTest',
-				'password' => 'password'),
 			array('name' => 'User1Pair1PairTest', 'lastName' => 'User1Pair1PairTest', 'email' => 'User1Pair1PairTest',
 				'password' => 'password'),
 			array('name' => 'User2Pair1PairTest', 'lastName' => 'User2Pair1PairTest', 'email' => 'User2Pair1PairTest',
@@ -28,6 +26,22 @@ class PairTestInsert implements FixtureInterface
 			array('name' => 'User1Pair3PairTest', 'lastName' => 'User1Pair3PairTest', 'email' => 'User1Pair3PairTest',
 				'password' => 'password'),
 			array('name' => 'User2Pair3PairTest', 'lastName' => 'User2Pair3PairTest', 'email' => 'User2Pair3PairTest',
+				'password' => 'password'),
+			array('name' => 'User1Pair4PairTest', 'lastName' => 'User1Pair4PairTest', 'email' => 'User1Pair4PairTest',
+				'password' => 'password'),
+			array('name' => 'User2Pair4PairTest', 'lastName' => 'User2Pair4PairTest', 'email' => 'User2Pair4PairTest',
+				'password' => 'password'),
+			array('name' => 'User1Pair5PairTest', 'lastName' => 'User1Pair5PairTest', 'email' => 'User1Pair5PairTest',
+				'password' => 'password'),
+			array('name' => 'User2Pair5PairTest', 'lastName' => 'User2Pair5PairTest', 'email' => 'User2Pair5PairTest',
+				'password' => 'password'),
+			array('name' => 'User1Pair6PairTest', 'lastName' => 'User1Pair6PairTest', 'email' => 'User1Pair6PairTest',
+				'password' => 'password'),
+			array('name' => 'User2Pair6PairTest', 'lastName' => 'User2Pair6PairTest', 'email' => 'User2Pair6PairTest',
+				'password' => 'password'),
+			array('name' => 'User1Pair7PairTest', 'lastName' => 'User1Pair7PairTest', 'email' => 'User1Pair7PairTest',
+				'password' => 'password'),
+			array('name' => 'User2Pair7PairTest', 'lastName' => 'User2Pair7PairTest', 'email' => 'User2Pair7PairTest',
 				'password' => 'password')
 			);
 

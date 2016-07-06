@@ -41,6 +41,12 @@ class GameService{
         return $game;
     }
 
+    public function getGameByDescription($description){
+        $repository = $this->em->getRepository('GeneralBundle:Game');
+        $game = $repository->findOneByDescription($description);
+        return $game;
+    }
+
     public function getGamesByGroup($idGroup){
         $repository = $this->em->getRepository('GeneralBundle:Game');
         $games = $repository->findByGroup($idGroup);
@@ -318,6 +324,7 @@ class GameService{
                 }
             }
         }
+        return null;
     }
 
     public function wonGameByScore($score){
@@ -352,6 +359,62 @@ class GameService{
         }
     }
 
+    public function getNextGameInDraw($game){
+        if(!empty($game->getDescription())){
+            $description = split('\|', $game->getDescription());
+            if(count($description) == 2){
+                $descriptionString = $description[0];
+                $descriptionR = $description[1];
+                $descriptionRound = split('/', $descriptionR);
+                if(count($descriptionRound) == 2){
+                    $newRound = intval($descriptionRound[0]) / 2;
+                    if(intval($descriptionRound[1]) % 2 == 0){
+                        $newNumMatch = intval($descriptionRound[1]);
+                        $newNumMatch = intval($newNumMatch / 2);
+                        $goToPair = 'pair1';
+                    }
+                    else{
+                        $newNumMatch = intval($descriptionRound[1]) - 1;
+                        $newNumMatch = intval($newNumMatch / 2);
+                        $goToPair = 'pair2';
+                    }
+                    $newDescription = $descriptionString . '|' . $newRound . '/' . $newNumMatch;
+                    $gameNextRound = $this->getGameByDescription($newDescription);
+                    if($gameNextRound instanceof Game){
+                        return array('game' => $gameNextRound, 'goTo' => $goToPair);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public function checkPassNextRound($game){
+        if($game->getIsDrawGame() && !empty($game->getScore())){
+            $nextGame = $this->getNextGameInDraw($game);
+            if(!is_null($nextGame)){
+                if($nextGame['goTo'] == 'pair1'){
+                    if($game->getStatus()->getValue() == Literals::WonPair1GameStatus){
+                        $nextGame['game']->setPair1($game->getPair1());
+                    }
+                    else{
+                        $nextGame['game']->setPair1($game->getPair2());   
+                    }
+                }
+                else{
+                    if($game->getStatus()->getValue() == Literals::WonPair1GameStatus){
+                        $nextGame['game']->setPair2($game->getPair1());
+                    }
+                    else{
+                        $nextGame['game']->setPair2($game->getPair2());   
+                    }
+                }
+                $this->em->persist($nextGame['game']);
+                $this->em->flush();
+            }
+        }
+    }
+
     private function setGameModify($game, $params){
 
         $game->setDescription(!empty($params['description']) ? $params['description'] : $game->getDescription());
@@ -366,7 +429,6 @@ class GameService{
         if(!empty($params['status'])){
             $game->setStatus($this->statusService->getStatus('game', $params['status']));
         }
-
         return $game;
     }
 

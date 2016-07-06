@@ -3,7 +3,6 @@
 namespace PadelTFG\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
 
 /**
@@ -18,16 +17,15 @@ class Pair implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User", inversedBy="pair")
 		@ORM\JoinColumn(name="user1_id", onDelete="cascade") */
 	protected $user1;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\User", inversedBy="pair")
 		@ORM\JoinColumn(name="user2_id", onDelete="cascade") */
 	protected $user2;
 
-	/** @ORM\Column(type="string", nullable=true)
-		@Assert\Choice(callback = {"PadelTFG\GeneralBundle\Resources\globals\Utils", "getGenders"}, message = "Choose a valid gender.") */
+	/** @ORM\Column(type="string", nullable=true) */
 	protected $gender;
 
 

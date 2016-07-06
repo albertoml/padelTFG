@@ -86,7 +86,7 @@ class Schedule implements JsonSerializable
     {
         return array(
         	'id' => $this->id,
-            'tournament' => $this->tournament->getId(),
+            'tournament' => !is_null($this->tournament) ? $this->tournament->getId() : null,
             'scheduleJson' => $this->scheduleJson,
             'scheduleResourcesJson' => $this->scheduleResourcesJson,
             'startDate' => $this->startDate,

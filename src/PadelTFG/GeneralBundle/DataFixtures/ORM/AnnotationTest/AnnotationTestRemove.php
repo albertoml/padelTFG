@@ -5,12 +5,21 @@ namespace PadelTFG\GeneralBundle\DataFixtures\ORM\AnnotationTest;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PadelTFG\GeneralBundle\Entity\Annotation;
+use PadelTFG\GeneralBundle\Entity\User;
 
 
 class AnnotationTestRemove implements FixtureInterface
 {
 	public function load(ObjectManager $manager){
 
+		$repository = $manager->getRepository('GeneralBundle:User');
+
+		$userEntity = $repository->findOneByEmail('AnnotationEmail');
+		if ($userEntity instanceof User) {
+
+			$manager->remove($userEntity);
+		}	
+		
 		$repository = $manager->getRepository('GeneralBundle:Annotation');
 
 		$Annotations = array(

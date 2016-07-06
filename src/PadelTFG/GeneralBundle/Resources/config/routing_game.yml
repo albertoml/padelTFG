@@ -57,3 +57,10 @@ game_put:
     requirements:
         _method: PUT
         id: "\d+"
+
+game_delete:
+    path:  /game/{id}
+    defaults: { _controller: GeneralBundle:Game:deleteGame, _format: ~ }
+    requirements:
+        _method: DELETE
+        id: "\d+"

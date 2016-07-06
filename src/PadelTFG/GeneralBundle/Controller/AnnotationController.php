@@ -51,7 +51,7 @@ class AnnotationController extends FOSRestController{
 
         $this->annotationService->setManager($this->getDoctrine()->getManager());
 
-    	$params = array();
+        $params = array();
     	$content = $this->get("request")->getContent();
         $params = json_decode($content, true);
         $annotation = $this->annotationService->saveAnnotation($params, $this);

@@ -161,7 +161,6 @@ class UserControllerAPITest extends WebTestCase
 
     public function testPutUserActionAPI()
     {
-
     	$repository = $this->em->getRepository('GeneralBundle:User');
         $user = $repository->findOneByEmail("amlTest58@alu.ua.es");
 
@@ -201,6 +200,27 @@ class UserControllerAPITest extends WebTestCase
         $this->assertContains(Literals::UserNotFound, $response);
     }
 
+    public function testPutNotFoundUserIncorrectActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user = $repository->findOneByEmail("amlTest58@alu.ua.es");
+
+        $method = 'PUT';
+        $uri = '/api/user/' . $user->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = json_encode(array(
+            'name' => ''
+        ));
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('This value should not be blank.', $response);
+    }
+
     public function testPutEmptyContentUserActionAPI()
     {
     	$repository = $this->em->getRepository('GeneralBundle:User');
@@ -235,7 +255,7 @@ class UserControllerAPITest extends WebTestCase
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
         
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        //$this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains(Literals::UserDeleted, $response);
     }
 
@@ -289,5 +309,24 @@ class UserControllerAPITest extends WebTestCase
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
         $this->assertContains(Literals::PasswordIncorrect, $response);
+    }
+
+    public function testSearchUser(){
+
+        $method = 'GET';
+        $uri = '/api/user/search';
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = json_encode(array(
+            'term' => 'a'
+        ));
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('alberto', $response);
+        $this->assertContains('rocio', $response);
     }
 }

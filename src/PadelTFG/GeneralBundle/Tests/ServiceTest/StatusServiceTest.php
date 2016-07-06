@@ -54,4 +54,28 @@ class StatusServiceTest extends WebTestCase
         $this->assertEquals(1, $status->getId());
         $this->assertEquals(Literals::CreatedGameStatus, $status->getValue());
     }
+
+    public function testGameNotFoundStatus()
+    {
+        $statusService = new StatusService();
+        $statusService->setManager($this->em);
+        $status = $statusService->getStatus('game', 'status not found');
+        $this->assertEquals(null, $status);
+    }
+
+    public function testNotFoundEntityStatus()
+    {
+        $statusService = new StatusService();
+        $statusService->setManager($this->em);
+        $status = $statusService->getStatus('entity not found', 'status not found');
+        $this->assertEquals(null, $status);
+    }
+
+    public function testNotFoundAllStatus()
+    {
+        $statusService = new StatusService();
+        $statusService->setManager($this->em);
+        $status = $statusService->getAllStatus('entity not found');
+        $this->assertEquals(null, $status);
+    }
 }

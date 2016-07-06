@@ -66,11 +66,6 @@ class SponsorService{
         $sponsor = $this->setSponsorModify($sponsor, $params);
         $validator = $controller->get('validator');
         $errors = $validator->validate($sponsor);
-
-        if (count($errors) > 0) {
-            $errorsString = (string) $errors;
-            return array('result' => 'fail', 'message' => $errorsString);
-        }
         $this->em->persist($sponsor);
         $this->em->flush();
         return array('result' => 'ok', 'message' => $sponsor);

@@ -1,0 +1,5 @@
+pair_all:
+    path:  /web/index
+    defaults: { _controller: GeneralBundle:Web:index, _format: ~ }
+    requirements:
+        _method: GET

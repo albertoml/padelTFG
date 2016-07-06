@@ -1,26 +1,37 @@
 <% _.each(matchs, function(match) { %>
 
-	<!-- calcular clase si es cs o cs-lost -->
 	<% if(_.isNull(match.pair1)){
-	match.pair1 = {};
-	match.pair1.user1 = {};
-	match.pair1.user1.name = "--";
-	match.pair1.user1.lastName = "";
-	match.pair1.user2 = {};
-	match.pair1.user2.name = "--";
-	match.pair1.user2.lastName = "";
+		match.pair1 = {};
+		match.pair1.user1 = {};
+		match.pair1.user1.name = "--";
+		match.pair1.user1.lastName = "";
+		match.pair1.user2 = {};
+		match.pair1.user2.name = "--";
+		match.pair1.user2.lastName = "";
 	}
 	if(_.isNull(match.pair2)){
-	match.pair2 = {};
-	match.pair2.user1 = {};
-	match.pair2.user1.name = "--";
-	match.pair2.user1.lastName = "";
-	match.pair2.user2 = {};
-	match.pair2.user2.name = "--";
-	match.pair2.user2.lastName = "";
+		match.pair2 = {};
+		match.pair2.user1 = {};
+		match.pair2.user1.name = "--";
+		match.pair2.user1.lastName = "";
+		match.pair2.user2 = {};
+		match.pair2.user2.name = "--";
+		match.pair2.user2.lastName = "";
 	}
 	if(_.isNull(match.startDate)){
-	match.startDate = dataLiterals.startDateNotSet;
+		match.startDate = dataLiterals.startDateNotSet;
+	}
+	if(match.status.value == dataLiterals.gameStatus.WonPair1){
+		var classPair1 = 'cs';
+		var classPair2 = 'cs-lost';
+	}
+	else if(match.status.value == dataLiterals.gameStatus.WonPair2){
+		var classPair1 = 'cs-lost';
+		var classPair2 = 'cs';
+	}
+	else{
+		var classPair1 = 'cs';
+		var classPair2 = 'cs';
 	}
 	%>
 	<div class="match">
@@ -30,10 +41,10 @@
 			<div class="schedule"><%= match.startDate %></div>
 
 			<div class="pair pair-1">
-		        <div class="player cs">
+		        <div class="player <%= classPair1 %>">
 		        	<%= match.pair1.user1.name %> <%= match.pair1.user1.lastName %>
 		        </div>
-		        <div class="player cs">
+		        <div class="player <%= classPair1 %>">
 		        	<%= match.pair1.user2.name %> <%= match.pair1.user2.lastName %>
 		        </div>
 			</div>			
@@ -42,10 +53,10 @@
 				<%= match.score %>
 			</div>
 			<div class="pair pair-2">
-		        <div class="player cs-lost">
+		        <div class="player <%= classPair2 %>">
 		        	<%= match.pair2.user1.name %> <%= match.pair2.user1.lastName %>                     
 		        </div>
-		        <div class="player cs-lost">
+		        <div class="player <%= classPair2 %>">
 		        	<%= match.pair2.user2.name %> <%= match.pair2.user2.lastName %>                      
 		        </div>
 			</div>		

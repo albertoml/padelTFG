@@ -11,6 +11,13 @@ tournament_get:
         _method: GET
         id: "\d+"
 
+tournament_get_byAdmin:
+    path:  /tournament/admin/{userId}
+    defaults: { _controller: GeneralBundle:Tournament:getTournamentsByAdmin, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
 tournament_post:
     path:  /tournament
     defaults: { _controller: GeneralBundle:Tournament:postTournament, _format: ~ }

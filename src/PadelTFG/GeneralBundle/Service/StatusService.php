@@ -67,9 +67,7 @@ class StatusService{
         $repository = $this->factoryStatusController($entity);
         if($repository!=null){
             $status = $repository->findAll();
-            if($status != null){
-                return $status; 
-            }
+            return $status; 
         }
         return null; 
     }

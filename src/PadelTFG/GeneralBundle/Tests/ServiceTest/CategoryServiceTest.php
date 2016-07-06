@@ -385,13 +385,118 @@ class CategoryServiceTest extends WebTestCase
         $this->em->remove($this->tournament);
         $this->em->remove($this->category);
         $this->em->flush();
-        foreach ($this->games as $game) {
-            $this->em->remove($game);
-        }
-        $this->em->flush();
     }
 
-    /*public function testGenerateDraw16()
+    public function testAssignPairsToDraw2()
+    {
+        $inscriptions = [$this->inscription1, $this->inscription2];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $position1 = $categoryService->assignPairForDrawGame($inscriptions, 1, 0, 'pair1');
+        $position2 = $categoryService->assignPairForDrawGame($inscriptions, 1, 0, 'pair2');
+
+        $this->assertEquals($this->inscription1->getPair(), $position1);
+        $this->assertEquals($this->inscription2->getPair(), $position2);
+    }
+    public function testAssignPairsToDraw4()
+    {
+        $inscriptions = [$this->inscription1, $this->inscription2, $this->inscription3, $this->inscription4];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $position1 = $categoryService->assignPairForDrawGame($inscriptions, 2, 0, 'pair1');
+        $position2 = $categoryService->assignPairForDrawGame($inscriptions, 2, 0, 'pair2');
+
+        $this->assertEquals($this->inscription1->getPair(), $position1);
+        $this->assertEquals($this->inscription4->getPair(), $position2);
+    }
+    public function testAssignPairsToDraw8()
+    {
+        $inscriptions = [$this->inscription1, $this->inscription2, $this->inscription3, $this->inscription4,
+        $this->inscription5, $this->inscription6, $this->inscription7, $this->inscription8];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $position1 = $categoryService->assignPairForDrawGame($inscriptions, 4, 0, 'pair1');
+        $position2 = $categoryService->assignPairForDrawGame($inscriptions, 4, 0, 'pair2');
+
+        $this->assertEquals($this->inscription1->getPair(), $position1);
+        $this->assertEquals($this->inscription8->getPair(), $position2);
+    }
+    public function testAssignPairsToDraw16()
+    {
+        $inscriptions = [$this->inscription1, $this->inscription2, $this->inscription3, $this->inscription4,
+        $this->inscription5, $this->inscription6, $this->inscription7, $this->inscription8,
+        $this->inscription9, $this->inscription10, $this->inscription11, $this->inscription12,
+        $this->inscription13, $this->inscription14, $this->inscription15, $this->inscription16];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $position1 = $categoryService->assignPairForDrawGame($inscriptions, 8, 0, 'pair1');
+        $position2 = $categoryService->assignPairForDrawGame($inscriptions, 8, 0, 'pair2');
+
+        $this->assertEquals($this->inscription1->getPair(), $position1);
+        $this->assertEquals($this->inscription16->getPair(), $position2);
+    }
+
+    public function testAssignPairsToDrawIncorrect()
+    {
+        $inscriptions = [$this->inscription1, $this->inscription2, $this->inscription3, $this->inscription4,
+        $this->inscription5, $this->inscription6, $this->inscription7, $this->inscription8,
+        $this->inscription9, $this->inscription10, $this->inscription11, $this->inscription12,
+        $this->inscription13, $this->inscription14, $this->inscription15, $this->inscription16];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $position = $categoryService->assignPairForDrawGame($inscriptions, 9, 0, 'pair2');
+
+        $this->assertEquals(null, $position);
+    }
+
+    public function testAssignPairsToDrawNullInscription()
+    {
+        $inscriptions = [$this->inscription1];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $position1 = $categoryService->assignPairForDrawGame($inscriptions, 1, 0, 'pair1');
+        $position2 = $categoryService->assignPairForDrawGame($inscriptions, 1, 0, 'pair2');
+
+        $this->assertEquals($this->inscription1->getPair(), $position1);
+        $this->assertEquals(null, $position2);
+    }
+
+    public function testAssignPairsToDrawNullInscription2()
+    {
+        $inscriptions = [$this->inscription1, 'aaaa'];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $position1 = $categoryService->assignPairForDrawGame($inscriptions, 1, 0, 'pair1');
+        $position2 = $categoryService->assignPairForDrawGame($inscriptions, 1, 0, 'pair2');
+
+        $this->assertEquals($this->inscription1->getPair(), $position1);
+        $this->assertEquals(null, $position2);
+    }
+
+    public function testGetDrawLength()
+    {
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+        $drawLength = $categoryService->getDrawLength(9);
+
+        $this->assertEquals($drawLength, 16);
+    }
+
+    public function testGenerateDraw16()
     {
         $inscriptions = [$this->inscription1, $this->inscription2, $this->inscription3, $this->inscription4, $this->inscription5, $this->inscription6, $this->inscription7, $this->inscription8, $this->inscription9, $this->inscription10, $this->inscription11, $this->inscription12, $this->inscription13, $this->inscription14, $this->inscription15, $this->inscription16];
 
@@ -399,7 +504,52 @@ class CategoryServiceTest extends WebTestCase
         $categoryService->setManager($this->em);
         $this->games = $categoryService->generateDraw($inscriptions, 8, $this->category->getId(), $this->tournament->getId());
 
-        $this->assertEquals(json_encode($this->games), ' ');
+        $this->assertContains('' . $this->pair1->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair2->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair3->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair4->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair5->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair6->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair7->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair8->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair9->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair10->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair11->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair12->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair13->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair14->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair15->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair16->getId(), json_encode($this->games));
+        foreach ($this->games as $game) {
+            $this->em->remove($game);
+        }
+        if(count($this->games) > 0){
+            $this->em->flush();
+        }
+    }
+
+    public function testGenerateDraw9()
+    {
+        $inscriptions = [null, $this->inscription2, $this->inscription3, $this->inscription4, $this->inscription5, $this->inscription6, $this->inscription7, $this->inscription8, $this->inscription9];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+        $this->games = $categoryService->generateDraw($inscriptions, 8, $this->category->getId(), $this->tournament->getId());
+
+        $this->assertContains('' . $this->pair2->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair3->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair4->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair5->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair6->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair7->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair8->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair9->getId(), json_encode($this->games));
+        foreach ($this->games as $game) {
+            $this->em->remove($game);
+        }
+        if(count($this->games) > 0){
+            $this->em->flush();
+        }
     }
 
     public function testGenerateDraw8()
@@ -409,11 +559,24 @@ class CategoryServiceTest extends WebTestCase
         $categoryService = new CategoryService();
         $categoryService->setManager($this->em);
 
-        $category = 0;
-        $tournament = 1;
+        $category = $this->category->getId();
+        $tournament = $this->tournament->getId();
         $this->games = $categoryService->generateDraw($inscriptions, 4, $category, $tournament);
 
-        $this->assertEquals(json_encode($this->games), ' ');
+        $this->assertContains('' . $this->pair1->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair2->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair3->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair4->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair5->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair6->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair7->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair8->getId(), json_encode($this->games));
+        foreach ($this->games as $game) {
+            $this->em->remove($game);
+        }
+        if(count($this->games) > 0){
+            $this->em->flush();
+        }
     }
 
     public function testGenerateDraw4()
@@ -423,12 +586,54 @@ class CategoryServiceTest extends WebTestCase
         $categoryService = new CategoryService();
         $categoryService->setManager($this->em);
 
-        $category = 0;
-        $tournament = 1;
+        $category = $this->category->getId();
+        $tournament = $this->tournament->getId();
         $this->games = $categoryService->generateDraw($inscriptions, 2, $category, $tournament);
 
-        $this->assertEquals(json_encode($this->games), ' ');
-    }*/
+        $this->assertContains('' . $this->pair1->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair2->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair3->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair4->getId(), json_encode($this->games));
+        foreach ($this->games as $game) {
+            $this->em->remove($game);
+        }
+        if(count($this->games) > 0){
+            $this->em->flush();
+        }
+    }
+
+    public function testGenerateDraw3()
+    {
+        $inscriptions = [null, $this->inscription2, null, $this->inscription4];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $category = $this->category->getId();
+        $tournament = $this->tournament->getId();
+        $this->games = $categoryService->generateDraw($inscriptions, 2, $category, $tournament);
+
+        $this->assertContains('' . $this->pair2->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair4->getId(), json_encode($this->games));
+        foreach ($this->games as $game) {
+            $this->em->remove($game);
+        }
+        if(count($this->games) > 0){
+            $this->em->flush();
+        }
+    }
+
+    public function testCheckPairToAddDrawIncorrectDescription()
+    {
+        $inscriptions = [null, $this->inscription2, null, $this->inscription4];
+
+        $categoryService = new CategoryService();
+        $categoryService->setManager($this->em);
+
+        $response = $categoryService->checkPairToAddDraw('incorrectDescription');
+
+        $this->assertEquals($response, null);
+    }
 
     public function testGenerateDraw2()
     {
@@ -437,11 +642,18 @@ class CategoryServiceTest extends WebTestCase
         $categoryService = new CategoryService();
         $categoryService->setManager($this->em);
 
-        $category = 0;
-        $tournament = 1;
+        $category = $this->category->getId();
+        $tournament = $this->tournament->getId();
         $this->games = $categoryService->generateDraw($inscriptions, 1, $category, $tournament);
 
-        $this->assertEquals(json_encode($this->games), ' ');
+        $this->assertContains('' . $this->pair1->getId(), json_encode($this->games));
+        $this->assertContains('' . $this->pair2->getId(), json_encode($this->games));
+        foreach ($this->games as $game) {
+            $this->em->remove($game);
+        }
+        if(count($this->games) > 0){
+            $this->em->flush();
+        }
     }
 
 }

@@ -66,8 +66,14 @@ class User implements JsonSerializable
 	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\UserStatus") */
 	protected $status;
 
-	/** @ORM\OneToMany(targetEntity="PadelTFG\GeneralBundle\Entity\UserUserRole", mappedBy="user") */
-	protected $role;
+	/**
+     * @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\UserRole")
+     * @ORM\JoinTable(name="user_userrole",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="userrole_id", referencedColumnName="id")}
+     *      )
+     */
+	protected $roles;
 
 	/** @ORM\ManyToMany(targetEntity="PadelTFG\GeneralBundle\Entity\Notification", mappedBy="user") */
 	protected $notification;
@@ -93,7 +99,7 @@ class User implements JsonSerializable
 	public function __construct(){
 		$this->notification = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->tournament = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->role = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->roles = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->registrationDate = new \DateTime();
 		$this->salt = $this->registrationDate->format('Y-m-d H:i:s') . 'PadelTFG';
 	}
@@ -108,9 +114,9 @@ class User implements JsonSerializable
 
 	public function isPassEqual($pass){
 
-		$iguales = password_verify($pass, $this->password);
+		$equals = password_verify($pass, $this->password);
  
-		if ($iguales) {
+		if ($equals) {
 		    return true;
 		} else {
 		    return false;
@@ -158,9 +164,6 @@ class User implements JsonSerializable
 	}
 	public function getStatus(){
 		return $this->status;
-	}
-	public function getRole(){
-		return $this->role;
 	}
 	public function getNotification(){
 		return $this->notification;
@@ -226,7 +229,7 @@ class User implements JsonSerializable
 	public function setRegistrationDate($registrationDate){
 		$this->registrationDate = $registrationDate;
 	}
-	public function setbirthDate($birthDate){
+	public function setBirthDate($birthDate){
 		$this->birthDate = $birthDate;
 	}
 	public function setProfileImage($profileImage){
@@ -237,6 +240,9 @@ class User implements JsonSerializable
 	}
 	public function setAlias($alias){
 		$this->alias = $alias;
+	}
+	public function addRole($role){
+		$this->roles[] = $role;
 	}
 
 	public function jsonSerialize()
@@ -258,7 +264,7 @@ class User implements JsonSerializable
             'registrationDate' => $this->registrationDate,
             'birthDate' => $this->birthDate,
             'gameLevel' => $this->gameLevel,
-            'alias' => $this->alias
+            'alias' => $this->alias,
         );
     }
 }

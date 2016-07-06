@@ -42,10 +42,6 @@ class ScheduleController extends FOSRestController
         $params = json_decode($content, true);
         
         $schedule = $this->scheduleService->saveSchedule($params);
-        if($schedule['result'] == 'fail'){
-            $dataToSend = json_encode(array('error' => $schedule['message']));
-            return $this->util->setResponse(400, $dataToSend);
-        }
         $dataToSend = json_encode(array('schedule' => $schedule['message']));
         return $this->util->setJsonResponse(201, $dataToSend);   
     }

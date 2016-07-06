@@ -8,7 +8,12 @@ define({
 	"SundayDay": "Sunday",
 	"yes": "Yes",
 	"no": "No",
-	"add": "Add",	
+	"add": "Add",
+	"roles":{
+		"Player":"Player",
+		"TournamentAdmin":"TournamentAdmin",
+		"Admin":"Admin"
+	},
 	"sections":[
         {'key':'basicInfo', 'text':'Basic Information'},
         {'key':'annotations', 'text':'Annotations'},

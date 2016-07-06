@@ -11,6 +11,13 @@ user_get:
         _method: GET
         id: "\d+"
 
+user_getRoles:
+    path:  /user/roles/{id}
+    defaults: { _controller: GeneralBundle:User:getUserRoles, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
 user_post:
     path:  /user
     defaults: { _controller: GeneralBundle:User:postUser, _format: ~ }

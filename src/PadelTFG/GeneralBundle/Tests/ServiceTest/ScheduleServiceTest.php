@@ -15,6 +15,10 @@ use PadelTFG\GeneralBundle\Entity\ScheduleRange;
 use PadelTFG\GeneralBundle\Entity\ScheduleRangeDate;
 use PadelTFG\GeneralBundle\Entity\ScheduleTrack;
 use PadelTFG\GeneralBundle\Service\ScheduleService as ScheduleService;
+use PadelTFG\GeneralBundle\Service\ScheduleTrackService as ScheduleTrackService;
+use PadelTFG\GeneralBundle\Service\ScheduleDateService as ScheduleDateService;
+use PadelTFG\GeneralBundle\Service\ScheduleRangeService as ScheduleRangeService;
+use PadelTFG\GeneralBundle\Service\ScheduleRangeDateService as ScheduleRangeDateService;
 
 class ScheduleServiceTest extends WebTestCase
 {
@@ -26,7 +30,9 @@ class ScheduleServiceTest extends WebTestCase
         $this->client = static::createClient();
         $this->em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
     	
-    	$this->tournament = new Tournament();
+        $this->tournament = new Tournament();
+        $this->tournament1 = new Tournament();
+    	$this->tournament2 = new Tournament();
     	$this->category = new Category();
         $this->admin = new User();
         $this->user1 = new User();
@@ -46,8 +52,12 @@ class ScheduleServiceTest extends WebTestCase
 		$this->admin->setEmail('emailTournamentTest');
 		$this->admin->setPassword('password');
 
-    	$this->tournament->setName($this->admin);
-    	$this->tournament->setName('Tournament');
+        $this->tournament->setName($this->admin);
+        $this->tournament1->setName($this->admin);
+    	$this->tournament2->setName($this->admin);
+        $this->tournament->setName('Tournament');
+        $this->tournament1->setName('Tournament1');
+    	$this->tournament2->setName('Tournament2');
     	$this->category->setTournament($this->tournament);
     	$this->category->setName('Category');
 
@@ -172,7 +182,9 @@ class ScheduleServiceTest extends WebTestCase
         $this->em->remove($this->user2);
         $this->em->remove($this->user3);
         $this->em->remove($this->user4);
-    	$this->em->remove($this->tournament);
+        $this->em->remove($this->tournament);
+        $this->em->remove($this->tournament1);
+    	$this->em->remove($this->tournament2);
     	$this->em->remove($this->category);
     	$this->em->flush();
     }
@@ -239,5 +251,86 @@ class ScheduleServiceTest extends WebTestCase
         $minRange = $scheduleService->scheduleCalculateMinRange($this->schedule->getId());
 
         $this->assertEquals('9:00:00', $minRange);
+    }
+
+    public function testGetScheduleRangeDate(){
+
+        $sheduleRangeDateService = new ScheduleRangeDateService();
+        $sheduleRangeDateService->setManager($this->em);
+        $scheduleRangeDate = $sheduleRangeDateService->getScheduleRangeDate($this->scheduleRangeDate1->getId());
+
+        $this->assertContains('' . $this->schedule->getId(), json_encode($scheduleRangeDate));
+    }
+
+    public function testGetScheduleDate(){
+
+        $sheduleDateService = new ScheduleDateService();
+        $sheduleDateService->setManager($this->em);
+        $scheduleDate = $sheduleDateService->getScheduleDate($this->scheduleDate1->getId());
+
+        $this->assertContains('2016-08-24', json_encode($scheduleDate));
+    }
+
+    public function testGetScheduleRange(){
+
+        $scheduleRangeService = new ScheduleRangeService();
+        $scheduleRangeService->setManager($this->em);
+        $scheduleRange = $scheduleRangeService->getScheduleRange($this->scheduleRange1->getId());
+
+        $this->assertContains('T9:00:00', json_encode($scheduleRange));
+        $this->assertContains('T10:00:00', json_encode($scheduleRange));
+    }
+
+    public function testGetScheduleTrack(){
+
+        $scheduleTrackService = new ScheduleTrackService();
+        $scheduleTrackService->setManager($this->em);
+        $scheduleRange = $scheduleTrackService->getScheduleTrack($this->scheduleTrack1->getId());
+
+        $this->assertContains('TestTrack 1', json_encode($scheduleRange));
+    }
+
+    public function testSaveScheduleIdInt(){
+        $sheduleService = new ScheduleService();
+        $sheduleService->setManager($this->em);
+        $params = array('tournament' => $this->tournament1->getId());
+        $schedule= $sheduleService->saveSchedule($params);
+
+        $this->assertContains('ok', json_encode($schedule));
+        $this->em->remove($schedule['message']);
+    }
+
+    public function testSaveScheduleDate(){
+        $sheduleDateService = new ScheduleDateService();
+        $sheduleDateService->setManager($this->em);
+        $scheduleDate = $sheduleDateService->saveScheduleDate($this->scheduleRangeDate1, '2016-08-26');
+
+        $this->assertContains('2016-08-26', json_encode($scheduleDate));
+    }
+
+    public function testSaveScheduleRange(){
+        $scheduleRangeService = new ScheduleRangeService();
+        $scheduleRangeService->setManager($this->em);
+        $params = array('toHour' => 'T12:00:00', 'fromHour' => 'T18:00:00');
+        $scheduleRange = $scheduleRangeService->saveScheduleRange($this->scheduleRangeDate1, $params);
+
+        $this->assertContains('T12:00:00', json_encode($scheduleRange));
+        $this->assertContains('T18:00:00', json_encode($scheduleRange));
+    }
+
+    public function testSaveScheduleRangeDate(){
+        $sheduleRangeDateService = new ScheduleRangeDateService();
+        $sheduleRangeDateService->setManager($this->em);
+        $scheduleDate = $sheduleRangeDateService->saveScheduleRangeDate($this->schedule);
+
+        $this->assertContains('' . $this->schedule->getId(), json_encode($scheduleDate));
+    }
+
+    public function testSaveScheduleTrack(){
+        $scheduleTrackService = new ScheduleTrackService();
+        $scheduleTrackService->setManager($this->em);
+        $scheduleTrack = $scheduleTrackService->saveScheduleTrack($this->schedule, 3);
+
+        $this->assertContains('Track 3', json_encode($scheduleTrack));
     }
 }

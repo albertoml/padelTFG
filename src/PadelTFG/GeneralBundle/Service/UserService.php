@@ -7,7 +7,6 @@ use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Service\StatusService as StatusService;
 use PadelTFG\GeneralBundle\Service\PairService as PairService;
 use PadelTFG\GeneralBundle\Service\UserPreferenceService as UserPreferenceService;
-use PadelTFG\GeneralBundle\Service\UserUserRoleService as UserUserRoleService;
  
 class UserService{
 
@@ -33,6 +32,23 @@ class UserService{
         $repository = $this->em->getRepository('GeneralBundle:User');
         $user = $repository->find($id);
         return $user;
+    }
+
+    public function isTournamentAdmin($user){
+        foreach ($user->getRoles() as $role) {
+            if($role == Literals::TournamentAdmin){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getUserRoles($id){
+        $sql = "SELECT ur.id, ur.value FROM user_userrole urr, userRole ur WHERE urr.userrole_id=ur.id AND urr.user_id=" . $id;
+        $stmt = $this->em->getConnection()->prepare($sql);
+        $stmt->execute();
+        $roles = $stmt->fetchAll();
+        return $roles;
     }
 
     public function getUserByEmail($email){
@@ -74,11 +90,8 @@ class UserService{
         }
         $userPreference = new UserPreferenceService();
         $userPreference->setManager($this->em);
-        $userUserRole = new UserUserRoleService();
-        $userUserRole->setManager($this->em);
         $this->em->persist($user);
         $this->em->flush();
-        $userUserRole->saveUserUserRole($user->getId());
         $userPreference->saveUserPreference($user->getId());
         return array('result' => 'ok', 'message' => $user);
     }
@@ -121,8 +134,14 @@ class UserService{
     }
 
     public function deleteUser($user){
+        $userPreference = new UserPreferenceService();
+        $userPreference->setManager($this->em);
+        $userPre = $userPreference->getUserPreference($user->getId());
         $this->em->remove($user);
         $this->em->flush();
+        if(!is_null($userPre)){
+            $userPreference->deleteUserPreference($user->getId());
+        }
     }
 
     public function loginUser($email, $password){

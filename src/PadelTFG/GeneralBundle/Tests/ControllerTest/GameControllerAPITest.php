@@ -89,7 +89,7 @@ class GameControllerAPITest extends WebTestCase
         $repository = $this->em->getRepository('GeneralBundle:Tournament');
         $tournament = $repository->findOneByName("TournamentName");
 
-        $this->client->request('GET', '/api/game/tournament/' . $tournament->getId());
+        $this->client->request('GET', '/api/game/tournament/' . $tournament->getId() . '/false');
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -99,9 +99,20 @@ class GameControllerAPITest extends WebTestCase
         $this->assertContains('Game Test 4', $response);
     }
 
+    public function testGetGameDrawssByTournamentActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName("TournamentName");
+
+        $this->client->request('GET', '/api/game/tournament/' . $tournament->getId() . '/true');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testGetGameByTournamentNotFoundActionAPI()
     {
-        $this->client->request('GET', '/api/game/tournament/0');
+        $this->client->request('GET', '/api/game/tournament/0/true');
         $response = $this->client->getResponse()->getContent();
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
@@ -156,6 +167,28 @@ class GameControllerAPITest extends WebTestCase
         $this->assertContains(Literals::GroupNotFound, $response);
     }
 
+    public function testGetGameByUserActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user = $repository->findOneByName("User1Pair1");
+
+        $this->client->request('GET', '/api/game/user/' . $user->getId());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Game Test 1', $response);
+        $this->assertNotContains('6/0 - 6/0', $response);
+    }
+
+    public function testGetGameByUserNotFoundActionAPI()
+    {
+        $this->client->request('GET', '/api/game/user/0');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::UserNotFound, $response);
+    }
+
     public function testPostGameEmptyRequiredFieldsActionAPI()
     {
         $method = 'POST';
@@ -208,7 +241,7 @@ class GameControllerAPITest extends WebTestCase
 
     
 
-    public function testPostGroupActionAPI()
+    public function testPostGameActionAPI()
     {
         $repository = $this->em->getRepository('GeneralBundle:GroupCategory');
         $group = $repository->findOneByName("Group A Test");
@@ -239,7 +272,7 @@ class GameControllerAPITest extends WebTestCase
         $parameters = array();
         $files = array();
         $server = array();
-        $content = '{"tournamentId":0}';
+        $content = '{"tournamentId":"notCorrectId"}';
 
         $this->client->request($method, $uri, $parameters, $files, $server, $content);
         $response = $this->client->getResponse()->getContent();
@@ -293,5 +326,101 @@ class GameControllerAPITest extends WebTestCase
         $this->assertContains('User2Pair9', $response);        
         $this->assertContains('User1Pair10', $response);
         $this->assertContains('User2Pair10', $response);    
+    }
+
+    public function testPutGameActionAPI()
+    {
+
+        $repository = $this->em->getRepository('GeneralBundle:Game');
+        $game = $repository->findOneByDescription("Game Test 1");
+
+        $method = 'PUT';
+        $uri = '/api/game/' . $game->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = json_encode(array(
+            'score' => '6/3 - 6/3'
+        ));
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('"score":"6\/3 - 6\/3"', $response);
+        $this->assertContains("Game Test 1", $response);
+    }
+
+    public function testPutNotFoundGameActionAPI()
+    {
+        $method = 'PUT';
+        $uri = '/api/game/0';
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = json_encode(array(
+            'score' => '6/3 - 6/3'
+        ));
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::GameNotFound, $response);
+    }
+
+    public function testPutEmptyContentGameActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Game');
+        $game = $repository->findOneByDescription("Game Test 1");
+
+        $method = 'PUT';
+        $uri = '/api/game/' . $game->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = '';
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Game Test 1', $response);
+        $this->assertContains('6\/0 - 6\/0', $response);
+    }
+
+    public function testDeleteGameActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Game');
+        $game = $repository->findOneByDescription("Game DELETED");
+
+        $method = 'DELETE';
+        $uri = '/api/game/' . $game->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = array();
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::GameDeleted, $response);
+    }
+
+    public function testDeleteNotFoundGameActionAPI()
+    {
+        $method = 'DELETE';
+        $uri = '/api/game/0';
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = "";
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::GameNotFound, $response);
     }
 }

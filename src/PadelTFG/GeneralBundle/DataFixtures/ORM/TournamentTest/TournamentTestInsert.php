@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\User;
+use PadelTFG\GeneralBundle\Entity\Category;
 
 
 class TournamentTestInsert implements FixtureInterface
@@ -60,6 +61,22 @@ class TournamentTestInsert implements FixtureInterface
 			$manager->persist($entity);	
 		}
 
+		$manager->flush();
+
+		$repository = $manager->getRepository('GeneralBundle:Tournament');
+		$tournament = $repository->findOneByName('Torneo TFG');
+
+		$Categories = array(
+			array('name' => 'Category Tournament', 'tournament' => $tournament),
+			array('name' => 'Category Tournament1', 'tournament' => $tournament)
+			);
+
+		foreach ($Categories as $key) {
+			$entity = new Category();
+			$entity->setName($key['name']);
+			$entity->setTournament($key['tournament']);
+			$manager->persist($entity);	
+		}
 		$manager->flush();
 	}
 }

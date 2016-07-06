@@ -18,22 +18,22 @@ class Inscription implements JsonSerializable
 	* @ORM\GeneratedValue */
 	protected $id;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair", inversedBy="inscription")
 		@ORM\JoinColumn(name="pair_id", onDelete="cascade") 
 		@Assert\NotBlank() */
 	protected $pair;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Category")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Category", inversedBy="inscription")
 		@ORM\JoinColumn(name="category_id", onDelete="cascade") 
 		@Assert\NotBlank() */
 	protected $category;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="inscription")
 		@ORM\JoinColumn(name="tournament_id", onDelete="cascade") 
 		@Assert\NotBlank() */
 	protected $tournament;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory", inversedBy="inscription")
 		@ORM\JoinColumn(name="group_id", onDelete="cascade") */
 	protected $group;
 

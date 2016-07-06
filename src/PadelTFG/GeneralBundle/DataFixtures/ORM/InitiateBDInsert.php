@@ -11,7 +11,6 @@ use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\User;
 use PadelTFG\GeneralBundle\Entity\UserPreference;
 use PadelTFG\GeneralBundle\Entity\UserStatus;
-use PadelTFG\GeneralBundle\Entity\UserUserRole;
 use PadelTFG\GeneralBundle\Entity\Pair;
 use PadelTFG\GeneralBundle\Entity\Inscription;
 use PadelTFG\GeneralBundle\Entity\Schedule;
@@ -90,17 +89,15 @@ class InitiateBDInsert implements FixtureInterface
 			$entity->setPassword($key['password']);
 			$entity->setGender($key['gender']);
 			$entity->setStatus($userStatus);
-			$manager->persist($entity);
-			$manager->flush();
-			$entityRole = new UserUserRole();
-			$entityRole->setId($entity->getId());
 			if($key['name'] == 'Alberto'){
-				$entityRole->setRole($tournamentAdminRole);
+				$entity->addRole($tournamentAdminRole);
+				$entity->addRole($playerRole);
 			}
 			else{
-				$entityRole->setRole($playerRole);
+				$entity->addRole($playerRole);
 			}
-			$manager->persist($entityRole);
+			$manager->persist($entity);
+			$manager->flush();
 			$entityPreference = new UserPreference();
 			$entityPreference->setId($entity->getId());
 			$entityPreference->setName(true);

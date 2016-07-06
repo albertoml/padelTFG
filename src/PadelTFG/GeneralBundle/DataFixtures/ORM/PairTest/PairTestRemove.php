@@ -4,10 +4,7 @@ namespace PadelTFG\GeneralBundle\DataFixtures\ORM\PairTest;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use PadelTFG\GeneralBundle\Entity\Category;
-use PadelTFG\GeneralBundle\Entity\Tournament;
 use PadelTFG\GeneralBundle\Entity\User;
-use PadelTFG\GeneralBundle\Entity\Pair;
 
 
 class PairTestRemove implements FixtureInterface
@@ -21,7 +18,15 @@ class PairTestRemove implements FixtureInterface
 			array('email' => 'User1Pair2PairTest'),
 			array('email' => 'User2Pair2PairTest'),
 			array('email' => 'User1Pair3PairTest'),
-			array('email' => 'User2Pair3PairTest')
+			array('email' => 'User2Pair3PairTest'),
+			array('email' => 'User1Pair4PairTest'),
+			array('email' => 'User2Pair4PairTest'),
+			array('email' => 'User1Pair5PairTest'),
+			array('email' => 'User2Pair5PairTest'),
+			array('email' => 'User1Pair6PairTest'),
+			array('email' => 'User2Pair6PairTest'),
+			array('email' => 'User1Pair7PairTest'),
+			array('email' => 'User2Pair7PairTest')
 		);
 
 		$repository = $manager->getRepository('GeneralBundle:User');

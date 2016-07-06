@@ -10,6 +10,11 @@ abstract class Literals
 	const pointsToLoserIfWinSet = 0;
 	const doubleTieResolveByGame = "true";
 
+	//User Roles
+	const Player = "Player";
+	const TournamentAdmin = "TournamentAdmin";
+	const Admin = "Admin";
+
     //User Status
     const RegisteredUserStatus = "Registered";
     const In_TournamentUserStatus = "In Tournament";
@@ -88,6 +93,8 @@ abstract class Literals
 	const AdminEmpty = "admin is Empty;";
 	const CreationDateEmpty = "creationDate is Empty;";
 	const AdminIncorrect = "Incorrect Admin";
+	const CloseInscriptionBadFormat = "Close inscription in bad format";
+	const TournamentChangesNotSaved = "Tournament changes not saved because data is not correct";
 
 	//SponsorController
 	const SponsorNotFound = "Sponsor not found";
@@ -149,6 +156,7 @@ abstract class Literals
 	//ObservationController
 	const ObservationNotFound = "Observation not found";
 	const ObservationDeleted = "Observation deleted";
+	const ObservationBadFormat = "Observation bad format";
 
 	//GroupController
 	const GroupNotFound = "Group not found";
@@ -156,6 +164,7 @@ abstract class Literals
 
 	//GameController
 	const GameNotFound = "Game not found";
+	const GameDeleted = "Game deleted";
 	const TournamentIdNotCorrect = "Tournament ID not correct";
 
 	//ScheduleService

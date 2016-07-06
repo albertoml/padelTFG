@@ -181,7 +181,8 @@ class GameTestInsert implements FixtureInterface
 			array('pair1' => $pair1, 'pair2' => $pair2, 'tournament' => $tournament, 'category' => $category, 'group' => $groupA, 'description' => 'Game Test 1', 'score' => '6/0 - 6/0'),
 			array('pair1' => $pair3, 'pair2' => $pair4, 'tournament' => $tournament, 'category' => $category, 'group' => $groupB, 'description' => 'Game Test 2', 'score' => '6/3 - 6/3'),
 			array('pair1' => $pair4, 'pair2' => $pair5, 'tournament' => $tournament, 'category' => $category, 'group' => $groupB, 'description' => 'Game Test 3', 'score' => '7/5 - 6/2'),
-			array('pair1' => $pair5, 'pair2' => $pair3, 'tournament' => $tournament, 'category' => $category, 'group' => $groupB, 'description' => 'Game Test 4', 'score' => '6/3 - 3/6 - 7/5')
+			array('pair1' => $pair5, 'pair2' => $pair3, 'tournament' => $tournament, 'category' => $category, 'group' => $groupB, 'description' => 'Game Test 4', 'score' => '6/3 - 3/6 - 7/5'),
+			array('pair1' => null, 'pair2' => null, 'tournament' => $tournament, 'category' => $category, 'group' => $groupB, 'description' => 'Game DELETED', 'score' => '6/3 - 3/6 - 7/5')
 			);
 
 		foreach ($Games as $key) {

@@ -280,24 +280,22 @@ define([
                 var gamesToShow = _self.gamesDrawDone;
             }
 
-            if(_.isNull(gamesToShow) || _.isUndefined(gamesToShow)){
-                var urlToSend = _self.params.getGamesByTournament.replace('{idTournament}', _self.tournamentModel.get('id'));                    
-                var urlToSend = urlToSend.replace('{isDraw}', isDraw);                    
-                $.ajax({
-                    type: 'GET',
-                    url: urlToSend,
-                    async: false,
-                    success: function (response) {
-                        if(isDraw){
-                            _self.gamesDrawDone = response.game;
-                        }
-                        else{
-                            _self.gamesDone = response.game;    
-                        }
-                        gamesToShow = response.game;
+            var urlToSend = _self.params.getGamesByTournament.replace('{idTournament}', _self.tournamentModel.get('id'));                    
+            var urlToSend = urlToSend.replace('{isDraw}', isDraw);                    
+            $.ajax({
+                type: 'GET',
+                url: urlToSend,
+                async: false,
+                success: function (response) {
+                    if(isDraw){
+                        _self.gamesDrawDone = response.game;
                     }
-                })
-            }
+                    else{
+                        _self.gamesDone = response.game;    
+                    }
+                    gamesToShow = response.game;
+                }
+            })
             _self.preProcessViewTournamentAdminSection(gamesToShow, categoryId, literals.GamesMode);
             _.each(gamesToShow, function(games, catKey){
                 var catInfo = catKey.split(';');
@@ -526,7 +524,7 @@ define([
                 userLogged: _self.userModel.get('name')
             });
             modalContent += '</div>';
-            modalContent += '<div class="col-lg-4" style="margin-top:20px"><button id="addItemInscription">' + literals.addInscription + '</button></div>';
+            modalContent += '<div class="col-lg-4" style="margin-top:20px"><button class="btn btn-default" id="addItemInscription">' + literals.addInscription + '</button></div>';
             var modal = _self.renderModalAddInscription(modalContent, e.target.name);
             $(modal).modal();
             $('.player1').last().select2({
@@ -1357,7 +1355,7 @@ define([
             var method = $(e.target).attr('method');
             var gameToReturn = {};
             var games = $.extend( _self.gamesDone, _self.gamesDrawDone );
-            _.each(_self.gamesDone, function(gamesCategory){
+            _.each(games, function(gamesCategory){
                 _.each(gamesCategory, function(game){
                     if(game.id == idGame){
                         gameToReturn = game;
@@ -1500,8 +1498,8 @@ define([
                         $('.common').trigger('showSuccesAlert', [literals.successMessageSaveScore]);
                         _self.gamesDone = null;
                         _self.categoryIdActivePills = $(e.target).attr("categoryId");
-                        _self.render();
                         $('#' + _self.modalIDScoreModal).modal('hide');
+                        _self.render();
                     },
                     error: function(msg){
                         $('.common').trigger('showErrorAlert', [msg.responseJSON.error]);
@@ -1676,7 +1674,8 @@ define([
                 var gamesByBlock = {};
                 var roundAnt = 0;
                 _.each(drawCategory, function(game){
-                    var round = game.description.split('/')[0];
+                    var description = game.description.split('|')[1];
+                    var round = description.split('/')[0];
                     if(roundAnt == round){
                         gamesByBlock[round].push(game);
                     }

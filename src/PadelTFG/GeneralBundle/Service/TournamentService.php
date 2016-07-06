@@ -35,9 +35,9 @@ class TournamentService{
         return $tournament;
     }
 
-    public function getTournamentsByAdmin($id){
+    public function getTournamentsByAdmin($userId){
         $repository = $this->em->getRepository('GeneralBundle:Tournament');
-        $tournament = $repository->findByAdmin($id);
+        $tournament = $repository->findByAdmin($userId);
         return $tournament;
     }
 
@@ -151,6 +151,8 @@ class TournamentService{
                     }
                 }
                 else{
+                    // arreglar este bucle porque puede no acabar nunca
+                    // si sobran dos parejas y solo hay un grupo antes para insertarlas
                     while($restDivision != 0){
                         $groupModify = $groups[count($groups) - $restDivision];
                         $groupModify->setNumPairs($groupModify->getNumPairs() + 1);
@@ -180,25 +182,37 @@ class TournamentService{
         $inscriptionService->setManager($this->em);
         $groupService->setManager($this->em);
 
+        $saveChangesCorrect = true;
+
         $categories = $categoryService->getCategoryByTournament($tournament->getId());
 
         foreach ($categories as $category) {
             $inscriptions = $inscriptionService->getInscriptionsByCategory($category->getId());
             $countInscriptions = 0;
-            $groups = $this->calculateNumGroups(count($inscriptions), (int) $params[$category->getName()], $category, $tournament);
-            foreach ($groups as $group) {
-                for($i = 0; $i < $group->getNumPairs(); $i++){
-                    $inscriptions[$countInscriptions]->setGroup($group);
-                    $this->em->persist($inscriptions[$i]);
-                    $countInscriptions = $countInscriptions + 1;
-                }   
+            if(intval($params[$category->getName()]) > 0){
+                $groups = $this->calculateNumGroups(count($inscriptions), intval($params[$category->getName()]), $category, $tournament);
+                foreach ($groups as $group) {
+                    for($i = 0; $i < $group->getNumPairs(); $i++){
+                        $inscriptions[$countInscriptions]->setGroup($group);
+                        $this->em->persist($inscriptions[$i]);
+                        $countInscriptions = $countInscriptions + 1;
+                    }   
+                }
+            }
+            else{
+                $saveChangesCorrect = false;
             }
         }
-        $tournament->setStatus($this->statusService->getStatus('tournament', Literals::In_Group_DateTournamentStatus));
-        $this->em->persist($tournament);
-        $this->em->flush();
-        $result = array('result' => 'ok', 'message' => $inscriptionService->getInscriptionsByGroupForATournament($tournament->getId(), null));
-        return $result;
+        if($saveChangesCorrect){
+            $tournament->setStatus($this->statusService->getStatus('tournament', Literals::In_Group_DateTournamentStatus));
+            $this->em->persist($tournament);
+            $this->em->flush();
+            $result = array('result' => 'ok', 'message' => $inscriptionService->getInscriptionsByGroupForATournament($tournament->getId(), null));
+            return $result;
+        }
+        else{
+            return $result = array('result' => 'fail', 'message' => Literals::TournamentChangesNotSaved);
+        }
     }
 
     public function closeGroupTournament($tournament){
@@ -215,16 +229,18 @@ class TournamentService{
             $numPairsByGroup = array();
             $allInscriptions = array();
             $groups = $groupService->getGroupsByCategory($category->getId());
-            foreach ($groups as $group) {
-                $inscriptions = $inscriptionService->getInscriptionsByGroup($group->getId(), null);
-                $allInscriptions = array_merge($allInscriptions, $inscriptions);
-                $groupRank = $groupService->calculateClassficationByGroup($inscriptions, $group);  
-                if(!is_null($groupRank)){
-                    $numPairsByGroup[] = count($groupRank);
-                    $groupsRank[] = $groupRank;
+            if(!is_null($groups)){
+                foreach ($groups as $group) {
+                    $inscriptions = $inscriptionService->getInscriptionsByGroup($group->getId(), null);
+                    $allInscriptions = array_merge($allInscriptions, $inscriptions);
+                    $groupRank = $groupService->calculateClassficationByGroup($inscriptions, $group);  
+                    if(!is_null($groupRank)){
+                        $numPairsByGroup[] = count($groupRank);
+                        $groupsRank[] = $groupRank;
+                    }
                 }
             }
-            if(!is_null($groupsRank)){
+            if(!empty($groupsRank)){
                 rsort($numPairsByGroup);
                 for($i = 0; $i < $numPairsByGroup[0]; $i++){
                     $rankByGroupPositions = array();
@@ -262,19 +278,36 @@ class TournamentService{
 
         $gamesForDraw = array();
 
-        foreach ($params as $categoryId => $category) {
-            $categoryEntity = $categoryService->getCategory($categoryId);
-            $inscriptionsInCategory = array();
-            foreach ($category as $pairId) {
-                $inscriptionsInCategory[] = $inscriptionService->getInscriptionsByPairAndCategory($pairId, $categoryId);
+        $saveChangesCorrect = true;
+
+        if(!empty($params)){
+            foreach ($params as $categoryId => $category) {
+                $categoryEntity = $categoryService->getCategory($categoryId);
+                if(!is_null($categoryEntity)){
+                    $inscriptionsInCategory = array();
+                    foreach ($category as $pairId) {
+                        $inscriptionsInCategory[] = $inscriptionService->getInscriptionsByPairAndCategory($pairId, $categoryId);
+                    }
+                    $gamesForDraw[$categoryEntity->getName() . ';' . $categoryId] = $categoryService->createDrawForCategory($inscriptionsInCategory, $categoryId, $tournament->getId());
+                }
+                else{
+                    $saveChangesCorrect = false;
+                }
             }
-            $gamesForDraw[$categoryEntity->getName() . ';' . $categoryId] = $categoryService->createDrawForCategory($inscriptionsInCategory, $categoryId, $tournament->getId());
+        }
+        else{
+            $saveChangesCorrect = false;
         }
 
-        $tournament->setStatus($this->statusService->getStatus('tournament', Literals::In_Finals_DateTournamentStatus));
-        $this->em->persist($tournament);
-        $this->em->flush();
-        $result = array('result' => 'ok', 'message' => $gamesForDraw);
-        return $result;
+        if($saveChangesCorrect){
+            $tournament->setStatus($this->statusService->getStatus('tournament', Literals::In_Finals_DateTournamentStatus));
+            $this->em->persist($tournament);
+            $this->em->flush();
+            $result = array('result' => 'ok', 'message' => $gamesForDraw);
+            return $result;
+        }
+        else{
+            return $result = array('result' => 'fail', 'message' => Literals::TournamentChangesNotSaved);
+        }
     }
 }

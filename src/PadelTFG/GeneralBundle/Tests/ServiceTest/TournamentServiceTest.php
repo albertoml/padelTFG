@@ -37,8 +37,6 @@ class TournamentServiceTest extends WebTestCase
         $this->category->setTournament($this->tournament);
         $this->category->setName('Category');
 
-       
-
         $this->em->persist($this->admin);
         $this->em->persist($this->tournament);
         $this->em->persist($this->category);
@@ -268,6 +266,38 @@ class TournamentServiceTest extends WebTestCase
         $this->game14->setGroup($this->group3);
         $this->game15->setGroup($this->group3);
 
+        $this->game1->setTournament($this->tournament);
+        $this->game2->setTournament($this->tournament);
+        $this->game3->setTournament($this->tournament);
+        $this->game4->setTournament($this->tournament);
+        $this->game5->setTournament($this->tournament);
+        $this->game6->setTournament($this->tournament);
+        $this->game7->setTournament($this->tournament);
+        $this->game8->setTournament($this->tournament);
+        $this->game9->setTournament($this->tournament);
+        $this->game10->setTournament($this->tournament);
+        $this->game11->setTournament($this->tournament);
+        $this->game12->setTournament($this->tournament);
+        $this->game13->setTournament($this->tournament);
+        $this->game14->setTournament($this->tournament);
+        $this->game15->setTournament($this->tournament);
+
+        $this->game1->setCategory($this->category);
+        $this->game2->setCategory($this->category);
+        $this->game3->setCategory($this->category);
+        $this->game4->setCategory($this->category);
+        $this->game5->setCategory($this->category);
+        $this->game6->setCategory($this->category);
+        $this->game7->setCategory($this->category);
+        $this->game8->setCategory($this->category);
+        $this->game9->setCategory($this->category);
+        $this->game10->setCategory($this->category);
+        $this->game11->setCategory($this->category);
+        $this->game12->setCategory($this->category);
+        $this->game13->setCategory($this->category);
+        $this->game14->setCategory($this->category);
+        $this->game15->setCategory($this->category);
+
         $this->game1->setScore("6/1 6/3");
         $this->game2->setScore("6/2 6/2");
         $this->game3->setScore("6/3 6/1");
@@ -395,9 +425,43 @@ class TournamentServiceTest extends WebTestCase
     }
 
     public function tearDownGroupsAndGames(){
-        $this->em->remove($this->group1);
-        $this->em->remove($this->group2);
-        $this->em->remove($this->group3);
+        $this->em->remove($this->inscription1);
+        $this->em->remove($this->inscription2);
+        $this->em->remove($this->inscription3);
+        $this->em->remove($this->inscription4);
+        $this->em->remove($this->inscription5);
+        $this->em->remove($this->inscription6);
+        $this->em->remove($this->inscription7);
+        $this->em->remove($this->inscription8);
+        $this->em->remove($this->inscription9);
+        $this->em->remove($this->inscription10);
+        $this->em->remove($this->inscription11);
+        $this->em->remove($this->game1);
+        $this->em->remove($this->game2);
+        $this->em->remove($this->game3);
+        $this->em->remove($this->game4);
+        $this->em->remove($this->game5);
+        $this->em->remove($this->game6);
+        $this->em->remove($this->game7);
+        $this->em->remove($this->game8);
+        $this->em->remove($this->game9);
+        $this->em->remove($this->game10);
+        $this->em->remove($this->game11);
+        $this->em->remove($this->game12);
+        $this->em->remove($this->game13);
+        $this->em->remove($this->game14);
+        $this->em->remove($this->game15);
+        $this->em->remove($this->pair1);
+        $this->em->remove($this->pair2);
+        $this->em->remove($this->pair3);
+        $this->em->remove($this->pair4);
+        $this->em->remove($this->pair5);
+        $this->em->remove($this->pair6);
+        $this->em->remove($this->pair7);
+        $this->em->remove($this->pair8);
+        $this->em->remove($this->pair9);
+        $this->em->remove($this->pair10);
+        $this->em->remove($this->pair11);
         $this->em->remove($this->user1);
         $this->em->remove($this->user2);
         $this->em->remove($this->user3);
@@ -420,44 +484,17 @@ class TournamentServiceTest extends WebTestCase
         $this->em->remove($this->user20);
         $this->em->remove($this->user21);
         $this->em->remove($this->user22);
-        $this->em->remove($this->pair1);
-        $this->em->remove($this->pair2);
-        $this->em->remove($this->pair3);
-        $this->em->remove($this->pair4);
-        $this->em->remove($this->pair5);
-        $this->em->remove($this->pair6);
-        $this->em->remove($this->pair7);
-        $this->em->remove($this->pair8);
-        $this->em->remove($this->pair9);
-        $this->em->remove($this->pair10);
-        $this->em->remove($this->pair11);
-        $this->em->remove($this->game1);
-        $this->em->remove($this->game2);
-        $this->em->remove($this->game3);
-        $this->em->remove($this->game4);
-        $this->em->remove($this->game5);
-        $this->em->remove($this->game6);
-        $this->em->remove($this->game7);
-        $this->em->remove($this->game8);
-        $this->em->remove($this->game9);
-        $this->em->remove($this->game10);
-        $this->em->remove($this->game11);
-        $this->em->remove($this->game12);
-        $this->em->remove($this->game13);
-        $this->em->remove($this->game14);
-        $this->em->remove($this->game15);
-        $this->em->remove($this->inscription1);
-        $this->em->remove($this->inscription2);
-        $this->em->remove($this->inscription3);
-        $this->em->remove($this->inscription4);
-        $this->em->remove($this->inscription5);
-        $this->em->remove($this->inscription6);
-        $this->em->remove($this->inscription7);
-        $this->em->remove($this->inscription8);
-        $this->em->remove($this->inscription9);
-        $this->em->remove($this->inscription10);
-        $this->em->remove($this->inscription11);
         $this->em->flush();
+    }
+
+    public function testNumGroups_1Inscriptions()
+    {
+        $tournamentService = new TournamentService();
+        $tournamentService->setManager($this->em);
+        $groups = $tournamentService->calculateNumGroups(1, 4, $this->category, $this->tournament);
+
+        $this->assertEquals(1, count($groups));
+        $this->assertEquals(1, $groups[0]->getNumPairs());
     }
 
     public function testNumGroups_20Inscriptions()
@@ -509,14 +546,53 @@ class TournamentServiceTest extends WebTestCase
         $this->assertEquals(0, count($groups));
     }
 
+    public function testCloseInscriptionTournament()
+    {
+        $tournamentService = new TournamentService();
+        $tournamentService->setManager($this->em);
+        $params = array(
+                'Category' => 5
+            );
+        $inscriptions = $tournamentService->closeInscriptionTournament($this->tournament, $params);
+
+        $this->assertEquals(count($inscriptions), 2);
+    }
+
+    public function testCreateDrawTournament()
+    {
+        $this->setUpGroupsAndGames();
+        $tournamentService = new TournamentService();
+        $tournamentService->setManager($this->em);
+        $params = array(
+                $this->category->getId() => [$this->pair1->getId(), $this->pair2->getId(), $this->pair3->getId(), $this->pair4->getId()]
+            );
+        $games = $tournamentService->createDrawTournament($this->tournament, $params);
+
+        $this->assertEquals(count($games), 2);
+        $this->assertContains('Test1', json_encode($games));
+        $this->assertContains('Test2', json_encode($games));
+        $this->assertContains('Test3', json_encode($games));
+        $this->assertContains('Test4', json_encode($games));
+        $this->assertContains('Test5', json_encode($games));
+        $this->assertContains('Test6', json_encode($games));
+        $this->assertContains('Test7', json_encode($games));
+        $this->assertContains('Test8', json_encode($games));
+
+        $repository = $this->em->getRepository('GeneralBundle:Game');
+        $games = $repository->findByTournament($this->tournament->getId());
+        foreach ($games as $game) {
+            $this->em->remove($game);
+            $this->em->flush();
+        }
+        $this->tearDownGroupsAndGames();
+    }
+
     public function testCloseGroupTournament()
     {
         $this->setUpGroupsAndGames();
         $tournamentService = new TournamentService();
         $tournamentService->setManager($this->em);
         $groups = $tournamentService->closeGroupTournament($this->tournament);
-
-        //$this->assertEquals("", json_encode($groups));
 
         $this->assertEquals($this->inscription1->getClassifiedPositionInGroup(), 0);
         $this->assertEquals($this->inscription1->getClassifiedPositionByGroups(), 2);

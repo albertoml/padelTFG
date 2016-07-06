@@ -24,7 +24,7 @@ class UserRoleController extends FOSRestController
 
 	public function allUserRoleAction(){
         $this->userRoleService->setManager($this->getDoctrine()->getManager());
-        $roles = $this->userRoleService->getAllUserRoles();
+        $roles = $this->userRoleService->getAllUserRole();
         $dataToSend = json_encode(array('role' => $roles));
         return $this->util->setJsonResponse(200, $dataToSend);
     }

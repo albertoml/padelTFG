@@ -108,10 +108,6 @@ class GroupController extends FOSRestController
         $content = $this->get("request")->getContent();
         $params = json_decode($content, true);
         $group = $this->groupService->saveGroupsTournament($params);
-        if($group['result'] == 'fail'){
-            $dataToSend = json_encode(array('error' => $group['message']));
-            return $this->util->setResponse(400, $dataToSend);
-        }
         $dataToSend = json_encode(array('group' => $group['message']));
         return $this->util->setJsonResponse(201, $dataToSend);
     }

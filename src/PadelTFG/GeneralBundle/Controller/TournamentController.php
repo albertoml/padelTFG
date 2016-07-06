@@ -41,6 +41,13 @@ class TournamentController extends FOSRestController
         return $this->util->setJsonResponse(200, $dataToSend);
 	}
 
+    public function getTournamentsByAdminAction($userId){
+        $this->tournamentService->setManager($this->getDoctrine()->getManager());
+        $tournaments = $this->tournamentService->getTournamentsByAdmin($userId);
+        $dataToSend = json_encode($tournaments);
+        return $this->util->setJsonResponse(200, $dataToSend);
+    }
+
     public function postTournamentAction(){
 
         $this->tournamentService->setManager($this->getDoctrine()->getManager());
@@ -118,10 +125,6 @@ class TournamentController extends FOSRestController
         if ($tournament instanceof Tournament) {
 
             $tournament = $this->tournamentService->startTournament($tournament);
-            if($tournament['result'] == 'fail'){
-                $dataToSend = json_encode(array('error' => $tournament['message']));
-                return $this->util->setResponse(400, $dataToSend);
-            }
             $dataToSend = json_encode(array('tournament' => $tournament['message']));
             return $this->util->setJsonResponse(200, $dataToSend);
             
@@ -140,13 +143,18 @@ class TournamentController extends FOSRestController
             $content = $this->get("request")->getContent();
             $params = json_decode($content, true);
 
-            $tournament = $this->tournamentService->closeInscriptionTournament($tournament, $params);
-            if($tournament['result'] == 'fail'){
-                $dataToSend = json_encode(array('error' => $tournament['message']));
-                return $this->util->setResponse(400, $dataToSend);
+            if(!empty($params)){
+                $tournament = $this->tournamentService->closeInscriptionTournament($tournament, $params);
+                if($tournament['result'] == 'fail'){
+                    $dataToSend = json_encode(array('error' => $tournament['message']));
+                    return $this->util->setResponse(400, $dataToSend);
+                }
+                $dataToSend = json_encode(array('tournament' => $tournament['message']));
+                return $this->util->setJsonResponse(200, $dataToSend);
             }
-            $dataToSend = json_encode(array('tournament' => $tournament['message']));
-            return $this->util->setJsonResponse(200, $dataToSend);
+            else{
+                return $this->util->setResponse(400, Literals::CloseInscriptionBadFormat);
+            }
             
         } else {
             return $this->util->setResponse(404, Literals::TournamentNotFound);
@@ -160,10 +168,6 @@ class TournamentController extends FOSRestController
         if ($tournament instanceof Tournament) {
 
             $tournament = $this->tournamentService->closeGroupTournament($tournament);
-            if($tournament['result'] == 'fail'){
-                $dataToSend = json_encode(array('error' => $tournament['message']));
-                return $this->util->setResponse(400, $dataToSend);
-            }
             $dataToSend = json_encode(array('tournament' => $tournament['message']));
             return $this->util->setJsonResponse(200, $dataToSend);
             

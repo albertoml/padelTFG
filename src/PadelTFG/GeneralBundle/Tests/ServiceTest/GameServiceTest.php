@@ -65,4 +65,12 @@ class GameServiceTest extends WebTestCase
         $wonMatch = $gameService->wonGameByScore('6/7 6/7');
         $this->assertEquals($wonMatch, 2);
     }
+
+    public function testWonGamePairs()
+    {
+        $gameService = new GameService();
+        $gameService->setManager($this->em);
+        $wonMatch = $gameService->wonGameByPairs(1, 2, []);
+        $this->assertEquals($wonMatch, null);
+    }
 }

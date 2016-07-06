@@ -21,26 +21,26 @@ class Game implements JsonSerializable
 	/** @ORM\Column(type="string", length=500, nullable=true) */
 	protected $description;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair")
-		@ORM\JoinColumn(name="pair1_id", onDelete="cascade") */
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair", inversedBy="game")
+		@ORM\JoinColumn(name="pair1_id", referencedColumnName="id", onDelete="SET NULL") */
 	protected $pair1;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair")
-		@ORM\JoinColumn(name="pair2_id", onDelete="cascade") */
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Pair", inversedBy="game")
+		@ORM\JoinColumn(name="pair2_id", referencedColumnName="id", onDelete="SET NULL") */
 	protected $pair2;
 
 	/** @ORM\Column(type="string", length=50, nullable=true) */
 	protected $score;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Tournament", inversedBy="game")
 		@ORM\JoinColumn(name="tournament_id", onDelete="cascade") */
 	protected $tournament;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\GroupCategory", inversedBy="game")
 		@ORM\JoinColumn(name="group_id", onDelete="cascade") */
 	protected $group;
 
-	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Category")
+	/** @ORM\ManyToOne(targetEntity="PadelTFG\GeneralBundle\Entity\Category", inversedBy="game")
 		@ORM\JoinColumn(name="category_id", onDelete="cascade") */
 	protected $category;
 

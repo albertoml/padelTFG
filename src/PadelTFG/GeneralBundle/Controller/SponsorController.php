@@ -65,10 +65,6 @@ class SponsorController extends FOSRestController
             $content = $this->get("request")->getContent();
             $params = json_decode($content, true);
             $sponsor = $this->sponsorService->modifySponsor($sponsor, $params, $this);
-            if($sponsor['result'] == 'fail'){
-                $dataToSend = json_encode(array('error' => $sponsor['message']));
-                return $this->util->setResponse(400, $dataToSend);
-            }
             $dataToSend = json_encode(array('sponsor' => $sponsor['message']));
             return $this->util->setJsonResponse(200, $dataToSend);
             

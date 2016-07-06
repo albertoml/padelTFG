@@ -136,10 +136,6 @@ class GameController extends FOSRestController
         $params = json_decode($content, true);
         
         $game = $this->gameService->saveGame($params);
-        if($game['result'] == 'fail'){
-            $dataToSend = json_encode(array('error' => $game['message']));
-            return $this->util->setResponse(400, $dataToSend);
-        }
         $dataToSend = json_encode(array('game' => $game['message']));
         return $this->util->setJsonResponse(201, $dataToSend);
     }
@@ -171,10 +167,7 @@ class GameController extends FOSRestController
             $content = $this->get("request")->getContent();
             $params = json_decode($content, true);
             $game = $this->gameService->modifyGame($game, $params);
-            if($game['result'] == 'fail'){
-                $dataToSend = json_encode(array('error' => $game['message']));
-                return $this->util->setResponse(400, $dataToSend);
-            }
+            $this->gameService->checkPassNextRound($game['message']);
             $dataToSend = json_encode(array('game' => $game['message']));
             return $this->util->setJsonResponse(200, $dataToSend);
             
@@ -182,5 +175,19 @@ class GameController extends FOSRestController
             return $this->util->setResponse(404, Literals::GameNotFound);
         }
 
+    }
+
+    public function deleteGameAction($id){
+
+        $this->gameService->setManager($this->getDoctrine()->getManager());
+        $game = $this->gameService->getGame($id);
+
+        if ($game instanceof Game) {
+            $game = $this->gameService->deleteGame($game);
+
+            return $this->util->setResponse(200, Literals::GameDeleted);
+        } else {
+            return $this->util->setResponse(404, Literals::GameNotFound);
+        }
     }
 }

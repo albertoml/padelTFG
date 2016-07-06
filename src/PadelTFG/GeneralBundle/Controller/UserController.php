@@ -38,7 +38,14 @@ class UserController extends FOSRestController{
         if (!$user instanceof User) {
             return $this->util->setResponse(404, Literals::UserNotFound);
         }
-        $dataToSend = json_encode($user);
+        $dataToSend = json_encode($user);    
+        return $this->util->setJsonResponse(200, $dataToSend);
+    }
+
+    public function getUserRolesAction($id){
+        $this->userService->setManager($this->getDoctrine()->getManager());
+        $roles = $this->userService->getUserRoles($id);
+        $dataToSend = json_encode($roles);    
         return $this->util->setJsonResponse(200, $dataToSend);
     }
 

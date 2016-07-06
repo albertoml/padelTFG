@@ -2,7 +2,6 @@ define([
     'backbone', 
     'underscore',
     'models/user/user',
-    'models/userRole/userRole',
     'models/tournament/tournament',
     'i18n!nls/homeLiterals.js',
     'views/basicInfo/basicInfo',
@@ -19,7 +18,7 @@ define([
     'text!templates/common/genericModal.html',
     'text!templates/tournament/newTournamentStep1.html',
     'text!templates/tournament/category.html'], 
-    function(Backbone, _, UserModel, UserRoleModel, TournamentModel, Literals, BasicInfoView, AnnotationsView, TournamentAdminView,
+    function(Backbone, _, UserModel, TournamentModel, Literals, BasicInfoView, AnnotationsView, TournamentAdminView,
         TournamentsView, InscriptionsView, GamesView, PairsView, SectionTemplate, ListTreeTemplate, 
         ListTreeAdmin, PageContentTemplate, genericModalTemplate, NewTournamentStep1Template, CategoryTemplate) {
 
@@ -130,16 +129,29 @@ define([
             userModel.fetch({
                 success: function(model){
                     _self.userModel = model;
-                    _self.renderSections();
-                }
-            });
-            var userRoleModel = new UserRoleModel({id: idUser});
-            userRoleModel.fetch({
-                success: function(modelAdmin){
-                    if(!_.isEmpty(modelAdmin.get('tournament'))){
-                        _self.renderAdminTreePanel(modelAdmin.get('tournament'), false); 
-                        _self.renderAdminSections(modelAdmin.get('tournament'));        
-                    }         
+                    var url = _self.params.getUserRoles.replace('{idUser}', model.get('id'));
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        success: function (roles) {
+                            _.each(roles, function(role){
+                                if(role.value == Literals.roles.Player){
+                                    _self.renderSections();
+                                }
+                                if(role.value == Literals.roles.TournamentAdmin){
+                                    var url = _self.params.getTournamentsAdmin.replace('{idUser}', model.get('id'));
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: url,
+                                        success: function (response) {
+                                            _self.renderAdminTreePanel(response, false); 
+                                            _self.renderAdminSections(response);     
+                                        }
+                                    });
+                                }
+                            })   
+                        }
+                    });
                 }
             });
             $('#sidebar-wrapper').smint({

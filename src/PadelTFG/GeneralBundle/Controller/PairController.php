@@ -84,7 +84,7 @@ class PairController extends FOSRestController{
         $params = array();
         $content = $this->get("request")->getContent();
         $params = json_decode($content, true);
-        $pair = $this->pairService->savePair($params, $this);
+        $pair = $this->pairService->savePair($params);
         if($pair['result'] == 'fail'){
             $dataToSend = json_encode(array('error' => $pair['message']));
             return $this->util->setResponse(400, $dataToSend);
@@ -105,7 +105,7 @@ class PairController extends FOSRestController{
         foreach ($params['pairs'] as $pair) {
             $pairsEntity = $this->pairService->getPairByUsers($pair['user1'], $pair['user2']);
             if(empty($pairsEntity)){
-                $newPair = $this->pairService->savePair($pair, $this);
+                $newPair = $this->pairService->savePair($pair);
                 if($newPair['result'] == 'ok'){
                     $addPair = $newPair['message'];
                     $checkPairs[] = $addPair->getId();

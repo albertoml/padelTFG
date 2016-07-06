@@ -26,6 +26,10 @@ class ObservationTestInsert implements FixtureInterface
 			array('name' => 'User1Pair2ObservationTest', 'lastName' => 'User1Pair2ObservationTest', 'email' => 'User1Pair2ObservationTest',
 				'password' => 'password'),
 			array('name' => 'User2Pair2ObservationTest', 'lastName' => 'User2Pair2ObservationTest', 'email' => 'User2Pair2ObservationTest',
+				'password' => 'password'),
+			array('name' => 'User1Pair3ObservationTest', 'lastName' => 'User1Pair3ObservationTest', 'email' => 'User1Pair3ObservationTest',
+				'password' => 'password'),
+			array('name' => 'User2Pair3ObservationTest', 'lastName' => 'User2Pair3ObservationTest', 'email' => 'User2Pair3ObservationTest',
 				'password' => 'password')
 			);
 
@@ -58,10 +62,13 @@ class ObservationTestInsert implements FixtureInterface
 		$user2Pair1 = $repository->findOneByName('User2Pair1ObservationTest');
 		$user1Pair2 = $repository->findOneByName('User1Pair2ObservationTest');
 		$user2Pair2 = $repository->findOneByName('User2Pair2ObservationTest');
+		$user1Pair3 = $repository->findOneByName('User1Pair3ObservationTest');
+		$user2Pair3 = $repository->findOneByName('User2Pair3ObservationTest');
 
 		$Pairs = array(
 			array('user1' => $user1Pair1, 'user2' => $user2Pair1),
-			array('user1' => $user1Pair2, 'user2' => $user2Pair2)
+			array('user1' => $user1Pair2, 'user2' => $user2Pair2),
+			array('user1' => $user1Pair3, 'user2' => $user2Pair3)
 			);
 
 		foreach ($Pairs as $key) {
@@ -75,11 +82,13 @@ class ObservationTestInsert implements FixtureInterface
 		$repository = $manager->getRepository('GeneralBundle:Pair');
 		$pair1 = $repository->findOneByUser1($user1Pair1);
 		$pair2 = $repository->findOneByUser1($user1Pair2);
+		$pair3 = $repository->findOneByUser1($user1Pair3);
 
 
 		$Inscriptions = array(
 			array('pair' => $pair1, 'tournament' => $tournament, 'category' => $category),
-			array('pair' => $pair2, 'tournament' => $tournament, 'category' => $category)
+			array('pair' => $pair2, 'tournament' => $tournament, 'category' => $category),
+			array('pair' => $pair3, 'tournament' => $tournament, 'category' => $category)
 			);
 
 		foreach ($Inscriptions as $key) {
@@ -94,10 +103,12 @@ class ObservationTestInsert implements FixtureInterface
 		$repository = $manager->getRepository('GeneralBundle:Inscription');
 		$inscription1 = $repository->findOneByPair($pair1);
 		$inscription2 = $repository->findOneByPair($pair2);
+		$inscription3 = $repository->findOneByPair($pair3);
 
 		$Observations = array(
 			array('date' => new \DateTime(), 'fromHour' => 10, 'toHour' => 14, 'inscription' => $inscription1),
-			array('date' => new \DateTime(), 'fromHour' => 16, 'toHour' => 18, 'inscription' => $inscription2)
+			array('date' => new \DateTime(), 'fromHour' => 16, 'toHour' => 18, 'inscription' => $inscription2),
+			array('date' => new \DateTime(), 'fromHour' => 16, 'toHour' => 18, 'inscription' => $inscription3)
 			);
 
 		foreach ($Observations as $key) {

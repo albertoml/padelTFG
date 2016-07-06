@@ -65,13 +65,18 @@ class ObservationController extends FOSRestController
         $params = array();
         $content = $this->get("request")->getContent();
         $params = json_decode($content, true);
-        $observations = $this->observationService->saveObservationsPOST($params, $this);
-        if($observations['result'] == 'fail'){
-            $dataToSend = json_encode(array('error' => $observations['message']));
-            return $this->util->setResponse(400, $dataToSend);
+        if(!empty($params['inscription']) && !empty($params['observations'])){
+            $observations = $this->observationService->saveObservationsPOST($params, $this);
+            if($observations['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $observations['message']));
+                return $this->util->setResponse(400, $dataToSend);
+            }
+            $dataToSend = json_encode(array('observations' => $observations['message']));
+            return $this->util->setJsonResponse(201, $dataToSend);
         }
-        $dataToSend = json_encode(array('observations' => $observations['message']));
-        return $this->util->setJsonResponse(201, $dataToSend);
+        else{
+            return $this->util->setResponse(400, Literals::ObservationBadFormat);
+        }
     }
 
     public function postOneObservationsAction(){
@@ -82,14 +87,19 @@ class ObservationController extends FOSRestController
         $params = array();
         $content = $this->get("request")->getContent();
         $params = json_decode($content, true);
-        $inscription = $inscriptionService->getInscription($params['inscription']);
-        $observations = $this->observationService->saveObservation($params['observation'], $inscription, $this);
-        if($observations['result'] == 'fail'){
-            $dataToSend = json_encode(array('error' => $observations['message']));
-            return $this->util->setResponse(400, $dataToSend);
+        if(!empty($params['inscription']) && !empty($params['observation'])){
+            $inscription = $inscriptionService->getInscription($params['inscription']);
+            $observations = $this->observationService->saveObservation($params['observation'], $inscription, $this);
+            if($observations['result'] == 'fail'){
+                $dataToSend = json_encode(array('error' => $observations['message']));
+                return $this->util->setResponse(400, $dataToSend);
+            }
+            $dataToSend = json_encode(array('observations' => $observations['message']));
+            return $this->util->setJsonResponse(201, $dataToSend);
         }
-        $dataToSend = json_encode(array('observations' => $observations['message']));
-        return $this->util->setJsonResponse(201, $dataToSend);
+        else{
+            return $this->util->setResponse(400, Literals::ObservationBadFormat);
+        }
     }
 
     public function deleteObservationAction($id){

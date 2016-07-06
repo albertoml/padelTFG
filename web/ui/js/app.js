@@ -107,6 +107,8 @@ require(['backbone', 'views/login/login', 'views/common/common', 'views/home/hom
 		'apiName' : 'api',
 		'sendLoginURL' : host + '/api/user/login/{email}/{password}',
 		'getUserPreferences' : host + '/api/userPreference/{idUser}',
+		'getUserRoles' : host + '/api/user/roles/{idUser}',
+		'getTournamentsAdmin' : host + '/api/tournament/admin/{idUser}',
 		'getCategories' : host + '/api/category/tournament/{idTournament}',
 		'getObservations' : host + '/api/observation/inscription/{idInscription}',
 		'getInscriptionsByUser' : host + '/api/inscription/user/{idUser}',

@@ -55,6 +55,11 @@ class ScheduleService{
         else{
             $schedule->setTournament(null);
         }
+        $schedule->setScheduleJson(!empty($params['scheduleJson']) ? $params['scheduleJson'] : '');
+        $schedule->setScheduleResourcesJson(!empty($params['scheduleResourcesJson']) ? $params['scheduleResourcesJson'] : '');
+        $schedule->setStartDate(!empty($params['startDate']) ? $params['startDate'] : '');
+        $schedule->setMaxRange(!empty($params['maxRange']) ? $params['maxRange'] : '');
+        $schedule->setMinRange(!empty($params['minRange']) ? $params['minRange'] : '');
         $this->em->persist($schedule);
         $this->em->flush();
         return $schedule;
@@ -62,7 +67,7 @@ class ScheduleService{
 
     public function saveScheduleTrack($schedule, $params){
 
-        if(is_int($params['track'])){
+        if(!empty($params['track']) && is_int($params['track'])){
             $scheduleTrackService = new ScheduleTrackService();
             $scheduleTrackService->setManager($this->em);
             for ($i=1; $i <= (int) $params['track']; $i++) { 
@@ -73,26 +78,28 @@ class ScheduleService{
 
     public function saveScheduleDate($schedule, $params){
 
-        $scheduleRangeDateService = new ScheduleRangeDateService();
-        $scheduleRangeDateService->setManager($this->em);
-        $scheduleDateService = new ScheduleDateService();
-        $scheduleDateService->setManager($this->em);
-        $scheduleRangeService = new scheduleRangeService();
-        $scheduleRangeService->setManager($this->em);
+        if(!empty($params['scheduleRanges'])){
+            $scheduleRangeDateService = new ScheduleRangeDateService();
+            $scheduleRangeDateService->setManager($this->em);
+            $scheduleDateService = new ScheduleDateService();
+            $scheduleDateService->setManager($this->em);
+            $scheduleRangeService = new scheduleRangeService();
+            $scheduleRangeService->setManager($this->em);
 
-        foreach ($params['scheduleRanges'] as $rangeCollection) {
-            
-            $scheduleRangeDate = $scheduleRangeDateService->saveScheduleRangeDate($schedule);
+            foreach ($params['scheduleRanges'] as $rangeCollection) {
+                
+                $scheduleRangeDate = $scheduleRangeDateService->saveScheduleRangeDate($schedule);
 
-            foreach ($rangeCollection['dates'] as $date) {
-                $scheduleDate = $scheduleDateService->saveScheduleDate($scheduleRangeDate, $date);
+                foreach ($rangeCollection['dates'] as $date) {
+                    $scheduleDate = $scheduleDateService->saveScheduleDate($scheduleRangeDate, $date);
+                }
+                
+                foreach ($rangeCollection['ranges'] as $range) {
+                    $scheduleRange = $scheduleRangeService->saveScheduleRange($scheduleRangeDate, $range);
+                }
             }
-            
-            foreach ($rangeCollection['ranges'] as $range) {
-                $scheduleRange = $scheduleRangeService->saveScheduleRange($scheduleRangeDate, $range);
-            }
+            $this->em->flush();
         }
-        $this->em->flush();
     }
 
     public function saveSchedule($params){

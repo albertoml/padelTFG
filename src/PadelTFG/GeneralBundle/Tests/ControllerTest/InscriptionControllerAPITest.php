@@ -159,7 +159,6 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->assertContains('CategoryTournamentName1', $response);
         $this->assertContains('Category Tournament2', $response);
         $this->assertContains('Category Tournament1', $response);
-
     }
 
     public function testGetInscriptionByPairNotFoundActionAPI()
@@ -169,6 +168,32 @@ class InscriptionControllerAPITest extends WebTestCase
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
         $this->assertContains(Literals::PairNotFound, $response);
+    }
+
+    public function testGetInscriptionByUserNotFoundActionAPI()
+    {
+        $this->client->request('GET', '/api/inscription/user/0');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::UserNotFound, $response);
+    }
+
+    public function testGetInscriptionByUserActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:User');
+        $user1 = $repository->findOneByName('User1Pair2PairTest');
+
+        $this->client->request('GET', '/api/inscription/user/' . $user1->getId());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('User1Pair2PairTest', $response);
+        $this->assertContains('User2Pair2PairTest', $response);
+        $this->assertContains('CategoryTournamentName', $response);
+        $this->assertContains('CategoryTournamentName1', $response);
+        $this->assertContains('Category Tournament2', $response);
+        $this->assertContains('Category Tournament1', $response);
     }
 
     public function testGetInscriptionByGroupActionAPI()
@@ -184,6 +209,43 @@ class InscriptionControllerAPITest extends WebTestCase
         $this->assertContains('User2Pair1PairTest', $response);
         $this->assertContains('CategoryTournamentName', $response);
         $this->assertContains('Category Tournament', $response);
+    }
+
+    public function testGetInscriptionByGroupNotFoundActionAPI()
+    {
+        $this->client->request('GET', '/api/inscription/group/0');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::GroupNotFound, $response);
+    }
+
+    public function testGetInscriptionByGroupForATournamentActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName('CategoryTournamentName');
+
+        $this->client->request('GET', '/api/inscription/group/tournament/' . $tournament->getId());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('User1Pair1PairTest', $response);
+        $this->assertContains('User2Pair1PairTest', $response);
+        $this->assertContains('User1Pair2PairTest', $response);
+        $this->assertContains('User2Pair2PairTest', $response);
+        $this->assertContains('User1Pair3PairTest', $response);
+        $this->assertContains('User2Pair3PairTest', $response);
+        $this->assertContains('CategoryTournamentName', $response);
+        $this->assertContains('Category Tournament', $response);
+    }
+
+    public function testGetInscriptionByGroupForATournamentNotFoundActionAPI()
+    {
+        $this->client->request('GET', '/api/inscription/group/tournament/0');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::TournamentNotFound, $response);
     }
 
     public function testPostInscriptionActionAPI()
@@ -487,5 +549,64 @@ class InscriptionControllerAPITest extends WebTestCase
         
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
         $this->assertContains($pair1->getId() . ' ' . Literals::CategoryInscriptionLimitMax, $response);
+    }
+
+    public function testDeleteInscriptionActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName("TournamentToDeleteInscription");
+        $repository = $this->em->getRepository('GeneralBundle:Inscription');
+        $inscription = $repository->findByTournament($tournament->getId());
+
+        $method = 'DELETE';
+        $uri = '/api/inscription/' . $inscription[0]->getId();
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = array();
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::InscriptionDeleted, $response);
+    }
+
+    public function testDeleteNotFoundInscriptionActionAPI()
+    {
+        $method = 'DELETE';
+        $uri = '/api/inscription/0';
+        $parameters = array();
+        $files = array();
+        $server = array();
+        $content = "";
+
+        $this->client->request($method, $uri, $parameters, $files, $server, $content);
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::InscriptionNotFound, $response);
+    }
+
+    public function testCountInscriptionActionAPI()
+    {
+        $repository = $this->em->getRepository('GeneralBundle:Tournament');
+        $tournament = $repository->findOneByName('CategoryTournamentName');
+
+        $this->client->request('GET', '/api/inscription/tournamentCount/' . $tournament->getId());
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('"totalTournament":3', $response);
+        $this->assertContains('"Category Tournament1":3', $response);
+    }
+
+    public function testCountInscriptionActionNotFoundActionAPI()
+    {
+        $this->client->request('GET', '/api/inscription/tournamentCount/0');
+        $response = $this->client->getResponse()->getContent();
+        
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains(Literals::TournamentNotFound, $response);
     }
 }
